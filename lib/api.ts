@@ -22,24 +22,25 @@ class Api {
     const currentTime = Math.floor(Date.now() / 1000);
 
     if (decodedToken.exp < currentTime) {
+
       console.warn('Access token has expired. Attempting to refresh...');
       const storedRefreshToken = await SecureStore.getItemAsync('refreshToken');
+
       if (!storedRefreshToken) {
         console.error('No refresh token available. Logging out...');
-        await handleUnauthorized(); 
         throw new Error('No refresh token available');
       }
 
       try {
         const { accessToken, refreshToken: newRefreshToken } =
           await this.refreshToken(storedRefreshToken);
+
         await SecureStore.setItemAsync('accessToken', accessToken);
         await SecureStore.setItemAsync('refreshToken', newRefreshToken);
 
         console.log('Access token successfully renewed using refresh token.');
       } catch (error) {
         console.error('Failed to refresh token. Logging out...');
-        await handleUnauthorized(); 
         throw error;
       }
     }
@@ -64,7 +65,7 @@ class Api {
     refreshToken: string
   ): Promise<{ accessToken: string; refreshToken: string }> {
     try {
-      const response = await fetch(`${this._baseUrl}/auth/refresh`, {
+      const response = await fetch(`${config.apiUrlExpo}/auth/refresh`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -220,6 +221,3 @@ const api = new Api({
 });
 
 export default api;
-function handleUnauthorized() {
-  throw new Error('Function not implemented.');
-}

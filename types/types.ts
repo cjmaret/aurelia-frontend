@@ -11,14 +11,15 @@ export interface AuthContextType {
   isAuthenticated: boolean;
   login: (userEmail: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  handleUnauthorized: () => Promise<void>;
   user: UserDataType | null;
   setUser: React.Dispatch<React.SetStateAction<UserDataType | null>>;
+  refreshToken: () => Promise<string>;
 };
 
 export interface CorrectionDataContextType {
   correctionData: CorrectionDataType[];
   setCorrectionData: SetStateType<CorrectionDataType[]>;
+  fetchCorrections: () => Promise<void>;
   correctionsFetchError: Error | null;
 }
 

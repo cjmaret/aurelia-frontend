@@ -86,7 +86,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const login = async (userEmail: string, password: string) => {
     try {
-
       const { accessToken, refreshToken } = await api.authenticateUser(
         userEmail,
         password
@@ -127,6 +126,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     try {
       const storedRefreshToken = await SecureStore.getItemAsync('refreshToken');
       if (!storedRefreshToken) {
+        console.warn('No refresh token available. Logging out...');
+        await logout();
         throw new Error('No refresh token available');
       }
 
@@ -142,6 +143,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       return accessToken;
     } catch (error) {
       console.error('Error refreshing token:', error);
+      console.warn('Token refresh failed. Logging out...');
+      await logout();
       throw error;
     }
   };
@@ -176,9 +179,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         isAuthenticated,
         login,
         logout,
-        handleUnauthorized,
         user,
         setUser,
+        refreshToken,
       }}>
       {children}
     </AuthContext.Provider>
