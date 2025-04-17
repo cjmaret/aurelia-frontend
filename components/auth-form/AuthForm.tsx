@@ -24,11 +24,17 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const handleSubmit = async () => {
     setLoading(true);
     try {
+      const normalizedEmail = userEmail.trim().toLowerCase();
+
       if (isSignUp) {
-        await api.registerUser(userEmail, password);
+        await api.registerUser(normalizedEmail, password);
+        Alert.alert(
+          'Sign Up Successful',
+          'You have successfully signed up! You can now log in.'
+        );
         router.replace('/sign-in');
       } else {
-        await login(userEmail, password);
+        await login(normalizedEmail, password);
       }
     } catch (error: any) {
       Alert.alert(
