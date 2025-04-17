@@ -1,0 +1,96 @@
+{
+  "sessionId": "abc123",
+  "createdAt": "2025-03-25T14:30:00Z",
+  "original_text": " This is sound of my voice. This is he favorite song. I like go to the park.",
+  "sentenceFeedback": [
+    {
+      "id": "s1",
+      "original": "This is sound of my voice",
+      "corrected": "This is the sound of my voice",
+      "errors": [
+        {
+          "id": "e1",
+          "index": 7,
+          "type": "grammar",
+          "message": "missing article",
+          "suggestion": "Insert the definite article 'the' before 'sound'",
+          "improvedClause": "This is the sound of my voice"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "original": "This is he favorite song",
+      "corrected": "This is his favorite song",
+      "errors": [
+        {
+          "id": "e2",
+          "index": 8,
+          "type": "grammar",
+          "message": "incorrect pronoun",
+          "suggestion": "Replace 'he' with the possessive pronoun 'his'",
+          "improvedClause": "This is his favorite song"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "original": "I like go to the park",
+      "corrected": "I like to go to the park",
+      "errors": [
+        {
+          "id": "e3",
+          "index": 6,
+          "type": "grammar",
+          "message": "incorrect verb form",
+          "suggestion": "Use the infinitive form 'to go' instead of 'go'",
+          "improvedClause": "I like to go to the park"
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "original": "I aren't from Texas, I be from New York",
+      "corrected": "I'm not from Texas, I'm from New York",
+      "errors": [
+        {
+          "id": "e4",
+          "index": 2,
+          "type": "grammar",
+          "message": "incorrect verb form",
+          "suggestion": "Replace 'aren't' with 'am not' for correct negation",
+          "improvedClause": "I'm not from Texas"
+        },
+        {
+          "id": "e5",
+          "index": 23,
+          "type": "grammar",
+          "message": "incorrect verb form",
+          "suggestion": "Replace 'I be' with 'I'm'",
+          "improvedClause": "I'm from New York"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "original": "I love cooking breakfast every day",
+      "corrected": "I love cooking breakfast every day",
+      "errors": []
+    },
+    {
+      "id": "s6",
+      "original": "The company's sales have exploded slightly last quarter",
+      "corrected": "The company's sales have improved/increased slightly last quarter",
+      "errors": [
+        {
+          "id": "e6",
+          "index": 24,
+          "type": "vocabulary",
+          "message": "poor word choice",
+          "suggestion": "Replace 'exploded' with 'improved' or 'increased'",
+          "improvedClause": "The company's sales have improved/increased slightly last quarter"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1199 @@
+[
+  {
+    "sessionId": "xyz789",
+    "createdAt": "2025-03-25T16:45:00Z",
+    "originalText": "Although he was very tired but he decided to keep working because he don't want to fall behind. The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me. She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering. In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet. The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+    "sentenceFeedback": [
+      {
+        "id": "s1",
+        "original": "Although he was very tired but he decided to keep working because he don't want to fall behind.",
+        "corrected": "Although he was very tired, he decided to keep working because he didn't want to fall behind.",
+        "errors": [
+          {
+            "id": "e1",
+            "error": "Although he was very tired but",
+            "reason": "Redundant conjunction: 'but' is unnecessary after 'Although'.",
+            "suggestion": "Remove 'but' for correct sentence structure.",
+            "improvedClause": "Although he was very tired, he decided to keep working"
+          },
+          {
+            "id": "e2",
+            "error": "he don't want",
+            "reason": "Incorrect verb form: 'don't' should match past tense.",
+            "suggestion": "Replace 'don't' with 'didn't'.",
+            "improvedClause": "he didn't want to fall behind"
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "original": "The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me.",
+        "corrected": "The weather was so hot that I decided not to go outside, even though I had promised to meet my friend who was waiting for me.",
+        "errors": [
+          {
+            "id": "e3",
+            "error": "so hot, so",
+            "reason": "Incorrect conjunction: 'so hot that' is the correct form.",
+            "suggestion": "Use 'so hot that' instead.",
+            "improvedClause": "The weather was so hot that I decided not to go outside"
+          },
+          {
+            "id": "e4",
+            "error": "to not go",
+            "reason": "Incorrect word order: 'not to go' is preferred.",
+            "suggestion": "Switch to 'not to go'.",
+            "improvedClause": "I decided not to go outside"
+          },
+          {
+            "id": "e5",
+            "error": "who is waited",
+            "reason": "Incorrect verb tense: 'is waited' is incorrect.",
+            "suggestion": "Use 'was waiting' instead.",
+            "improvedClause": "my friend who was waiting for me"
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "original": "She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering.",
+        "corrected": "She has always been interested in science, and her brother, who also likes physics, encouraged her to study engineering.",
+        "errors": [
+          {
+            "id": "e6",
+            "error": "She always have been",
+            "reason": "Incorrect verb agreement: 'have' should be 'has' for singular subject.",
+            "suggestion": "Replace 'have' with 'has'.",
+            "improvedClause": "She has always been interested in science"
+          },
+          {
+            "id": "e7",
+            "error": "who is also liking physics",
+            "reason": "Incorrect verb form: 'is liking' is unnatural.",
+            "suggestion": "Use 'who also likes physics' instead.",
+            "improvedClause": "her brother, who also likes physics"
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "original": "In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet.",
+        "corrected": "In the meeting yesterday, he said that he would finish the report by today, but he hasn't sent me anything yet.",
+        "errors": [
+          {
+            "id": "e8",
+            "error": "he say",
+            "reason": "Incorrect verb tense: 'say' should be past tense.",
+            "suggestion": "Replace 'say' with 'said'.",
+            "improvedClause": "he said that he would finish the report"
+          },
+          {
+            "id": "e9",
+            "error": "he will finish",
+            "reason": "Tense mismatch: 'will' should be 'would' to match past context.",
+            "suggestion": "Replace 'will' with 'would'.",
+            "improvedClause": "he said that he would finish the report by today"
+          },
+          {
+            "id": "e10",
+            "error": "he haven't send",
+            "reason": "Incorrect verb form: 'haven't send' should be 'hasn't sent'.",
+            "suggestion": "Replace 'haven't send' with 'hasn't sent'.",
+            "improvedClause": "but he hasn't sent me anything yet"
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "original": "The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+        "corrected": "The book that I bought yesterday was very interesting, and I plan to read more by the same author.",
+        "errors": [
+          {
+            "id": "e11",
+            "error": "The book what I bought",
+            "reason": "Incorrect relative pronoun: 'what' should be 'that'.",
+            "suggestion": "Replace 'what' with 'that'.",
+            "improvedClause": "The book that I bought yesterday"
+          },
+          {
+            "id": "e12",
+            "error": "I am plan",
+            "reason": "Incorrect verb form: 'am plan' is not correct.",
+            "suggestion": "Replace 'am plan' with 'plan'.",
+            "improvedClause": "I plan to read more by the same author"
+          },
+          {
+            "id": "e13",
+            "error": "by same author",
+            "reason": "Missing article: 'same author' needs 'the'.",
+            "suggestion": "Insert 'the' before 'same author'.",
+            "improvedClause": "by the same author"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sessionId": "xyz789",
+    "createdAt": "2025-03-25T18:45:00Z",
+    "originalText": "Although he was very tired but he decided to keep working because he don't want to fall behind. The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me. She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering. In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet. The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+    "sentenceFeedback": [
+      {
+        "id": "s1",
+        "original": "Although he was very tired but he decided to keep working because he don't want to fall behind.",
+        "corrected": "Although he was very tired, he decided to keep working because he didn't want to fall behind.",
+        "errors": [
+          {
+            "id": "e1",
+            "error": "Although he was very tired but",
+            "reason": "Redundant conjunction: 'but' is unnecessary after 'Although'.",
+            "suggestion": "Remove 'but' for correct sentence structure.",
+            "improvedClause": "Although he was very tired, he decided to keep working"
+          },
+          {
+            "id": "e2",
+            "error": "he don't want",
+            "reason": "Incorrect verb form: 'don't' should match past tense.",
+            "suggestion": "Replace 'don't' with 'didn't'.",
+            "improvedClause": "he didn't want to fall behind"
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "original": "The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me.",
+        "corrected": "The weather was so hot that I decided not to go outside, even though I had promised to meet my friend who was waiting for me.",
+        "errors": [
+          {
+            "id": "e3",
+            "error": "so hot, so",
+            "reason": "Incorrect conjunction: 'so hot that' is the correct form.",
+            "suggestion": "Use 'so hot that' instead.",
+            "improvedClause": "The weather was so hot that I decided not to go outside"
+          },
+          {
+            "id": "e4",
+            "error": "to not go",
+            "reason": "Incorrect word order: 'not to go' is preferred.",
+            "suggestion": "Switch to 'not to go'.",
+            "improvedClause": "I decided not to go outside"
+          },
+          {
+            "id": "e5",
+            "error": "who is waited",
+            "reason": "Incorrect verb tense: 'is waited' is incorrect.",
+            "suggestion": "Use 'was waiting' instead.",
+            "improvedClause": "my friend who was waiting for me"
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "original": "She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering.",
+        "corrected": "She has always been interested in science, and her brother, who also likes physics, encouraged her to study engineering.",
+        "errors": [
+          {
+            "id": "e6",
+            "error": "She always have been",
+            "reason": "Incorrect verb agreement: 'have' should be 'has' for singular subject.",
+            "suggestion": "Replace 'have' with 'has'.",
+            "improvedClause": "She has always been interested in science"
+          },
+          {
+            "id": "e7",
+            "error": "who is also liking physics",
+            "reason": "Incorrect verb form: 'is liking' is unnatural.",
+            "suggestion": "Use 'who also likes physics' instead.",
+            "improvedClause": "her brother, who also likes physics"
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "original": "In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet.",
+        "corrected": "In the meeting yesterday, he said that he would finish the report by today, but he hasn't sent me anything yet.",
+        "errors": [
+          {
+            "id": "e8",
+            "error": "he say",
+            "reason": "Incorrect verb tense: 'say' should be past tense.",
+            "suggestion": "Replace 'say' with 'said'.",
+            "improvedClause": "he said that he would finish the report"
+          },
+          {
+            "id": "e9",
+            "error": "he will finish",
+            "reason": "Tense mismatch: 'will' should be 'would' to match past context.",
+            "suggestion": "Replace 'will' with 'would'.",
+            "improvedClause": "he said that he would finish the report by today"
+          },
+          {
+            "id": "e10",
+            "error": "he haven't send",
+            "reason": "Incorrect verb form: 'haven't send' should be 'hasn't sent'.",
+            "suggestion": "Replace 'haven't send' with 'hasn't sent'.",
+            "improvedClause": "but he hasn't sent me anything yet"
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "original": "The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+        "corrected": "The book that I bought yesterday was very interesting, and I plan to read more by the same author.",
+        "errors": [
+          {
+            "id": "e11",
+            "error": "The book what I bought",
+            "reason": "Incorrect relative pronoun: 'what' should be 'that'.",
+            "suggestion": "Replace 'what' with 'that'.",
+            "improvedClause": "The book that I bought yesterday"
+          },
+          {
+            "id": "e12",
+            "error": "I am plan",
+            "reason": "Incorrect verb form: 'am plan' is not correct.",
+            "suggestion": "Replace 'am plan' with 'plan'.",
+            "improvedClause": "I plan to read more by the same author"
+          },
+          {
+            "id": "e13",
+            "error": "by same author",
+            "reason": "Missing article: 'same author' needs 'the'.",
+            "suggestion": "Insert 'the' before 'same author'.",
+            "improvedClause": "by the same author"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sessionId": "xyz789",
+    "createdAt": "2025-03-25T16:45:00Z",
+    "originalText": "Although he was very tired but he decided to keep working because he don't want to fall behind. The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me. She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering. In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet. The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+    "sentenceFeedback": [
+      {
+        "id": "s1",
+        "original": "Although he was very tired but he decided to keep working because he don't want to fall behind.",
+        "corrected": "Although he was very tired, he decided to keep working because he didn't want to fall behind.",
+        "errors": [
+          {
+            "id": "e1",
+            "error": "Although he was very tired but",
+            "reason": "Redundant conjunction: 'but' is unnecessary after 'Although'.",
+            "suggestion": "Remove 'but' for correct sentence structure.",
+            "improvedClause": "Although he was very tired, he decided to keep working"
+          },
+          {
+            "id": "e2",
+            "error": "he don't want",
+            "reason": "Incorrect verb form: 'don't' should match past tense.",
+            "suggestion": "Replace 'don't' with 'didn't'.",
+            "improvedClause": "he didn't want to fall behind"
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "original": "The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me.",
+        "corrected": "The weather was so hot that I decided not to go outside, even though I had promised to meet my friend who was waiting for me.",
+        "errors": [
+          {
+            "id": "e3",
+            "error": "so hot, so",
+            "reason": "Incorrect conjunction: 'so hot that' is the correct form.",
+            "suggestion": "Use 'so hot that' instead.",
+            "improvedClause": "The weather was so hot that I decided not to go outside"
+          },
+          {
+            "id": "e4",
+            "error": "to not go",
+            "reason": "Incorrect word order: 'not to go' is preferred.",
+            "suggestion": "Switch to 'not to go'.",
+            "improvedClause": "I decided not to go outside"
+          },
+          {
+            "id": "e5",
+            "error": "who is waited",
+            "reason": "Incorrect verb tense: 'is waited' is incorrect.",
+            "suggestion": "Use 'was waiting' instead.",
+            "improvedClause": "my friend who was waiting for me"
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "original": "She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering.",
+        "corrected": "She has always been interested in science, and her brother, who also likes physics, encouraged her to study engineering.",
+        "errors": [
+          {
+            "id": "e6",
+            "error": "She always have been",
+            "reason": "Incorrect verb agreement: 'have' should be 'has' for singular subject.",
+            "suggestion": "Replace 'have' with 'has'.",
+            "improvedClause": "She has always been interested in science"
+          },
+          {
+            "id": "e7",
+            "error": "who is also liking physics",
+            "reason": "Incorrect verb form: 'is liking' is unnatural.",
+            "suggestion": "Use 'who also likes physics' instead.",
+            "improvedClause": "her brother, who also likes physics"
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "original": "In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet.",
+        "corrected": "In the meeting yesterday, he said that he would finish the report by today, but he hasn't sent me anything yet.",
+        "errors": [
+          {
+            "id": "e8",
+            "error": "he say",
+            "reason": "Incorrect verb tense: 'say' should be past tense.",
+            "suggestion": "Replace 'say' with 'said'.",
+            "improvedClause": "he said that he would finish the report"
+          },
+          {
+            "id": "e9",
+            "error": "he will finish",
+            "reason": "Tense mismatch: 'will' should be 'would' to match past context.",
+            "suggestion": "Replace 'will' with 'would'.",
+            "improvedClause": "he said that he would finish the report by today"
+          },
+          {
+            "id": "e10",
+            "error": "he haven't send",
+            "reason": "Incorrect verb form: 'haven't send' should be 'hasn't sent'.",
+            "suggestion": "Replace 'haven't send' with 'hasn't sent'.",
+            "improvedClause": "but he hasn't sent me anything yet"
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "original": "The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+        "corrected": "The book that I bought yesterday was very interesting, and I plan to read more by the same author.",
+        "errors": [
+          {
+            "id": "e11",
+            "error": "The book what I bought",
+            "reason": "Incorrect relative pronoun: 'what' should be 'that'.",
+            "suggestion": "Replace 'what' with 'that'.",
+            "improvedClause": "The book that I bought yesterday"
+          },
+          {
+            "id": "e12",
+            "error": "I am plan",
+            "reason": "Incorrect verb form: 'am plan' is not correct.",
+            "suggestion": "Replace 'am plan' with 'plan'.",
+            "improvedClause": "I plan to read more by the same author"
+          },
+          {
+            "id": "e13",
+            "error": "by same author",
+            "reason": "Missing article: 'same author' needs 'the'.",
+            "suggestion": "Insert 'the' before 'same author'.",
+            "improvedClause": "by the same author"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sessionId": "xyz789",
+    "createdAt": "2025-03-25T16:45:00Z",
+    "originalText": "Although he was very tired but he decided to keep working because he don't want to fall behind. The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me. She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering. In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet. The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+    "sentenceFeedback": [
+      {
+        "id": "s1",
+        "original": "Although he was very tired but he decided to keep working because he don't want to fall behind.",
+        "corrected": "Although he was very tired, he decided to keep working because he didn't want to fall behind.",
+        "errors": [
+          {
+            "id": "e1",
+            "error": "Although he was very tired but",
+            "reason": "Redundant conjunction: 'but' is unnecessary after 'Although'.",
+            "suggestion": "Remove 'but' for correct sentence structure.",
+            "improvedClause": "Although he was very tired, he decided to keep working"
+          },
+          {
+            "id": "e2",
+            "error": "he don't want",
+            "reason": "Incorrect verb form: 'don't' should match past tense.",
+            "suggestion": "Replace 'don't' with 'didn't'.",
+            "improvedClause": "he didn't want to fall behind"
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "original": "The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me.",
+        "corrected": "The weather was so hot that I decided not to go outside, even though I had promised to meet my friend who was waiting for me.",
+        "errors": [
+          {
+            "id": "e3",
+            "error": "so hot, so",
+            "reason": "Incorrect conjunction: 'so hot that' is the correct form.",
+            "suggestion": "Use 'so hot that' instead.",
+            "improvedClause": "The weather was so hot that I decided not to go outside"
+          },
+          {
+            "id": "e4",
+            "error": "to not go",
+            "reason": "Incorrect word order: 'not to go' is preferred.",
+            "suggestion": "Switch to 'not to go'.",
+            "improvedClause": "I decided not to go outside"
+          },
+          {
+            "id": "e5",
+            "error": "who is waited",
+            "reason": "Incorrect verb tense: 'is waited' is incorrect.",
+            "suggestion": "Use 'was waiting' instead.",
+            "improvedClause": "my friend who was waiting for me"
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "original": "She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering.",
+        "corrected": "She has always been interested in science, and her brother, who also likes physics, encouraged her to study engineering.",
+        "errors": [
+          {
+            "id": "e6",
+            "error": "She always have been",
+            "reason": "Incorrect verb agreement: 'have' should be 'has' for singular subject.",
+            "suggestion": "Replace 'have' with 'has'.",
+            "improvedClause": "She has always been interested in science"
+          },
+          {
+            "id": "e7",
+            "error": "who is also liking physics",
+            "reason": "Incorrect verb form: 'is liking' is unnatural.",
+            "suggestion": "Use 'who also likes physics' instead.",
+            "improvedClause": "her brother, who also likes physics"
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "original": "In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet.",
+        "corrected": "In the meeting yesterday, he said that he would finish the report by today, but he hasn't sent me anything yet.",
+        "errors": [
+          {
+            "id": "e8",
+            "error": "he say",
+            "reason": "Incorrect verb tense: 'say' should be past tense.",
+            "suggestion": "Replace 'say' with 'said'.",
+            "improvedClause": "he said that he would finish the report"
+          },
+          {
+            "id": "e9",
+            "error": "he will finish",
+            "reason": "Tense mismatch: 'will' should be 'would' to match past context.",
+            "suggestion": "Replace 'will' with 'would'.",
+            "improvedClause": "he said that he would finish the report by today"
+          },
+          {
+            "id": "e10",
+            "error": "he haven't send",
+            "reason": "Incorrect verb form: 'haven't send' should be 'hasn't sent'.",
+            "suggestion": "Replace 'haven't send' with 'hasn't sent'.",
+            "improvedClause": "but he hasn't sent me anything yet"
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "original": "The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+        "corrected": "The book that I bought yesterday was very interesting, and I plan to read more by the same author.",
+        "errors": [
+          {
+            "id": "e11",
+            "error": "The book what I bought",
+            "reason": "Incorrect relative pronoun: 'what' should be 'that'.",
+            "suggestion": "Replace 'what' with 'that'.",
+            "improvedClause": "The book that I bought yesterday"
+          },
+          {
+            "id": "e12",
+            "error": "I am plan",
+            "reason": "Incorrect verb form: 'am plan' is not correct.",
+            "suggestion": "Replace 'am plan' with 'plan'.",
+            "improvedClause": "I plan to read more by the same author"
+          },
+          {
+            "id": "e13",
+            "error": "by same author",
+            "reason": "Missing article: 'same author' needs 'the'.",
+            "suggestion": "Insert 'the' before 'same author'.",
+            "improvedClause": "by the same author"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sessionId": "xyz789",
+    "createdAt": "2025-03-25T16:45:00Z",
+    "originalText": "Although he was very tired but he decided to keep working because he don't want to fall behind. The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me. She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering. In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet. The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+    "sentenceFeedback": [
+      {
+        "id": "s1",
+        "original": "Although he was very tired but he decided to keep working because he don't want to fall behind.",
+        "corrected": "Although he was very tired, he decided to keep working because he didn't want to fall behind.",
+        "errors": [
+          {
+            "id": "e1",
+            "error": "Although he was very tired but",
+            "reason": "Redundant conjunction: 'but' is unnecessary after 'Although'.",
+            "suggestion": "Remove 'but' for correct sentence structure.",
+            "improvedClause": "Although he was very tired, he decided to keep working"
+          },
+          {
+            "id": "e2",
+            "error": "he don't want",
+            "reason": "Incorrect verb form: 'don't' should match past tense.",
+            "suggestion": "Replace 'don't' with 'didn't'.",
+            "improvedClause": "he didn't want to fall behind"
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "original": "The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me.",
+        "corrected": "The weather was so hot that I decided not to go outside, even though I had promised to meet my friend who was waiting for me.",
+        "errors": [
+          {
+            "id": "e3",
+            "error": "so hot, so",
+            "reason": "Incorrect conjunction: 'so hot that' is the correct form.",
+            "suggestion": "Use 'so hot that' instead.",
+            "improvedClause": "The weather was so hot that I decided not to go outside"
+          },
+          {
+            "id": "e4",
+            "error": "to not go",
+            "reason": "Incorrect word order: 'not to go' is preferred.",
+            "suggestion": "Switch to 'not to go'.",
+            "improvedClause": "I decided not to go outside"
+          },
+          {
+            "id": "e5",
+            "error": "who is waited",
+            "reason": "Incorrect verb tense: 'is waited' is incorrect.",
+            "suggestion": "Use 'was waiting' instead.",
+            "improvedClause": "my friend who was waiting for me"
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "original": "She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering.",
+        "corrected": "She has always been interested in science, and her brother, who also likes physics, encouraged her to study engineering.",
+        "errors": [
+          {
+            "id": "e6",
+            "error": "She always have been",
+            "reason": "Incorrect verb agreement: 'have' should be 'has' for singular subject.",
+            "suggestion": "Replace 'have' with 'has'.",
+            "improvedClause": "She has always been interested in science"
+          },
+          {
+            "id": "e7",
+            "error": "who is also liking physics",
+            "reason": "Incorrect verb form: 'is liking' is unnatural.",
+            "suggestion": "Use 'who also likes physics' instead.",
+            "improvedClause": "her brother, who also likes physics"
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "original": "In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet.",
+        "corrected": "In the meeting yesterday, he said that he would finish the report by today, but he hasn't sent me anything yet.",
+        "errors": [
+          {
+            "id": "e8",
+            "error": "he say",
+            "reason": "Incorrect verb tense: 'say' should be past tense.",
+            "suggestion": "Replace 'say' with 'said'.",
+            "improvedClause": "he said that he would finish the report"
+          },
+          {
+            "id": "e9",
+            "error": "he will finish",
+            "reason": "Tense mismatch: 'will' should be 'would' to match past context.",
+            "suggestion": "Replace 'will' with 'would'.",
+            "improvedClause": "he said that he would finish the report by today"
+          },
+          {
+            "id": "e10",
+            "error": "he haven't send",
+            "reason": "Incorrect verb form: 'haven't send' should be 'hasn't sent'.",
+            "suggestion": "Replace 'haven't send' with 'hasn't sent'.",
+            "improvedClause": "but he hasn't sent me anything yet"
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "original": "The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+        "corrected": "The book that I bought yesterday was very interesting, and I plan to read more by the same author.",
+        "errors": [
+          {
+            "id": "e11",
+            "error": "The book what I bought",
+            "reason": "Incorrect relative pronoun: 'what' should be 'that'.",
+            "suggestion": "Replace 'what' with 'that'.",
+            "improvedClause": "The book that I bought yesterday"
+          },
+          {
+            "id": "e12",
+            "error": "I am plan",
+            "reason": "Incorrect verb form: 'am plan' is not correct.",
+            "suggestion": "Replace 'am plan' with 'plan'.",
+            "improvedClause": "I plan to read more by the same author"
+          },
+          {
+            "id": "e13",
+            "error": "by same author",
+            "reason": "Missing article: 'same author' needs 'the'.",
+            "suggestion": "Insert 'the' before 'same author'.",
+            "improvedClause": "by the same author"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sessionId": "xyz789",
+    "createdAt": "2025-03-25T16:45:00Z",
+    "originalText": "Although he was very tired but he decided to keep working because he don't want to fall behind. The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me. She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering. In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet. The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+    "sentenceFeedback": [
+      {
+        "id": "s1",
+        "original": "Although he was very tired but he decided to keep working because he don't want to fall behind.",
+        "corrected": "Although he was very tired, he decided to keep working because he didn't want to fall behind.",
+        "errors": [
+          {
+            "id": "e1",
+            "error": "Although he was very tired but",
+            "reason": "Redundant conjunction: 'but' is unnecessary after 'Although'.",
+            "suggestion": "Remove 'but' for correct sentence structure.",
+            "improvedClause": "Although he was very tired, he decided to keep working"
+          },
+          {
+            "id": "e2",
+            "error": "he don't want",
+            "reason": "Incorrect verb form: 'don't' should match past tense.",
+            "suggestion": "Replace 'don't' with 'didn't'.",
+            "improvedClause": "he didn't want to fall behind"
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "original": "The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me.",
+        "corrected": "The weather was so hot that I decided not to go outside, even though I had promised to meet my friend who was waiting for me.",
+        "errors": [
+          {
+            "id": "e3",
+            "error": "so hot, so",
+            "reason": "Incorrect conjunction: 'so hot that' is the correct form.",
+            "suggestion": "Use 'so hot that' instead.",
+            "improvedClause": "The weather was so hot that I decided not to go outside"
+          },
+          {
+            "id": "e4",
+            "error": "to not go",
+            "reason": "Incorrect word order: 'not to go' is preferred.",
+            "suggestion": "Switch to 'not to go'.",
+            "improvedClause": "I decided not to go outside"
+          },
+          {
+            "id": "e5",
+            "error": "who is waited",
+            "reason": "Incorrect verb tense: 'is waited' is incorrect.",
+            "suggestion": "Use 'was waiting' instead.",
+            "improvedClause": "my friend who was waiting for me"
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "original": "She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering.",
+        "corrected": "She has always been interested in science, and her brother, who also likes physics, encouraged her to study engineering.",
+        "errors": [
+          {
+            "id": "e6",
+            "error": "She always have been",
+            "reason": "Incorrect verb agreement: 'have' should be 'has' for singular subject.",
+            "suggestion": "Replace 'have' with 'has'.",
+            "improvedClause": "She has always been interested in science"
+          },
+          {
+            "id": "e7",
+            "error": "who is also liking physics",
+            "reason": "Incorrect verb form: 'is liking' is unnatural.",
+            "suggestion": "Use 'who also likes physics' instead.",
+            "improvedClause": "her brother, who also likes physics"
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "original": "In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet.",
+        "corrected": "In the meeting yesterday, he said that he would finish the report by today, but he hasn't sent me anything yet.",
+        "errors": [
+          {
+            "id": "e8",
+            "error": "he say",
+            "reason": "Incorrect verb tense: 'say' should be past tense.",
+            "suggestion": "Replace 'say' with 'said'.",
+            "improvedClause": "he said that he would finish the report"
+          },
+          {
+            "id": "e9",
+            "error": "he will finish",
+            "reason": "Tense mismatch: 'will' should be 'would' to match past context.",
+            "suggestion": "Replace 'will' with 'would'.",
+            "improvedClause": "he said that he would finish the report by today"
+          },
+          {
+            "id": "e10",
+            "error": "he haven't send",
+            "reason": "Incorrect verb form: 'haven't send' should be 'hasn't sent'.",
+            "suggestion": "Replace 'haven't send' with 'hasn't sent'.",
+            "improvedClause": "but he hasn't sent me anything yet"
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "original": "The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+        "corrected": "The book that I bought yesterday was very interesting, and I plan to read more by the same author.",
+        "errors": [
+          {
+            "id": "e11",
+            "error": "The book what I bought",
+            "reason": "Incorrect relative pronoun: 'what' should be 'that'.",
+            "suggestion": "Replace 'what' with 'that'.",
+            "improvedClause": "The book that I bought yesterday"
+          },
+          {
+            "id": "e12",
+            "error": "I am plan",
+            "reason": "Incorrect verb form: 'am plan' is not correct.",
+            "suggestion": "Replace 'am plan' with 'plan'.",
+            "improvedClause": "I plan to read more by the same author"
+          },
+          {
+            "id": "e13",
+            "error": "by same author",
+            "reason": "Missing article: 'same author' needs 'the'.",
+            "suggestion": "Insert 'the' before 'same author'.",
+            "improvedClause": "by the same author"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sessionId": "xyz789",
+    "createdAt": "2025-03-25T16:45:00Z",
+    "originalText": "Although he was very tired but he decided to keep working because he don't want to fall behind. The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me. She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering. In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet. The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+    "sentenceFeedback": [
+      {
+        "id": "s1",
+        "original": "Although he was very tired but he decided to keep working because he don't want to fall behind.",
+        "corrected": "Although he was very tired, he decided to keep working because he didn't want to fall behind.",
+        "errors": [
+          {
+            "id": "e1",
+            "error": "Although he was very tired but",
+            "reason": "Redundant conjunction: 'but' is unnecessary after 'Although'.",
+            "suggestion": "Remove 'but' for correct sentence structure.",
+            "improvedClause": "Although he was very tired, he decided to keep working"
+          },
+          {
+            "id": "e2",
+            "error": "he don't want",
+            "reason": "Incorrect verb form: 'don't' should match past tense.",
+            "suggestion": "Replace 'don't' with 'didn't'.",
+            "improvedClause": "he didn't want to fall behind"
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "original": "The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me.",
+        "corrected": "The weather was so hot that I decided not to go outside, even though I had promised to meet my friend who was waiting for me.",
+        "errors": [
+          {
+            "id": "e3",
+            "error": "so hot, so",
+            "reason": "Incorrect conjunction: 'so hot that' is the correct form.",
+            "suggestion": "Use 'so hot that' instead.",
+            "improvedClause": "The weather was so hot that I decided not to go outside"
+          },
+          {
+            "id": "e4",
+            "error": "to not go",
+            "reason": "Incorrect word order: 'not to go' is preferred.",
+            "suggestion": "Switch to 'not to go'.",
+            "improvedClause": "I decided not to go outside"
+          },
+          {
+            "id": "e5",
+            "error": "who is waited",
+            "reason": "Incorrect verb tense: 'is waited' is incorrect.",
+            "suggestion": "Use 'was waiting' instead.",
+            "improvedClause": "my friend who was waiting for me"
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "original": "She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering.",
+        "corrected": "She has always been interested in science, and her brother, who also likes physics, encouraged her to study engineering.",
+        "errors": [
+          {
+            "id": "e6",
+            "error": "She always have been",
+            "reason": "Incorrect verb agreement: 'have' should be 'has' for singular subject.",
+            "suggestion": "Replace 'have' with 'has'.",
+            "improvedClause": "She has always been interested in science"
+          },
+          {
+            "id": "e7",
+            "error": "who is also liking physics",
+            "reason": "Incorrect verb form: 'is liking' is unnatural.",
+            "suggestion": "Use 'who also likes physics' instead.",
+            "improvedClause": "her brother, who also likes physics"
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "original": "In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet.",
+        "corrected": "In the meeting yesterday, he said that he would finish the report by today, but he hasn't sent me anything yet.",
+        "errors": [
+          {
+            "id": "e8",
+            "error": "he say",
+            "reason": "Incorrect verb tense: 'say' should be past tense.",
+            "suggestion": "Replace 'say' with 'said'.",
+            "improvedClause": "he said that he would finish the report"
+          },
+          {
+            "id": "e9",
+            "error": "he will finish",
+            "reason": "Tense mismatch: 'will' should be 'would' to match past context.",
+            "suggestion": "Replace 'will' with 'would'.",
+            "improvedClause": "he said that he would finish the report by today"
+          },
+          {
+            "id": "e10",
+            "error": "he haven't send",
+            "reason": "Incorrect verb form: 'haven't send' should be 'hasn't sent'.",
+            "suggestion": "Replace 'haven't send' with 'hasn't sent'.",
+            "improvedClause": "but he hasn't sent me anything yet"
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "original": "The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+        "corrected": "The book that I bought yesterday was very interesting, and I plan to read more by the same author.",
+        "errors": [
+          {
+            "id": "e11",
+            "error": "The book what I bought",
+            "reason": "Incorrect relative pronoun: 'what' should be 'that'.",
+            "suggestion": "Replace 'what' with 'that'.",
+            "improvedClause": "The book that I bought yesterday"
+          },
+          {
+            "id": "e12",
+            "error": "I am plan",
+            "reason": "Incorrect verb form: 'am plan' is not correct.",
+            "suggestion": "Replace 'am plan' with 'plan'.",
+            "improvedClause": "I plan to read more by the same author"
+          },
+          {
+            "id": "e13",
+            "error": "by same author",
+            "reason": "Missing article: 'same author' needs 'the'.",
+            "suggestion": "Insert 'the' before 'same author'.",
+            "improvedClause": "by the same author"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sessionId": "xyz789",
+    "createdAt": "2025-03-25T16:45:00Z",
+    "originalText": "Although he was very tired but he decided to keep working because he don't want to fall behind. The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me. She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering. In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet. The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+    "sentenceFeedback": [
+      {
+        "id": "s1",
+        "original": "Although he was very tired but he decided to keep working because he don't want to fall behind.",
+        "corrected": "Although he was very tired, he decided to keep working because he didn't want to fall behind.",
+        "errors": [
+          {
+            "id": "e1",
+            "error": "Although he was very tired but",
+            "reason": "Redundant conjunction: 'but' is unnecessary after 'Although'.",
+            "suggestion": "Remove 'but' for correct sentence structure.",
+            "improvedClause": "Although he was very tired, he decided to keep working"
+          },
+          {
+            "id": "e2",
+            "error": "he don't want",
+            "reason": "Incorrect verb form: 'don't' should match past tense.",
+            "suggestion": "Replace 'don't' with 'didn't'.",
+            "improvedClause": "he didn't want to fall behind"
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "original": "The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me.",
+        "corrected": "The weather was so hot that I decided not to go outside, even though I had promised to meet my friend who was waiting for me.",
+        "errors": [
+          {
+            "id": "e3",
+            "error": "so hot, so",
+            "reason": "Incorrect conjunction: 'so hot that' is the correct form.",
+            "suggestion": "Use 'so hot that' instead.",
+            "improvedClause": "The weather was so hot that I decided not to go outside"
+          },
+          {
+            "id": "e4",
+            "error": "to not go",
+            "reason": "Incorrect word order: 'not to go' is preferred.",
+            "suggestion": "Switch to 'not to go'.",
+            "improvedClause": "I decided not to go outside"
+          },
+          {
+            "id": "e5",
+            "error": "who is waited",
+            "reason": "Incorrect verb tense: 'is waited' is incorrect.",
+            "suggestion": "Use 'was waiting' instead.",
+            "improvedClause": "my friend who was waiting for me"
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "original": "She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering.",
+        "corrected": "She has always been interested in science, and her brother, who also likes physics, encouraged her to study engineering.",
+        "errors": [
+          {
+            "id": "e6",
+            "error": "She always have been",
+            "reason": "Incorrect verb agreement: 'have' should be 'has' for singular subject.",
+            "suggestion": "Replace 'have' with 'has'.",
+            "improvedClause": "She has always been interested in science"
+          },
+          {
+            "id": "e7",
+            "error": "who is also liking physics",
+            "reason": "Incorrect verb form: 'is liking' is unnatural.",
+            "suggestion": "Use 'who also likes physics' instead.",
+            "improvedClause": "her brother, who also likes physics"
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "original": "In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet.",
+        "corrected": "In the meeting yesterday, he said that he would finish the report by today, but he hasn't sent me anything yet.",
+        "errors": [
+          {
+            "id": "e8",
+            "error": "he say",
+            "reason": "Incorrect verb tense: 'say' should be past tense.",
+            "suggestion": "Replace 'say' with 'said'.",
+            "improvedClause": "he said that he would finish the report"
+          },
+          {
+            "id": "e9",
+            "error": "he will finish",
+            "reason": "Tense mismatch: 'will' should be 'would' to match past context.",
+            "suggestion": "Replace 'will' with 'would'.",
+            "improvedClause": "he said that he would finish the report by today"
+          },
+          {
+            "id": "e10",
+            "error": "he haven't send",
+            "reason": "Incorrect verb form: 'haven't send' should be 'hasn't sent'.",
+            "suggestion": "Replace 'haven't send' with 'hasn't sent'.",
+            "improvedClause": "but he hasn't sent me anything yet"
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "original": "The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+        "corrected": "The book that I bought yesterday was very interesting, and I plan to read more by the same author.",
+        "errors": [
+          {
+            "id": "e11",
+            "error": "The book what I bought",
+            "reason": "Incorrect relative pronoun: 'what' should be 'that'.",
+            "suggestion": "Replace 'what' with 'that'.",
+            "improvedClause": "The book that I bought yesterday"
+          },
+          {
+            "id": "e12",
+            "error": "I am plan",
+            "reason": "Incorrect verb form: 'am plan' is not correct.",
+            "suggestion": "Replace 'am plan' with 'plan'.",
+            "improvedClause": "I plan to read more by the same author"
+          },
+          {
+            "id": "e13",
+            "error": "by same author",
+            "reason": "Missing article: 'same author' needs 'the'.",
+            "suggestion": "Insert 'the' before 'same author'.",
+            "improvedClause": "by the same author"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sessionId": "xyz789",
+    "createdAt": "2025-03-25T16:45:00Z",
+    "originalText": "Although he was very tired but he decided to keep working because he don't want to fall behind. The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me. She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering. In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet. The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+    "sentenceFeedback": [
+      {
+        "id": "s1",
+        "original": "Although he was very tired but he decided to keep working because he don't want to fall behind.",
+        "corrected": "Although he was very tired, he decided to keep working because he didn't want to fall behind.",
+        "errors": [
+          {
+            "id": "e1",
+            "error": "Although he was very tired but",
+            "reason": "Redundant conjunction: 'but' is unnecessary after 'Although'.",
+            "suggestion": "Remove 'but' for correct sentence structure.",
+            "improvedClause": "Although he was very tired, he decided to keep working"
+          },
+          {
+            "id": "e2",
+            "error": "he don't want",
+            "reason": "Incorrect verb form: 'don't' should match past tense.",
+            "suggestion": "Replace 'don't' with 'didn't'.",
+            "improvedClause": "he didn't want to fall behind"
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "original": "The weather was so hot, so I decided to not go outside, even though I had promised to meet my friend who is waited for me.",
+        "corrected": "The weather was so hot that I decided not to go outside, even though I had promised to meet my friend who was waiting for me.",
+        "errors": [
+          {
+            "id": "e3",
+            "error": "so hot, so",
+            "reason": "Incorrect conjunction: 'so hot that' is the correct form.",
+            "suggestion": "Use 'so hot that' instead.",
+            "improvedClause": "The weather was so hot that I decided not to go outside"
+          },
+          {
+            "id": "e4",
+            "error": "to not go",
+            "reason": "Incorrect word order: 'not to go' is preferred.",
+            "suggestion": "Switch to 'not to go'.",
+            "improvedClause": "I decided not to go outside"
+          },
+          {
+            "id": "e5",
+            "error": "who is waited",
+            "reason": "Incorrect verb tense: 'is waited' is incorrect.",
+            "suggestion": "Use 'was waiting' instead.",
+            "improvedClause": "my friend who was waiting for me"
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "original": "She always have been interested in science, and her brother who is also liking physics encouraged her to study engineering.",
+        "corrected": "She has always been interested in science, and her brother, who also likes physics, encouraged her to study engineering.",
+        "errors": [
+          {
+            "id": "e6",
+            "error": "She always have been",
+            "reason": "Incorrect verb agreement: 'have' should be 'has' for singular subject.",
+            "suggestion": "Replace 'have' with 'has'.",
+            "improvedClause": "She has always been interested in science"
+          },
+          {
+            "id": "e7",
+            "error": "who is also liking physics",
+            "reason": "Incorrect verb form: 'is liking' is unnatural.",
+            "suggestion": "Use 'who also likes physics' instead.",
+            "improvedClause": "her brother, who also likes physics"
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "original": "In the meeting yesterday, he say that he will finish the report by today, but he haven't send me anything yet.",
+        "corrected": "In the meeting yesterday, he said that he would finish the report by today, but he hasn't sent me anything yet.",
+        "errors": [
+          {
+            "id": "e8",
+            "error": "he say",
+            "reason": "Incorrect verb tense: 'say' should be past tense.",
+            "suggestion": "Replace 'say' with 'said'.",
+            "improvedClause": "he said that he would finish the report"
+          },
+          {
+            "id": "e9",
+            "error": "he will finish",
+            "reason": "Tense mismatch: 'will' should be 'would' to match past context.",
+            "suggestion": "Replace 'will' with 'would'.",
+            "improvedClause": "he said that he would finish the report by today"
+          },
+          {
+            "id": "e10",
+            "error": "he haven't send",
+            "reason": "Incorrect verb form: 'haven't send' should be 'hasn't sent'.",
+            "suggestion": "Replace 'haven't send' with 'hasn't sent'.",
+            "improvedClause": "but he hasn't sent me anything yet"
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "original": "The book what I bought yesterday was very interesting, and I am plan to read more by same author.",
+        "corrected": "The book that I bought yesterday was very interesting, and I plan to read more by the same author.",
+        "errors": [
+          {
+            "id": "e11",
+            "error": "The book what I bought",
+            "reason": "Incorrect relative pronoun: 'what' should be 'that'.",
+            "suggestion": "Replace 'what' with 'that'.",
+            "improvedClause": "The book that I bought yesterday"
+          },
+          {
+            "id": "e12",
+            "error": "I am plan",
+            "reason": "Incorrect verb form: 'am plan' is not correct.",
+            "suggestion": "Replace 'am plan' with 'plan'.",
+            "improvedClause": "I plan to read more by the same author"
+          },
+          {
+            "id": "e13",
+            "error": "by same author",
+            "reason": "Missing article: 'same author' needs 'the'.",
+            "suggestion": "Insert 'the' before 'same author'.",
+            "improvedClause": "by the same author"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,51 @@
+{
+  "dateTime": "2011-10-10T14:48:00.000+09:00",
+  "original_text": " This is sound of my voice. This is he favorite song. I like go to the park.",
+  "grammar_errors": [],
+  "ollama_result": {
+    "sentences": [
+      {
+        "sentence": "This is sound of my voice.",
+        "errorCount": 1,
+        "errors": [
+          {
+            "errorIndex": 13,
+            "error": "Incorrect use of possessive apostrophe",
+            "errorType": "Vocabulary",
+            "correction": "Replace 'sound' with the correct noun or phrase.",
+            "improvedClause": "This is the sound of my voice."
+          }
+        ],
+        "correctedSentence": "This is the sound of my voice"
+      },
+      {
+        "sentence": "This is he favorite song.",
+        "errorCount": 1,
+        "errors": [
+          {
+            "errorIndex": 6,
+            "error": "Incorrect use of 'he' as a possessive pronoun",
+            "errorType": "Vocabulary",
+            "correction": "Replace 'he' with the correct possessive pronoun.",
+            "improvedClause": "This is his favorite song."
+          }
+        ],
+        "correctedSentence": "This is his favorite song"
+      },
+      {
+        "sentence": "I like go to the park.",
+        "errorCount": 1,
+        "errors": [
+          {
+            "errorIndex": 5,
+            "error": "Incorrect use of verb tense",
+            "errorType": "Grammar",
+            "correction": "Replace 'go' with the correct verb form.",
+            "improvedClause": "I like going to the park."
+          }
+        ],
+        "correctedSentence": "I like going to the park"
+      }
+    ]
+  }
+}
