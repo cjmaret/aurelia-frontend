@@ -12,7 +12,7 @@ import Waveform from '../waveform/Waveform';
 import RecordButtonComponent from '../record-button/RecordButton';
 import styled from 'styled-components/native';
 import api from '@/lib/api';
-import { CorrectionDataType } from '@/types/types';
+import { CorrectionDataType, CorrectionResponseType } from '@/types/types';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 
 export default function SpeechRecorder() {
@@ -75,28 +75,27 @@ export default function SpeechRecorder() {
       type: 'audio/m4a',
     } as any);
 
-    api.sendAudioFile(formData).then((response) => {
-      if (!response) {
-        console.error('No response from server');
+    try {
+      const response: CorrectionResponseType = await api.sendAudioFile(formData);
+
+      if (!response.success) {
+        console.error('Error from server:', response.error);
+        // handle the error (toast?)
         return;
       }
 
-      console.log('Audio file sent successfully:', response);
-      setCorrectionData((prevData: CorrectionDataType[]) => {
-        // replace object if new object has the same conversationId
-        const existingIndex = prevData.findIndex(
-          (item) => item.conversationId === response.conversationId
-        );
-
-        if (existingIndex !== -1) {
-          const updatedData = [...prevData];
-          updatedData[existingIndex] = response;
-          return updatedData;
-        } else {
-          return [response, ...prevData];
-        }
-      });
-    });
+      const correctionData = response.data;
+      if (correctionData) {
+        console.log('Correction data received:', correctionData);
+        setCorrectionData((prevData: CorrectionDataType[]) => [
+          ...correctionData,
+          ...prevData,
+        ]);
+      }
+    } catch (error) {
+      console.error('Error sending audio:', error);
+      // handle the error (toast?)
+    }
   }
 
   return (

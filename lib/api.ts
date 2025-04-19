@@ -1,4 +1,4 @@
-import { ApiTypes } from '@/types/types';
+import { ApiTypes, CorrectionResponseType } from '@/types/types';
 import config from './config';
 import * as SecureStore from 'expo-secure-store';
 import { jwtDecode } from 'jwt-decode';
@@ -22,7 +22,6 @@ class Api {
     const currentTime = Math.floor(Date.now() / 1000);
 
     if (decodedToken.exp < currentTime) {
-
       console.warn('Access token has expired. Attempting to refresh...');
       const storedRefreshToken = await SecureStore.getItemAsync('refreshToken');
 
@@ -180,7 +179,7 @@ class Api {
       });
   }
 
-  async getCorrections(): Promise<any> {
+  async getCorrections(): Promise<CorrectionResponseType> {
     const headers = await this._getAuthHeaders();
 
     return fetch(this._baseUrl + `/corrections`, {
@@ -194,11 +193,9 @@ class Api {
       });
   }
 
-  async sendAudioFile(formData: FormData): Promise<any> {
+  async sendAudioFile(formData: FormData): Promise<CorrectionResponseType> {
     const headers = await this._getAuthHeaders();
 
-    // TODO: this might fail because youre allowing content-type to be application/json
-    // and not multipart/form-data
     return fetch(this._baseUrl + `/corrections`, {
       method: 'POST',
       headers,

@@ -134,9 +134,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       const response = await api.refreshToken(storedRefreshToken);
       const { accessToken, refreshToken: newRefreshToken } = response;
 
-      console.log('New access token:', accessToken);
-      console.log('New refresh token:', newRefreshToken);
-
       await SecureStore.setItemAsync('accessToken', accessToken);
       await SecureStore.setItemAsync('refreshToken', newRefreshToken);
 

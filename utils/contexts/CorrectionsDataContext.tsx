@@ -1,6 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import api from '@/lib/api';
-import { CorrectionDataContextType, CorrectionDataType } from '@/types/types';
+import {
+  CorrectionDataContextType,
+  CorrectionDataType,
+  CorrectionResponseType,
+} from '@/types/types';
 import { sortCorrectionDataChronologically } from '@/utils/functions/generalFunctions';
 import { useAuth } from '@/utils/contexts/AuthContext';
 
@@ -23,21 +27,36 @@ export const CorrectionsDataProvider: React.FC<{
 
   const fetchCorrections = async () => {
     try {
-      const correctionsRes = await api.getCorrections(); // API call
-      const sortedData = sortCorrectionDataChronologically(correctionsRes); // Sort data
-      setCorrectionData(sortedData); // Update state
-      setCorrectionsFetchError(null); // Clear any previous errors
+      const response: CorrectionResponseType = await api.getCorrections();
+
+      if (!response.success) {
+        console.error('Error fetching corrections:', response.error);
+        setCorrectionsFetchError(new Error(response.error || 'Unknown error'));
+        return;
+      }
+
+      const { data } = response;
+
+      if (!data || data.length === 0) {
+        console.warn('No correction data available');
+        setCorrectionData([]);
+        setCorrectionsFetchError(response.error ? new Error(response.error) : null)
+        return;
+      }
+      const sortedData = sortCorrectionDataChronologically(data);
+      setCorrectionData(sortedData);
+      setCorrectionsFetchError(null);
     } catch (err: any) {
       console.error('Error fetching corrections:', err);
-      setCorrectionsFetchError(err); // Set error state
+      setCorrectionsFetchError(err);
       if (err.message === 'Unauthorized') {
         try {
           console.warn('Unauthorized error. Attempting to refresh token...');
-          await refreshToken(); // Attempt to refresh token
-          await fetchCorrections(); // Retry fetching corrections after refreshing token
+          await refreshToken();
+          await fetchCorrections();
         } catch (refreshError) {
           console.error('Token refresh failed. Logging out...');
-          await logout(); // Log out if token refresh fails
+          await logout();
         }
       }
     }

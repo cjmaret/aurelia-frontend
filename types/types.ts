@@ -14,7 +14,7 @@ export interface AuthContextType {
   user: UserDataType | null;
   setUser: React.Dispatch<React.SetStateAction<UserDataType | null>>;
   refreshToken: () => Promise<string>;
-};
+}
 
 export interface CorrectionDataContextType {
   correctionData: CorrectionDataType[];
@@ -24,12 +24,22 @@ export interface CorrectionDataContextType {
 }
 
 // api data types
+
+// user data types
 export interface UserDataType {
   username: string;
   userEmail: string;
   targetLanguage: string;
   appLanguage: string;
   setupComplete: boolean;
+}
+
+// correction data types
+
+export interface CorrectionResponseType {
+  success: boolean;
+  data?: CorrectionDataType[];
+  error?: string;
 }
 
 export interface CorrectionDataType {

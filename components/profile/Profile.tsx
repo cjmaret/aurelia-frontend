@@ -70,7 +70,6 @@ export default function Profile() {
 
       // only make the call if there are changes
       if (Object.keys(updatedFields).length > 0) {
-        console.log('Updated fields:', updatedFields);
         const updatedUser = await api.updateUserDetails(updatedFields);
 
         setUser(updatedUser);
