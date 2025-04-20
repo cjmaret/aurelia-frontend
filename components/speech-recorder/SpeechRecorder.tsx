@@ -14,6 +14,7 @@ import styled from 'styled-components/native';
 import api from '@/lib/api';
 import { CorrectionDataType, CorrectionResponseType } from '@/types/types';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
+import { produceApiErrorAlert } from '@/utils/functions/handleApiError';
 
 export default function SpeechRecorder() {
   const [recording, setRecording] = useState<Audio.Recording | null>(null);
@@ -86,15 +87,16 @@ export default function SpeechRecorder() {
 
       const correctionData = response.data;
       if (correctionData) {
-        console.log('Correction data received:', correctionData);
         setCorrectionData((prevData: CorrectionDataType[]) => [
           ...correctionData,
           ...prevData,
         ]);
       }
-    } catch (error) {
+    } catch (error: any) {
+      const { status, message } = error;
+
       console.error('Error sending audio:', error);
-      // handle the error (toast?)
+      produceApiErrorAlert(status, message);
     }
   }
 

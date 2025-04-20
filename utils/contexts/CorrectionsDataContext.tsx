@@ -7,6 +7,7 @@ import {
 } from '@/types/types';
 import { sortCorrectionDataChronologically } from '@/utils/functions/generalFunctions';
 import { useAuth } from '@/utils/contexts/AuthContext';
+import { produceApiErrorAlert } from '../functions/handleApiError';
 
 const CorrectionDataContext = createContext<CorrectionDataContextType>({
   correctionData: [],
@@ -31,36 +32,40 @@ export const CorrectionsDataProvider: React.FC<{
 
       if (!response.success) {
         console.error('Error fetching corrections:', response.error);
+        // TODO: is this needed
         setCorrectionsFetchError(new Error(response.error || 'Unknown error'));
         return;
       }
 
       const { data } = response;
 
-      if (!data || data.length === 0) {
-        console.warn('No correction data available');
+      if (data && data.length > 0) {
+        const sortedData = sortCorrectionDataChronologically(data);
+        setCorrectionData(sortedData);
+      } else {
         setCorrectionData([]);
-        setCorrectionsFetchError(response.error ? new Error(response.error) : null)
-        return;
       }
-      const sortedData = sortCorrectionDataChronologically(data);
-      setCorrectionData(sortedData);
       setCorrectionsFetchError(null);
     } catch (err: any) {
       console.error('Error fetching corrections:', err);
       setCorrectionsFetchError(err);
-      if (err.message === 'Unauthorized') {
-        try {
-          console.warn('Unauthorized error. Attempting to refresh token...');
-          await refreshToken();
-          await fetchCorrections();
-        } catch (refreshError) {
-          console.error('Token refresh failed. Logging out...');
-          await logout();
-        }
+      if (err.status === 401) {
+        attemptRefreshAndRefetch();
       }
+      produceApiErrorAlert(err.status || 0, err.message || 'Unknown error');
     }
   };
+
+  async function attemptRefreshAndRefetch(): Promise<void> {
+    try {
+      console.warn('Unauthorized error. Attempting to refresh token...');
+      await refreshToken();
+      await fetchCorrections();
+    } catch (refreshError) {
+      console.error('Token refresh failed. Logging out...');
+      await logout();
+    }
+  }
 
   useEffect(() => {
     if (isAuthenticated) {

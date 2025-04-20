@@ -24,3 +24,21 @@ export const HeaderText = styled.Text`
   font-size: 20px;
   font-weight: bold;
 `;
+
+export const NoCorrectionsContainer = styled.View`
+  max-width: 200px;
+  border-radius: 10px;
+  background-color: ${colors.cardBackground};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 50px;
+`;
+
+export const NoCorrectionsText = styled.Text`
+  color: ${colors.snippetOriginalText};
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+`;

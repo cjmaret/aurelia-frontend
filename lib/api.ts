@@ -50,13 +50,19 @@ class Api {
     };
   }
 
-  _returnRes(res: any) {
+  _returnRes(res: Response): Promise<any> {
     if (res.ok) {
       return res.json();
-    } else if (res.status === 401) {
-      throw new Error('Token has expired');
     } else {
-      return Promise.reject(`Error: ${res.status} ${res.statusText}`);
+      return res.json().then((body: any) => {
+        const errorMessage =
+          body.detail ||
+          `Error: ${res.status} ${res.statusText || 'Unknown error'}`;
+        return Promise.reject({
+          status: res.status,
+          message: errorMessage,
+        });
+      });
     }
   }
 

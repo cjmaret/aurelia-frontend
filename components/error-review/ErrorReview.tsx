@@ -2,6 +2,8 @@ import {
   ErrorReviewContainer,
   HeaderContainer,
   HeaderText,
+  NoCorrectionsContainer,
+  NoCorrectionsText,
 } from './styledErrorReview';
 import { ScrollView, RefreshControl } from 'react-native';
 import CorrectionList from '../correction-list/CorrectionList';
@@ -32,6 +34,13 @@ export default function ErrorReview() {
       </HeaderContainer>
       {correctionsFetchError && (
         <ErrorMessage message={correctionsFetchError.message} />
+      )}
+      {correctionData.length === 0 && (
+        <NoCorrectionsContainer>
+          <NoCorrectionsText>
+            Starting recording to see your corrections here!
+          </NoCorrectionsText>
+        </NoCorrectionsContainer>
       )}
       <ScrollView
         style={{ width: '100%' }}
