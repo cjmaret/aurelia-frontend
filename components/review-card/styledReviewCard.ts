@@ -20,7 +20,7 @@ export const CardHeader = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color:${colors.cardHeaderBackground};
+  background-color: ${colors.cardHeaderBackground};
   padding: 20px;
   border-radius: 8px;
 `;
@@ -132,4 +132,19 @@ export const ErrorText = styled.Text`
   font-size: 12px;
   color: ${colors.snippetErrorText};
   margin-bottom: 5px;
+`;
+
+export const ContragulatoryTextContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+`;
+
+export const ContragulatoryText = styled.Text`
+  font-size: 16px;
+  color: ${colors.primary};
+  text-align: center;
+  margin-left: 10px;
 `;

@@ -20,6 +20,8 @@ import {
   CardHeaderTextTitle,
   CardHeaderTextTime,
   ErrorHeaderText,
+  ContragulatoryTextContainer,
+  ContragulatoryText,
 } from './styledReviewCard';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { extractTime } from '@/utils/functions/extractTime';
@@ -75,12 +77,28 @@ export default function ReviewCard({
         <CardContent>
           {sentenceFeedback.map((sentence) => (
             <SnippetCard key={sentence.id}>
-              <OriginalText>
-                <BoldText>You said:</BoldText> "{sentence.original}"
-              </OriginalText>
-              <CorrectedText>
-                <BoldText>Corrected:</BoldText> "{sentence.corrected}"
-              </CorrectedText>
+              {sentence?.errors?.length > 0 ? (
+                <>
+                  <OriginalText>
+                    <BoldText>You said:</BoldText> "{sentence.original}"
+                  </OriginalText>
+                  <CorrectedText>
+                    <BoldText>Corrected:</BoldText> "{sentence.corrected}"
+                  </CorrectedText>
+                </>
+              ) : (
+                <>
+                  <CorrectedText>
+                    <BoldText>You said:</BoldText> "{sentence.corrected}"
+                  </CorrectedText>
+                  <ContragulatoryTextContainer>
+                    <ContragulatoryText>
+                      🎊 Great job! No errors! 🎊
+                    </ContragulatoryText>
+                  </ContragulatoryTextContainer>
+                </>
+              )}
+
               {sentence?.errors?.length > 0 && (
                 <ErrorList>
                   {sentence.errors.map((error) => {
