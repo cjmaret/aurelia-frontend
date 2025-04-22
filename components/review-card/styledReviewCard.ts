@@ -4,11 +4,11 @@ import colors from '../../assets/globalStyles';
 export const CardContainer = styled.View`
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 93%;
   border-radius: 12px;
-  border: 1px solid ${colors.cardBorder};
   background-color: ${colors.cardBackground};
   shadow-color: #000;
+  shadow-offset: 0px 5px;
   shadow-opacity: 0.1;
   shadow-radius: 4px;
   elevation: 3;
@@ -20,7 +20,12 @@ export const CardHeader = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: ${colors.cardHeaderBackground};
+  background-color: ${colors.cardBackground};
+  border: 1px solid ${colors.cardHeaderBorder};
+  shadow-color: #000000;
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.1;
+  shadow-radius: 4px;
   padding: 20px;
   border-radius: 8px;
 `;
@@ -41,7 +46,7 @@ export const CardHeaderTextContainer = styled.View`
 `;
 
 const CardHeaderText = styled.Text`
-  color: ${colors.textWhite};
+  color: ${colors.cardHeaderText};
   font-weight: bold;
 `;
 
@@ -54,49 +59,58 @@ export const CardHeaderTextTime = styled(CardHeaderText)`
 `;
 
 export const CardContent = styled.View`
-  padding: 0 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const SnippetCard = styled.View`
+  width: 93%;
   background: ${colors.snippetBackground};
-  padding: 16px;
+  border: 1px solid ${colors.cardBorder};
+  padding: 20px 16px;
   border-radius: 8px;
-  shadow-color: #000;
+  shadow-color: #000000;
+  shadow-offset: 0px 2px;
   shadow-opacity: 0.1;
   shadow-radius: 4px;
   elevation: 2;
-  margin: 15px 0 0 0;
+  margin: 15px 0;
 `;
 
 export const OriginalText = styled.Text`
-  font-size: 14px;
+  font-size: 15px;
   color: ${colors.snippetOriginalText};
   font-style: italic;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 `;
 
 export const CorrectedText = styled.Text`
   font-size: 16px;
   font-weight: bold;
   color: ${colors.snippetCorrectedText};
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+`;
+
+export const HighlightedText = styled.Text`
+  font-weight: 900;
 `;
 
 export const ErrorList = styled.View`
   margin-top: 8px;
-  padding: 0 0 0 10px;
 `;
 
 export const ErrorItem = styled.View`
   border: 1px solid ${colors.snippetErrorText};
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
   margin-bottom: 6px;
 `;
 
 export const ErrorHeader = styled.View`
   display: flex;
   flex-direction: row;
+  padding: 5px 0;
 `;
 
 export const ErrorArrowIcon = styled(ArrowIcon)`
@@ -107,13 +121,16 @@ export const ErrorArrowIcon = styled(ArrowIcon)`
 `;
 
 export const ErrorHeaderText = styled.Text`
+  display: flex;
+  flex-direction: column;
   width: 90%;
-  font-size: 14px;
+  font-size: 16px;
   color: ${colors.snippetErrorText};
   flex-wrap: wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
   word-break: break-word;
+  margin-left: 5px;
 `;
 
 export const BoldText = styled.Text`
@@ -125,13 +142,25 @@ export const ItalicText = styled.Text`
 `;
 
 export const ErrorTextContainer = styled.View`
-  margin-top: 5px;
+  margin: 5px 0;
 `;
 
-export const ErrorText = styled.Text`
-  font-size: 12px;
+export const ErrorDetailContainer = styled.View`
+  margin-bottom: 15px;
+`;
+
+export const ErrorDetailHeader = styled.Text`
+  font-size: 15px;
+  font-weight: bold;
   color: ${colors.snippetErrorText};
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+`;
+
+export const ErrorDetailText = styled.Text`
+  font-size: 14px;
+  font-weight: 500;
+  color: ${colors.snippetErrorText};
+  margin-left: 10px;
 `;
 
 export const ContragulatoryTextContainer = styled.View`
@@ -144,7 +173,8 @@ export const ContragulatoryTextContainer = styled.View`
 
 export const ContragulatoryText = styled.Text`
   font-size: 16px;
-  color: ${colors.primary};
+  font-weight: bold;
+  color: ${colors.textSecondary};
   text-align: center;
   margin-left: 10px;
 `;

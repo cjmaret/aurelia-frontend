@@ -12,6 +12,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { AuthProvider } from '@/utils/contexts/AuthContext';
 import { CorrectionsDataProvider } from '@/utils/contexts/CorrectionsDataContext';
+import colors from '@/assets/globalStyles';
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -32,24 +33,27 @@ export default function RootLayout() {
   }
 
   return (
-      <AuthProvider>
-        <CorrectionsDataProvider>
-          <SafeAreaProvider>
-            <SafeAreaView style={{ flex: 1 }} edges={['top', 'left', 'right']}>
-              <ThemeProvider
-                value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-                <Stack screenOptions={{ headerShown: false }}>
-                  <Stack.Screen
-                    name="(tabs)"
-                    options={{ headerShown: false }}
-                  />
-                  <Stack.Screen name="+not-found" />
-                </Stack>
-              </ThemeProvider>
-              <StatusBar style="auto" />
-            </SafeAreaView>
-          </SafeAreaProvider>
-        </CorrectionsDataProvider>
-      </AuthProvider>
+    <AuthProvider>
+      <CorrectionsDataProvider>
+        <SafeAreaProvider>
+          <SafeAreaView
+            style={{
+              flex: 1,
+              backgroundColor:
+                colorScheme === 'dark' ? '#3b3a4c' : colors.background,
+            }}
+            edges={['top', 'left', 'right']}>
+            <ThemeProvider
+              value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+              <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen name="+not-found" />
+              </Stack>
+            </ThemeProvider>
+            <StatusBar style="auto" />
+          </SafeAreaView>
+        </SafeAreaProvider>
+      </CorrectionsDataProvider>
+    </AuthProvider>
   );
 }
