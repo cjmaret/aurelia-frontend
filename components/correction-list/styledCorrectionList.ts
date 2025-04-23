@@ -14,7 +14,8 @@ export const DateSeparatorContainer = styled.View`
   justify-content: flex-end;
   align-items: center;
   width: 90%;
-  margin: 25px 0;
+  /* move closer to below card to because above card's shadow makes distance look uneven */
+  margin: 20px 0 15px 0;
 `;
 
 export const DateSeparatorLine = styled.View`

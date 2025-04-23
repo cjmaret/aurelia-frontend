@@ -27,11 +27,13 @@ import {
   HighlightedText,
 } from './styledReviewCard';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { extractTime } from '@/utils/functions/extractTime';
-import { getConversationTitle } from '@/utils/functions/getConversationTitle';
 import { LinearGradient } from 'expo-linear-gradient';
 import { CorrectionDataType } from '@/types/types';
 import colors from '@/assets/globalStyles';
+import {
+  formatTime,
+  getConversationTitle,
+} from '@/utils/functions/generalFunctions';
 
 export default function ReviewCard({
   cardData,
@@ -42,7 +44,7 @@ export default function ReviewCard({
   const [isCardExpanded, setIsCardExpanded] = useState(false);
   const [expandedErrors, setExpandedErrors] = useState<string[]>([]);
 
-  const title = getConversationTitle(cardData.createdAt);
+  const title = getConversationTitle({ dateTimeString: cardData.createdAt });
 
   const toggleCard = () => setIsCardExpanded((prev) => !prev);
 
@@ -59,7 +61,7 @@ export default function ReviewCard({
   const getHighlightedText = (original: string, corrected: string) => {
     const normalizeWord = (word: string) => word.replace(/[.,!?;:]/g, '');
 
-    const originalWords = new Set(original.split(/\s+/).map(normalizeWord)); 
+    const originalWords = new Set(original.split(/\s+/).map(normalizeWord));
     const correctedWords = corrected.split(/\s+/);
 
     return correctedWords.map((word, index) => {
@@ -84,7 +86,9 @@ export default function ReviewCard({
           </HeaderArrowIcon>
           <CardHeaderTextContainer>
             <CardHeaderTextTitle>{title}</CardHeaderTextTitle>
-            <CardHeaderTextTime>{extractTime(createdAt)}</CardHeaderTextTime>
+            <CardHeaderTextTime>
+              {formatTime({ dateTimeString: createdAt })}
+            </CardHeaderTextTime>
           </CardHeaderTextContainer>
         </CardHeader>
       </TouchableOpacity>

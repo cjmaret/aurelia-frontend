@@ -13,7 +13,7 @@ export const CardContainer = styled.View`
   shadow-radius: 4px;
   elevation: 3;
   align-self: center;
-  margin: 15px 0;
+  margin: 20px 0;
 `;
 
 export const CardHeader = styled.View`

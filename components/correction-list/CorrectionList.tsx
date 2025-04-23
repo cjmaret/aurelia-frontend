@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import ReviewCard from '../review-card/ReviewCard';
-import { format, isSameDay, parseISO } from 'date-fns';
+import { isSameDay, parseISO, startOfDay } from 'date-fns';
 import { CorrectionDataType } from '@/types/types';
 import {
   DateSeparatorContainer,
@@ -9,6 +8,10 @@ import {
   DateSeparatorText,
   ReviewCardContainer,
 } from './styledCorrectionList';
+import {
+  formatDate,
+  formatToLocalDate,
+} from '@/utils/functions/generalFunctions';
 
 export default function CorrectionList({
   correctionData,
@@ -18,21 +21,27 @@ export default function CorrectionList({
   return (
     <>
       {correctionData?.map((cardData: CorrectionDataType, index: number) => {
-        const currentDate = parseISO(cardData.createdAt);
-        const previousDate =
-          index > 0 ? parseISO(correctionData[index - 1].createdAt) : null;
+        const currentDateLocal = formatToLocalDate({
+          dateTimeString: cardData.createdAt,
+        });
+        const previousDateLocal =
+          index > 0
+            ? formatToLocalDate({
+                dateTimeString: correctionData[index - 1].createdAt,
+              })
+            : null;
 
         // show date separator if it's the first item or if the current date is different from the previous convo's date
         const showDateSeparator =
-          !previousDate || !isSameDay(currentDate, previousDate);
+          !previousDateLocal || !isSameDay(currentDateLocal, previousDateLocal);
 
         return (
           <ReviewCardContainer key={index}>
             {showDateSeparator && (
               <DateSeparatorContainer>
-                <DateSeparatorLine/>
+                <DateSeparatorLine />
                 <DateSeparatorText>
-                  {format(currentDate, 'MMMM d, yyyy')}
+                  {formatDate({ dateTimeString: cardData.createdAt })}
                 </DateSeparatorText>
               </DateSeparatorContainer>
             )}

@@ -28,6 +28,7 @@ export const HeaderText = styled.Text`
   color: ${colors.textSecondary};
   font-size: 25px;
   font-weight: bold;
+  margin-bottom: 5px;
 `;
 
 export const SearchContainer = styled.View`

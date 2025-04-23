@@ -23,9 +23,9 @@ import {
   ScrollView,
 } from './styledProfile';
 import api from '@/lib/api';
-import { capitalizeFirstLetter } from '@/utils/functions/capitalizeFirstLetter';
 import { UserDataType } from '@/types/types';
 import { languageFlags, languages } from '@/constants/profileConstants';
+import { capitalizeFirstLetter } from '@/utils/functions/generalFunctions';
 
 export default function Profile() {
   const { logout } = useAuth();
