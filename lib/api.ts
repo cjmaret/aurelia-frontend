@@ -185,10 +185,16 @@ class Api {
       });
   }
 
-  async getCorrections(): Promise<CorrectionResponseType> {
+  async getCorrections({
+    page,
+    limit,
+  }: {
+    page: number;
+    limit: number;
+  }): Promise<CorrectionResponseType> {
     const headers = await this._getAuthHeaders();
 
-    return fetch(this._baseUrl + `/corrections`, {
+    return fetch(this._baseUrl + `/corrections?page=${page}&limit=${limit}`, {
       method: 'GET',
       headers,
     })

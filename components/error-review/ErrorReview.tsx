@@ -7,7 +7,7 @@ import {
   SearchBar,
   SearchContainer,
 } from './styledErrorReview';
-import { ScrollView, RefreshControl, TextInput } from 'react-native';
+import { RefreshControl, TextInput } from 'react-native';
 import CorrectionList from '../correction-list/CorrectionList';
 import ErrorMessage from '../error/ErrorMessage';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
@@ -16,8 +16,12 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '@/assets/globalStyles';
 
 export default function ErrorReview() {
-  const { correctionData, correctionsFetchError, fetchCorrections } =
-    useCorrectionsData();
+  const {
+    correctionData,
+    correctionsFetchError,
+    fetchCorrections,
+    pagination,
+  } = useCorrectionsData();
   const [refreshing, setRefreshing] = useState(false);
   const [searchText, setSearchText] = useState('');
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -25,7 +29,10 @@ export default function ErrorReview() {
   const handleRefresh = async () => {
     setRefreshing(true);
     try {
-      await fetchCorrections();
+      await fetchCorrections({
+        page: 1,
+        limit: pagination.limit,
+      });
     } catch (error) {
       console.error('Error refreshing corrections:', error);
     } finally {
@@ -33,23 +40,18 @@ export default function ErrorReview() {
     }
   };
 
-  const handleSearch = (text: string) => {
-    setSearchText(text);
-    console.log('Search text:', text);
-  };
-
   const handleScroll = (event: any) => {
     const scrollY = event.nativeEvent.contentOffset.y;
     setHasScrolled(scrollY > 0);
   };
 
-  // pass into correctionData
-  // const filteredCorrections = correctionData.filter((correction) =>
-  //   correction.text.toLowerCase().includes(searchText.toLowerCase())
-  // );
+  const handleSearch = (text: string) => {
+    setSearchText(text);
+    console.log('Search text:', text);
+  };
 
-  return (
-    <ErrorReviewContainer>
+  const renderHeader = () => (
+    <>
       <HeaderContainer hasScrolled={hasScrolled}>
         <HeaderText>Error Review</HeaderText>
         <SearchContainer>
@@ -76,19 +78,22 @@ export default function ErrorReview() {
       {correctionData.length === 0 && (
         <NoCorrectionsContainer>
           <NoCorrectionsText>
-            Starting recording to see your corrections here!
+            Start recording to see your corrections here!
           </NoCorrectionsText>
         </NoCorrectionsContainer>
       )}
-      <ScrollView
-        style={{ width: '100%' }}
-        onScroll={handleScroll}
-        scrollEventThrottle={16}
+    </>
+  );
+
+  return (
+    <ErrorReviewContainer>
+      {renderHeader()}
+      <CorrectionList
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-        }>
-        <CorrectionList correctionData={correctionData} />
-      </ScrollView>
+        }
+        handleScroll={handleScroll}
+      />
     </ErrorReviewContainer>
   );
 }

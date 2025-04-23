@@ -19,8 +19,9 @@ export interface AuthContextType {
 export interface CorrectionDataContextType {
   correctionData: CorrectionDataType[];
   setCorrectionData: SetStateType<CorrectionDataType[]>;
-  fetchCorrections: () => Promise<void>;
+  fetchCorrections: (params: { page: number; limit: number }) => Promise<void>;
   correctionsFetchError: Error | null;
+  pagination: PaginationType;
 }
 
 // api data types
@@ -38,8 +39,15 @@ export interface UserDataType {
 
 export interface CorrectionResponseType {
   success: boolean;
-  data?: CorrectionDataType[];
+  data?: CorrectionDataType | PaginatedCorrectionsResponseType;
   error?: string;
+}
+
+export interface PaginatedCorrectionsResponseType {
+  corrections: CorrectionDataType[];
+  total: number;
+  page: number;
+  limit: number;
 }
 
 export interface CorrectionDataType {
@@ -62,6 +70,12 @@ export interface ErrorDetail {
   reason: string;
   suggestion: string;
   improvedClause: string;
+}
+
+export interface PaginationType {
+  total: number;
+  page: number;
+  limit: number;
 }
 
 // AuthForm types

@@ -4,6 +4,8 @@ import {
   CorrectionDataContextType,
   CorrectionDataType,
   CorrectionResponseType,
+  PaginatedCorrectionsResponseType,
+  PaginationType,
 } from '@/types/types';
 import { sortCorrectionDataChronologically } from '@/utils/functions/generalFunctions';
 import { useAuth } from '@/utils/contexts/AuthContext';
@@ -12,8 +14,13 @@ import { produceApiErrorAlert } from '../functions/handleApiError';
 const CorrectionDataContext = createContext<CorrectionDataContextType>({
   correctionData: [],
   setCorrectionData: () => {},
-  fetchCorrections: async () => {},
+  fetchCorrections: async ({ page = 1, limit = 10 }: { page: number; limit: number }) => {},
   correctionsFetchError: null,
+  pagination: {
+    total: 0,
+    page: 1,
+    limit: 10,
+  },
 });
 
 export const CorrectionsDataProvider: React.FC<{
@@ -23,28 +30,51 @@ export const CorrectionsDataProvider: React.FC<{
   const [correctionData, setCorrectionData] = useState<CorrectionDataType[]>(
     []
   );
+  const [pagination, setPagination] = useState<PaginationType>({
+    total: 0,
+    page: 1,
+    limit: 10,
+  });
   const [correctionsFetchError, setCorrectionsFetchError] =
     useState<Error | null>(null);
 
-  const fetchCorrections = async () => {
+  const fetchCorrections = async ({
+    page = 1,
+    limit = 10,
+  }: {
+    page: number;
+    limit: number;
+  }) => {
     try {
-      const response: CorrectionResponseType = await api.getCorrections();
+      const response: CorrectionResponseType = await api.getCorrections({
+        page,
+        limit,
+      });
 
       if (!response.success) {
         console.error('Error fetching corrections:', response.error);
-        // TODO: is this needed
         setCorrectionsFetchError(new Error(response.error || 'Unknown error'));
         return;
       }
 
-      const { data } = response;
+      // data can be one of two types so we have to assert this one
+      const data = response.data as PaginatedCorrectionsResponseType;
 
-      if (data && data.length > 0) {
-        const sortedData = sortCorrectionDataChronologically(data);
-        setCorrectionData(sortedData);
-      } else {
+      if (data && data.corrections.length > 0) {
+        setCorrectionData((prev) =>
+          page === 1 ? data.corrections : [...prev, ...data.corrections]
+        );
+
+        // update pagination metadata
+        setPagination({
+          total: data.total,
+          page: data.page,
+          limit: data.limit,
+        });
+      } else if (page === 1) {
         setCorrectionData([]);
       }
+
       setCorrectionsFetchError(null);
     } catch (err: any) {
       console.error('Error fetching corrections:', err);
@@ -60,7 +90,10 @@ export const CorrectionsDataProvider: React.FC<{
     try {
       console.warn('Unauthorized error. Attempting to refresh token...');
       await refreshToken();
-      await fetchCorrections();
+      await fetchCorrections({
+        page: pagination.page,
+        limit: pagination.limit,
+      });
     } catch (refreshError) {
       console.error('Token refresh failed. Logging out...');
       await logout();
@@ -69,7 +102,7 @@ export const CorrectionsDataProvider: React.FC<{
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetchCorrections();
+      fetchCorrections({ page: pagination.page, limit: pagination.limit });
     }
   }, [isAuthenticated]);
 
@@ -80,6 +113,7 @@ export const CorrectionsDataProvider: React.FC<{
         setCorrectionData,
         correctionsFetchError,
         fetchCorrections,
+        pagination,
       }}>
       {children}
     </CorrectionDataContext.Provider>
