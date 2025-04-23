@@ -39,7 +39,7 @@ export interface UserDataType {
 
 export interface CorrectionResponseType {
   success: boolean;
-  data?: CorrectionDataType | PaginatedCorrectionsResponseType;
+  data?: CorrectionDataType[] | PaginatedCorrectionsResponseType; // paginated type for fetches, data type for add new corrections
   error?: string;
 }
 

@@ -85,7 +85,7 @@ export default function SpeechRecorder() {
         return;
       }
 
-      const correctionData = response.data;
+      const correctionData = response.data as CorrectionDataType[];
       if (correctionData) {
         setCorrectionData((prevData: CorrectionDataType[]) => [
           ...correctionData,

@@ -1,19 +1,9 @@
-import {
-  ErrorReviewContainer,
-  HeaderContainer,
-  HeaderText,
-  NoCorrectionsContainer,
-  NoCorrectionsText,
-  SearchBar,
-  SearchContainer,
-} from './styledErrorReview';
-import { RefreshControl, TextInput } from 'react-native';
+import { ErrorReviewContainer } from './styledErrorReview';
+import { RefreshControl } from 'react-native';
 import CorrectionList from '../correction-list/CorrectionList';
-import ErrorMessage from '../error/ErrorMessage';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useState } from 'react';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import colors from '@/assets/globalStyles';
+import ErrorReviewHeader from '../error-review-header/ErrorReviewHeader';
 
 export default function ErrorReview() {
   const {
@@ -50,44 +40,15 @@ export default function ErrorReview() {
     console.log('Search text:', text);
   };
 
-  const renderHeader = () => (
-    <>
-      <HeaderContainer hasScrolled={hasScrolled}>
-        <HeaderText>Error Review</HeaderText>
-        <SearchContainer>
-          <SearchBar>
-            <TextInput
-              style={{ flex: 1, fontSize: 16, color: colors.textPrimary }}
-              placeholder="Search corrections..."
-              placeholderTextColor={colors.textSecondary}
-              value={searchText}
-              onChangeText={handleSearch}
-              returnKeyType="search"
-            />
-            <MaterialCommunityIcons
-              name="magnify"
-              size={24}
-              color={colors.textPrimary}
-            />
-          </SearchBar>
-        </SearchContainer>
-      </HeaderContainer>
-      {correctionsFetchError && (
-        <ErrorMessage message={correctionsFetchError.message} />
-      )}
-      {correctionData.length === 0 && (
-        <NoCorrectionsContainer>
-          <NoCorrectionsText>
-            Start recording to see your corrections here!
-          </NoCorrectionsText>
-        </NoCorrectionsContainer>
-      )}
-    </>
-  );
-
   return (
     <ErrorReviewContainer>
-      {renderHeader()}
+      <ErrorReviewHeader
+        hasScrolled={hasScrolled}
+        searchText={searchText}
+        handleSearch={handleSearch}
+        correctionsFetchError={correctionsFetchError}
+        correctionData={correctionData}
+      />
       <CorrectionList
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
