@@ -14,7 +14,6 @@ import {
   ErrorItem,
   ErrorHeader,
   BoldText,
-  ItalicText,
   CardHeaderTextContainer,
   CardHeaderTextTitle,
   CardHeaderTextTime,

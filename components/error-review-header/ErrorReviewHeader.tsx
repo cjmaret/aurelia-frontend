@@ -25,17 +25,14 @@ export default function ErrorReviewHeader({
   hasScrolled: boolean;
   searchText: string;
   handleSearch: (text: string) => void;
-  correctionsFetchError: Error | null;
-  correctionData: any[];
   isSearching: boolean;
   setIsSearching: (isSearching: boolean) => void;
-  setSearchQuery: (query: string | null) => void;
+  setSearchQuery: (query: string) => void;
   resetToNormalFetch: () => void;
 }) {
   const {
     correctionsFetchError,
     correctionData,
-    setCorrectionData,
     searchCorrections,
     pagination,
   } = useCorrectionsData();
