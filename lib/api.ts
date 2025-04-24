@@ -205,6 +205,33 @@ class Api {
       });
   }
 
+  async searchCorrections({
+    query,
+    page = 1,
+    limit = 0,
+  }: {
+    query: string;
+    page: number;
+    limit: number;
+  }): Promise<CorrectionResponseType> {
+    const headers = await this._getAuthHeaders();
+
+    return fetch(
+      `${this._baseUrl}/corrections/search?query=${encodeURIComponent(
+        query
+      )}&page=${page}&limit=${limit}`,
+      {
+        method: 'GET',
+        headers,
+      }
+    )
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error while searching corrections', err);
+        throw err;
+      });
+  }
+
   async sendAudioFile(formData: FormData): Promise<CorrectionResponseType> {
     const headers = await this._getAuthHeaders();
 

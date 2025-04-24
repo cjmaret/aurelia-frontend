@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 import colors from '../../assets/globalStyles';
 
-
 export const HeaderContainer = styled.View<{ hasScrolled: boolean }>`
   width: 100%;
   background-color: ${colors.background};
@@ -45,6 +44,8 @@ export const SearchBar = styled.View`
   width: 100%;
   max-width: 300px;
 `;
+
+export const SearchBarButton = styled.TouchableOpacity``;
 
 export const NoCorrectionsContainer = styled.View`
   max-width: 200px;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, ActivityIndicator } from 'react-native';
+import { FlatList, ActivityIndicator, Button } from 'react-native';
 import ReviewCard from '../review-card/ReviewCard';
 import { isSameDay } from 'date-fns';
 import { CorrectionDataType } from '@/types/types';
@@ -18,28 +18,50 @@ import colors from '@/assets/globalStyles';
 
 export default function CorrectionList({
   refreshControl,
-  handleScroll
+  handleScroll,
+  isSearching,
+  searchQuery,
 }: {
   refreshControl?: React.ReactElement;
   handleScroll?: (event: any) => void;
+  isSearching: boolean;
+  searchQuery: string | null;
 }) {
-  const { correctionData, fetchCorrections, pagination } = useCorrectionsData();
+  const {
+    correctionData,
+    fetchCorrections,
+    searchCorrections,
+    pagination,
+  } = useCorrectionsData();
   const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
+
+  console.log('isSearching:', isSearching);
+  console.log('searchQuery:', searchQuery);
+  console.log('pagination:', pagination);
+  console.log('\n');
 
   const handleLoadMore = async () => {
     if (
       isLoadingMore ||
-      pagination.page * pagination.limit >= pagination.total
+      pagination.page * pagination.limit >= pagination.total // no more data to fetch
     ) {
-      return; // dont fetch if already loading or no more data
+      return;
     }
 
     setIsLoadingMore(true);
     try {
-      await fetchCorrections({
-        page: pagination.page + 1,
-        limit: pagination.limit,
-      });
+      if (isSearching && searchQuery) {
+        await searchCorrections({
+          query: searchQuery,
+          page: pagination.page + 1,
+          limit: pagination.limit,
+        });
+      } else {
+        await fetchCorrections({
+          page: pagination.page + 1,
+          limit: pagination.limit,
+        });
+      }
     } catch (error) {
       console.error('Error loading more corrections:', error);
     } finally {
@@ -91,7 +113,7 @@ export default function CorrectionList({
       onEndReachedThreshold={0.5} // fetch when 50% to the bottom
       onScroll={handleScroll}
       scrollEventThrottle={16}
-      refreshControl={refreshControl} 
+      refreshControl={refreshControl}
       ListFooterComponent={
         isLoadingMore ? (
           <ActivityIndicator size="small" color={colors.textSecondary} />

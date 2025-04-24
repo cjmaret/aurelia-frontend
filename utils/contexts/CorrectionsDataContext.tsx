@@ -6,22 +6,13 @@ import {
   CorrectionResponseType,
   PaginatedCorrectionsResponseType,
   PaginationType,
+  SearchCorrectionsType,
 } from '@/types/types';
 import { sortCorrectionDataChronologically } from '@/utils/functions/generalFunctions';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import { produceApiErrorAlert } from '../functions/handleApiError';
 
-const CorrectionDataContext = createContext<CorrectionDataContextType>({
-  correctionData: [],
-  setCorrectionData: () => {},
-  fetchCorrections: async ({ page = 1, limit = 10 }: { page: number; limit: number }) => {},
-  correctionsFetchError: null,
-  pagination: {
-    total: 0,
-    page: 1,
-    limit: 10,
-  },
-});
+const CorrectionDataContext = createContext<CorrectionDataContextType | null>(null);
 
 export const CorrectionsDataProvider: React.FC<{
   children: React.ReactNode;
@@ -86,6 +77,51 @@ export const CorrectionsDataProvider: React.FC<{
     }
   };
 
+  const searchCorrections = async ({
+    query,
+    page = 1,
+    limit = 10,
+  }: SearchCorrectionsType) => {
+    try {
+      const response = await api.searchCorrections({
+        query,
+        page,
+        limit,
+      });
+
+      if (response.success) {
+        const data = response.data as PaginatedCorrectionsResponseType;
+
+        if (data && data.corrections.length > 0) {
+          setCorrectionData((prev) =>
+            page === 1 ? data.corrections : [...prev, ...data.corrections]
+          );
+
+          setPagination({
+            total: data.total,
+            page: data.page,
+            limit: data.limit,
+          });
+        } else if (page === 1) {
+          // Clear corrections if no results are found on the first page
+          setCorrectionData([]);
+          setPagination({
+            total: 0,
+            page: 1,
+            limit: 10,
+          });
+        }
+        setCorrectionsFetchError(null); // Clear any previous errors
+      } else {
+        console.error('Search failed:', response.error);
+        setCorrectionsFetchError(new Error(response.error || 'Unknown error'));
+      }
+    } catch (err: any) {
+      console.error('Error during search:', err);
+      setCorrectionsFetchError(err);
+    }
+  };
+
   async function attemptRefreshAndRefetch(): Promise<void> {
     try {
       console.warn('Unauthorized error. Attempting to refresh token...');
@@ -113,7 +149,9 @@ export const CorrectionsDataProvider: React.FC<{
         setCorrectionData,
         correctionsFetchError,
         fetchCorrections,
+        searchCorrections,
         pagination,
+        setPagination,
       }}>
       {children}
     </CorrectionDataContext.Provider>

@@ -20,8 +20,10 @@ export interface CorrectionDataContextType {
   correctionData: CorrectionDataType[];
   setCorrectionData: SetStateType<CorrectionDataType[]>;
   fetchCorrections: (params: { page: number; limit: number }) => Promise<void>;
+  searchCorrections: (params: SearchCorrectionsType) => Promise<void>;
   correctionsFetchError: Error | null;
   pagination: PaginationType;
+  setPagination: SetStateType<PaginationType>;
 }
 
 // api data types
@@ -71,9 +73,16 @@ export interface ErrorDetail {
   suggestion: string;
   improvedClause: string;
 }
+// misc types
 
 export interface PaginationType {
   total: number;
+  page: number;
+  limit: number;
+}
+
+export interface SearchCorrectionsType {
+  query: string;
   page: number;
   limit: number;
 }
