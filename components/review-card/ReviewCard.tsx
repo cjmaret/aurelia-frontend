@@ -53,9 +53,9 @@ export default memo(function ReviewCard({
 
   const title = getConversationTitle({ dateTimeString: cardData.createdAt });
 
-  const toggleCard = () => setIsCardExpanded((prev) => !prev);
+  const toggleExpandCard = () => setIsCardExpanded((prev) => !prev);
 
-  const toggleError = (errorId: string) => {
+  const toggleExpandError = (errorId: string) => {
     setExpandedErrors((prevState) => {
       if (prevState.includes(errorId)) {
         return prevState.filter((id) => id !== errorId);
@@ -180,7 +180,7 @@ export default memo(function ReviewCard({
 
   return (
     <CardContainer>
-      <TouchableOpacity onPress={toggleCard}>
+      <TouchableOpacity onPress={toggleExpandCard}>
         <CardHeader>
           <HeaderArrowIcon>
             <MaterialCommunityIcons
@@ -239,7 +239,8 @@ export default memo(function ReviewCard({
                     let errorIsExpanded = expandedErrors.includes(error.id);
                     return (
                       <ErrorItem key={error.id}>
-                        <TouchableOpacity onPress={() => toggleError(error.id)}>
+                        <TouchableOpacity
+                          onPress={() => toggleExpandError(error.id)}>
                           <View
                             style={{
                               flexDirection: 'row',

@@ -8,7 +8,6 @@ import {
   PaginationType,
   SearchCorrectionsType,
 } from '@/types/types';
-import { sortCorrectionDataChronologically } from '@/utils/functions/generalFunctions';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import { produceApiErrorAlert } from '../functions/handleApiError';
 

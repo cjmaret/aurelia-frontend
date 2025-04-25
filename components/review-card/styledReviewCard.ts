@@ -101,10 +101,10 @@ export const ErrorList = styled.View`
 `;
 
 export const ErrorItem = styled.View`
-  border: 1px solid ${colors.snippetErrorText};
   border-radius: 5px;
   padding: 10px;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
+  background-color: ${colors.snippetErrorBackground};
 `;
 
 export const ErrorHeader = styled.View`

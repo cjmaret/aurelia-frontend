@@ -19,6 +19,7 @@ const colors = {
   snippetOriginalText: '#555',
   snippetCorrectedText: '#2b8a3e',
   snippetErrorText: '#b22222',
+  snippetErrorBackground: 'rgb(255, 236, 236)',
 
   // misc colors
   dateSeparatorText: '#81c6d0',
