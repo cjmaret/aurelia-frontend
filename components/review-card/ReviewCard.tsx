@@ -23,7 +23,9 @@ import {
   ErrorDetailHeader,
   ErrorDetailText,
   ErrorDetailContainer,
-  HighlightedText,
+  HighlightedCorrectedText,
+  HighlightedSearchText,
+  ErrorWhatsWongText,
 } from './styledReviewCard';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -36,8 +38,10 @@ import {
 
 export default function ReviewCard({
   cardData,
+  searchQuery,
 }: {
   cardData: CorrectionDataType;
+  searchQuery: string;
 }) {
   const { createdAt, sentenceFeedback } = cardData;
   const [isCardExpanded, setIsCardExpanded] = useState(false);
@@ -57,18 +61,114 @@ export default function ReviewCard({
     });
   };
 
-  const getHighlightedText = (original: string, corrected: string) => {
-    const normalizeWord = (word: string) => word.replace(/[.,!?;:]/g, '');
+  const normalizeText = (text: string) => {
+    return text
+      .trim() // Remove leading/trailing spaces
+      .replace(/[’‘‛′]/g, "'") // Replace all apostrophe variants with a straight apostrophe
+      .replace(/\s+/g, ' ') // Replace multiple spaces with a single space
+      .toLowerCase() // Convert to lowercase for case-insensitive matching
+      .normalize('NFC'); // Normalize Unicode characters
+  };
 
+  const highlightCorrectedText = (original: string, corrected: string) => {
+    // remove punctuation
+    const normalizeWord = (word: string) =>
+      normalizeText(word.replace(/[.,!?;:]/g, ''));
+
+    // split by whitespace
     const originalWords = new Set(original.split(/\s+/).map(normalizeWord));
     const correctedWords = corrected.split(/\s+/);
 
     return correctedWords.map((word, index) => {
       const normalizedWord = normalizeWord(word);
+      const isLastWord = index === correctedWords.length - 1;
+
+      // console.log('originalWords', originalWords);
+      // console.log('correctedWords', correctedWords);
+      // console.log('word', word);
+
       if (!originalWords.has(normalizedWord)) {
-        return <HighlightedText key={index}>{word} </HighlightedText>;
+        return (
+          <HighlightedCorrectedText key={index}>
+            {word}
+            {!isLastWord && ' '}
+          </HighlightedCorrectedText>
+        );
       }
-      return `${word} `;
+
+      return (
+        <>
+          {word}
+          {!isLastWord && ' '}
+        </>
+      );
+    });
+  };
+
+  const highlightSearchedText = (text: string) => {
+    if (!searchQuery.trim()) return text;
+
+      const normalizedSearchQuery = normalizeText(searchQuery);
+
+
+    // split searchQuery into individual words and escape special characters
+    const escapedWords = normalizedSearchQuery
+      .trim()
+      .split(/\s+/) // split by whitespace
+      .map((word) => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+
+    // regex to match any of the words
+    const regex = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+
+    // wrap matches in the styled component
+    return text
+      .split(regex)
+      .map((part, index) =>
+        regex.test(part) ? (
+          <HighlightedSearchText key={index}>{part}</HighlightedSearchText>
+        ) : (
+          part
+        )
+      );
+  };
+
+  const combinedHighlightedText = (original: string, corrected: string) => {
+    const correctedHighlight = highlightCorrectedText(original, corrected);
+
+    if (!searchQuery.trim()) {
+      return correctedHighlight;
+    }
+
+    const normalizedSearchQuery = normalizeText(searchQuery);
+
+    const escapedWords = normalizedSearchQuery
+      .trim()
+      .split(/\s+/)
+      .map((word) => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+
+    const regex = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+
+    return correctedHighlight.map((word, index) => {
+      console.log('word', word);
+      if (typeof word === 'string') {
+        return highlightSearchedText(word);
+      }
+
+      // since the text comes in as JSX, need to extract it
+      const wordChildren = (word as React.ReactElement).props.children;
+      const wordText = Array.isArray(wordChildren)
+        ? wordChildren.filter((child) => typeof child === 'string').join('')
+        : wordChildren;
+
+      const normalizedWordText = normalizeText(wordText);
+
+      if (normalizedWordText.match(regex)) {
+        return (
+          <HighlightedSearchText key={index}>{word}</HighlightedSearchText>
+        );
+      }
+
+      return word;
     });
   };
 
@@ -102,11 +202,16 @@ export default function ReviewCard({
               {sentence?.errors?.length > 0 ? (
                 <>
                   <OriginalText>
-                    <BoldText>You said:</BoldText> "{sentence.original}"
+                    <BoldText>You said:</BoldText> "
+                    {highlightSearchedText(sentence.original)}"
                   </OriginalText>
                   <CorrectedText>
-                    <BoldText>Corrected:</BoldText> "{' '}
-                    {getHighlightedText(sentence.original, sentence.corrected)}"
+                    <BoldText>Corrected:</BoldText> "
+                    {combinedHighlightedText(
+                      sentence.original,
+                      sentence.corrected
+                    )}
+                    "
                   </CorrectedText>
                 </>
               ) : (
@@ -151,9 +256,9 @@ export default function ReviewCard({
                                   <ErrorDetailHeader>
                                     What's wrong:{' '}
                                   </ErrorDetailHeader>
-                                  <ErrorDetailText>
-                                    {error.error}
-                                  </ErrorDetailText>
+                                  <ErrorWhatsWongText>
+                                    {highlightSearchedText(error.error)}
+                                  </ErrorWhatsWongText>
                                 </View>
                               </ErrorHeaderText>
                             </ErrorHeader>
@@ -163,14 +268,16 @@ export default function ReviewCard({
                           <ErrorTextContainer>
                             <ErrorDetailContainer>
                               <ErrorDetailHeader>Why?</ErrorDetailHeader>
-                              <ErrorDetailText>{error.reason}</ErrorDetailText>
+                              <ErrorDetailText>
+                                {highlightSearchedText(error.reason)}
+                              </ErrorDetailText>
                             </ErrorDetailContainer>
                             <ErrorDetailContainer>
                               <ErrorDetailHeader>
                                 Try this instead:
                               </ErrorDetailHeader>
                               <ErrorDetailText>
-                                {error.suggestion}
+                                {highlightSearchedText(error.suggestion)}
                               </ErrorDetailText>
                             </ErrorDetailContainer>
                             <ErrorDetailContainer style={{ marginBottom: 0 }}>
@@ -178,7 +285,7 @@ export default function ReviewCard({
                                 Improved clause:
                               </ErrorDetailHeader>
                               <ErrorDetailText>
-                                "{error.improvedClause}"
+                                "{highlightSearchedText(error.improvedClause)}"
                               </ErrorDetailText>
                             </ErrorDetailContainer>
                           </ErrorTextContainer>

@@ -32,7 +32,6 @@ export default function ErrorReview() {
   const handleSearch = (text: string) => {
     setIsSearching(true);
     setSearchText(text);
-    console.log('Search text:', text);
   };
 
   const resetToNormalFetch = async () => {
@@ -104,6 +103,7 @@ export default function ErrorReview() {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
         }
+        searchQuery={searchQuery}
         handleScroll={handleScroll}
         handleLoadMore={handleLoadMore}
         isLoadingMore={isLoadingMore}

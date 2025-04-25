@@ -17,11 +17,13 @@ import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import colors from '@/assets/globalStyles';
 
 export default function CorrectionList({
+  searchQuery,
   refreshControl,
   handleScroll,
   handleLoadMore,
   isLoadingMore,
 }: {
+  searchQuery: string;
   refreshControl?: React.ReactElement;
   handleScroll?: (event: React.BaseSyntheticEvent<NativeScrollEvent>) => void;
   handleLoadMore: () => void;
@@ -59,7 +61,7 @@ export default function CorrectionList({
             </DateSeparatorText>
           </DateSeparatorContainer>
         )}
-        <ReviewCard cardData={cardData} />
+        <ReviewCard cardData={cardData} searchQuery={searchQuery} />
       </ReviewCardContainer>
     );
   };

@@ -92,7 +92,7 @@ export const CorrectedText = styled.Text`
   margin-bottom: 10px;
 `;
 
-export const HighlightedText = styled.Text`
+export const HighlightedCorrectedText = styled.Text`
   font-weight: 900;
 `;
 
@@ -161,6 +161,14 @@ export const ErrorDetailText = styled.Text`
   font-weight: 500;
   color: ${colors.snippetErrorText};
   margin-left: 10px;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+`;
+
+export const ErrorWhatsWongText = styled(ErrorDetailText)`
+  max-width: 200px;
 `;
 
 export const ContragulatoryTextContainer = styled.View`
@@ -177,4 +185,9 @@ export const ContragulatoryText = styled.Text`
   color: ${colors.textSecondary};
   text-align: center;
   margin-left: 10px;
+`;
+
+export const HighlightedSearchText = styled.Text`
+  background-color: rgb(246, 253, 166);
+  font-weight: bold;
 `;
