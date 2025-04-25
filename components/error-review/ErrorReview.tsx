@@ -17,11 +17,14 @@ export default function ErrorReview() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [refreshing, setRefreshing] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
+  const [collapseCardsAndErrors, setCollapseCardsAndErrors] =
+    useState<boolean>(false);
 
   const resetStatesToNormalFetchState = async () => {
     setIsSearching(false);
     setSearchQuery('');
     setSearchText('');
+    setCollapseCardsAndErrors(true);
   };
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -107,6 +110,8 @@ export default function ErrorReview() {
         handleScroll={handleScroll}
         handleLoadMore={handleLoadMore}
         isLoadingMore={isLoadingMore}
+        collapseCardsAndErrors={collapseCardsAndErrors}
+        setCollapseCardsAndErrors={setCollapseCardsAndErrors}
       />
     </ErrorReviewContainer>
   );

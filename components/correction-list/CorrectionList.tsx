@@ -1,5 +1,10 @@
 import React from 'react';
-import { FlatList, ActivityIndicator, NativeScrollEvent } from 'react-native';
+import {
+  FlatList,
+  ActivityIndicator,
+  NativeScrollEvent,
+  View,
+} from 'react-native';
 import ReviewCard from '../review-card/ReviewCard';
 import { isSameDay } from 'date-fns';
 import { CorrectionDataType } from '@/types/types';
@@ -22,21 +27,29 @@ export default function CorrectionList({
   handleScroll,
   handleLoadMore,
   isLoadingMore,
+  collapseCardsAndErrors,
+  setCollapseCardsAndErrors,
 }: {
   searchQuery: string;
   refreshControl?: React.ReactElement;
   handleScroll?: (event: React.BaseSyntheticEvent<NativeScrollEvent>) => void;
   handleLoadMore: () => void;
   isLoadingMore: boolean;
+  collapseCardsAndErrors: boolean;
+  setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const { correctionData } = useCorrectionsData();
 
   const renderCard = ({
     item: cardData,
     index,
+    collapseCardsAndErrors,
+    setCollapseCardsAndErrors,
   }: {
     item: CorrectionDataType;
     index: number;
+    collapseCardsAndErrors: boolean;
+    setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
   }) => {
     const currentDateLocal = formatToLocalDate({
       dateTimeString: cardData.createdAt,
@@ -61,26 +74,37 @@ export default function CorrectionList({
             </DateSeparatorText>
           </DateSeparatorContainer>
         )}
-        <ReviewCard cardData={cardData} searchQuery={searchQuery} />
+        <ReviewCard cardData={cardData} searchQuery={searchQuery} collapseCardsAndErrors={collapseCardsAndErrors} setCollapseCardsAndErrors={setCollapseCardsAndErrors} />
       </ReviewCardContainer>
     );
   };
 
   return (
-    <FlatList
-      data={correctionData}
-      keyExtractor={(item) => item.conversationId} // provides unique key for each item
-      renderItem={renderCard} // renders each item (card)
-      onEndReached={handleLoadMore} // fetch more data when scrolled to the bottom
-      onEndReachedThreshold={0.5} // fetch when 50% to the bottom
-      onScroll={handleScroll}
-      scrollEventThrottle={16}
-      refreshControl={refreshControl}
-      ListFooterComponent={
-        isLoadingMore ? (
-          <ActivityIndicator size="small" color={colors.textSecondary} />
-        ) : null
-      } // spinner at the bottom
-    />
+    // dont cut off final cards if height changes dynamically
+    <View style={{ flex: 1 }}>
+      <FlatList
+        data={correctionData}
+        keyExtractor={(item) => item.conversationId} // provides unique key for each item
+        renderItem={({ item, index }) =>
+          renderCard({
+            item,
+            index,
+            collapseCardsAndErrors,
+            setCollapseCardsAndErrors,
+          })
+        } // renders each item (card)
+        onEndReached={handleLoadMore} // fetch more data when scrolled to the bottom
+        onEndReachedThreshold={0.5} // fetch when 50% to the bottom
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+        refreshControl={refreshControl}
+        extraData={correctionData}
+        ListFooterComponent={
+          isLoadingMore ? (
+            <ActivityIndicator size="small" color={colors.textSecondary} />
+          ) : null
+        } // spinner at the bottom
+      />
+    </View>
   );
 }

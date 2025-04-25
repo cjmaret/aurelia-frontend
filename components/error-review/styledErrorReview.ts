@@ -7,5 +7,4 @@ export const ErrorReviewContainer = styled.View`
   background-color: ${colors.background};
   display: flex;
   align-items: center;
-  padding: 0 0 90px 0;
 `;

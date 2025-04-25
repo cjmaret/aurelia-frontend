@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import {
   CardContainer,
@@ -36,12 +36,16 @@ import {
   getConversationTitle,
 } from '@/utils/functions/generalFunctions';
 
-export default function ReviewCard({
+export default memo(function ReviewCard({
   cardData,
   searchQuery,
+  collapseCardsAndErrors,
+  setCollapseCardsAndErrors,
 }: {
   cardData: CorrectionDataType;
   searchQuery: string;
+  collapseCardsAndErrors: boolean;
+  setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const { createdAt, sentenceFeedback } = cardData;
   const [isCardExpanded, setIsCardExpanded] = useState(false);
@@ -61,13 +65,21 @@ export default function ReviewCard({
     });
   };
 
+  useEffect(() => {
+    if (collapseCardsAndErrors) {
+      setIsCardExpanded(false);
+      setExpandedErrors([]);
+      setCollapseCardsAndErrors(false);
+    }
+  }, [collapseCardsAndErrors]);
+
   const normalizeText = (text: string) => {
     return text
-      .trim() // Remove leading/trailing spaces
-      .replace(/[’‘‛′]/g, "'") // Replace all apostrophe variants with a straight apostrophe
-      .replace(/\s+/g, ' ') // Replace multiple spaces with a single space
-      .toLowerCase() // Convert to lowercase for case-insensitive matching
-      .normalize('NFC'); // Normalize Unicode characters
+      .trim()
+      .replace(/[’‘‛′]/g, "'")
+      .replace(/\s+/g, ' ')
+      .toLowerCase()
+      .normalize('NFC');
   };
 
   const highlightCorrectedText = (original: string, corrected: string) => {
@@ -82,10 +94,6 @@ export default function ReviewCard({
     return correctedWords.map((word, index) => {
       const normalizedWord = normalizeWord(word);
       const isLastWord = index === correctedWords.length - 1;
-
-      // console.log('originalWords', originalWords);
-      // console.log('correctedWords', correctedWords);
-      // console.log('word', word);
 
       if (!originalWords.has(normalizedWord)) {
         return (
@@ -108,8 +116,7 @@ export default function ReviewCard({
   const highlightSearchedText = (text: string) => {
     if (!searchQuery.trim()) return text;
 
-      const normalizedSearchQuery = normalizeText(searchQuery);
-
+    const normalizedSearchQuery = normalizeText(searchQuery);
 
     // split searchQuery into individual words and escape special characters
     const escapedWords = normalizedSearchQuery
@@ -149,7 +156,6 @@ export default function ReviewCard({
     const regex = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
 
     return correctedHighlight.map((word, index) => {
-      console.log('word', word);
       if (typeof word === 'string') {
         return highlightSearchedText(word);
       }
@@ -179,7 +185,7 @@ export default function ReviewCard({
           <HeaderArrowIcon>
             <MaterialCommunityIcons
               name={isCardExpanded ? 'chevron-up' : 'chevron-down'}
-              size={20}
+              size={25}
               color={colors.cardHeaderText}
             />
           </HeaderArrowIcon>
@@ -320,4 +326,4 @@ export default function ReviewCard({
       )}
     </CardContainer>
   );
-}
+})

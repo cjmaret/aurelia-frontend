@@ -12,7 +12,9 @@ import { sortCorrectionDataChronologically } from '@/utils/functions/generalFunc
 import { useAuth } from '@/utils/contexts/AuthContext';
 import { produceApiErrorAlert } from '../functions/handleApiError';
 
-const CorrectionDataContext = createContext<CorrectionDataContextType | null>(null);
+const CorrectionDataContext = createContext<CorrectionDataContextType | null>(
+  null
+);
 
 export const CorrectionsDataProvider: React.FC<{
   children: React.ReactNode;
