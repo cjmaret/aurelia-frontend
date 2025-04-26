@@ -6,12 +6,13 @@ import {
   NoCorrectionsText,
   SearchBar,
   SearchBarButton,
+  SearchBarInput,
   SearchContainer,
 } from './styledErrorReviewHeader';
 import ErrorMessage from '../error/ErrorMessage';
-import colors from '@/assets/globalStyles';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
+import { useTheme } from 'styled-components/native';
 
 export default function ErrorReviewHeader({
   hasScrolled,
@@ -36,6 +37,7 @@ export default function ErrorReviewHeader({
     searchCorrections,
     pagination,
   } = useCorrectionsData();
+  const theme = useTheme();
 
   const handleSearchSubmit = async (query: string) => {
     setIsSearching(true);
@@ -54,14 +56,9 @@ export default function ErrorReviewHeader({
         <HeaderText>Error Review</HeaderText>
         <SearchContainer>
           <SearchBar>
-            <TextInput
-              style={{
-                flex: 1,
-                fontSize: 16,
-                color: colors.textSecondary,
-              }}
+            <SearchBarInput
               placeholder="Search corrections..."
-              placeholderTextColor={colors.textSecondary}
+              placeholderTextColor={theme.colors.textSecondary}
               value={searchText}
               onChangeText={handleSearch}
               onSubmitEditing={() => handleSearchSubmit(searchText)}
@@ -72,14 +69,14 @@ export default function ErrorReviewHeader({
                 <MaterialCommunityIcons
                   name="close"
                   size={24}
-                  color={colors.textSecondary}
+                  color={theme.colors.textSecondary}
                 />
               </SearchBarButton>
             ) : (
               <MaterialCommunityIcons
                 name="magnify"
                 size={24}
-                color={colors.textSecondary}
+                color={theme.colors.textSecondary}
               />
             )}
           </SearchBar>

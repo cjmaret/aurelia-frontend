@@ -1,4 +1,3 @@
-import colors from '@/assets/globalStyles';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -27,7 +26,7 @@ export const Input = styled.TextInput`
 `;
 
 export const AuthButton = styled.TouchableOpacity`
-  background-color: ${colors.secondary};
+  background-color: ${({ theme }: { theme: any }) => theme.colors.secondary};
   border-radius: 8px;
   padding: 12px;
   display: flex;
@@ -51,7 +50,7 @@ export const AuthLinkButton = styled.TouchableOpacity`
 `;
 
 export const AuthLinkText = styled.Text`
-  color: ${colors.secondary};
+  color: ${({ theme }: { theme: any }) => theme.colors.secondary};
   text-align: center;
   font-size: 16px;
 `;

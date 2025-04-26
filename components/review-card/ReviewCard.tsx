@@ -30,11 +30,11 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { CorrectionDataType } from '@/types/types';
-import colors from '@/assets/globalStyles';
 import {
   formatTime,
   getConversationTitle,
 } from '@/utils/functions/generalFunctions';
+import { useTheme } from 'styled-components/native';
 
 export default memo(function ReviewCard({
   cardData,
@@ -47,7 +47,8 @@ export default memo(function ReviewCard({
   collapseCardsAndErrors: boolean;
   setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { createdAt, sentenceFeedback } = cardData;
+  const theme = useTheme();
+  const { createdAt, sentenceFeedback, conversationId } = cardData;
   const [isCardExpanded, setIsCardExpanded] = useState(false);
   const [expandedErrors, setExpandedErrors] = useState<string[]>([]);
 
@@ -179,14 +180,14 @@ export default memo(function ReviewCard({
   };
 
   return (
-    <CardContainer>
+    <CardContainer key={conversationId}>
       <TouchableOpacity onPress={toggleExpandCard}>
         <CardHeader>
           <HeaderArrowIcon>
             <MaterialCommunityIcons
               name={isCardExpanded ? 'chevron-up' : 'chevron-down'}
               size={25}
-              color={colors.cardHeaderText}
+              color={theme.colors.cardHeaderText}
             />
           </HeaderArrowIcon>
           <CardHeaderTextContainer>
@@ -255,7 +256,7 @@ export default memo(function ReviewCard({
                                       : 'chevron-down'
                                   }
                                   size={25}
-                                  color={colors.snippetErrorText}
+                                  color={theme.colors.snippetErrorText}
                                 />
                               </ErrorArrowIcon>
                               <ErrorHeaderText>
@@ -327,4 +328,4 @@ export default memo(function ReviewCard({
       )}
     </CardContainer>
   );
-})
+});

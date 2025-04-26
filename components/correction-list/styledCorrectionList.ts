@@ -1,4 +1,3 @@
-import colors from '@/assets/globalStyles';
 import styled from 'styled-components/native';
 
 export const ReviewCardContainer = styled.View`
@@ -19,7 +18,8 @@ export const DateSeparatorContainer = styled.View`
 `;
 
 export const DateSeparatorLine = styled.View`
-  border: 0.5px solid ${colors.dateSeparatorText};
+  border: 0.5px solid
+    ${({ theme }: { theme: any }) => theme.colors.dateSeparatorColor};
   height: 1px;
   width: 60%;
 `;
@@ -27,6 +27,6 @@ export const DateSeparatorLine = styled.View`
 export const DateSeparatorText = styled.Text`
   font-size: 12px;
   font-weight: bold;
-  color: ${colors.dateSeparatorText};
+  color: ${({ theme }: { theme: any }) => theme.colors.dateSeparatorColor};
   margin-left: 15px;
 `;

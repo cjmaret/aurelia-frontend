@@ -1,4 +1,3 @@
-import colors from '@/assets/globalStyles';
 import styled from 'styled-components/native';
 
 export const ScrollView = styled.ScrollView`
@@ -95,7 +94,7 @@ export const SaveButton = styled.Button`
 export const LogoutButton = styled.TouchableOpacity`
   margin-top: 16px;
   padding: 12px;
-  background-color: ${colors.secondary};
+  background-color: ${({ theme }: { theme: any }) => theme.colors.secondary};
   border-radius: 8px;
   align-items: center;
 `;

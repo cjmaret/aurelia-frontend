@@ -12,15 +12,21 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { AuthProvider } from '@/utils/contexts/AuthContext';
 import { CorrectionsDataProvider } from '@/utils/contexts/CorrectionsDataContext';
+import { getTheme } from '@/utils/themes/ColorsThemeProvider';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components/native';
 import colors from '@/assets/globalStyles';
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
+  const colorScheme = useColorScheme();
+  const theme: any = getTheme(colorScheme ?? 'light');
+
+  console.log(theme)
 
   useEffect(() => {
     if (loaded) {
@@ -35,24 +41,29 @@ export default function RootLayout() {
   return (
     <AuthProvider>
       <CorrectionsDataProvider>
-        <SafeAreaProvider>
-          <SafeAreaView
-            style={{
-              flex: 1,
-              backgroundColor:
-                colorScheme === 'dark' ? '#3b3a4c' : colors.background,
-            }}
-            edges={['top', 'left', 'right']}>
-            <ThemeProvider
-              value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-              <Stack screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen name="+not-found" />
-              </Stack>
-            </ThemeProvider>
-            <StatusBar style="auto" />
-          </SafeAreaView>
-        </SafeAreaProvider>
+        <StyledThemeProvider theme={theme}>
+          <SafeAreaProvider>
+            <SafeAreaView
+            // TODO: remember this is not connected to your styled theme
+              style={{
+                flex: 1,
+                backgroundColor: colorScheme === 'dark' ? '#e8f6fc' : '#e8f6fc',
+              }}
+              edges={['top', 'left', 'right']}>
+              <ThemeProvider
+                value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+                <Stack screenOptions={{ headerShown: false }}>
+                  <Stack.Screen
+                    name="(tabs)"
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen name="+not-found" />
+                </Stack>
+              </ThemeProvider>
+              <StatusBar style="auto" />
+            </SafeAreaView>
+          </SafeAreaProvider>
+        </StyledThemeProvider>
       </CorrectionsDataProvider>
     </AuthProvider>
   );

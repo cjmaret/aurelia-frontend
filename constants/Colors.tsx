@@ -1,0 +1,78 @@
+const tintColorLight = '#0a7ea4';
+const tintColorDark = '#fff';
+
+export const Colors = {
+  light: {
+    // Default light mode colors
+    text: '#11181C',
+    background: '#e8f6fc', // From your custom colors
+    tint: tintColorLight,
+    // icon: '#687076',
+
+
+    tabBarBackground: '#ffffff',
+    tabIconDefault: '#687076',
+    tabIconSelected: tintColorLight,
+
+    // Custom colors
+    primary: '#748cab',
+    secondary: '#ee9e9e',
+
+    // General colors
+    textPrimary: '#ffffff',
+    textSecondary: '#81c6d0',
+
+    // Card colors
+    cardHeaderBorder: '#e7eaef',
+    cardHeaderText: '#81c6d0',
+    cardTimeText: '#81c6d0',
+    cardBackground: '#ffffff',
+    cardBorder: '#e7eaef',
+
+    // Snippet colors
+    snippetBackground: '#ffffff',
+    snippetOriginalText: '#555',
+    snippetCorrectedText: '#2b8a3e',
+    snippetErrorText: '#b22222',
+    snippetErrorBackground: 'rgb(255, 236, 236)',
+
+    // Misc colors
+    dateSeparatorColor: '#81c6d0',
+    rippleBorder: '#A5B3DB',
+  },
+  dark: {
+    // Default dark mode colors
+    text: '#ECEDEE',
+    background: '#151718', // Dark mode background
+    tint: tintColorDark,
+    icon: '#9BA1A6',
+    tabIconDefault: '#9BA1A6',
+    tabIconSelected: tintColorDark,
+
+    // Custom colors (adjusted for dark mode)
+    primary: '#4a5e73',
+    secondary: '#ee9e9e',
+
+    // General colors
+    textPrimary: '#e8e8e8',
+    textSecondary: '#5fb3ba',
+
+    // Card colors
+    cardHeaderBorder: '#3a3f47',
+    cardHeaderText: '#5fb3ba',
+    cardTimeText: '#5fb3ba',
+    cardBackground: '#1e1e1e',
+    cardBorder: '#3a3f47',
+
+    // Snippet colors
+    snippetBackground: '#2a2a2a',
+    snippetOriginalText: '#aaa',
+    snippetCorrectedText: '#50e3c2',
+    snippetErrorText: '#ff6b6b',
+    snippetErrorBackground: 'rgb(60, 20, 20)',
+
+    // Misc colors
+    dateSeparatorText: '#5fb3ba',
+    rippleBorder: '#4a5e73',
+  },
+};

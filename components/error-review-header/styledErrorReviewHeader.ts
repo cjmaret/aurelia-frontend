@@ -1,9 +1,8 @@
 import styled from 'styled-components/native';
-import colors from '../../assets/globalStyles';
 
 export const HeaderContainer = styled.View<{ hasScrolled: boolean }>`
   width: 100%;
-  background-color: ${colors.background};
+  background-color: dateSeparatorColor;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
@@ -12,11 +11,13 @@ export const HeaderContainer = styled.View<{ hasScrolled: boolean }>`
   gap: 20px;
   border-bottom-width: 1px;
   border-bottom-color: ${({ hasScrolled }: { hasScrolled: boolean }) =>
-    hasScrolled ? colors.cardBorder : 'transparent'};
+    hasScrolled
+      ? ({ theme }: { theme: any }) => theme.colors.background
+      : 'transparent'};
 `;
 
 export const HeaderText = styled.Text`
-  color: ${colors.textSecondary};
+  color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 10px;
@@ -33,7 +34,8 @@ export const SearchContainer = styled.View`
 export const SearchBar = styled.View`
   flex-direction: row;
   align-items: center;
-  background-color: ${colors.cardBackground};
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.cardBackground};
   border-radius: 8px;
   padding: 8px 12px;
   shadow-color: #000;
@@ -45,12 +47,19 @@ export const SearchBar = styled.View`
   max-width: 300px;
 `;
 
+export const SearchBarInput = styled.TextInput`
+  flex: 1;
+  font-size: 16px;
+  color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
+`;
+
 export const SearchBarButton = styled.TouchableOpacity``;
 
 export const NoCorrectionsContainer = styled.View`
   max-width: 200px;
   border-radius: 10px;
-  background-color: ${colors.cardBackground};
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.cardBackground};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,7 +68,7 @@ export const NoCorrectionsContainer = styled.View`
 `;
 
 export const NoCorrectionsText = styled.Text`
-  color: ${colors.snippetOriginalText};
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetOriginalText};
   font-size: 16px;
   font-weight: bold;
   text-align: center;

@@ -1,12 +1,12 @@
 import styled from 'styled-components/native';
-import colors from '../../assets/globalStyles';
 
 export const CardContainer = styled.View`
   display: flex;
   flex-direction: column;
   width: 93%;
   border-radius: 12px;
-  background-color: ${colors.cardBackground};
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.cardBackground};
   shadow-color: #000;
   shadow-offset: 0px 5px;
   shadow-opacity: 0.1;
@@ -20,8 +20,10 @@ export const CardHeader = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: ${colors.cardBackground};
-  border: 1px solid ${colors.cardHeaderBorder};
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.cardBackground};
+  border: 1px solid
+    ${({ theme }: { theme: any }) => theme.colors.cardHeaderBorder};
   shadow-color: #000000;
   shadow-offset: 0px 2px;
   shadow-opacity: 0.1;
@@ -46,7 +48,7 @@ export const CardHeaderTextContainer = styled.View`
 `;
 
 const CardHeaderText = styled.Text`
-  color: ${colors.cardHeaderText};
+  color: ${({ theme }: { theme: any }) => theme.colors.cardHeaderText};
   font-weight: bold;
 `;
 
@@ -55,7 +57,7 @@ export const CardHeaderTextTitle = styled(CardHeaderText)`
 `;
 export const CardHeaderTextTime = styled(CardHeaderText)`
   font-size: 13px;
-  color: ${colors.cardTimeText};
+  color: ${({ theme }: { theme: any }) => theme.colors.cardTimeText};
 `;
 
 export const CardContent = styled.View`
@@ -66,8 +68,8 @@ export const CardContent = styled.View`
 
 export const SnippetCard = styled.View`
   width: 93%;
-  background: ${colors.snippetBackground};
-  border: 1px solid ${colors.cardBorder};
+  background: ${({ theme }: { theme: any }) => theme.colors.snippetBackground};
+  border: 1px solid ${({ theme }: { theme: any }) => theme.colors.cardBorder};
   padding: 20px 16px;
   border-radius: 8px;
   shadow-color: #000000;
@@ -80,7 +82,7 @@ export const SnippetCard = styled.View`
 
 export const OriginalText = styled.Text`
   font-size: 15px;
-  color: ${colors.snippetOriginalText};
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetOriginalText};
   font-style: italic;
   margin-bottom: 10px;
 `;
@@ -88,7 +90,7 @@ export const OriginalText = styled.Text`
 export const CorrectedText = styled.Text`
   font-size: 16px;
   font-weight: bold;
-  color: ${colors.snippetCorrectedText};
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetCorrectedText};
   margin-bottom: 10px;
 `;
 
@@ -104,7 +106,8 @@ export const ErrorItem = styled.View`
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: ${colors.snippetErrorBackground};
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.snippetErrorBackground};
 `;
 
 export const ErrorHeader = styled.View`
@@ -125,7 +128,7 @@ export const ErrorHeaderText = styled.Text`
   flex-direction: column;
   width: 90%;
   font-size: 16px;
-  color: ${colors.snippetErrorText};
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetErrorText};
   flex-wrap: wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -152,14 +155,14 @@ export const ErrorDetailContainer = styled.View`
 export const ErrorDetailHeader = styled.Text`
   font-size: 15px;
   font-weight: bold;
-  color: ${colors.snippetErrorText};
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetErrorText};
   margin-bottom: 4px;
 `;
 
 export const ErrorDetailText = styled.Text`
   font-size: 14px;
   font-weight: 500;
-  color: ${colors.snippetErrorText};
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetErrorText};
   margin-left: 10px;
   flex-wrap: wrap;
   word-wrap: break-word;
@@ -182,7 +185,7 @@ export const ContragulatoryTextContainer = styled.View`
 export const ContragulatoryText = styled.Text`
   font-size: 16px;
   font-weight: bold;
-  color: ${colors.textSecondary};
+  color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
   text-align: center;
   margin-left: 10px;
 `;

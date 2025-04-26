@@ -1,4 +1,3 @@
-import colors from '@/assets/globalStyles';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -29,15 +28,20 @@ export const ListContainer = styled.View`
 const SetupButton = styled.TouchableOpacity``;
 
 export const LanguageButton = styled(SetupButton)<{ selected: boolean }>`
-  background-color: ${({ selected }: { selected: boolean }) =>
-    selected ? colors.secondary : '#ccc'};
+  background-color: ${({
+    theme,
+    selected,
+  }: {
+    theme: any;
+    selected: boolean;
+  }) => (selected ? theme.colors.secondary : '#ccc')};
   padding: 10px 20px;
   border-radius: 5px;
   margin-top: 20px;
 `;
 
 export const SaveButton = styled(SetupButton)`
-  background-color: ${colors.secondary};
+  background-color: ${({ theme }: { theme: any }) => theme.colors.secondary};
   padding: 16px;
   border-radius: 7px;
 `;

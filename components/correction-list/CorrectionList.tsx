@@ -19,7 +19,7 @@ import {
   formatToLocalDate,
 } from '@/utils/functions/generalFunctions';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
-import colors from '@/assets/globalStyles';
+import { useTheme } from 'styled-components/native';
 
 export default function CorrectionList({
   searchQuery,
@@ -39,7 +39,9 @@ export default function CorrectionList({
   setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const { correctionData } = useCorrectionsData();
+  const theme = useTheme();
 
+  
   const renderCard = ({
     item: cardData,
     index,
@@ -65,7 +67,7 @@ export default function CorrectionList({
       !previousDateLocal || !isSameDay(currentDateLocal, previousDateLocal);
 
     return (
-      <ReviewCardContainer key={index}>
+      <ReviewCardContainer key={cardData.conversationId.toString()}>
         {showDateSeparator && (
           <DateSeparatorContainer>
             <DateSeparatorLine />
@@ -74,7 +76,12 @@ export default function CorrectionList({
             </DateSeparatorText>
           </DateSeparatorContainer>
         )}
-        <ReviewCard cardData={cardData} searchQuery={searchQuery} collapseCardsAndErrors={collapseCardsAndErrors} setCollapseCardsAndErrors={setCollapseCardsAndErrors} />
+        <ReviewCard
+          cardData={cardData}
+          searchQuery={searchQuery}
+          collapseCardsAndErrors={collapseCardsAndErrors}
+          setCollapseCardsAndErrors={setCollapseCardsAndErrors}
+        />
       </ReviewCardContainer>
     );
   };
@@ -84,7 +91,7 @@ export default function CorrectionList({
     <View style={{ flex: 1 }}>
       <FlatList
         data={correctionData}
-        keyExtractor={(item) => item.conversationId} // provides unique key for each item
+        keyExtractor={(item) => item.conversationId.toString()} // provides unique key for each item
         renderItem={({ item, index }) =>
           renderCard({
             item,
@@ -101,7 +108,7 @@ export default function CorrectionList({
         extraData={correctionData}
         ListFooterComponent={
           isLoadingMore ? (
-            <ActivityIndicator size="small" color={colors.textSecondary} />
+            <ActivityIndicator size="small" color={theme.colors.background} />
           ) : null
         } // spinner at the bottom
       />

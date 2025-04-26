@@ -1,4 +1,3 @@
-import colors from '@/assets/globalStyles';
 import styled from 'styled-components/native';
 
 export const RecordButton = styled.TouchableHighlight<{ isRecording: boolean }>`
@@ -10,7 +9,9 @@ export const RecordButton = styled.TouchableHighlight<{ isRecording: boolean }>`
   border-radius: 50px;
   margin-bottom: 20px;
   box-shadow: ${({ isRecording }: { isRecording: boolean }) =>
-    isRecording ? `0 0 15px ${colors.rippleBorder}` : 'none'};
+    isRecording
+      ? `0 0 15px ${({ theme }: { theme: any }) => theme.colors.rippleBorder};`
+      : 'none'};
 `;
 
 export const ButtonText = styled.Text`
