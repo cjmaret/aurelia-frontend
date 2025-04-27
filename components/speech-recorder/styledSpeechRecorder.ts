@@ -9,8 +9,8 @@ export const SpeechRecorderGroup = styled.View`
 `;
 
 export const UpperContainer = styled.View`
-  background-color: #ffffff;
-  height: 35%;
+  background-color: ${({ theme }: { theme: any }) => theme.colors.background};
+  height: 55%;
   display: flex;
   justify-content: flex-end;
 `;
@@ -19,8 +19,9 @@ export const LowerContainer = styled.View`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: #e5e5e5;
-  height: 65%;
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.secondaryBackground};
+  height: 45%;
 `;
 
 export const RecordingGroup = styled.View`
@@ -31,12 +32,18 @@ export const RecordingGroup = styled.View`
   margin-top: 40px;
 `;
 
-export const Transcript = styled.Text`
-  font-size: 16px;
-  color: white;
-  text-align: center;
-  padding: 10px;
+export const TimerText = styled.Text`
+  margin-bottom: 10px;
+  font-size: 48px;
+  color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
 `;
+
+// export const Transcript = styled.Text`
+//   font-size: 16px;
+//   color: white;
+//   text-align: center;
+//   padding: 10px;
+// `;
 
 export const WaveformBackground = styled(Animated.View)`
   position: absolute;
@@ -44,3 +51,4 @@ export const WaveformBackground = styled(Animated.View)`
   height: 100%;
   opacity: 0;
 `;
+

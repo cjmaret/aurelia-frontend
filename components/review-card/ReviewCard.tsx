@@ -180,7 +180,7 @@ export default memo(function ReviewCard({
   };
 
   return (
-    <CardContainer key={conversationId}>
+    <CardContainer key={conversationId.toString()}>
       <TouchableOpacity onPress={toggleExpandCard}>
         <CardHeader>
           <HeaderArrowIcon>

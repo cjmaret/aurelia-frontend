@@ -26,8 +26,6 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
   const theme: any = getTheme(colorScheme ?? 'light');
 
-  console.log(theme)
-
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();

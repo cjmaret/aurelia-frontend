@@ -6,16 +6,17 @@ export const Colors = {
     // Default light mode colors
     text: '#11181C',
     background: '#e8f6fc', // From your custom colors
+    secondaryBackground: '#ffffff',
     tint: tintColorLight,
     // icon: '#687076',
-
 
     tabBarBackground: '#ffffff',
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
 
     // Custom colors
-    primary: '#748cab',
+    primary: '#81c6d0',
+    primaryDark: '#6daeb8',
     secondary: '#ee9e9e',
 
     // General colors
@@ -38,7 +39,7 @@ export const Colors = {
 
     // Misc colors
     dateSeparatorColor: '#81c6d0',
-    rippleBorder: '#A5B3DB',
+    rippleBorder: '#6daeb8',
   },
   dark: {
     // Default dark mode colors
@@ -76,3 +77,6 @@ export const Colors = {
     rippleBorder: '#4a5e73',
   },
 };
+
+
+// 748cab

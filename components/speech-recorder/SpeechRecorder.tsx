@@ -5,6 +5,7 @@ import {
   LowerContainer,
   RecordingGroup,
   SpeechRecorderGroup,
+  TimerText,
   UpperContainer,
 } from './styledSpeechRecorder';
 import { Button } from 'react-native';
@@ -20,6 +21,10 @@ export default function SpeechRecorder() {
   const [recording, setRecording] = useState<Audio.Recording | null>(null);
   const [permissionResponse, requestPermission] = Audio.usePermissions();
   const [waveformOpacity] = useState(new Animated.Value(0));
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [timerInterval, setTimerInterval] = useState<NodeJS.Timeout | null>(
+    null
+  );
 
   const { setCorrectionData } = useCorrectionsData();
 
@@ -48,6 +53,12 @@ export default function SpeechRecorder() {
       setRecording(recording);
       console.log('Recording started');
       // start waveform animation
+
+      setElapsedTime(0); // Reset the timer
+      const interval = setInterval(() => {
+        setElapsedTime((prev) => prev + 1);
+      }, 1000);
+      setTimerInterval(interval);
     } catch (err) {
       console.error('Failed to start recording', err);
     }
@@ -56,6 +67,12 @@ export default function SpeechRecorder() {
   async function stopRecording() {
     console.log('Stopping recording..');
     setRecording(null);
+
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      setTimerInterval(null);
+    }
+
     await recording?.stopAndUnloadAsync();
     await Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
@@ -76,28 +93,40 @@ export default function SpeechRecorder() {
       type: 'audio/m4a',
     } as any);
 
-    try {
-      const response: CorrectionResponseType = await api.sendAudioFile(formData);
+    console.log('sent!!!')
 
-      if (!response.success) {
-        console.error('Error from server:', response.error);
-        // handle the error (toast?)
-        return;
-      }
+    // try {
+    //   const response: CorrectionResponseType = await api.sendAudioFile(
+    //     formData
+    //   );
 
-      const correctionData = response.data as CorrectionDataType[];
-      if (correctionData) {
-        setCorrectionData((prevData: CorrectionDataType[]) => [
-          ...correctionData,
-          ...prevData,
-        ]);
-      }
-    } catch (error: any) {
-      const { status, message } = error;
+    //   if (!response.success) {
+    //     console.error('Error from server:', response.error);
+    //     // handle the error (toast?)
+    //     return;
+    //   }
 
-      console.error('Error sending audio:', error);
-      produceApiErrorAlert(status, message);
-    }
+    //   const correctionData = response.data as CorrectionDataType[];
+    //   if (correctionData) {
+    //     setCorrectionData((prevData: CorrectionDataType[]) => [
+    //       ...correctionData,
+    //       ...prevData,
+    //     ]);
+    //   }
+    // } catch (error: any) {
+    //   const { status, message } = error;
+
+    //   console.error('Error sending audio:', error);
+    //   produceApiErrorAlert(status, message);
+    // }
+  }
+
+  function formatElapsedTime(seconds: number): string {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(
+      remainingSeconds
+    ).padStart(2, '0')}`;
   }
 
   return (
@@ -107,8 +136,8 @@ export default function SpeechRecorder() {
       </UpperContainer>
       <LowerContainer>
         <RecordingGroup>
+          <TimerText>{formatElapsedTime(elapsedTime)}</TimerText>
           <RecordButtonComponent
-            recording={recording}
             startRecording={startRecording}
             stopRecording={stopRecording}
           />

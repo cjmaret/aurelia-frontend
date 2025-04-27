@@ -1,13 +1,14 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import { View, Animated, Easing, TouchableOpacity } from 'react-native';
-import { RecordButton, ButtonText } from './styledRecordButton';
+import React, { useEffect, useRef, useState } from 'react';
+import { View, Animated, Easing } from 'react-native';
+import { RecordButton, RecordButtonContainer } from './styledRecordButton';
+import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from 'styled-components/native';
+import * as Haptics from 'expo-haptics';
 
 export default function RecordButtonComponent({
-  recording,
   startRecording,
   stopRecording,
 }: {
-  recording: any;
   startRecording: any;
   stopRecording: any;
 }) {
@@ -15,9 +16,12 @@ export default function RecordButtonComponent({
     { id: number; scale: Animated.Value; opacity: Animated.Value }[]
   >([]);
   const rippleInterval = useRef<NodeJS.Timeout | null>(null);
+  const theme = useTheme();
+  const [isRecordButtonPressed, setIsRecordButtonPressed] =
+    useState<boolean>(false);
 
   useEffect(() => {
-    if (recording) {
+    if (isRecordButtonPressed) {
       // start generating ripples continuously
       rippleInterval.current = setInterval(triggerRipple, 1000);
       triggerRipple();
@@ -32,7 +36,7 @@ export default function RecordButtonComponent({
     return () => {
       if (rippleInterval.current) clearInterval(rippleInterval.current);
     };
-  }, [recording]);
+  }, [isRecordButtonPressed]);
 
   const triggerRipple = () => {
     const newRipple = {
@@ -62,27 +66,34 @@ export default function RecordButtonComponent({
     });
   };
 
-  const handlePressIn = () => {
+  const handlePressIn = async () => {
+    // for immediate style changes
+    setIsRecordButtonPressed(true);
+    for (let i = 0; i < 3; i++) {
+      await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+      await new Promise((resolve) => setTimeout(resolve, 80)); 
+    }
     startRecording();
   };
 
   const handlePressOut = () => {
+    setIsRecordButtonPressed(false);
     stopRecording();
   };
 
   return (
-    <View>
+    <RecordButtonContainer>
       {ripples.map(({ id, scale, opacity }) => (
         <Animated.View
           key={id}
           style={{
             position: 'absolute',
-            width: 100,
-            height: 100,
-            borderRadius: 50,
+            width: 145,
+            height: 145,
+            borderRadius: 140,
             transform: [{ scale }],
             opacity,
-            borderColor: '#a5b3db',
+            borderColor: theme.colors.rippleBorder,
             borderWidth: 1,
           }}
         />
@@ -90,9 +101,13 @@ export default function RecordButtonComponent({
       <RecordButton
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
-        isRecording={recording}>
-        <ButtonText>{recording ? 'Stop' : 'Press & Hold to Record'}</ButtonText>
+        isRecordButtonPressed={isRecordButtonPressed}>
+        <Ionicons
+          name="mic-outline"
+          size={55}
+          color={theme.colors.textPrimary}
+        />
       </RecordButton>
-    </View>
+    </RecordButtonContainer>
   );
 }
