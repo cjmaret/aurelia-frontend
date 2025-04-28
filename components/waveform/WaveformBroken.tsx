@@ -156,18 +156,18 @@ export default function Waveform({ recording }: { recording: boolean }) {
           strokeWidth={5}
           fill="black"
         />
-        {renderWaveforms({
+        {/* {renderWaveforms({
           xStart: width * 0.1,
           xWidth: width * 0.4,
           animationProgress: animationProgress1,
           opacity: opacity1,
-        })} 
-        {renderWaveforms({
+        })} */}
+        {/* {renderWaveforms({
           xStart: width * 0.6,
           xWidth: width * 0.3,
           animationProgress: animationProgress2,
           opacity: opacity2,
-        })}
+        })} */}
       </Svg>
     </WaveformContainer>
   );
