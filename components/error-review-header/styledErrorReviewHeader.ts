@@ -38,7 +38,7 @@ export const SearchBar = styled.View`
     theme.colors.cardBackground};
   border-radius: 8px;
   padding: 8px 12px;
-  shadow-color: #000;
+  shadow-color: #000000;
   shadow-offset: 0 2px;
   shadow-opacity: 0.1;
   shadow-radius: 4px;

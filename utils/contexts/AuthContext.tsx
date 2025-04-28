@@ -78,7 +78,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     if (!isAuthenticated) {
       router.replace('/sign-in');
     } else if (user && !user.setupComplete) {
-      router.replace('/(setup)/setup');
+      router.replace('/(setup)/setupTab');
     } else {
       router.replace('/');
     }
@@ -102,7 +102,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       if (userDetails.setupComplete) {
         router.replace('/');
       } else {
-        router.replace('/(setup)/setup');
+        router.replace('/(setup)/setupTab');
       }
     } catch (error) {
       console.error('Error during login in auth context:', error);

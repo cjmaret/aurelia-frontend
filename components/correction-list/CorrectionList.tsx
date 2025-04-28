@@ -108,7 +108,7 @@ export default function CorrectionList({
         extraData={correctionData}
         ListFooterComponent={
           isLoadingMore ? (
-            <ActivityIndicator size="small" color={theme.colors.background} />
+            <ActivityIndicator size="small" color={theme.colors.backgroundPrimary} />
           ) : null
         } // spinner at the bottom
       />

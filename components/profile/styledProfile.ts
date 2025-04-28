@@ -3,7 +3,8 @@ import styled from 'styled-components/native';
 export const ScrollView = styled.ScrollView`
   flex: 1;
   padding: 16px;
-  background-color: #f8f9fa;
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.backgroundSecondary};
 `;
 
 export const Container = styled.View`
@@ -29,11 +30,6 @@ export const Name = styled.Text`
   margin-bottom: 4px;
 `;
 
-export const Email = styled.Text`
-  font-size: 16px;
-  color: #6c757d;
-`;
-
 export const Section = styled.View`
   margin-bottom: 24px;
 `;
@@ -46,7 +42,7 @@ export const Label = styled.Text`
 
 export const Input = styled.TextInput`
   height: 40px;
-  border: 1px solid #ccc;
+  border: 1px solid ${({ theme }: { theme: any }) => theme.colors.greySecondary};
   border-radius: 8px;
   margin-bottom: 16px;
   padding: 0 8px;
@@ -60,7 +56,7 @@ export const Stat = styled.View`
 
 export const StatLabel = styled.Text`
   font-size: 16px;
-  color: #6c757d;
+  color: ${({ theme }: { theme: any }) => theme.colors.greySecondary};
 `;
 
 export const StatValue = styled.Text`
@@ -70,7 +66,7 @@ export const StatValue = styled.Text`
 
 export const LanguagePickerWrapper = styled.View`
   height: 40px;
-  border: 1px solid #ccc;
+  border: 1px solid ${({ theme }: { theme: any }) => theme.colors.greySecondary};
   border-radius: 8px;
   margin-bottom: 16px;
   justify-content: center;
@@ -84,7 +80,7 @@ export const DropdownButton = styled.TouchableOpacity`
 
 export const DropdownButtonText = styled.Text`
   font-size: 16px;
-  color: #333;
+  color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
 `;
 
 export const SaveButton = styled.Button`
@@ -94,27 +90,28 @@ export const SaveButton = styled.Button`
 export const LogoutButton = styled.TouchableOpacity`
   margin-top: 16px;
   padding: 12px;
-  background-color: ${({ theme }: { theme: any }) => theme.colors.secondary};
+  background-color: ${({ theme }: { theme: any }) => theme.colors.primary};
   border-radius: 8px;
   align-items: center;
 `;
 
 export const LogoutButtonText = styled.Text`
-  color: #fff;
+  color: ${({ theme }: { theme: any }) => theme.colors.textPrimary};
   font-size: 16px;
   font-weight: bold;
 `;
 
 export const ModalOverlay = styled.TouchableOpacity`
   flex: 1;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${({ theme }: { theme: any }) => theme.colors.modalOverlay};
   justify-content: center;
   align-items: center;
 `;
 
 export const ModalContent = styled.View`
   width: 80%;
-  background-color: #fff;
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.backgroundSecondary};
   border-radius: 8px;
   padding: 16px;
 `;
@@ -122,5 +119,6 @@ export const ModalContent = styled.View`
 export const ModalItem = styled.TouchableOpacity`
   padding: 12px;
   border-bottom-width: 1px;
-  border-bottom-color: #ccc;
+  border-bottom-color: ${({ theme }: { theme: any }) =>
+    theme.colors.greySecondary};
 `;

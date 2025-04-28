@@ -26,16 +26,19 @@ import api from '@/lib/api';
 import { UserDataType } from '@/types/types';
 import { languageFlags, languages } from '@/constants/profileConstants';
 import { capitalizeFirstLetter } from '@/utils/functions/generalFunctions';
+import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
+import { useTheme } from 'styled-components/native';
 
 export default function Profile() {
-  const { logout } = useAuth();
-  const { user, setUser } = useAuth();
+  const { user, setUser, logout } = useAuth();
+  const { pagination } = useCorrectionsData();
   const [localUser, setLocalUser] = useState<UserDataType | null>(user);
   const [isModalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState<'speaking' | 'correction'>(
     'speaking'
   );
   const [loading, setLoading] = useState(false);
+  const theme = useTheme();
 
   const hasFieldChanged = (
     key: string,
@@ -108,7 +111,7 @@ export default function Profile() {
   };
 
   if (loading) {
-    return <ActivityIndicator size="large" color="#0000ff" />;
+    return <ActivityIndicator size="large" color={theme.colors.primary} />;
   }
 
   if (!localUser || !user) {
@@ -133,7 +136,7 @@ export default function Profile() {
         <Section>
           <Stat>
             <StatLabel>Conversations</StatLabel>
-            <StatValue>25</StatValue>
+            <StatValue>{pagination.total}</StatValue>
           </Stat>
           <Stat>
             <StatLabel>Milestones</StatLabel>
@@ -229,7 +232,7 @@ export default function Profile() {
         </Modal>
 
         {/* Loading Indicator */}
-        {loading && <ActivityIndicator size="large" color="#0000ff" />}
+        {loading && <ActivityIndicator size="large" color={theme.colors.primary} />}
       </Container>
     </ScrollView>
   );

@@ -13,6 +13,7 @@ import {
 import { useAuth } from '@/utils/contexts/AuthContext';
 import api from '@/lib/api';
 import { AuthFormTypes } from '@/types/types';
+import { useTheme } from 'styled-components/native';
 
 export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const [userEmail, setUserEmail] = useState('');
@@ -20,6 +21,7 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const router = useRouter();
+  const theme = useTheme();
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -53,14 +55,14 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
         value={userEmail}
         onChangeText={setUserEmail}
         placeholder="Email"
-        placeholderTextColor="#a9a9a9"
+        placeholderTextColor={theme.colors.placeholderText}
       />
       <Input
         value={password}
         onChangeText={setPassword}
         secureTextEntry
         placeholder="Password"
-        placeholderTextColor="#a9a9a9"
+        placeholderTextColor={theme.colors.placeholderText}
       />
       <AuthButton
         title={

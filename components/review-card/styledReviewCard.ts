@@ -7,7 +7,7 @@ export const CardContainer = styled.View`
   border-radius: 12px;
   background-color: ${({ theme }: { theme: any }) =>
     theme.colors.cardBackground};
-  shadow-color: #000;
+  shadow-color: #000000;
   shadow-offset: 0px 5px;
   shadow-opacity: 0.1;
   shadow-radius: 4px;
@@ -191,6 +191,7 @@ export const ContragulatoryText = styled.Text`
 `;
 
 export const HighlightedSearchText = styled.Text`
-  background-color: rgb(246, 253, 166);
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.textHighlight};
   font-weight: bold;
 `;

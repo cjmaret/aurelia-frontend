@@ -5,10 +5,9 @@ export const Colors = {
   light: {
     // Default light mode colors
     text: '#11181C',
-    background: '#e8f6fc', // From your custom colors
-    secondaryBackground: '#ffffff',
+    backgroundPrimary: '#e8f6fc', // From your custom colors
+    backgroundSecondary: '#ffffff',
     tint: tintColorLight,
-    // icon: '#687076',
 
     tabBarBackground: '#ffffff',
     tabIconDefault: '#687076',
@@ -22,6 +21,7 @@ export const Colors = {
     // General colors
     textPrimary: '#ffffff',
     textSecondary: '#81c6d0',
+    textTertiary: '#333',
 
     // Card colors
     cardHeaderBorder: '#e7eaef',
@@ -37,9 +37,20 @@ export const Colors = {
     snippetErrorText: '#b22222',
     snippetErrorBackground: 'rgb(255, 236, 236)',
 
+    // profile colors:
+
+    // greys
+    greyPrimary: '#6c757d',
+    greySecondary: '#ccc',
+    greyTertiary: '#333',
+    greyQuaternary: '#555',
+    modalOverlay: '#00000080',
+
     // Misc colors
     dateSeparatorColor: '#81c6d0',
     rippleBorder: '#6daeb8',
+    textHighlight: '#f6fda6',
+    placeholderText: '#a9a9a9',
   },
   dark: {
     // Default dark mode colors
@@ -78,5 +89,7 @@ export const Colors = {
   },
 };
 
-
+// old colors:
+// AuthForm Container background-color: #f8fafc;
+// Setup Container background-color: #f9f9f9;
 // 748cab

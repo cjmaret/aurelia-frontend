@@ -4,7 +4,8 @@ export const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: #f9f9f9;
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.backgroundSecondary};
   padding: 16px;
 `;
 
@@ -12,13 +13,13 @@ export const Title = styled.Text`
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #333;
+  color: ${({ theme }: { theme: any }) => theme.colors.greyTertiary};
 `;
 
 export const Subtitle = styled.Text`
   font-size: 16px;
   margin-bottom: 10px;
-  color: #555;
+  color: ${({ theme }: { theme: any }) => theme.colors.greyQuarternary};
 `;
 
 export const ListContainer = styled.View`
@@ -34,20 +35,20 @@ export const LanguageButton = styled(SetupButton)<{ selected: boolean }>`
   }: {
     theme: any;
     selected: boolean;
-  }) => (selected ? theme.colors.secondary : '#ccc')};
+  }) => (selected ? theme.colors.primary : theme.colors.greySecondary)};
   padding: 10px 20px;
   border-radius: 5px;
   margin-top: 20px;
 `;
 
 export const SaveButton = styled(SetupButton)`
-  background-color: ${({ theme }: { theme: any }) => theme.colors.secondary};
+  background-color: ${({ theme }: { theme: any }) => theme.colors.primary};
   padding: 16px;
   border-radius: 7px;
 `;
 
 export const ButtonText = styled.Text`
-  color: #fff;
+  color: ${({ theme }: { theme: any }) => theme.colors.textPrimary};
   font-size: 16px;
   font-weight: bold;
   text-align: center;

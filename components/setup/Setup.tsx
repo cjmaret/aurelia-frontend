@@ -4,11 +4,10 @@ import { useAuth } from '@/utils/contexts/AuthContext';
 import LanguageSelection from '../language-selection/LanguageSelection';
 import { languages } from '@/constants/profileConstants';
 import { Alert } from 'react-native';
-import { router, useNavigation } from 'expo-router';
+import { router } from 'expo-router';
 
 export default function Setup() {
-  const navigation = useNavigation();
-  const { user, setUser } = useAuth();
+  const { setUser } = useAuth();
   const [step, setStep] = useState(1);
   const [appLanguage, setAppLanguage] = useState<string>('english');
   const [targetLanguage, setTargetLanguage] = useState<string>('english');
@@ -33,8 +32,8 @@ export default function Setup() {
   if (step === 1) {
     return (
       <LanguageSelection
-        title="Setup Your Profile"
-        subtitle="Select App Language:"
+        title="Set up Your Profile"
+        subtitle="Choose the language you want your app to be in:"
         languages={languages}
         selectedLanguage={appLanguage}
         onSelectLanguage={setAppLanguage}
@@ -45,8 +44,8 @@ export default function Setup() {
 
   return (
     <LanguageSelection
-      title="Setup Your Profile"
-      subtitle="Select Target Language:"
+      title="Set up Your Profile"
+      subtitle="Choose the language you want to practice:"
       languages={languages}
       selectedLanguage={targetLanguage}
       onSelectLanguage={setTargetLanguage}
