@@ -2,6 +2,7 @@ import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
+  useNavigationState,
 } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
@@ -26,6 +27,36 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
   const theme: any = getTheme(colorScheme ?? 'light');
 
+const currentRouteName = useNavigationState((state) => {
+  if (!state || !state.routes || state.index === undefined) {
+    return 'default'; 
+  }
+
+  const route = state.routes[state.index];
+
+  // checking nested routes
+  if (route.state && route.state.routes && route.state.index !== undefined) {
+    const childRoute = route.state.routes[route.state.index];
+    return childRoute?.name || 'default';
+  }
+
+  return route?.name || 'default';
+});
+
+
+  // background colors for pages
+  const backgroundColors: Record<string, string> = {
+    'index': theme.colors.backgroundPrimary,
+    'errorReviewTab': theme.colors.backgroundPrimary,
+    'profileTab': theme.colors.backgroundSecondary,
+    'default': theme.colors.backgroundSecondary,
+  };
+
+  const backgroundColor =
+    backgroundColors[currentRouteName] || theme.colors.backgroundSecondary;
+
+
+
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
@@ -42,10 +73,10 @@ export default function RootLayout() {
         <StyledThemeProvider theme={theme}>
           <SafeAreaProvider>
             <SafeAreaView
-            // TODO: remember this is not connected to your styled theme
+              // TODO: remember this is not connected to your styled theme
               style={{
                 flex: 1,
-                backgroundColor: colorScheme === 'dark' ? '#e8f6fc' : '#e8f6fc',
+                backgroundColor,
               }}
               edges={['top', 'left', 'right']}>
               <ThemeProvider
