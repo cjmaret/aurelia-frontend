@@ -3,9 +3,10 @@ const tintColorDark = '#fff';
 
 export const Colors = {
   light: {
-    // Default light mode colors
+  
+    // default colors
     text: '#11181C',
-    backgroundPrimary: '#e8f6fc', // From your custom colors
+    backgroundPrimary: '#e8f6fc', 
     backgroundSecondary: '#ffffff',
     tint: tintColorLight,
 
@@ -13,24 +14,24 @@ export const Colors = {
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
 
-    // Custom colors
+    // main colors
     primary: '#81c6d0',
     primaryDark: '#6daeb8',
     secondary: '#ee9e9e',
 
-    // General colors
+    // text colors
     textPrimary: '#ffffff',
     textSecondary: '#81c6d0',
-    textTertiary: '#333',
+    textTertiary: '#3b3b3b',
 
-    // Card colors
+    // card colors
     cardHeaderBorder: '#e7eaef',
     cardHeaderText: '#81c6d0',
     cardTimeText: '#81c6d0',
     cardBackground: '#ffffff',
     cardBorder: '#e7eaef',
 
-    // Snippet colors
+    // snippet colors
     snippetBackground: '#ffffff',
     snippetOriginalText: '#555',
     snippetCorrectedText: '#2b8a3e',
@@ -46,7 +47,7 @@ export const Colors = {
     greyQuaternary: '#555',
     modalOverlay: '#00000080',
 
-    // Misc colors
+    // misc colors
     dateSeparatorColor: '#81c6d0',
     rippleBorder: '#6daeb8',
     textHighlight: '#f6fda6',

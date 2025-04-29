@@ -18,26 +18,42 @@ export const Header = styled.View`
 `;
 
 export const ProfilePicture = styled.Image`
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
+  width: 125px;
+  height: 125px;
+  padding: 5px;
+  border-radius: 125px;
   margin-bottom: 16px;
+
+  /* Add shadow for 3D effect */
+  shadow-color: #000;
+  shadow-offset: 0 4px;
+  shadow-opacity: 0.3;
+  shadow-radius: 6px;
 `;
 
 export const Name = styled.Text`
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 4px;
+  color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
 `;
 
 export const Section = styled.View`
   margin-bottom: 24px;
 `;
 
+export const SectionTitle = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+  margin: 24px 0 16px 0;
+  color: ${({ theme }: { theme: any }) => theme.colors.primary};
+`;
+
 export const Label = styled.Text`
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 8px;
+  color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
 `;
 
 export const Input = styled.TextInput`
@@ -56,12 +72,13 @@ export const Stat = styled.View`
 
 export const StatLabel = styled.Text`
   font-size: 16px;
-  color: ${({ theme }: { theme: any }) => theme.colors.greySecondary};
+  color: ${({ theme }: { theme: any }) => theme.colors.greyPrimary};
 `;
 
 export const StatValue = styled.Text`
   font-size: 16px;
   font-weight: bold;
+  color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
 `;
 
 export const LanguagePickerWrapper = styled.View`
@@ -83,13 +100,23 @@ export const DropdownButtonText = styled.Text`
   color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
 `;
 
-export const SaveButton = styled.Button`
-  margin-top: 16px;
-`;
-
-export const LogoutButton = styled.TouchableOpacity`
+export const ProfileButton = styled.TouchableOpacity`
   margin-top: 16px;
   padding: 12px;
+`;
+
+export const SaveButton = styled(ProfileButton)`
+  padding: 0;
+  align-self: center;
+`;
+
+export const SaveButtonText = styled.Text<{ disabled: boolean }>`
+  color: ${({ theme }: { theme: any }) => theme.colors.primary};
+  font-size: 16px;
+  font-weight: bold;
+`;
+
+export const LogoutButton = styled(ProfileButton)`
   background-color: ${({ theme }: { theme: any }) => theme.colors.primary};
   border-radius: 8px;
   align-items: center;

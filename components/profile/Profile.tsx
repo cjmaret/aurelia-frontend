@@ -21,6 +21,9 @@ import {
   StatLabel,
   StatValue,
   ScrollView,
+  SectionTitle,
+  SaveButtonText,
+  Name,
 } from './styledProfile';
 import api from '@/lib/api';
 import { UserDataType } from '@/types/types';
@@ -128,7 +131,7 @@ export default function Profile() {
         {/* Header Section */}
         <Header>
           <ProfilePicture source={languageFlags[user.targetLanguage]} />
-          <Label>{user.username}</Label>
+          <Name>{user.username}</Name>
           <Label>{user.userEmail}</Label>
         </Header>
 
@@ -146,6 +149,7 @@ export default function Profile() {
 
         {/* Edit Profile Info */}
         <Section>
+          <SectionTitle>Profile Info</SectionTitle>
           <Label>Username</Label>
           <Input
             value={localUser.username}
@@ -165,8 +169,8 @@ export default function Profile() {
           />
         </Section>
 
-        {/* Language Preferences */}
         <Section>
+          <SectionTitle>Language Preferences</SectionTitle>
           <Label>App Language</Label>
           <LanguagePickerWrapper>
             <DropdownButton
@@ -196,13 +200,14 @@ export default function Profile() {
 
         {/* Account Management */}
         <Section>
+          <SectionTitle>Account Management</SectionTitle>
           <Label>Password</Label>
           <Input placeholder="Enter new password" secureTextEntry />
-          <SaveButton
-            title={loading ? 'Saving...' : 'Save Changes'}
-            onPress={handleSave}
-            disabled={!hasChanges || loading}
-          />
+          <SaveButton onPress={handleSave} disabled={!hasChanges || loading}>
+            <SaveButtonText disabled={!hasChanges || loading}>
+              {loading ? 'Saving...' : 'Save Changes'}
+            </SaveButtonText>
+          </SaveButton>
         </Section>
 
         {/* Logout Button */}
@@ -232,7 +237,9 @@ export default function Profile() {
         </Modal>
 
         {/* Loading Indicator */}
-        {loading && <ActivityIndicator size="large" color={theme.colors.primary} />}
+        {loading && (
+          <ActivityIndicator size="large" color={theme.colors.primary} />
+        )}
       </Container>
     </ScrollView>
   );
