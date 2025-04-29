@@ -22,7 +22,7 @@ export const Colors = {
     // text colors
     textPrimary: '#ffffff',
     textSecondary: '#81c6d0',
-    textTertiary: '#3b3b3b',
+    textTertiary: '#5d5d5d',
 
     // card colors
     cardHeaderBorder: '#e7eaef',

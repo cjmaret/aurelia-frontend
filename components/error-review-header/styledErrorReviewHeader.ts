@@ -9,10 +9,10 @@ export const HeaderContainer = styled.View<{ hasScrolled: boolean }>`
   z-index: 1;
   padding: 30px 20px 20px 20px;
   gap: 20px;
-  border-bottom-width: 1px;
+  border-bottom-width: 0.5px;
   border-bottom-color: ${({ hasScrolled }: { hasScrolled: boolean }) =>
     hasScrolled
-      ? ({ theme }: { theme: any }) => theme.colors.background
+      ? ({ theme }: { theme: any }) => theme.colors.cardHeaderBorder
       : 'transparent'};
 `;
 

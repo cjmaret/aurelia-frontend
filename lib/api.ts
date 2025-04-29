@@ -185,6 +185,30 @@ class Api {
       });
   }
 
+  async updateUserPassword({
+    currentPassword,
+    newPassword,
+  }: {
+    currentPassword: string;
+    newPassword: string;
+  }): Promise<any> {
+    const headers = await this._getAuthHeaders();
+
+    return fetch(`${config.apiUrlExpo}/auth/update-password`, {
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ currentPassword, newPassword }),
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error updating password:', err);
+        throw err;
+      });
+  }
+
   async getCorrections({
     page,
     limit,

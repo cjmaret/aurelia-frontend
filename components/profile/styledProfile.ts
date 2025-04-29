@@ -9,7 +9,7 @@ export const ScrollView = styled.ScrollView`
 
 export const Container = styled.View`
   flex: 1;
-  padding: 25px 0 100px 0;
+  padding: 25px 0 50px 0;
 `;
 
 export const Header = styled.View`
@@ -38,8 +38,12 @@ export const Name = styled.Text`
   color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
 `;
 
-export const Section = styled.View`
+export const ProfileInfoSection = styled.View`
   margin-bottom: 24px;
+`;
+
+export const SubSection = styled.View`
+  /* margin-bottom: 24px; */
 `;
 
 export const SectionTitle = styled.Text`
@@ -101,7 +105,6 @@ export const DropdownButtonText = styled.Text`
 `;
 
 export const ProfileButton = styled.TouchableOpacity`
-  margin-top: 16px;
   padding: 12px;
 `;
 
@@ -111,7 +114,8 @@ export const SaveButton = styled(ProfileButton)`
 `;
 
 export const SaveButtonText = styled.Text<{ disabled: boolean }>`
-  color: ${({ theme }: { theme: any }) => theme.colors.primary};
+  color: ${({ theme, disabled }: { theme: any; disabled: boolean }) =>
+    disabled ? theme.colors.greySecondary : theme.colors.primary};
   font-size: 16px;
   font-weight: bold;
 `;
@@ -120,6 +124,7 @@ export const LogoutButton = styled(ProfileButton)`
   background-color: ${({ theme }: { theme: any }) => theme.colors.primary};
   border-radius: 8px;
   align-items: center;
+  margin-top: 50px;
 `;
 
 export const LogoutButtonText = styled.Text`

@@ -1,11 +1,22 @@
 import React, { useMemo, useState } from 'react';
-import { Alert, Modal, FlatList, Text, ActivityIndicator } from 'react-native';
+import {
+  Alert,
+  Modal,
+  FlatList,
+  Text,
+  ActivityIndicator,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  Keyboard,
+  Platform,
+} from 'react-native';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import {
   Container,
   Header,
   ProfilePicture,
-  Section,
+  ProfileInfoSection,
+  SubSection,
   Label,
   Input,
   SaveButton,
@@ -42,6 +53,8 @@ export default function Profile() {
   );
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
 
   const hasFieldChanged = (
     key: string,
@@ -113,6 +126,34 @@ export default function Profile() {
     setModalVisible(false);
   };
 
+  const handlePasswordUpdate = async () => {
+    if (newPassword.length < 8) {
+      Alert.alert('Error', 'Password must be at least 8 characters long.');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await api.updateUserPassword({
+        currentPassword,
+        newPassword: newPassword,
+      });
+
+      Alert.alert('Success', 'Your password has been successfully updated.');
+      setCurrentPassword('');
+      setNewPassword('');
+    } catch (error: any) {
+      console.error('Error updating password:', error);
+      Alert.alert(
+        'Error',
+        error.response?.data?.message ||
+          'Failed to update password. Please try again.'
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (loading) {
     return <ActivityIndicator size="large" color={theme.colors.primary} />;
   }
@@ -126,121 +167,149 @@ export default function Profile() {
   }
 
   return (
-    <ScrollView>
-      <Container>
-        {/* Header Section */}
-        <Header>
-          <ProfilePicture source={languageFlags[user.targetLanguage]} />
-          <Name>{user.username}</Name>
-          <Label>{user.userEmail}</Label>
-        </Header>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          keyboardShouldPersistTaps="handled">
+          <Container>
+            <Header>
+              <ProfilePicture source={languageFlags[user.targetLanguage]} />
+              <Name>{user.username}</Name>
+              <Label>{user.userEmail}</Label>
+            </Header>
 
-        {/* Progress Section */}
-        <Section>
-          <Stat>
-            <StatLabel>Conversations</StatLabel>
-            <StatValue>{pagination.total}</StatValue>
-          </Stat>
-          <Stat>
+            {/* Progress Section */}
+            <SubSection>
+              <Stat>
+                <StatLabel>Conversations</StatLabel>
+                <StatValue>{pagination.total}</StatValue>
+              </Stat>
+              {/* <Stat>
             <StatLabel>Milestones</StatLabel>
             <StatValue>5 Achieved</StatValue>
-          </Stat>
-        </Section>
+          </Stat> */}
+            </SubSection>
 
-        {/* Edit Profile Info */}
-        <Section>
-          <SectionTitle>Profile Info</SectionTitle>
-          <Label>Username</Label>
-          <Input
-            value={localUser.username}
-            onChangeText={(text: string) =>
-              setLocalUser({ ...localUser, username: text })
-            }
-            placeholder="Enter your username"
-          />
-          <Label>Email</Label>
-          <Input
-            value={localUser.userEmail}
-            onChangeText={(text: string) =>
-              setLocalUser({ ...localUser, userEmail: text })
-            }
-            placeholder="Enter your email"
-            keyboardType="email-address"
-          />
-        </Section>
+            <ProfileInfoSection>
+              {/* Edit Profile Info Subsection*/}
+              <SubSection>
+                <SectionTitle>Profile Info</SectionTitle>
+                <Label>Username</Label>
+                <Input
+                  value={localUser.username}
+                  onChangeText={(text: string) =>
+                    setLocalUser({ ...localUser, username: text })
+                  }
+                  placeholder="Enter your username"
+                />
+                <Label>Email</Label>
+                <Input
+                  value={localUser.userEmail}
+                  onChangeText={(text: string) =>
+                    setLocalUser({ ...localUser, userEmail: text })
+                  }
+                  placeholder="Enter your email"
+                  keyboardType="email-address"
+                />
+              </SubSection>
 
-        <Section>
-          <SectionTitle>Language Preferences</SectionTitle>
-          <Label>App Language</Label>
-          <LanguagePickerWrapper>
-            <DropdownButton
-              onPress={() => {
-                setModalType('speaking');
-                setModalVisible(true);
-              }}>
-              <DropdownButtonText>
-                {capitalizeFirstLetter(localUser.appLanguage)}
-              </DropdownButtonText>
-            </DropdownButton>
-          </LanguagePickerWrapper>
+              {/* Language Preferences Subsection*/}
+              <SubSection>
+                <SectionTitle>Language Preferences</SectionTitle>
+                <Label>App Language</Label>
+                <LanguagePickerWrapper>
+                  <DropdownButton
+                    onPress={() => {
+                      setModalType('speaking');
+                      setModalVisible(true);
+                    }}>
+                    <DropdownButtonText>
+                      {capitalizeFirstLetter(localUser.appLanguage)}
+                    </DropdownButtonText>
+                  </DropdownButton>
+                </LanguagePickerWrapper>
 
-          <Label>Target Language</Label>
-          <LanguagePickerWrapper>
-            <DropdownButton
-              onPress={() => {
-                setModalType('correction');
-                setModalVisible(true);
-              }}>
-              <DropdownButtonText>
-                {capitalizeFirstLetter(localUser.targetLanguage)}
-              </DropdownButtonText>
-            </DropdownButton>
-          </LanguagePickerWrapper>
-        </Section>
+                <Label>Target Language</Label>
+                <LanguagePickerWrapper>
+                  <DropdownButton
+                    onPress={() => {
+                      setModalType('correction');
+                      setModalVisible(true);
+                    }}>
+                    <DropdownButtonText>
+                      {capitalizeFirstLetter(localUser.targetLanguage)}
+                    </DropdownButtonText>
+                  </DropdownButton>
+                </LanguagePickerWrapper>
+              </SubSection>
+              <SaveButton
+                onPress={handleSave}
+                disabled={!hasChanges || loading}>
+                <SaveButtonText disabled={!hasChanges || loading}>
+                  {loading ? 'Saving...' : 'Save Profile Changes'}
+                </SaveButtonText>
+              </SaveButton>
+            </ProfileInfoSection>
 
-        {/* Account Management */}
-        <Section>
-          <SectionTitle>Account Management</SectionTitle>
-          <Label>Password</Label>
-          <Input placeholder="Enter new password" secureTextEntry />
-          <SaveButton onPress={handleSave} disabled={!hasChanges || loading}>
-            <SaveButtonText disabled={!hasChanges || loading}>
-              {loading ? 'Saving...' : 'Save Changes'}
-            </SaveButtonText>
-          </SaveButton>
-        </Section>
-
-        {/* Logout Button */}
-        <LogoutButton onPress={handleLogout}>
-          <LogoutButtonText>Log Out</LogoutButtonText>
-        </LogoutButton>
-
-        {/* Reusable Modal */}
-        <Modal
-          visible={isModalVisible}
-          transparent
-          animationType="fade"
-          onRequestClose={() => setModalVisible(false)}>
-          <ModalOverlay onPress={() => setModalVisible(false)}>
-            <ModalContent>
-              <FlatList
-                data={languages}
-                keyExtractor={(item) => item}
-                renderItem={({ item }) => (
-                  <ModalItem onPress={() => handleLanguageSelect(item)}>
-                    <Text>{item}</Text>
-                  </ModalItem>
-                )}
+            {/* Account Management Subsection*/}
+            <SubSection>
+              <SectionTitle>Account Management</SectionTitle>
+              <Label>Current Password</Label>
+              <Input
+                placeholder="Enter current password"
+                secureTextEntry
+                value={currentPassword}
+                onChangeText={(text: string) => setCurrentPassword(text)}
               />
-            </ModalContent>
-          </ModalOverlay>
-        </Modal>
+              <Label>New Password</Label>
+              <Input
+                placeholder="Enter new password"
+                secureTextEntry
+                value={newPassword}
+                onChangeText={(text: string) => setNewPassword(text)}
+              />
+              <SaveButton
+                onPress={handlePasswordUpdate}
+                disabled={!currentPassword || !newPassword || loading}>
+                <SaveButtonText
+                  disabled={!currentPassword || !newPassword || loading}>
+                  {loading ? 'Updating...' : 'Update Password'}
+                </SaveButtonText>
+              </SaveButton>
+            </SubSection>
 
-        {/* Loading Indicator */}
-        {loading && (
-          <ActivityIndicator size="large" color={theme.colors.primary} />
-        )}
-      </Container>
-    </ScrollView>
+            <LogoutButton onPress={handleLogout}>
+              <LogoutButtonText>Log Out</LogoutButtonText>
+            </LogoutButton>
+
+            <Modal
+              visible={isModalVisible}
+              transparent
+              animationType="fade"
+              onRequestClose={() => setModalVisible(false)}>
+              <ModalOverlay onPress={() => setModalVisible(false)}>
+                <ModalContent>
+                  <FlatList
+                    data={languages}
+                    keyExtractor={(item) => item}
+                    renderItem={({ item }) => (
+                      <ModalItem onPress={() => handleLanguageSelect(item)}>
+                        <Text>{item}</Text>
+                      </ModalItem>
+                    )}
+                  />
+                </ModalContent>
+              </ModalOverlay>
+            </Modal>
+            {loading && (
+              <ActivityIndicator size="large" color={theme.colors.primary} />
+            )}
+          </Container>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
