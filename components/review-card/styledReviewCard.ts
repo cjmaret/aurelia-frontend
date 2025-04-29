@@ -44,7 +44,7 @@ export const CardHeaderTextContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 85%;
+  gap: 8px;
 `;
 
 const CardHeaderText = styled.Text`

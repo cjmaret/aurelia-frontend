@@ -3,9 +3,11 @@ import React from 'react';
 import { HapticTab } from '@/components/base-rn-components/HapticTab';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components/native';
+import { useTranslation } from 'react-i18next';
 
 export default function TabLayout() {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Tabs
@@ -21,7 +23,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Record',
+          title: t('record'),
           tabBarIcon: ({ color }) => (
             <Ionicons name="mic-outline" size={28} color={color} />
           ),
@@ -30,7 +32,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="errorReviewTab"
         options={{
-          title: 'Grammar Review',
+          title: t('grammarReview'),
           tabBarIcon: ({ color }) => (
             <Ionicons name="checkmark-done-outline" size={28} color={color} />
           ),
@@ -39,7 +41,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profileTab"
         options={{
-          title: 'Profile',
+          title: t('profile'),
           tabBarIcon: ({ color }) => (
             <Ionicons name="person-circle-outline" size={28} color={color} />
           ),

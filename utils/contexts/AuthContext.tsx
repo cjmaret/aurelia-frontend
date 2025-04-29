@@ -79,8 +79,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       router.replace('/sign-in');
     } else if (user && !user.setupComplete) {
       router.replace('/(setup)/setupTab');
-    } else {
-      router.replace('/');
     }
   };
 

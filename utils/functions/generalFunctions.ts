@@ -1,7 +1,3 @@
-
-export const capitalizeFirstLetter = (str: string): string =>
-  str.charAt(0).toUpperCase() + str.slice(1);
-
 export function formatToLocalDate({
   dateTimeString,
 }: {
@@ -78,8 +74,10 @@ export function formatDate({
 
 export function getConversationTitle({
   dateTimeString,
+  t,
 }: {
   dateTimeString: string;
+  t: (key: string) => string;
 }): string {
   const date = new Date(`${dateTimeString}Z`);
 
@@ -90,10 +88,25 @@ export function getConversationTitle({
   const hour = date.getHours();
 
   if (hour >= 0 && hour < 12) {
-    return 'Morning Conversation';
+    return t('morningConversation');
   } else if (hour >= 12 && hour < 18) {
-    return 'Afternoon Conversation';
+    return t('afternoonConversation');
   } else {
-    return 'Evening Conversation';
+    return t('nightConversation');
   }
+}
+
+export function getTranslatedLanguageName({
+  code,
+  t,
+}: {
+  code: string;
+  t: (key: string) => string;
+}) {
+  const languageKeys: Record<string, string> = {
+    en: 'english',
+    es: 'spanish',
+    fr: 'french',
+  };
+  return t(languageKeys[code]);
 }

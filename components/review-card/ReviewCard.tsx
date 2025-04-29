@@ -35,6 +35,7 @@ import {
   getConversationTitle,
 } from '@/utils/functions/generalFunctions';
 import { useTheme } from 'styled-components/native';
+import { useTranslation } from 'react-i18next';
 
 export default memo(function ReviewCard({
   cardData,
@@ -48,11 +49,12 @@ export default memo(function ReviewCard({
   setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const { createdAt, sentenceFeedback, conversationId } = cardData;
   const [isCardExpanded, setIsCardExpanded] = useState(false);
   const [expandedErrors, setExpandedErrors] = useState<string[]>([]);
 
-  const title = getConversationTitle({ dateTimeString: cardData.createdAt });
+  const title = getConversationTitle({ dateTimeString: cardData.createdAt, t });
 
   const toggleExpandCard = () => setIsCardExpanded((prev) => !prev);
 

@@ -38,14 +38,16 @@ import {
 } from './styledProfile';
 import api from '@/lib/api';
 import { UserDataType } from '@/types/types';
-import { languageFlags, languages } from '@/constants/profileConstants';
-import { capitalizeFirstLetter } from '@/utils/functions/generalFunctions';
+import { languageFlags, languageCodes } from '@/constants/profileConstants';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useTheme } from 'styled-components/native';
+import { useTranslation } from 'react-i18next';
+import { getTranslatedLanguageName } from '@/utils/functions/generalFunctions';
 
 export default function Profile() {
   const { user, setUser, logout } = useAuth();
   const { pagination } = useCorrectionsData();
+  const { t } = useTranslation();
   const [localUser, setLocalUser] = useState<UserDataType | null>(user);
   const [isModalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState<'speaking' | 'correction'>(
@@ -184,7 +186,7 @@ export default function Profile() {
             {/* Progress Section */}
             <SubSection>
               <Stat>
-                <StatLabel>Conversations</StatLabel>
+                <StatLabel>{t('conversations')}</StatLabel>
                 <StatValue>{pagination.total}</StatValue>
               </Stat>
               {/* <Stat>
@@ -196,30 +198,30 @@ export default function Profile() {
             <ProfileInfoSection>
               {/* Edit Profile Info Subsection*/}
               <SubSection>
-                <SectionTitle>Profile Info</SectionTitle>
-                <Label>Username</Label>
+                <SectionTitle>{t('profileInfo')}</SectionTitle>
+                <Label>{t('username')}</Label>
                 <Input
                   value={localUser.username}
                   onChangeText={(text: string) =>
                     setLocalUser({ ...localUser, username: text })
                   }
-                  placeholder="Enter your username"
+                  placeholder={t('enterUsername')}
                 />
-                <Label>Email</Label>
+                <Label>{t('email')}</Label>
                 <Input
                   value={localUser.userEmail}
                   onChangeText={(text: string) =>
                     setLocalUser({ ...localUser, userEmail: text })
                   }
-                  placeholder="Enter your email"
+                  placeholder={t('enterEmail')}
                   keyboardType="email-address"
                 />
               </SubSection>
 
               {/* Language Preferences Subsection*/}
               <SubSection>
-                <SectionTitle>Language Preferences</SectionTitle>
-                <Label>App Language</Label>
+                <SectionTitle>{t('languagePreferences')}</SectionTitle>
+                <Label>{t('appLanguage')}</Label>
                 <LanguagePickerWrapper>
                   <DropdownButton
                     onPress={() => {
@@ -227,12 +229,15 @@ export default function Profile() {
                       setModalVisible(true);
                     }}>
                     <DropdownButtonText>
-                      {capitalizeFirstLetter(localUser.appLanguage)}
+                      {getTranslatedLanguageName({
+                        code: localUser.appLanguage,
+                        t,
+                      })}
                     </DropdownButtonText>
                   </DropdownButton>
                 </LanguagePickerWrapper>
 
-                <Label>Target Language</Label>
+                <Label>{t('targetLanguage')}</Label>
                 <LanguagePickerWrapper>
                   <DropdownButton
                     onPress={() => {
@@ -240,7 +245,10 @@ export default function Profile() {
                       setModalVisible(true);
                     }}>
                     <DropdownButtonText>
-                      {capitalizeFirstLetter(localUser.targetLanguage)}
+                      {getTranslatedLanguageName({
+                        code: localUser.targetLanguage,
+                        t,
+                      })}
                     </DropdownButtonText>
                   </DropdownButton>
                 </LanguagePickerWrapper>
@@ -249,24 +257,24 @@ export default function Profile() {
                 onPress={handleSave}
                 disabled={!hasChanges || loading}>
                 <SaveButtonText disabled={!hasChanges || loading}>
-                  {loading ? 'Saving...' : 'Save Profile Changes'}
+                  {loading ? t('saving') : t('saveProfileChanges')}
                 </SaveButtonText>
               </SaveButton>
             </ProfileInfoSection>
 
             {/* Account Management Subsection*/}
             <SubSection>
-              <SectionTitle>Account Management</SectionTitle>
-              <Label>Current Password</Label>
+              <SectionTitle>{t('accountManagement')}</SectionTitle>
+              <Label>{t('currentPassword')}</Label>
               <Input
-                placeholder="Enter current password"
+                placeholder={t('enterCurrentPassword')}
                 secureTextEntry
                 value={currentPassword}
                 onChangeText={(text: string) => setCurrentPassword(text)}
               />
-              <Label>New Password</Label>
+              <Label>{t('newPassword')}</Label>
               <Input
-                placeholder="Enter new password"
+                placeholder={t('enterNewPassword')}
                 secureTextEntry
                 value={newPassword}
                 onChangeText={(text: string) => setNewPassword(text)}
@@ -276,13 +284,13 @@ export default function Profile() {
                 disabled={!currentPassword || !newPassword || loading}>
                 <SaveButtonText
                   disabled={!currentPassword || !newPassword || loading}>
-                  {loading ? 'Updating...' : 'Update Password'}
+                  {loading ? t('updating') : t('updatePassword')}
                 </SaveButtonText>
               </SaveButton>
             </SubSection>
 
             <LogoutButton onPress={handleLogout}>
-              <LogoutButtonText>Log Out</LogoutButtonText>
+              <LogoutButtonText>{t('logOut')}</LogoutButtonText>
             </LogoutButton>
 
             <Modal
@@ -293,11 +301,13 @@ export default function Profile() {
               <ModalOverlay onPress={() => setModalVisible(false)}>
                 <ModalContent>
                   <FlatList
-                    data={languages}
+                    data={languageCodes}
                     keyExtractor={(item) => item}
                     renderItem={({ item }) => (
                       <ModalItem onPress={() => handleLanguageSelect(item)}>
-                        <Text>{item}</Text>
+                        <Text>
+                          {getTranslatedLanguageName({ code: item, t })}
+                        </Text>
                       </ModalItem>
                     )}
                   />
