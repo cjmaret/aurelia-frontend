@@ -8,8 +8,10 @@ export function formatToLocalDate({
 
 export function formatTime({
   dateTimeString,
+  locale = 'en-US',
 }: {
   dateTimeString: string;
+  locale?: string;
 }): string {
   const date = formatToLocalDate({ dateTimeString });
 
@@ -17,7 +19,7 @@ export function formatTime({
     throw new Error('Invalid date format');
   }
 
-  return new Intl.DateTimeFormat('en-US', {
+  return new Intl.DateTimeFormat(locale, {
     hour: 'numeric',
     minute: 'numeric',
     hour12: true,
@@ -26,9 +28,11 @@ export function formatTime({
 
 export function formatDate({
   dateTimeString,
+  locale = 'en-US',
   fancy = false,
 }: {
   dateTimeString: string;
+  locale?: string;
   fancy?: boolean;
 }): string {
   const date = formatToLocalDate({ dateTimeString });
@@ -54,7 +58,7 @@ export function formatDate({
 
   if (fancy) {
     // Fancy: "Tuesday, April 22nd, 2025"
-    return new Intl.DateTimeFormat('en-US', {
+    return new Intl.DateTimeFormat(locale, {
       weekday: 'long',
       month: 'long',
       day: 'numeric',
@@ -64,7 +68,7 @@ export function formatDate({
       .replace(/\d+/, `${day}${suffix}`);
   } else {
     // regular: "April 22, 2025"
-    return new Intl.DateTimeFormat('en-US', {
+    return new Intl.DateTimeFormat(locale, {
       month: 'long',
       day: 'numeric',
       year: 'numeric',

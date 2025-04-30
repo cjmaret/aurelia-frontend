@@ -211,11 +211,11 @@ export default memo(function ReviewCard({
               {sentence?.errors?.length > 0 ? (
                 <>
                   <OriginalText>
-                    <BoldText>You said:</BoldText> "
+                    <BoldText>{t('youSaid')}:</BoldText> "
                     {highlightSearchedText(sentence.original)}"
                   </OriginalText>
                   <CorrectedText>
-                    <BoldText>Corrected:</BoldText> "
+                    <BoldText>{t('corrected')}:</BoldText> "
                     {combinedHighlightedText(
                       sentence.original,
                       sentence.corrected
@@ -226,11 +226,11 @@ export default memo(function ReviewCard({
               ) : (
                 <>
                   <CorrectedText>
-                    <BoldText>You said:</BoldText> "{sentence.corrected}"
+                    <BoldText>{t('youSaid')}:</BoldText> "{sentence.corrected}"
                   </CorrectedText>
                   <ContragulatoryTextContainer>
                     <ContragulatoryText>
-                      🎊 Great job! No errors! 🎊
+                      {t('greatJobNoErrors')}
                     </ContragulatoryText>
                   </ContragulatoryTextContainer>
                 </>
@@ -264,7 +264,7 @@ export default memo(function ReviewCard({
                               <ErrorHeaderText>
                                 <View>
                                   <ErrorDetailHeader>
-                                    What's wrong:{' '}
+                                    {t('whatsWrong')}:{' '}
                                   </ErrorDetailHeader>
                                   <ErrorWhatsWongText>
                                     {highlightSearchedText(error.error)}
@@ -277,14 +277,14 @@ export default memo(function ReviewCard({
                         {errorIsExpanded && (
                           <ErrorTextContainer>
                             <ErrorDetailContainer>
-                              <ErrorDetailHeader>Why?</ErrorDetailHeader>
+                              <ErrorDetailHeader>{t('why')}</ErrorDetailHeader>
                               <ErrorDetailText>
                                 {highlightSearchedText(error.reason)}
                               </ErrorDetailText>
                             </ErrorDetailContainer>
                             <ErrorDetailContainer>
                               <ErrorDetailHeader>
-                                Try this instead:
+                                {t('tryThisInstead')}:
                               </ErrorDetailHeader>
                               <ErrorDetailText>
                                 {highlightSearchedText(error.suggestion)}
@@ -292,7 +292,7 @@ export default memo(function ReviewCard({
                             </ErrorDetailContainer>
                             <ErrorDetailContainer style={{ marginBottom: 0 }}>
                               <ErrorDetailHeader>
-                                Improved clause:
+                                {t('improvedClause')}:
                               </ErrorDetailHeader>
                               <ErrorDetailText>
                                 "{highlightSearchedText(error.improvedClause)}"

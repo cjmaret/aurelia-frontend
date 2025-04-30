@@ -1,16 +1,17 @@
 import { ErrorReviewContainer } from './styledErrorReview';
-import { RefreshControl, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
+import {
+  RefreshControl,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+} from 'react-native';
 import CorrectionList from '../correction-list/CorrectionList';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useState } from 'react';
 import ErrorReviewHeader from '../error-review-header/ErrorReviewHeader';
 
 export default function ErrorReview() {
-  const {
-    fetchCorrections,
-    searchCorrections,
-    pagination,
-  } = useCorrectionsData();
+  const { fetchCorrections, searchCorrections, pagination } =
+    useCorrectionsData();
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchText, setSearchText] = useState('');

@@ -1,4 +1,3 @@
-import { TextInput } from 'react-native';
 import {
   HeaderContainer,
   HeaderText,
@@ -13,6 +12,7 @@ import ErrorMessage from '../error/ErrorMessage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useTheme } from 'styled-components/native';
+import { useTranslation } from 'react-i18next';
 
 export default function ErrorReviewHeader({
   hasScrolled,
@@ -38,6 +38,7 @@ export default function ErrorReviewHeader({
     pagination,
   } = useCorrectionsData();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const handleSearchSubmit = async (query: string) => {
     setIsSearching(true);
@@ -53,11 +54,11 @@ export default function ErrorReviewHeader({
   return (
     <>
       <HeaderContainer hasScrolled={hasScrolled}>
-        <HeaderText>Error Review</HeaderText>
+        <HeaderText>{t('errorReview')}</HeaderText>
         <SearchContainer>
           <SearchBar>
             <SearchBarInput
-              placeholder="Search corrections..."
+              placeholder={t('searchCorrections')}
               placeholderTextColor={theme.colors.textSecondary}
               value={searchText}
               onChangeText={handleSearch}
@@ -88,9 +89,7 @@ export default function ErrorReviewHeader({
       {correctionData.length === 0 && correctionsFetchError === null && (
         <NoCorrectionsContainer>
           <NoCorrectionsText>
-            {isSearching
-              ? 'No results found for your search.'
-              : 'Start recording to see your corrections here!'}{' '}
+            {isSearching ? t('noResultsFound') : t('startRecording')}
           </NoCorrectionsText>
         </NoCorrectionsContainer>
       )}

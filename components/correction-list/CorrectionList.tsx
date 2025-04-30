@@ -20,6 +20,8 @@ import {
 } from '@/utils/functions/generalFunctions';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useTheme } from 'styled-components/native';
+import i18n from '@/utils/app-language-wrapper/i18n';
+// import { getLocales } from 'react-native-localize';
 
 export default function CorrectionList({
   searchQuery,
@@ -41,7 +43,6 @@ export default function CorrectionList({
   const { correctionData } = useCorrectionsData();
   const theme = useTheme();
 
-  
   const renderCard = ({
     item: cardData,
     index,
@@ -56,6 +57,12 @@ export default function CorrectionList({
     const currentDateLocal = formatToLocalDate({
       dateTimeString: cardData.createdAt,
     });
+    const currentLocale = i18n.language || 'en-US';
+
+    console.log(currentLocale);
+
+    // console.log(getLocales());
+
     const previousDateLocal =
       index > 0
         ? formatToLocalDate({
@@ -72,7 +79,10 @@ export default function CorrectionList({
           <DateSeparatorContainer>
             <DateSeparatorLine />
             <DateSeparatorText>
-              {formatDate({ dateTimeString: cardData.createdAt })}
+              {formatDate({
+                dateTimeString: cardData.createdAt,
+                locale: currentLocale,
+              })}
             </DateSeparatorText>
           </DateSeparatorContainer>
         )}
@@ -108,7 +118,10 @@ export default function CorrectionList({
         extraData={correctionData}
         ListFooterComponent={
           isLoadingMore ? (
-            <ActivityIndicator size="small" color={theme.colors.backgroundPrimary} />
+            <ActivityIndicator
+              size="small"
+              color={theme.colors.backgroundPrimary}
+            />
           ) : null
         } // spinner at the bottom
       />
