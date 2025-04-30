@@ -1,3 +1,5 @@
+import i18n from '@/utils/app-language-wrapper/i18n';
+
 export function formatToLocalDate({
   dateTimeString,
 }: {
@@ -8,10 +10,8 @@ export function formatToLocalDate({
 
 export function formatTime({
   dateTimeString,
-  locale = 'en-US',
 }: {
   dateTimeString: string;
-  locale?: string;
 }): string {
   const date = formatToLocalDate({ dateTimeString });
 
@@ -19,7 +19,7 @@ export function formatTime({
     throw new Error('Invalid date format');
   }
 
-  return new Intl.DateTimeFormat(locale, {
+  return new Intl.DateTimeFormat(undefined, {
     hour: 'numeric',
     minute: 'numeric',
     hour12: true,
@@ -28,11 +28,9 @@ export function formatTime({
 
 export function formatDate({
   dateTimeString,
-  locale = 'en-US',
   fancy = false,
 }: {
   dateTimeString: string;
-  locale?: string;
   fancy?: boolean;
 }): string {
   const date = formatToLocalDate({ dateTimeString });
@@ -40,6 +38,8 @@ export function formatDate({
   if (isNaN(date.getTime())) {
     throw new Error('Invalid date format');
   }
+
+  const userLocale = i18n.language || 'en';
 
   const day = date.getDate();
   const suffix = (() => {
@@ -58,7 +58,7 @@ export function formatDate({
 
   if (fancy) {
     // Fancy: "Tuesday, April 22nd, 2025"
-    return new Intl.DateTimeFormat(locale, {
+    return new Intl.DateTimeFormat(userLocale, {
       weekday: 'long',
       month: 'long',
       day: 'numeric',
@@ -68,7 +68,7 @@ export function formatDate({
       .replace(/\d+/, `${day}${suffix}`);
   } else {
     // regular: "April 22, 2025"
-    return new Intl.DateTimeFormat(locale, {
+    return new Intl.DateTimeFormat(userLocale, {
       month: 'long',
       day: 'numeric',
       year: 'numeric',
@@ -96,7 +96,7 @@ export function getConversationTitle({
   } else if (hour >= 12 && hour < 18) {
     return t('afternoonConversation');
   } else {
-    return t('nightConversation');
+    return t('eveningConversation');
   }
 }
 

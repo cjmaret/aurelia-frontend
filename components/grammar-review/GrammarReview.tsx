@@ -1,4 +1,4 @@
-import { ErrorReviewContainer } from './styledErrorReview';
+import { GrammarReviewContainer } from './styledGrammarReview'
 import {
   RefreshControl,
   NativeSyntheticEvent,
@@ -7,9 +7,9 @@ import {
 import CorrectionList from '../correction-list/CorrectionList';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useState } from 'react';
-import ErrorReviewHeader from '../error-review-header/ErrorReviewHeader';
+import GrammarReviewHeader from './grammar-review-header/GrammarReviewHeader';
 
-export default function ErrorReview() {
+export default function GrammarReview() {
   const { fetchCorrections, searchCorrections, pagination } =
     useCorrectionsData();
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -93,8 +93,8 @@ export default function ErrorReview() {
   };
 
   return (
-    <ErrorReviewContainer>
-      <ErrorReviewHeader
+    <GrammarReviewContainer>
+      <GrammarReviewHeader
         hasScrolled={hasScrolled}
         searchText={searchText}
         handleSearch={handleSearch}
@@ -114,6 +114,6 @@ export default function ErrorReview() {
         collapseCardsAndErrors={collapseCardsAndErrors}
         setCollapseCardsAndErrors={setCollapseCardsAndErrors}
       />
-    </ErrorReviewContainer>
+    </GrammarReviewContainer>
   );
 }

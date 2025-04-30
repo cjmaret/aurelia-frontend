@@ -28,11 +28,14 @@ export const CardHeader = styled.View`
   shadow-offset: 0px 2px;
   shadow-opacity: 0.1;
   shadow-radius: 4px;
-  padding: 20px;
+  padding: 20px 15px;
   border-radius: 8px;
+  /* border: 1px solid red; */
 `;
 
-const ArrowIcon = styled.View``;
+const ArrowIcon = styled.View`
+  /* border: 1px solid red; */
+`;
 
 export const HeaderArrowIcon = styled(ArrowIcon)`
   display: flex;
@@ -44,7 +47,9 @@ export const CardHeaderTextContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  /* gap: 8px; */
+  /* border: 1px solid red; */
+  width: 90%;
 `;
 
 const CardHeaderText = styled.Text`

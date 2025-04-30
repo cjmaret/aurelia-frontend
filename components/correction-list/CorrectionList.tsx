@@ -21,7 +21,6 @@ import {
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useTheme } from 'styled-components/native';
 import i18n from '@/utils/app-language-wrapper/i18n';
-// import { getLocales } from 'react-native-localize';
 
 export default function CorrectionList({
   searchQuery,
@@ -57,11 +56,6 @@ export default function CorrectionList({
     const currentDateLocal = formatToLocalDate({
       dateTimeString: cardData.createdAt,
     });
-    const currentLocale = i18n.language || 'en-US';
-
-    console.log(currentLocale);
-
-    // console.log(getLocales());
 
     const previousDateLocal =
       index > 0
@@ -81,7 +75,6 @@ export default function CorrectionList({
             <DateSeparatorText>
               {formatDate({
                 dateTimeString: cardData.createdAt,
-                locale: currentLocale,
               })}
             </DateSeparatorText>
           </DateSeparatorContainer>

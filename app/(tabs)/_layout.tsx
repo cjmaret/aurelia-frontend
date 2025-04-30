@@ -30,7 +30,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="errorReviewTab"
+        name="grammarReviewTab"
         options={{
           title: t('grammarReview'),
           tabBarIcon: ({ color }) => (

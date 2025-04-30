@@ -7,14 +7,14 @@ import {
   SearchBarButton,
   SearchBarInput,
   SearchContainer,
-} from './styledErrorReviewHeader';
-import ErrorMessage from '../error/ErrorMessage';
+} from './styledGrammarReviewHeader';
+import ErrorMessage from '../../error/ErrorMessage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
 
-export default function ErrorReviewHeader({
+export default function GrammarReviewHeader({
   hasScrolled,
   searchText,
   handleSearch,
@@ -54,7 +54,7 @@ export default function ErrorReviewHeader({
   return (
     <>
       <HeaderContainer hasScrolled={hasScrolled}>
-        <HeaderText>{t('errorReview')}</HeaderText>
+        <HeaderText>{t('grammarReview')}</HeaderText>
         <SearchContainer>
           <SearchBar>
             <SearchBarInput

@@ -49,7 +49,7 @@ export default function RootLayout() {
   // background colors for pages
   const backgroundColors: Record<string, string> = {
     index: theme.colors.backgroundPrimary,
-    errorReviewTab: theme.colors.backgroundPrimary,
+    grammarReviewTab: theme.colors.backgroundPrimary,
     profileTab: theme.colors.backgroundSecondary,
     default: theme.colors.backgroundSecondary,
   };
