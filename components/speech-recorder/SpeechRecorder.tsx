@@ -93,32 +93,30 @@ export default function SpeechRecorder() {
       type: 'audio/m4a',
     } as any);
 
-    console.log('sent!!!')
+    try {
+      const response: CorrectionResponseType = await api.sendAudioFile(
+        formData
+      );
 
-    // try {
-    //   const response: CorrectionResponseType = await api.sendAudioFile(
-    //     formData
-    //   );
+      if (!response.success) {
+        console.error('Error from server:', response.error);
+        // handle the error (toast?)
+        return;
+      }
 
-    //   if (!response.success) {
-    //     console.error('Error from server:', response.error);
-    //     // handle the error (toast?)
-    //     return;
-    //   }
+      const correctionData = response.data as CorrectionDataType[];
+      if (correctionData) {
+        setCorrectionData((prevData: CorrectionDataType[]) => [
+          ...correctionData,
+          ...prevData,
+        ]);
+      }
+    } catch (error: any) {
+      const { status, message } = error;
 
-    //   const correctionData = response.data as CorrectionDataType[];
-    //   if (correctionData) {
-    //     setCorrectionData((prevData: CorrectionDataType[]) => [
-    //       ...correctionData,
-    //       ...prevData,
-    //     ]);
-    //   }
-    // } catch (error: any) {
-    //   const { status, message } = error;
-
-    //   console.error('Error sending audio:', error);
-    //   produceApiErrorAlert(status, message);
-    // }
+      console.error('Error sending audio:', error);
+      produceApiErrorAlert(status, message);
+    }
   }
 
   function formatElapsedTime(seconds: number): string {

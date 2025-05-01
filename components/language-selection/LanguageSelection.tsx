@@ -8,30 +8,56 @@ import {
   ButtonText,
   SaveButton,
   ListContainer,
+  ButtonContainer,
+  BackButton,
 } from '../setup/styledSetup';
+import { useTranslation } from 'react-i18next';
+import { getTranslatedLanguageName } from '@/utils/functions/generalFunctions';
+import { languageCodes } from '@/constants/profileConstants';
 
 interface LanguageSelectionProps {
   title: string;
   subtitle: string;
-  languages: string[];
   selectedLanguage: string;
   onSelectLanguage: (language: string) => void;
+  showLanguagesInOwnLanguage?: boolean;
   onNext: () => void;
+  onBack?: () => void;
   isFinalStep?: boolean;
 }
 
 export default function LanguageSelection({
   title,
   subtitle,
-  languages,
   selectedLanguage,
+  showLanguagesInOwnLanguage,
   onSelectLanguage,
   onNext,
-  isFinalStep = false,
+  onBack,
+  isFinalStep,
 }: LanguageSelectionProps) {
+  const { t } = useTranslation();
+
+  const getLanguageName = ({ code }: { code: string }) => {
+    if (showLanguagesInOwnLanguage) {
+      switch (code) {
+        case 'en':
+          return 'English';
+        case 'es':
+          return 'Español';
+        case 'fr':
+          return 'Français';
+        default:
+          return code;
+      }
+    } else {
+      return getTranslatedLanguageName({ code, t });
+    }
+  };
+
   const handleNext = () => {
     if (!selectedLanguage) {
-      Alert.alert('Error', 'Please select a language.');
+      Alert.alert(t('error'), t('pleaseSelectLanguage'));
       return;
     }
     onNext();
@@ -43,20 +69,27 @@ export default function LanguageSelection({
       <Subtitle>{subtitle}</Subtitle>
       <ListContainer>
         <FlatList
-          data={languages}
+          data={languageCodes}
           keyExtractor={(item) => item}
           renderItem={({ item }) => (
             <LanguageButton
               onPress={() => onSelectLanguage(item.toLowerCase())}
               selected={selectedLanguage === item.toLowerCase()}>
-              <ButtonText>{item}</ButtonText>
+              <ButtonText>{getLanguageName({ code: item })}</ButtonText>
             </LanguageButton>
           )}
         />
       </ListContainer>
-      <SaveButton onPress={handleNext}>
-        <ButtonText>{isFinalStep ? 'Save' : 'Next'}</ButtonText>
-      </SaveButton>
+      <ButtonContainer>
+        {onBack && ( 
+          <BackButton onPress={onBack}>
+            <ButtonText>{t('Back')}</ButtonText>
+          </BackButton>
+        )}
+        <SaveButton onPress={handleNext}>
+          <ButtonText>{isFinalStep ? t('save') : 'Next'}</ButtonText>
+        </SaveButton>
+      </ButtonContainer>
     </Container>
   );
 }

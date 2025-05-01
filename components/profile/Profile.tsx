@@ -96,13 +96,13 @@ export default function Profile() {
         setUser(updatedUser);
         setLocalUser(updatedUser);
 
-        Alert.alert('Success', 'Your profile has been successfully updated.');
+        Alert.alert(t('success'), t('profileUpdated'));
       } else {
-        Alert.alert('No Changes', 'No fields were updated.');
+        Alert.alert(t('noChanges'), t('noFieldsUpdated'));
       }
     } catch (error) {
       console.error('Error updating profile:', error);
-      Alert.alert('Error', 'Failed to update profile. Please try again.');
+      Alert.alert(t('error'), t('profileUpdateFailed'));
     } finally {
       setLoading(false);
     }
@@ -130,7 +130,7 @@ export default function Profile() {
 
   const handlePasswordUpdate = async () => {
     if (newPassword.length < 8) {
-      Alert.alert('Error', 'Password must be at least 8 characters long.');
+      Alert.alert(t('error'), t('passwordTooShort'));
       return;
     }
 
@@ -141,15 +141,15 @@ export default function Profile() {
         newPassword: newPassword,
       });
 
-      Alert.alert('Success', 'Your password has been successfully updated.');
+      Alert.alert(t('success'), t('passwordUpdated'));
       setCurrentPassword('');
       setNewPassword('');
     } catch (error: any) {
       console.error('Error updating password:', error);
       Alert.alert(
-        'Error',
+        t('error'),
         error.response?.data?.message ||
-          'Failed to update password. Please try again.'
+          t('passwordUpdateFailed')
       );
     } finally {
       setLoading(false);

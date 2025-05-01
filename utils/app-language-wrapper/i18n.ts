@@ -10,7 +10,12 @@ const resources = {
       profile: 'Profile',
       logout: 'Log Out',
       record: 'Record',
-      grammarReview: 'Grammar Review',
+      // setup
+      setupProfile: 'Set up Your Profile',
+      chooseTargetLanguage: 'Choose the language you want to practice',
+      save: 'Save',
+      back: 'Back',
+      //profile
       conversations: 'Conversations',
       profileInfo: 'Profile Info',
       username: 'Username',
@@ -30,6 +35,8 @@ const resources = {
       updatePassword: 'Update Password',
       updating: 'Updating...',
       logOut: 'Log Out',
+      // grammar review
+      grammarReview: 'Grammar Review',
       searchCorrections: 'Search corrections...',
       noResultsFound: 'No results found for your search.',
       startRecording: 'Start recording to see your corrections here!',
@@ -43,9 +50,23 @@ const resources = {
       why: 'Why?',
       tryThisInstead: 'Try this instead',
       improvedClause: 'Improved clause',
+      // alerts
+      success: 'Success',
+      pleaseSelectLanguage: 'Please select a language.',
+      setupComplete: 'Setup complete! You can now use the app.',
+      setupFailed: 'Failed to save setup. Please try again.',
+      profileUpdated: 'Your profile has been successfully updated.',
+      noChanges: 'No Changes',
+      noFieldsUpdated: 'No fields were updated.',
+      error: 'Error',
+      profileUpdateFailed: 'Failed to update profile. Please try again.',
+      passwordUpdated: 'Your password has been successfully updated.',
+      passwordTooShort: 'Password must be at least 8 characters long.',
+      passwordUpdateError: 'Error updating password',
+      passwordUpdateFailed: 'Failed to update password. Please try again.',
+
       // words for setup (necessary?)
       // words for login/signup
-      // dates time
     },
   },
   fr: {
@@ -56,7 +77,12 @@ const resources = {
       profile: 'Profil',
       logout: 'Se Déconnecter',
       record: 'Enregistrer',
-      grammarReview: 'Révision de Grammaire',
+      // setup
+      setupProfile: 'Configurer votre profil',
+      chooseTargetLanguage: 'Choisissez la langue que vous voulez pratiquer',
+      save: 'Enregistrer',
+      back: 'Retour',
+      // profile
       conversations: 'Conversations',
       profileInfo: 'Infos du Profil',
       username: "Nom d'utilisateur",
@@ -76,6 +102,8 @@ const resources = {
       updatePassword: 'Mettre à Jour le Mot de Passe',
       updating: 'Mise à jour...',
       logOut: 'Se Déconnecter',
+      // grammar review
+      grammarReview: 'Révision de Grammaire',
       searchCorrections: 'Rechercher des corrections...',
       noResultsFound: 'Aucun résultat trouvé pour votre recherche.',
       startRecording: 'Commencez à enregistrer pour voir vos corrections ici !',
@@ -89,6 +117,24 @@ const resources = {
       why: 'Pourquoi ?',
       tryThisInstead: 'Essayez ceci à la place',
       improvedClause: 'Clause améliorée',
+      // alerts
+      success: 'Succès',
+      pleaseSelectLanguage: 'Veuillez sélectionner une langue.',
+      setupComplete:
+        'Configuration terminée ! Vous pouvez maintenant utiliser l’application.',
+      setupFailed:
+        'Échec de l’enregistrement de la configuration. Veuillez réessayer.',
+      profileUpdated: 'Votre profil a été mis à jour avec succès.',
+      noChanges: 'Aucun changement',
+      noFieldsUpdated: 'Aucun champ n’a été mis à jour.',
+      error: 'Erreur',
+      profileUpdateFailed:
+        'Échec de la mise à jour du profil. Veuillez réessayer.',
+      passwordUpdated: 'Votre mot de passe a été mis à jour avec succès.',
+      passwordTooShort: 'Le mot de passe doit contenir au moins 8 caractères.',
+      passwordUpdateError: 'Erreur lors de la mise à jour du mot de passe',
+      passwordUpdateFailed:
+        'Échec de la mise à jour du mot de passe. Veuillez réessayer.',
     },
   },
   es: {
@@ -99,7 +145,13 @@ const resources = {
       profile: 'Perfil',
       logout: 'Cerrar Sesión',
       record: 'Grabar',
-      grammarReview: 'Revisión de Gramática',
+      // setup
+      setupProfile: 'Configura tu perfil',
+      chooseTargetLanguage: 'Elige el idioma que quieres practicar',
+      save: 'Guardar',
+      back: 'Atrás',
+
+      // profile
       conversations: 'Conversaciones',
       profileInfo: 'Información del Perfil',
       username: 'Nombre de Usuario',
@@ -119,6 +171,8 @@ const resources = {
       updatePassword: 'Actualizar Contraseña',
       updating: 'Actualizando...',
       logOut: 'Cerrar Sesión',
+      // grammar reivew
+      grammarReview: 'Revisión de Gramática',
       searchCorrections: 'Buscar correcciones...',
       noResultsFound: 'No se encontraron resultados para tu búsqueda.',
       startRecording: 'Comienza a grabar para ver tus correcciones aquí.',
@@ -132,16 +186,34 @@ const resources = {
       why: '¿Por qué?',
       tryThisInstead: 'Prueba esto en su lugar',
       improvedClause: 'Cláusula mejorada',
+      // alerts
+      success: 'Éxito',
+      pleaseSelectLanguage: 'Por favor, selecciona un idioma.',
+      setupComplete:
+        '¡Configuración completa! Ahora puedes usar la aplicación.',
+      setupFailed:
+        'Error al guardar la configuración. Por favor, inténtalo de nuevo.',
+      profileUpdated: 'Tu perfil se ha actualizado con éxito.',
+      noChanges: 'Sin cambios',
+      noFieldsUpdated: 'No se actualizaron campos.',
+      error: 'Error',
+      profileUpdateFailed:
+        'Error al actualizar el perfil. Por favor, inténtalo de nuevo.',
+      passwordUpdated: 'Tu contraseña se ha actualizado con éxito.',
+      passwordTooShort: 'La contraseña debe tener al menos 8 caracteres.',
+      passwordUpdateError: 'Error al actualizar la contraseña',
+      passwordUpdateFailed:
+        'Error al actualizar la contraseña. Por favor, inténtalo de nuevo.',
     },
   },
 };
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: 'en', // Default language
+  lng: 'en',
   fallbackLng: 'en',
   interpolation: {
-    escapeValue: false, // React already escapes values
+    escapeValue: false,
   },
 });
 

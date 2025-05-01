@@ -41,11 +41,23 @@ export const LanguageButton = styled(SetupButton)<{ selected: boolean }>`
   margin-top: 20px;
 `;
 
-export const SaveButton = styled(SetupButton)`
+export const ButtonContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+`;
+
+const MoveButton = styled(SetupButton)`
   background-color: ${({ theme }: { theme: any }) => theme.colors.primary};
   padding: 16px;
   border-radius: 7px;
+  width: 130px;
 `;
+
+export const SaveButton = styled(MoveButton)``;
+
+export const BackButton = styled(MoveButton)``;
 
 export const ButtonText = styled.Text`
   color: ${({ theme }: { theme: any }) => theme.colors.textPrimary};
