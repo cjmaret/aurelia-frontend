@@ -30,6 +30,12 @@ export const CorrectionsDataProvider: React.FC<{
   const [correctionsFetchError, setCorrectionsFetchError] =
     useState<Error | null>(null);
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchCorrections({ page: pagination.page, limit: pagination.limit });
+    }
+  }, [isAuthenticated]);
+
   const fetchCorrections = async ({
     page = 1,
     limit = 10,
@@ -137,11 +143,24 @@ export const CorrectionsDataProvider: React.FC<{
     }
   }
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchCorrections({ page: pagination.page, limit: pagination.limit });
+  const deleteCorrection = async (conversationId: string): Promise<void> => {
+    try {
+      const response = await api.deleteConversation({ conversationId });
+
+      if (!response.success) {
+        throw new Error('Failed to delete correction');
+      }
+
+      // remove deleted card
+      setCorrectionData((prevData) =>
+        prevData.filter((item) => item.conversationId !== conversationId)
+      );
+    } catch (err: any) {
+      console.error('Error deleting correction:', err);
+      produceApiErrorAlert(err.status || 0, err.message || 'Unknown error');
+      throw err; 
     }
-  }, [isAuthenticated]);
+  };
 
   return (
     <CorrectionDataContext.Provider
@@ -151,6 +170,7 @@ export const CorrectionsDataProvider: React.FC<{
         correctionsFetchError,
         fetchCorrections,
         searchCorrections,
+        deleteCorrection,
         pagination,
         setPagination,
       }}>

@@ -50,6 +50,14 @@ const resources = {
       why: 'Why?',
       tryThisInstead: 'Try this instead',
       improvedClause: 'Improved clause',
+      confirmDeleteTitle: 'Delete Conversation',
+      confirmDeleteMessage:
+        'Are you sure you want to delete this conversation?',
+      cancel: 'Cancel',
+      delete: 'Delete',
+      deleteError: 'Error',
+      deleteErrorMessage:
+        'Failed to delete the conversation. Please try again.',
       // alerts
       success: 'Success',
       pleaseSelectLanguage: 'Please select a language.',
@@ -117,6 +125,14 @@ const resources = {
       why: 'Pourquoi ?',
       tryThisInstead: 'Essayez ceci à la place',
       improvedClause: 'Clause améliorée',
+      confirmDeleteTitle: 'Supprimer la conversation',
+      confirmDeleteMessage:
+        'Êtes-vous sûr de vouloir supprimer cette conversation ?',
+      cancel: 'Annuler',
+      delete: 'Supprimer',
+      deleteError: 'Erreur',
+      deleteErrorMessage:
+        'Échec de la suppression de la conversation. Veuillez réessayer.',
       // alerts
       success: 'Succès',
       pleaseSelectLanguage: 'Veuillez sélectionner une langue.',
@@ -186,6 +202,14 @@ const resources = {
       why: '¿Por qué?',
       tryThisInstead: 'Prueba esto en su lugar',
       improvedClause: 'Cláusula mejorada',
+      confirmDeleteTitle: 'Eliminar conversación',
+      confirmDeleteMessage:
+        '¿Estás seguro de que deseas eliminar esta conversación?',
+      cancel: 'Cancelar',
+      delete: 'Eliminar',
+      deleteError: 'Error',
+      deleteErrorMessage:
+        'No se pudo eliminar la conversación. Inténtalo de nuevo.',
       // alerts
       success: 'Éxito',
       pleaseSelectLanguage: 'Por favor, selecciona un idioma.',

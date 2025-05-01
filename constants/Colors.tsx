@@ -3,10 +3,9 @@ const tintColorDark = '#fff';
 
 export const Colors = {
   light: {
-  
     // default colors
     text: '#11181C',
-    backgroundPrimary: '#e8f6fc', 
+    backgroundPrimary: '#e8f6fc',
     backgroundSecondary: '#ffffff',
     tint: tintColorLight,
 
@@ -17,6 +16,7 @@ export const Colors = {
     // main colors
     primary: '#81c6d0',
     primaryDark: '#6daeb8',
+    primaryLight: '#9ad2dc',
     secondary: '#ee9e9e',
 
     // text colors
@@ -26,7 +26,7 @@ export const Colors = {
 
     // card colors
     cardHeaderBorder: '#e7eaef',
-    cardHeaderText: '#81c6d0',
+    cardHeaderText: '#8fc7d0',
     cardTimeText: '#81c6d0',
     cardBackground: '#ffffff',
     cardBorder: '#e7eaef',

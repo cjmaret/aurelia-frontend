@@ -79,13 +79,13 @@ export default function SpeechRecorder() {
     });
     const uri = recording?.getURI();
     if (uri) {
-      sendAudioFile(uri);
+      addCorrection(uri);
     }
     console.log('Recording stopped and stored at', uri);
     waveformOpacity.setValue(0);
   }
 
-  async function sendAudioFile(audioUri: string) {
+  async function addCorrection(audioUri: string) {
     const formData = new FormData();
     formData.append('file', {
       uri: audioUri,
@@ -94,7 +94,7 @@ export default function SpeechRecorder() {
     } as any);
 
     try {
-      const response: CorrectionResponseType = await api.sendAudioFile(
+      const response: CorrectionResponseType = await api.addCorrection(
         formData
       );
 

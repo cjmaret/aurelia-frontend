@@ -200,3 +200,18 @@ export const HighlightedSearchText = styled.Text`
     theme.colors.textHighlight};
   font-weight: bold;
 `;
+
+export const DeleteButton = styled.TouchableOpacity`
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.backgroundSecondary};
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid ${({ theme }: { theme: any }) => theme.colors.primary};
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

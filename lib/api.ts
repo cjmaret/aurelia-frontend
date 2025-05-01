@@ -256,7 +256,7 @@ class Api {
       });
   }
 
-  async sendAudioFile(formData: FormData): Promise<CorrectionResponseType> {
+  async addCorrection(formData: FormData): Promise<CorrectionResponseType> {
     const headers = await this._getAuthHeaders();
 
     return fetch(this._baseUrl + `/corrections`, {
@@ -267,6 +267,24 @@ class Api {
       .then((res) => this._returnRes(res))
       .catch((err) => {
         console.error('Error sending audio:', err);
+        throw err;
+      });
+  }
+
+  async deleteConversation({
+    conversationId,
+  }: {
+    conversationId: string;
+  }): Promise<CorrectionResponseType> {
+    const headers = await this._getAuthHeaders();
+
+    return fetch(this._baseUrl + `/corrections/${conversationId}`, {
+      method: 'DELETE',
+      headers,
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error deleting correction:', err);
         throw err;
       });
   }

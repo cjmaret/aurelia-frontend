@@ -4,6 +4,7 @@ import {
   ActivityIndicator,
   NativeScrollEvent,
   View,
+  Alert,
 } from 'react-native';
 import ReviewCard from '../review-card/ReviewCard';
 import { isSameDay } from 'date-fns';
@@ -20,7 +21,7 @@ import {
 } from '@/utils/functions/generalFunctions';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useTheme } from 'styled-components/native';
-import i18n from '@/utils/app-language-wrapper/i18n';
+import { useTranslation } from 'react-i18next';
 
 export default function CorrectionList({
   searchQuery,
@@ -39,8 +40,31 @@ export default function CorrectionList({
   collapseCardsAndErrors: boolean;
   setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { correctionData } = useCorrectionsData();
+  const { correctionData, deleteCorrection } = useCorrectionsData();
   const theme = useTheme();
+  const { t } = useTranslation();
+
+  const handleDeleteCard = async (conversationId: string) => {
+    Alert.alert(
+      t('confirmDeleteTitle'),
+      t('confirmDeleteMessage'),
+      [
+        { text: t('cancel'), style: 'cancel' },
+        {
+          text: t('delete'),
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await deleteCorrection(conversationId);
+            } catch (error) {
+              Alert.alert(t('deleteError'), t('deleteErrorMessage'));
+            }
+          },
+        },
+      ],
+      { cancelable: true }
+    );
+  };
 
   const renderCard = ({
     item: cardData,
@@ -84,6 +108,7 @@ export default function CorrectionList({
           searchQuery={searchQuery}
           collapseCardsAndErrors={collapseCardsAndErrors}
           setCollapseCardsAndErrors={setCollapseCardsAndErrors}
+          handleDeleteCard={() => handleDeleteCard(cardData.conversationId)}
         />
       </ReviewCardContainer>
     );

@@ -26,6 +26,7 @@ import {
   HighlightedCorrectedText,
   HighlightedSearchText,
   ErrorWhatsWongText,
+  DeleteButton,
 } from './styledReviewCard';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -42,11 +43,13 @@ export default memo(function ReviewCard({
   searchQuery,
   collapseCardsAndErrors,
   setCollapseCardsAndErrors,
+  handleDeleteCard,
 }: {
   cardData: CorrectionDataType;
   searchQuery: string;
   collapseCardsAndErrors: boolean;
   setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
+  handleDeleteCard: () => void;
 }) {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -198,6 +201,13 @@ export default memo(function ReviewCard({
               {formatTime({ dateTimeString: createdAt })}
             </CardHeaderTextTime>
           </CardHeaderTextContainer>
+          <DeleteButton onPress={handleDeleteCard}>
+            <MaterialCommunityIcons
+              name="close"
+              size={14}
+              color={theme.colors.primary}
+            />
+          </DeleteButton>
         </CardHeader>
       </TouchableOpacity>
       <View

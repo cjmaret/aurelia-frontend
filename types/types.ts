@@ -21,6 +21,7 @@ export interface CorrectionDataContextType {
   setCorrectionData: SetStateType<CorrectionDataType[]>;
   fetchCorrections: (params: { page: number; limit: number }) => Promise<void>;
   searchCorrections: (params: SearchCorrectionsType) => Promise<void>;
+  deleteCorrection: (conversationId: string) => Promise<void>;
   correctionsFetchError: Error | null;
   pagination: PaginationType;
   setPagination: SetStateType<PaginationType>;
