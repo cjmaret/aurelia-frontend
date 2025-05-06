@@ -70,7 +70,7 @@ class Api {
     refreshToken: string
   ): Promise<{ accessToken: string; refreshToken: string }> {
     try {
-      const response = await fetch(`${config.apiUrlExpo}/auth/refresh`, {
+      const response = await fetch(`${config.apiUrl}/auth/refresh`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ class Api {
 
   async registerUser(userEmail: string, password: string): Promise<string> {
     try {
-      const response = await fetch(`${config.apiUrlExpo}/register`, {
+      const response = await fetch(`${config.apiUrl}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userEmail, password }),
@@ -121,7 +121,7 @@ class Api {
     password: string
   ): Promise<{ accessToken: string; refreshToken: string }> {
     try {
-      const response = await fetch(`${config.apiUrlExpo}/login`, {
+      const response = await fetch(`${config.apiUrl}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userEmail, password }),
@@ -194,7 +194,7 @@ class Api {
   }): Promise<any> {
     const headers = await this._getAuthHeaders();
 
-    return fetch(`${config.apiUrlExpo}/auth/update-password`, {
+    return fetch(`${config.apiUrl}/auth/update-password`, {
       method: 'POST',
       headers: {
         ...headers,
@@ -291,7 +291,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: `${config.apiUrlExpo}/api/v1`,
+  baseUrl: `${config.apiUrl}/api/v1`,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
