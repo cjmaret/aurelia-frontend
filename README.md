@@ -13,7 +13,6 @@ This project serves as the front-end for the Conversant-AI backend.
 - **Customizable Settings**: Personalize your experience with language preferences and user settings.
 - **Secure API Integration**: Communicate with the backend via secure API requests.
 - **Testing**: Major components tested with React Testing Library.
-- **Hosting**: Frontend hosted on Vercel.
 
 ---
 
@@ -40,7 +39,28 @@ This project serves as the front-end for the Conversant-AI backend.
 
 ## 🖥️ Running the App
 
-### On Physical Device (Expo Go)
+### For Testers or Viewers (Using Expo Go)
+
+If you just want to **test or view the app** without setting up a local development environment:
+
+1. **Install Expo Go**:
+   - Download the Expo Go app on your device:
+     - [Expo Go for iOS](https://apps.apple.com/app/expo-go/id982107779)
+     - [Expo Go for Android](https://play.google.com/store/apps/details?id=host.exp.exponent)
+
+2. **Access the App**:
+   - Open the Expo Go app and scan the QR code provided by the app owner.
+   - Alternatively, use the provided Expo project link (e.g., `https://expo.dev/@username/project-name`).
+
+3. **Ensure Backend Accessibility**:
+   - The app will connect to the production backend at:
+     ```https://conversant-backend-qeq9t.ondigitalocean.app```
+
+---
+
+### For Developers (Running Locally)
+
+If you want to **run the app locally** for development purposes:
 
 1. Start the app:
    ```npx expo start```
@@ -54,11 +74,10 @@ This project serves as the front-end for the Conversant-AI backend.
       ```uvicorn app.app:app --reload```
    - Run the app to allow calls from Expo Go:
       ```uvicorn app.app:app --host 0.0.0.0 --port 8000 --reload```
-   - Replace `localhost` in your API URL (in config file) with your machine's local IP address (e.g., `http://192.168.x.x:8000`).
-      - can be found via `ifconfig | grep inet`
+   - Replace `localhost` in your API URL (in config file) with your machine's local IP address (e.g., ```http://192.168.x.x:8000```).
+      - can be found via ```ifconfig | grep inet```
    - If on a public network, use the `--tunnel` flag when running the Expo app:
      ```npx expo start --tunnel```
-
 
 5. Make sure your device and development machine are connected to the same Wi-Fi network.
 
@@ -74,7 +93,6 @@ This project serves as the front-end for the Conversant-AI backend.
 - **Fetch API**: For making HTTP requests to the backend.
 - **FastAPI**: Backend server for handling API requests.
 - **React Testing Library**: For testing React components.
-- **Vercel**: Hosting platform for the frontend.
 
 ---
 
