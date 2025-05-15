@@ -98,9 +98,8 @@ If you want to **run the app locally** for development purposes:
 
 ## 🔗 Links
 
-- [➡️ Frontend GitHub Repository](#)
-- [➡️ Backend GitHub Repository](#)
-- [➡️ Live Site](#)
+- [➡️ Frontend GitHub Repository](https://github.com/cjmaret/conversant-frontend)
+- [➡️ Backend GitHub Repository](https://github.com/cjmaret/conversant-backend)
 
 ---
 
