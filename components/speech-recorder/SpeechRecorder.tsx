@@ -11,22 +11,26 @@ import {
 import { Button } from 'react-native';
 import Waveform from '../waveform/Waveform';
 import RecordButtonComponent from '../record-button/RecordButton';
-import styled from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
 import api from '@/lib/api';
 import { CorrectionDataType, CorrectionResponseType } from '@/types/types';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { produceApiErrorAlert } from '@/utils/functions/handleApiError';
+import { useToastModal } from '@/utils/contexts/ToastModalContext';
+import NewWaveform from '../waveform/NewWaveform';
 
 export default function SpeechRecorder() {
+  const theme: any = useTheme();
+  const { setCorrectionData } = useCorrectionsData();
+  const { showToast } = useToastModal();
   const [recording, setRecording] = useState<Audio.Recording | null>(null);
   const [permissionResponse, requestPermission] = Audio.usePermissions();
   const [waveformOpacity] = useState(new Animated.Value(0));
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [timerInterval, setTimerInterval] = useState<NodeJS.Timeout | null>(
-    null
-  );
-
-  const { setCorrectionData } = useCorrectionsData();
+  const [timerInterval, setTimerInterval] = useState<ReturnType<
+    typeof setInterval
+  > | null>(null);
+  const MAX_RECORDING_SECONDS = 10;
 
   useEffect(() => {
     if (!permissionResponse?.granted) {
@@ -85,6 +89,17 @@ export default function SpeechRecorder() {
     waveformOpacity.setValue(0);
   }
 
+  useEffect(() => {
+    if (recording && elapsedTime >= MAX_RECORDING_SECONDS) {
+      stopRecording();
+      showToast(
+        'info',
+        'Recording Stopped',
+        `Maximum recording length of ${MAX_RECORDING_SECONDS} seconds reached.`
+      );
+    }
+  }, [elapsedTime, recording]);
+
   async function addCorrection(audioUri: string) {
     const formData = new FormData();
     formData.append('file', {
@@ -94,29 +109,52 @@ export default function SpeechRecorder() {
     } as any);
 
     try {
-      const response: CorrectionResponseType = await api.addCorrection(
-        formData
+      showToast(
+        'info',
+        'Processing Your Recording',
+        'Hang tight! Check the Grammar Review tab for results.'
       );
 
-      if (!response.success) {
-        console.error('Error from server:', response.error);
-        // handle the error (toast?)
-        return;
-      }
+      // const response: CorrectionResponseType = await api.addCorrection(
+      //   formData
+      // );
 
-      const correctionData = response.data as CorrectionDataType[];
-      if (correctionData) {
-        setCorrectionData((prevData: CorrectionDataType[]) => [
-          ...correctionData,
-          ...prevData,
-        ]);
-      }
+      // if (!response.success) {
+      //   console.error('Error from server:', response.error);
+      //   showToast('error', 'Error Processing Recording', 'Please try again.');
+      //   return;
+      // }
+
+      // const correctionData = response.data as CorrectionDataType[];
+      // if (correctionData) {
+      //   setCorrectionData((prevData: CorrectionDataType[]) => [
+      //     ...correctionData,
+      //     ...prevData,
+      //   ]);
+      //   showToast(
+      //     'success',
+      //     'Recording Processed',
+      //     'Your corrections are ready!'
+      //   );
+      // }
     } catch (error: any) {
       const { status, message } = error;
 
       console.error('Error sending audio:', error);
+      showToast(
+        'error',
+        'Error Sending Audio',
+        message || 'An unexpected error occurred.'
+      );
       produceApiErrorAlert(status, message);
     }
+  }
+
+  function getTimerColor(seconds: number) {
+    const percent = seconds / MAX_RECORDING_SECONDS;
+    if (percent >= 0.85) return theme.colors.errorText;
+    if (percent >= 0.7) return theme.colors.warningText;
+    return theme.colors.primary;
   }
 
   function formatElapsedTime(seconds: number): string {
@@ -130,11 +168,14 @@ export default function SpeechRecorder() {
   return (
     <SpeechRecorderGroup>
       <UpperContainer>
-        {/* <Waveform recording={!!recording} /> */}
+        <Waveform recording={true} />
+        {/* <NewWaveform recording={true} color={theme.colors.primary} /> */}
       </UpperContainer>
       <LowerContainer>
         <RecordingGroup>
-          <TimerText>{formatElapsedTime(elapsedTime)}</TimerText>
+          <TimerText color={getTimerColor(elapsedTime)}>
+            {formatElapsedTime(elapsedTime)}
+          </TimerText>
           <RecordButtonComponent
             startRecording={startRecording}
             stopRecording={stopRecording}

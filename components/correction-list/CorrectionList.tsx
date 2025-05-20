@@ -41,7 +41,7 @@ export default function CorrectionList({
   setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const { correctionData, deleteCorrection } = useCorrectionsData();
-  const theme = useTheme();
+  const theme: any = useTheme();
   const { t } = useTranslation();
 
   const handleDeleteCard = async (conversationId: string) => {

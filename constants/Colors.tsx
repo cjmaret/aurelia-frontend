@@ -23,18 +23,21 @@ export const Colors = {
     textPrimary: '#ffffff',
     textSecondary: '#81c6d0',
     textTertiary: '#5d5d5d',
-
+    correctedText: '#2b8a3e',
+    warningText: '#f1c40f',
+    errorText: '#e74c3c',
+    
+    
     // card colors
     cardHeaderBorder: '#e7eaef',
     cardHeaderText: '#8fc7d0',
     cardTimeText: '#81c6d0',
     cardBackground: '#ffffff',
     cardBorder: '#e7eaef',
-
+    
     // snippet colors
     snippetBackground: '#ffffff',
     snippetOriginalText: '#555',
-    snippetCorrectedText: '#2b8a3e',
     snippetErrorText: '#b22222',
     snippetErrorBackground: 'rgb(255, 236, 236)',
 
@@ -80,7 +83,7 @@ export const Colors = {
     // Snippet colors
     snippetBackground: '#2a2a2a',
     snippetOriginalText: '#aaa',
-    snippetCorrectedText: '#50e3c2',
+    correctedText: '#50e3c2',
     snippetErrorText: '#ff6b6b',
     snippetErrorBackground: 'rgb(60, 20, 20)',
 

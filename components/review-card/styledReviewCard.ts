@@ -95,7 +95,7 @@ export const OriginalText = styled.Text`
 export const CorrectedText = styled.Text`
   font-size: 16px;
   font-weight: bold;
-  color: ${({ theme }: { theme: any }) => theme.colors.snippetCorrectedText};
+  color: ${({ theme }: { theme: any }) => theme.colors.correctedText};
   margin-bottom: 10px;
 `;
 

@@ -6,7 +6,7 @@ import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
 
 export default function TabLayout() {
-  const theme = useTheme();
+  const theme: any = useTheme();
   const { t } = useTranslation();
 
   return (

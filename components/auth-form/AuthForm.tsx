@@ -14,6 +14,7 @@ import { useAuth } from '@/utils/contexts/AuthContext';
 import api from '@/lib/api';
 import { AuthFormTypes } from '@/types/types';
 import { useTheme } from 'styled-components/native';
+import GoogleSignInButton from '../google-signin-button/GoogleSignInButton';
 
 export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const [userEmail, setUserEmail] = useState('');
@@ -21,7 +22,7 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const router = useRouter();
-  const theme = useTheme();
+  const theme: any = useTheme();
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -79,9 +80,12 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
         <AuthButtonText>{isSignUp ? 'Sign Up' : 'Login'}</AuthButtonText>
       </AuthButton>
       {!isSignUp && (
+        <>
         <AuthLinkButton onPress={() => router.navigate('/sign-up')}>
           <AuthLinkText>New user? Sign up</AuthLinkText>
         </AuthLinkButton>
+                {/* <GoogleSignInButton/> */}
+        </>
       )}
       {isSignUp && (
         <AuthLinkButton onPress={() => router.navigate('/sign-in')}>
