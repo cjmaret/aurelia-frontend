@@ -76,7 +76,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const handleNavigation = () => {
     if (!isAuthenticated) {
-      router.replace('/sign-in');
+      router.replace('/signIn');
     } else if (user && !user.setupComplete) {
       router.replace('/(setup)/setupTab');
     }
@@ -113,7 +113,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       await SecureStore.deleteItemAsync('accessToken');
       setIsAuthenticated(false);
       setUser(null);
-      router.replace('/sign-in');
+      router.replace('/signIn');
     } catch (error) {
       console.error('Error during logout:', error);
       throw error;

@@ -10,7 +10,7 @@ export type ThemedToastProps = {
 };
 
 const getBorderColor = (type: 'info' | 'success' | 'error', theme: any) => {
-  if (type === 'success') return theme.colors.correctedText;
+  if (type === 'success') return theme.colors.primary;
   if (type === 'error') return theme.colors.snippetErrorText;
   return theme.colors.primary;
 };
@@ -21,7 +21,7 @@ const getIcon = (type: 'info' | 'success' | 'error', theme: any) => {
       <MaterialIcons
         name="check-circle"
         size={28}
-        color={theme.colors.correctedText}
+        color={theme.colors.primary}
         style={{ marginRight: 12 }}
       />
     );

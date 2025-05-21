@@ -53,16 +53,13 @@ const resources = {
       why: 'Why?',
       tryThisInstead: 'Try this instead',
       improvedClause: 'Improved clause',
-      confirmDeleteTitle: 'Delete Conversation',
-      confirmDeleteMessage:
-        'Are you sure you want to delete this conversation?',
-      cancel: 'Cancel',
-      delete: 'Delete',
-      deleteError: 'Error',
-      deleteErrorMessage:
-        'Failed to delete the conversation. Please try again.',
 
-      // alerts
+      // Toast notifications
+      signUpSuccessTitle: 'Sign Up Successful',
+      signUpSuccessMessage:
+        'You have successfully signed up! You can now log in.',
+      signUpFailed: 'Sign Up Failed',
+      loginFailed: 'Login Failed',
       success: 'Success',
       pleaseSelectLanguage: 'Please select a language.',
       setupComplete: 'Setup complete! You can now use the app.',
@@ -76,8 +73,6 @@ const resources = {
       passwordTooShort: 'Password must be at least 8 characters long.',
       passwordUpdateError: 'Error updating password',
       passwordUpdateFailed: 'Failed to update password. Please try again.',
-
-      // Toast notifications
       processingRecording: 'Processing Your Recording',
       processingRecordingMessage:
         'Hang tight! Check the Grammar Review tab for results.',
@@ -89,6 +84,16 @@ const resources = {
         'No speech detected. Please record your voice and try again.',
       sessionExpiredError: 'Your session has expired. Please log in again.',
       serverError: 'A server error occurred. Please try again later.',
+
+      // alerts
+      confirmDeleteTitle: 'Delete Conversation',
+      confirmDeleteMessage:
+        'Are you sure you want to delete this conversation?',
+      cancel: 'Cancel',
+      delete: 'Delete',
+      deleteError: 'Error',
+      deleteErrorMessage:
+        'Failed to delete the conversation. Please try again.',
     },
   },
   fr: {
@@ -142,16 +147,13 @@ const resources = {
       why: 'Pourquoi ?',
       tryThisInstead: 'Essayez ceci à la place',
       improvedClause: 'Clause améliorée',
-      confirmDeleteTitle: 'Supprimer la conversation',
-      confirmDeleteMessage:
-        'Êtes-vous sûr de vouloir supprimer cette conversation ?',
-      cancel: 'Annuler',
-      delete: 'Supprimer',
-      deleteError: 'Erreur',
-      deleteErrorMessage:
-        'Échec de la suppression de la conversation. Veuillez réessayer.',
 
-      // alerts
+      // Toast notifications
+      signUpSuccessTitle: 'Inscription réussie',
+      signUpSuccessMessage:
+        'Vous vous êtes inscrit avec succès ! Vous pouvez maintenant vous connecter.',
+      signUpFailed: "Échec de l'inscription",
+      loginFailed: 'Échec de la connexion',
       success: 'Succès',
       pleaseSelectLanguage: 'Veuillez sélectionner une langue.',
       setupComplete:
@@ -169,8 +171,6 @@ const resources = {
       passwordUpdateError: 'Erreur lors de la mise à jour du mot de passe',
       passwordUpdateFailed:
         'Échec de la mise à jour du mot de passe. Veuillez réessayer.',
-
-      // Toast notifications
       processingRecording: 'Traitement de votre enregistrement',
       processingRecordingMessage:
         'Patientez ! Consultez l’onglet Revue grammaticale pour les résultats.',
@@ -183,6 +183,16 @@ const resources = {
       sessionExpiredError: 'Votre session a expiré. Veuillez vous reconnecter.',
       serverError:
         'Une erreur du serveur s’est produite. Veuillez réessayer plus tard.',
+
+      // alerts
+      confirmDeleteTitle: 'Supprimer la conversation',
+      confirmDeleteMessage:
+        'Êtes-vous sûr de vouloir supprimer cette conversation ?',
+      cancel: 'Annuler',
+      delete: 'Supprimer',
+      deleteError: 'Erreur',
+      deleteErrorMessage:
+        'Échec de la suppression de la conversation. Veuillez réessayer.',
     },
   },
   es: {
@@ -236,16 +246,13 @@ const resources = {
       why: '¿Por qué?',
       tryThisInstead: 'Prueba esto en su lugar',
       improvedClause: 'Cláusula mejorada',
-      confirmDeleteTitle: 'Eliminar conversación',
-      confirmDeleteMessage:
-        '¿Estás seguro de que deseas eliminar esta conversación?',
-      cancel: 'Cancelar',
-      delete: 'Eliminar',
-      deleteError: 'Error',
-      deleteErrorMessage:
-        'No se pudo eliminar la conversación. Inténtalo de nuevo.',
 
-      // alerts
+      // Toast notifications
+      signUpSuccessTitle: 'Registro exitoso',
+      signUpSuccessMessage:
+        '¡Te has registrado con éxito! Ahora puedes iniciar sesión.',
+      signUpFailed: 'Error al registrarse',
+      loginFailed: 'Error al iniciar sesión',
       success: 'Éxito',
       pleaseSelectLanguage: 'Por favor, selecciona un idioma.',
       setupComplete:
@@ -263,8 +270,6 @@ const resources = {
       passwordUpdateError: 'Error al actualizar la contraseña',
       passwordUpdateFailed:
         'Error al actualizar la contraseña. Por favor, inténtalo de nuevo.',
-
-      // Toast notifications
       processingRecording: 'Procesando tu grabación',
       processingRecordingMessage:
         '¡Espera un momento! Consulta la pestaña de Revisión Gramatical para ver los resultados.',
@@ -278,6 +283,16 @@ const resources = {
         'Tu sesión ha expirado. Por favor, inicia sesión de nuevo.',
       serverError:
         'Ocurrió un error del servidor. Por favor, inténtalo de nuevo más tarde.',
+
+      // alerts
+      confirmDeleteTitle: 'Eliminar conversación',
+      confirmDeleteMessage:
+        '¿Estás seguro de que deseas eliminar esta conversación?',
+      cancel: 'Cancelar',
+      delete: 'Eliminar',
+      deleteError: 'Error',
+      deleteErrorMessage:
+        'No se pudo eliminar la conversación. Inténtalo de nuevo.',
     },
   },
 };

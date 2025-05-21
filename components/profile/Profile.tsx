@@ -1,14 +1,12 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
-  Alert,
   Modal,
   FlatList,
   Text,
   ActivityIndicator,
   TouchableWithoutFeedback,
-  KeyboardAvoidingView,
   Keyboard,
-  Platform,
+  View,
 } from 'react-native';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import {
@@ -35,6 +33,7 @@ import {
   SectionTitle,
   SaveButtonText,
   Name,
+  LoadingOverlay,
 } from './styledProfile';
 import api from '@/lib/api';
 import { UserDataType } from '@/types/types';
@@ -43,10 +42,13 @@ import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
 import { getTranslatedLanguageName } from '@/utils/functions/generalFunctions';
+import { useToastModal } from '@/utils/contexts/ToastModalContext';
 
 export default function Profile() {
+  const { showToast } = useToastModal();
   const { user, setUser, logout } = useAuth();
   const { pagination } = useCorrectionsData();
+  const theme: any = useTheme();
   const { t } = useTranslation();
   const [localUser, setLocalUser] = useState<UserDataType | null>(user);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -54,7 +56,6 @@ export default function Profile() {
     'speaking'
   );
   const [loading, setLoading] = useState(false);
-  const theme = useTheme();
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
 
@@ -96,13 +97,13 @@ export default function Profile() {
         setUser(updatedUser);
         setLocalUser(updatedUser);
 
-        Alert.alert(t('success'), t('profileUpdated'));
+        showToast('success', t('success'), t('profileUpdated'));
       } else {
-        Alert.alert(t('noChanges'), t('noFieldsUpdated'));
+        showToast('info', t('noChanges'), t('noFieldsUpdated'));
       }
     } catch (error) {
       console.error('Error updating profile:', error);
-      Alert.alert(t('error'), t('profileUpdateFailed'));
+      showToast('error', t('error'), t('profileUpdateFailed'));
     } finally {
       setLoading(false);
     }
@@ -130,7 +131,7 @@ export default function Profile() {
 
   const handlePasswordUpdate = async () => {
     if (newPassword.length < 8) {
-      Alert.alert(t('error'), t('passwordTooShort'));
+      showToast('error', t('error'), t('passwordTooShort'));
       return;
     }
 
@@ -141,24 +142,18 @@ export default function Profile() {
         newPassword: newPassword,
       });
 
-      Alert.alert(t('success'), t('passwordUpdated'));
+      showToast('success', t('success'), t('passwordUpdated'));
       setCurrentPassword('');
       setNewPassword('');
     } catch (error: any) {
       console.error('Error updating password:', error);
-      Alert.alert(
-        t('error'),
-        error.response?.data?.message ||
-          t('passwordUpdateFailed')
-      );
+      showToast('error', t('error'), t('passwordUpdateFailed'));
     } finally {
+      setCurrentPassword('');
+      setNewPassword('');
       setLoading(false);
     }
   };
-
-  if (loading) {
-    return <ActivityIndicator size="large" color={theme.colors.primary} />;
-  }
 
   if (!localUser || !user) {
     return (
@@ -169,13 +164,12 @@ export default function Profile() {
   }
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView
           contentContainerStyle={{ flexGrow: 1 }}
-          keyboardShouldPersistTaps="handled">
+          keyboardShouldPersistTaps="handled"
+          automaticallyAdjustKeyboardInsets={true}>
           <Container>
             <Header>
               <ProfilePicture source={languageFlags[user.targetLanguage]} />
@@ -314,12 +308,17 @@ export default function Profile() {
                 </ModalContent>
               </ModalOverlay>
             </Modal>
-            {loading && (
-              <ActivityIndicator size="large" color={theme.colors.primary} />
-            )}
           </Container>
         </ScrollView>
       </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+      {loading && (
+        <LoadingOverlay>
+          <ActivityIndicator
+            size="large"
+            color={theme.colors.primary}
+          />
+        </LoadingOverlay>
+      )}
+    </>
   );
 }

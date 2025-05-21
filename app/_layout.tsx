@@ -47,13 +47,16 @@ export default function RootLayout() {
     index: theme.colors.backgroundPrimary,
     grammarReviewTab: theme.colors.backgroundPrimary,
     profileTab: theme.colors.backgroundSecondary,
+    signIn: theme.colors.backgroundSecondary,
+    signUp: theme.colors.backgroundSecondary,
+    setupTab: theme.colors.backgroundSecondary,
+    '+not-found': theme.colors.backgroundSecondary,
+    '(auth)': theme.colors.backgroundSecondary,
     default: theme.colors.backgroundPrimary,
   };
 
   const backgroundColor =
     backgroundColors[currentRouteName] || theme.colors.backgroundPrimary;
-
-  console.log('currentRouteName', currentRouteName);
 
   useEffect(() => {
     if (loaded) {
@@ -67,10 +70,10 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-            <StyledThemeProvider theme={theme}>
-      <ToastModalProvider>
-        <AuthProvider>
-          <CorrectionsDataProvider>
+      <StyledThemeProvider theme={theme}>
+        <ToastModalProvider>
+          <AuthProvider>
+            <CorrectionsDataProvider>
               <SafeAreaProvider>
                 <I18nextProvider i18n={i18n}>
                   <LanguageUpdater>
@@ -92,10 +95,10 @@ export default function RootLayout() {
                   </LanguageUpdater>
                 </I18nextProvider>
               </SafeAreaProvider>
-          </CorrectionsDataProvider>
-        </AuthProvider>
-      </ToastModalProvider>
-            </StyledThemeProvider>
+            </CorrectionsDataProvider>
+          </AuthProvider>
+        </ToastModalProvider>
+      </StyledThemeProvider>
     </ThemeProvider>
   );
 }

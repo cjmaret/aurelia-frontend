@@ -14,6 +14,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { getTranslatedLanguageName } from '@/utils/functions/generalFunctions';
 import { languageCodes } from '@/constants/profileConstants';
+import { useToastModal } from '@/utils/contexts/ToastModalContext';
 
 interface LanguageSelectionProps {
   title: string;
@@ -36,6 +37,7 @@ export default function LanguageSelection({
   onBack,
   isFinalStep,
 }: LanguageSelectionProps) {
+  const { showToast } = useToastModal();
   const { t } = useTranslation();
 
   const getLanguageName = ({ code }: { code: string }) => {
@@ -57,7 +59,7 @@ export default function LanguageSelection({
 
   const handleNext = () => {
     if (!selectedLanguage) {
-      Alert.alert(t('error'), t('pleaseSelectLanguage'));
+      showToast('error', t('error'), t('pleaseSelectLanguage'));
       return;
     }
     onNext();

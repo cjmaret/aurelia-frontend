@@ -6,9 +6,11 @@ import { Alert } from 'react-native';
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/utils/app-language-wrapper/i18n';
+import { useToastModal } from '@/utils/contexts/ToastModalContext';
 
 export default function Setup() {
   const { setUser } = useAuth();
+  const { showToast } = useToastModal();
   const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const [appLanguage, setAppLanguage] = useState<string>('en');
@@ -23,11 +25,11 @@ export default function Setup() {
       });
 
       setUser(updatedUser);
-      Alert.alert(t('success'), t('setupComplete'));
+      showToast('success', t('success'), t('setupComplete'));
       router.navigate('/');
     } catch (error) {
       console.error('Error saving setup:', error);
-      Alert.alert(t('error'), t('setupFailed'));
+      showToast('error', t('error'), t('setupFailed'));
     }
   };
 

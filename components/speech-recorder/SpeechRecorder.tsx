@@ -8,7 +8,6 @@ import {
   TimerText,
   UpperContainer,
 } from './styledSpeechRecorder';
-import { Button } from 'react-native';
 import Waveform from '../waveform/Waveform';
 import RecordButtonComponent from '../record-button/RecordButton';
 import styled, { useTheme } from 'styled-components/native';
@@ -141,7 +140,6 @@ export default function SpeechRecorder() {
         'No speech detected in the audio file.': t('noSpeechError'),
       };
 
-      console.log('message', message);
       let translatedMessage = t('unexpectedError');
 
       if (typeof message === 'string') {

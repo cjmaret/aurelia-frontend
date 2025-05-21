@@ -15,8 +15,12 @@ import api from '@/lib/api';
 import { AuthFormTypes } from '@/types/types';
 import { useTheme } from 'styled-components/native';
 import GoogleSignInButton from '../google-signin-button/GoogleSignInButton';
+import { useToastModal } from '@/utils/contexts/ToastModalContext';
+import { useTranslation } from 'react-i18next';
 
 export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
+  const { showToast } = useToastModal();
+  const { t } = useTranslation();
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -31,18 +35,20 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
 
       if (isSignUp) {
         await api.registerUser(normalizedEmail, password);
-        Alert.alert(
-          'Sign Up Successful',
-          'You have successfully signed up! You can now log in.'
+        showToast(
+          'success',
+          t('signUpSuccessTitle'),
+          t('signUpSuccessMessage')
         );
-        router.replace('/sign-in');
+        router.replace('/signIn');
       } else {
         await login(normalizedEmail, password);
       }
     } catch (error: any) {
-      Alert.alert(
-        isSignUp ? 'Sign Up Failed' : 'Login Failed',
-        error.message || 'An error occurred'
+      showToast(
+        'error',
+        isSignUp ? t('signUpFailed') : t('loginFailed'),
+        error.message || t('unexpectedError')
       );
     } finally {
       setLoading(false);
@@ -81,14 +87,14 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
       </AuthButton>
       {!isSignUp && (
         <>
-        <AuthLinkButton onPress={() => router.navigate('/sign-up')}>
-          <AuthLinkText>New user? Sign up</AuthLinkText>
-        </AuthLinkButton>
-                {/* <GoogleSignInButton/> */}
+          <AuthLinkButton onPress={() => router.navigate('/signUp')}>
+            <AuthLinkText>New user? Sign up</AuthLinkText>
+          </AuthLinkButton>
+          {/* <GoogleSignInButton/> */}
         </>
       )}
       {isSignUp && (
-        <AuthLinkButton onPress={() => router.navigate('/sign-in')}>
+        <AuthLinkButton onPress={() => router.navigate('/signIn')}>
           <AuthLinkText>Already have an account? Sign in</AuthLinkText>
         </AuthLinkButton>
       )}
