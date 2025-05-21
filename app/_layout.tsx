@@ -41,7 +41,7 @@ export default function RootLayout() {
   }
 
   const currentRouteName = useNavigationState(getActiveRouteName);
-  
+
   // background colors for pages
   const backgroundColors: Record<string, string> = {
     index: theme.colors.backgroundPrimary,
@@ -53,7 +53,7 @@ export default function RootLayout() {
   const backgroundColor =
     backgroundColors[currentRouteName] || theme.colors.backgroundPrimary;
 
-    console.log('currentRouteName', currentRouteName);
+  console.log('currentRouteName', currentRouteName);
 
   useEffect(() => {
     if (loaded) {
@@ -66,21 +66,20 @@ export default function RootLayout() {
   }
 
   return (
-    <AuthProvider>
-      <CorrectionsDataProvider>
-        <StyledThemeProvider theme={theme}>
-          <SafeAreaProvider>
-            <I18nextProvider i18n={i18n}>
-              <LanguageUpdater>
-                <ToastModalProvider>
-                  <SafeAreaView
-                    style={{
-                      flex: 1,
-                      backgroundColor: backgroundColor
-                    }}
-                    edges={['top', 'left', 'right']}>
-                    <ThemeProvider
-                      value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+            <StyledThemeProvider theme={theme}>
+      <ToastModalProvider>
+        <AuthProvider>
+          <CorrectionsDataProvider>
+              <SafeAreaProvider>
+                <I18nextProvider i18n={i18n}>
+                  <LanguageUpdater>
+                    <SafeAreaView
+                      style={{
+                        flex: 1,
+                        backgroundColor: backgroundColor,
+                      }}
+                      edges={['top', 'left', 'right']}>
                       <Stack screenOptions={{ headerShown: false }}>
                         <Stack.Screen
                           name="(tabs)"
@@ -88,15 +87,15 @@ export default function RootLayout() {
                         />
                         <Stack.Screen name="+not-found" />
                       </Stack>
-                    </ThemeProvider>
-                    <StatusBar style="auto" />
-                  </SafeAreaView>
-                </ToastModalProvider>
-              </LanguageUpdater>
-            </I18nextProvider>
-          </SafeAreaProvider>
-        </StyledThemeProvider>
-      </CorrectionsDataProvider>
-    </AuthProvider>
+                      <StatusBar style="auto" />
+                    </SafeAreaView>
+                  </LanguageUpdater>
+                </I18nextProvider>
+              </SafeAreaProvider>
+          </CorrectionsDataProvider>
+        </AuthProvider>
+      </ToastModalProvider>
+            </StyledThemeProvider>
+    </ThemeProvider>
   );
 }

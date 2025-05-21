@@ -52,7 +52,7 @@ export const Colors = {
 
     // misc colors
     dateSeparatorColor: '#81c6d0',
-    rippleBorder: '#6daeb8',
+    rippleBorder: '#7ec4cf',
     textHighlight: '#f6fda6',
     placeholderText: '#a9a9a9',
   },

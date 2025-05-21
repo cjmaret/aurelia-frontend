@@ -15,8 +15,8 @@ export default function RecordButtonComponent({
   const [ripples, setRipples] = useState<
     { id: number; scale: Animated.Value; opacity: Animated.Value }[]
   >([]);
-  const rippleInterval = useRef<NodeJS.Timeout | null>(null);
-  const theme = useTheme();
+  const rippleInterval = useRef<ReturnType<typeof setInterval> | null>(null);
+  const theme: any = useTheme();
   const [isRecordButtonPressed, setIsRecordButtonPressed] =
     useState<boolean>(false);
 
@@ -49,7 +49,7 @@ export default function RecordButtonComponent({
 
     Animated.parallel([
       Animated.timing(newRipple.scale, {
-        toValue: 2, // scale circle outward
+        toValue: 1.6, // scale circle outward
         duration: 2000,
         easing: Easing.out(Easing.ease),
         useNativeDriver: true,

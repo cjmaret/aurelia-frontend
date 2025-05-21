@@ -10,11 +10,13 @@ const resources = {
       profile: 'Profile',
       logout: 'Log Out',
       record: 'Record',
+
       // setup
       setupProfile: 'Set up Your Profile',
       chooseTargetLanguage: 'Choose the language you want to practice',
       save: 'Save',
       back: 'Back',
+
       //profile
       conversations: 'Conversations',
       profileInfo: 'Profile Info',
@@ -35,6 +37,7 @@ const resources = {
       updatePassword: 'Update Password',
       updating: 'Updating...',
       logOut: 'Log Out',
+
       // grammar review
       grammarReview: 'Grammar Review',
       searchCorrections: 'Search corrections...',
@@ -58,6 +61,7 @@ const resources = {
       deleteError: 'Error',
       deleteErrorMessage:
         'Failed to delete the conversation. Please try again.',
+
       // alerts
       success: 'Success',
       pleaseSelectLanguage: 'Please select a language.',
@@ -73,8 +77,18 @@ const resources = {
       passwordUpdateError: 'Error updating password',
       passwordUpdateFailed: 'Failed to update password. Please try again.',
 
-      // words for setup (necessary?)
-      // words for login/signup
+      // Toast notifications
+      processingRecording: 'Processing Your Recording',
+      processingRecordingMessage:
+        'Hang tight! Check the Grammar Review tab for results.',
+      recordingProcessed: 'Recording Processed',
+      correctionsReady: 'Your corrections are ready!',
+      errorSendingAudio: 'Error Sending Audio',
+      unexpectedError: 'An unexpected error occurred.',
+      noSpeechDetectedError:
+        'No speech detected. Please record your voice and try again.',
+      sessionExpiredError: 'Your session has expired. Please log in again.',
+      serverError: 'A server error occurred. Please try again later.',
     },
   },
   fr: {
@@ -85,11 +99,13 @@ const resources = {
       profile: 'Profil',
       logout: 'Se Déconnecter',
       record: 'Enregistrer',
+
       // setup
       setupProfile: 'Configurer votre profil',
       chooseTargetLanguage: 'Choisissez la langue que vous voulez pratiquer',
       save: 'Enregistrer',
       back: 'Retour',
+
       // profile
       conversations: 'Conversations',
       profileInfo: 'Infos du Profil',
@@ -110,6 +126,7 @@ const resources = {
       updatePassword: 'Mettre à Jour le Mot de Passe',
       updating: 'Mise à jour...',
       logOut: 'Se Déconnecter',
+
       // grammar review
       grammarReview: 'Révision de Grammaire',
       searchCorrections: 'Rechercher des corrections...',
@@ -133,6 +150,7 @@ const resources = {
       deleteError: 'Erreur',
       deleteErrorMessage:
         'Échec de la suppression de la conversation. Veuillez réessayer.',
+
       // alerts
       success: 'Succès',
       pleaseSelectLanguage: 'Veuillez sélectionner une langue.',
@@ -151,6 +169,20 @@ const resources = {
       passwordUpdateError: 'Erreur lors de la mise à jour du mot de passe',
       passwordUpdateFailed:
         'Échec de la mise à jour du mot de passe. Veuillez réessayer.',
+
+      // Toast notifications
+      processingRecording: 'Traitement de votre enregistrement',
+      processingRecordingMessage:
+        'Patientez ! Consultez l’onglet Revue grammaticale pour les résultats.',
+      recordingProcessed: 'Enregistrement traité',
+      correctionsReady: 'Vos corrections sont prêtes !',
+      errorSendingAudio: 'Erreur lors de l’envoi de l’audio',
+      unexpectedError: 'Une erreur inattendue est survenue.',
+      noSpeechDetectedError:
+        'Aucune voix détectée. Veuillez enregistrer votre voix et réessayer.',
+      sessionExpiredError: 'Votre session a expiré. Veuillez vous reconnecter.',
+      serverError:
+        'Une erreur du serveur s’est produite. Veuillez réessayer plus tard.',
     },
   },
   es: {
@@ -161,6 +193,7 @@ const resources = {
       profile: 'Perfil',
       logout: 'Cerrar Sesión',
       record: 'Grabar',
+
       // setup
       setupProfile: 'Configura tu perfil',
       chooseTargetLanguage: 'Elige el idioma que quieres practicar',
@@ -187,6 +220,7 @@ const resources = {
       updatePassword: 'Actualizar Contraseña',
       updating: 'Actualizando...',
       logOut: 'Cerrar Sesión',
+
       // grammar reivew
       grammarReview: 'Revisión de Gramática',
       searchCorrections: 'Buscar correcciones...',
@@ -210,6 +244,7 @@ const resources = {
       deleteError: 'Error',
       deleteErrorMessage:
         'No se pudo eliminar la conversación. Inténtalo de nuevo.',
+
       // alerts
       success: 'Éxito',
       pleaseSelectLanguage: 'Por favor, selecciona un idioma.',
@@ -228,6 +263,21 @@ const resources = {
       passwordUpdateError: 'Error al actualizar la contraseña',
       passwordUpdateFailed:
         'Error al actualizar la contraseña. Por favor, inténtalo de nuevo.',
+
+      // Toast notifications
+      processingRecording: 'Procesando tu grabación',
+      processingRecordingMessage:
+        '¡Espera un momento! Consulta la pestaña de Revisión Gramatical para ver los resultados.',
+      recordingProcessed: 'Grabación procesada',
+      correctionsReady: '¡Tus correcciones están listas!',
+      errorSendingAudio: 'Error al enviar el audio',
+      unexpectedError: 'Ocurrió un error inesperado.',
+      noSpeechDetectedError:
+        'No se detectó voz. Por favor, graba tu voz e inténtalo de nuevo.',
+      sessionExpiredError:
+        'Tu sesión ha expirado. Por favor, inicia sesión de nuevo.',
+      serverError:
+        'Ocurrió un error del servidor. Por favor, inténtalo de nuevo más tarde.',
     },
   },
 };

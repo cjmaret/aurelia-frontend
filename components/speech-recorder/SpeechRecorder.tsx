@@ -17,10 +17,11 @@ import { CorrectionDataType, CorrectionResponseType } from '@/types/types';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { produceApiErrorAlert } from '@/utils/functions/handleApiError';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
-import NewWaveform from '../waveform/NewWaveform';
+import { useTranslation } from 'react-i18next';
 
 export default function SpeechRecorder() {
   const theme: any = useTheme();
+  const { t } = useTranslation();
   const { setCorrectionData } = useCorrectionsData();
   const { showToast } = useToastModal();
   const [recording, setRecording] = useState<Audio.Recording | null>(null);
@@ -30,7 +31,7 @@ export default function SpeechRecorder() {
   const [timerInterval, setTimerInterval] = useState<ReturnType<
     typeof setInterval
   > | null>(null);
-  const MAX_RECORDING_SECONDS = 10;
+  const MAX_RECORDING_SECONDS = 60;
 
   useEffect(() => {
     if (!permissionResponse?.granted) {
@@ -111,42 +112,49 @@ export default function SpeechRecorder() {
     try {
       showToast(
         'info',
-        'Processing Your Recording',
-        'Hang tight! Check the Grammar Review tab for results.'
+        t('processingRecording'),
+        t('processingRecordingMessage')
       );
 
-      // const response: CorrectionResponseType = await api.addCorrection(
-      //   formData
-      // );
+      const response: CorrectionResponseType = await api.addCorrection(
+        formData
+      );
 
-      // if (!response.success) {
-      //   console.error('Error from server:', response.error);
-      //   showToast('error', 'Error Processing Recording', 'Please try again.');
-      //   return;
-      // }
+      if (!response.success) {
+        console.error('Error from server:', response.error);
+        showToast('error', 'Error Processing Recording', 'Please try again.');
+        return;
+      }
 
-      // const correctionData = response.data as CorrectionDataType[];
-      // if (correctionData) {
-      //   setCorrectionData((prevData: CorrectionDataType[]) => [
-      //     ...correctionData,
-      //     ...prevData,
-      //   ]);
-      //   showToast(
-      //     'success',
-      //     'Recording Processed',
-      //     'Your corrections are ready!'
-      //   );
-      // }
+      const correctionData = response.data as CorrectionDataType[];
+      if (correctionData) {
+        setCorrectionData((prevData: CorrectionDataType[]) => [
+          ...correctionData,
+          ...prevData,
+        ]);
+        showToast('success', t('recordingProcessed'), t('correctionsReady'));
+      }
     } catch (error: any) {
       const { status, message } = error;
 
+      const errorMap: any = {
+        'No speech detected in the audio file.': t('noSpeechError'),
+      };
+
+      console.log('message', message);
+      let translatedMessage = t('unexpectedError');
+
+      if (typeof message === 'string') {
+        translatedMessage = errorMap[message] || message;
+
+        if (message.toLowerCase().includes('unexpected error')) {
+          translatedMessage = t('unexpectedError');
+        }
+      }
+
       console.error('Error sending audio:', error);
-      showToast(
-        'error',
-        'Error Sending Audio',
-        message || 'An unexpected error occurred.'
-      );
-      produceApiErrorAlert(status, message);
+      showToast('error', t('errorSendingAudio'), translatedMessage);
+      produceApiErrorAlert({ status, message, showToast, t });
     }
   }
 

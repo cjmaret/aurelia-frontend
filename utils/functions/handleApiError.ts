@@ -1,13 +1,27 @@
-export function produceApiErrorAlert(status: number, message: string): void {
+export function produceApiErrorAlert({
+  status,
+  message,
+  showToast,
+  t,
+}: {
+  status: number;
+  message: string;
+  showToast: (
+    type: 'error' | 'info' | 'success',
+    text1: string,
+    text2?: string
+  ) => void;
+  t: (key: string, options?: any) => string;
+}): void {
   console.error(`API Error - Status: ${status}, Message: ${message}`);
 
   if (status === 422) {
-    alert('No speech detected. Please record your voice and try again.');
+    showToast('error', t('error'), t('noSpeechDetectedError'));
   } else if (status === 401) {
-    alert('Your session has expired. Please log in again.');
+    showToast('error', t('error'), t('sessionExpiredError'));
   } else if (status >= 500) {
-    alert('A server error occurred. Please try again later.');
+    showToast('error', t('error'), t('serverError'));
   } else {
-    alert(`An unexpected error occurred: ${message}`);
+    showToast('error', t('error'), t('unexpectedError'));
   }
 }

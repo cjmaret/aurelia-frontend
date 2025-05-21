@@ -10,6 +10,8 @@ import {
 } from '@/types/types';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import { produceApiErrorAlert } from '../functions/handleApiError';
+import { useToastModal } from './ToastModalContext';
+import { useTranslation } from 'react-i18next';
 
 const CorrectionDataContext = createContext<CorrectionDataContextType | null>(
   null
@@ -18,6 +20,8 @@ const CorrectionDataContext = createContext<CorrectionDataContextType | null>(
 export const CorrectionsDataProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
+  const { showToast } = useToastModal();
+  const { t } = useTranslation();
   const { isAuthenticated, refreshToken, logout } = useAuth();
   const [correctionData, setCorrectionData] = useState<CorrectionDataType[]>(
     []
@@ -80,7 +84,12 @@ export const CorrectionsDataProvider: React.FC<{
       if (err.status === 401) {
         attemptRefreshAndRefetch();
       }
-      produceApiErrorAlert(err.status || 0, err.message || 'Unknown error');
+      produceApiErrorAlert({
+        status: err.status || 0,
+        message: err.message || 'Unknown error',
+        showToast,
+        t,
+      });
     }
   };
 
@@ -157,8 +166,13 @@ export const CorrectionsDataProvider: React.FC<{
       );
     } catch (err: any) {
       console.error('Error deleting correction:', err);
-      produceApiErrorAlert(err.status || 0, err.message || 'Unknown error');
-      throw err; 
+      produceApiErrorAlert({
+        status: err.status || 0,
+        message: err.message || 'Unknown error',
+        showToast,
+        t,
+      });
+      throw err;
     }
   };
 
