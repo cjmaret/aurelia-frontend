@@ -1,4 +1,4 @@
-export function produceApiErrorAlert({
+export function showApiErrorToast({
   status,
   message,
   showToast,

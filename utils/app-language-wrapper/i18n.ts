@@ -82,6 +82,7 @@ const resources = {
       unexpectedError: 'An unexpected error occurred.',
       noSpeechDetectedError:
         'No speech detected. Please record your voice and try again.',
+      searchCorrectionsError: 'An error occurred while searching corrections',
       sessionExpiredError: 'Your session has expired. Please log in again.',
       serverError: 'A server error occurred. Please try again later.',
 
@@ -180,6 +181,8 @@ const resources = {
       unexpectedError: 'Une erreur inattendue est survenue.',
       noSpeechDetectedError:
         'Aucune voix détectée. Veuillez enregistrer votre voix et réessayer.',
+      searchCorrectionsError:
+        "Une erreur s'est produite lors de la recherche de corrections.",
       sessionExpiredError: 'Votre session a expiré. Veuillez vous reconnecter.',
       serverError:
         'Une erreur du serveur s’est produite. Veuillez réessayer plus tard.',
@@ -279,6 +282,7 @@ const resources = {
       unexpectedError: 'Ocurrió un error inesperado.',
       noSpeechDetectedError:
         'No se detectó voz. Por favor, graba tu voz e inténtalo de nuevo.',
+      searchCorrectionsError: 'Ocurrió un error al buscar correcciones.',
       sessionExpiredError:
         'Tu sesión ha expirado. Por favor, inicia sesión de nuevo.',
       serverError:

@@ -3,15 +3,11 @@ import api from '@/lib/api';
 import {
   CorrectionDataContextType,
   CorrectionDataType,
-  CorrectionResponseType,
   PaginatedCorrectionsResponseType,
   PaginationType,
   SearchCorrectionsType,
 } from '@/types/types';
 import { useAuth } from '@/utils/contexts/AuthContext';
-import { produceApiErrorAlert } from '../functions/handleApiError';
-import { useToastModal } from './ToastModalContext';
-import { useTranslation } from 'react-i18next';
 
 const CorrectionDataContext = createContext<CorrectionDataContextType | null>(
   null
@@ -20,8 +16,6 @@ const CorrectionDataContext = createContext<CorrectionDataContextType | null>(
 export const CorrectionsDataProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const { showToast } = useToastModal();
-  const { t } = useTranslation();
   const { isAuthenticated, refreshToken, logout } = useAuth();
   const [correctionData, setCorrectionData] = useState<CorrectionDataType[]>(
     []
@@ -31,8 +25,6 @@ export const CorrectionsDataProvider: React.FC<{
     page: 1,
     limit: 10,
   });
-  const [correctionsFetchError, setCorrectionsFetchError] =
-    useState<Error | null>(null);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -48,15 +40,15 @@ export const CorrectionsDataProvider: React.FC<{
     limit: number;
   }) => {
     try {
-      const response: CorrectionResponseType = await api.getCorrections({
+      const response: any = await api.getCorrections({
         page,
         limit,
       });
 
+      console.log('response', response);
+
       if (!response.success) {
-        console.error('Error fetching corrections:', response.error);
-        setCorrectionsFetchError(new Error(response.error || 'Unknown error'));
-        return;
+        throw new Error(response.error || 'Unknown error');
       }
 
       // data can be one of two types so we have to assert this one
@@ -76,20 +68,12 @@ export const CorrectionsDataProvider: React.FC<{
       } else if (page === 1) {
         setCorrectionData([]);
       }
-
-      setCorrectionsFetchError(null);
     } catch (err: any) {
       console.error('Error fetching corrections:', err);
-      setCorrectionsFetchError(err);
       if (err.status === 401) {
         attemptRefreshAndRefetch();
       }
-      produceApiErrorAlert({
-        status: err.status || 0,
-        message: err.message || 'Unknown error',
-        showToast,
-        t,
-      });
+      throw err;
     }
   };
 
@@ -127,14 +111,12 @@ export const CorrectionsDataProvider: React.FC<{
             limit: 10,
           });
         }
-        setCorrectionsFetchError(null); // Clear any previous errors
       } else {
-        console.error('Search failed:', response.error);
-        setCorrectionsFetchError(new Error(response.error || 'Unknown error'));
+        throw new Error(response.error || 'Unknown error');
       }
     } catch (err: any) {
       console.error('Error during search:', err);
-      setCorrectionsFetchError(err);
+      throw err;
     }
   };
 
@@ -146,7 +128,7 @@ export const CorrectionsDataProvider: React.FC<{
         page: pagination.page,
         limit: pagination.limit,
       });
-    } catch (refreshError) {
+    } catch (err) {
       console.error('Token refresh failed. Logging out...');
       await logout();
     }
@@ -166,12 +148,6 @@ export const CorrectionsDataProvider: React.FC<{
       );
     } catch (err: any) {
       console.error('Error deleting correction:', err);
-      produceApiErrorAlert({
-        status: err.status || 0,
-        message: err.message || 'Unknown error',
-        showToast,
-        t,
-      });
       throw err;
     }
   };
@@ -181,7 +157,6 @@ export const CorrectionsDataProvider: React.FC<{
       value={{
         correctionData,
         setCorrectionData,
-        correctionsFetchError,
         fetchCorrections,
         searchCorrections,
         deleteCorrection,

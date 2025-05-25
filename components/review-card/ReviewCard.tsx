@@ -51,7 +51,7 @@ export default memo(function ReviewCard({
   setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
   handleDeleteCard: () => void;
 }) {
-  const theme = useTheme();
+  const theme:any = useTheme();
   const { t } = useTranslation();
   const { createdAt, sentenceFeedback, conversationId } = cardData;
   const [isCardExpanded, setIsCardExpanded] = useState(false);
@@ -185,8 +185,8 @@ export default memo(function ReviewCard({
   };
 
   return (
-    <CardContainer key={conversationId.toString()}>
-      <TouchableOpacity onPress={toggleExpandCard}>
+    <CardContainer>
+      <TouchableOpacity onPress={toggleExpandCard} >
         <CardHeader>
           <HeaderArrowIcon>
             <MaterialCommunityIcons
@@ -224,7 +224,7 @@ export default memo(function ReviewCard({
                     <BoldText>{t('youSaid')}:</BoldText> "
                     {highlightSearchedText(sentence.original)}"
                   </OriginalText>
-                  <CorrectedText>
+                  <CorrectedText key={sentence.id}>
                     <BoldText>{t('corrected')}:</BoldText> "
                     {combinedHighlightedText(
                       sentence.original,

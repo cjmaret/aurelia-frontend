@@ -22,7 +22,6 @@ export interface CorrectionDataContextType {
   fetchCorrections: (params: { page: number; limit: number }) => Promise<void>;
   searchCorrections: (params: SearchCorrectionsType) => Promise<void>;
   deleteCorrection: (conversationId: string) => Promise<void>;
-  correctionsFetchError: Error | null;
   pagination: PaginationType;
   setPagination: SetStateType<PaginationType>;
 }
@@ -44,6 +43,7 @@ export interface CorrectionResponseType {
   success: boolean;
   data?: CorrectionDataType[] | PaginatedCorrectionsResponseType; // paginated type for fetches, data type for add new corrections
   error?: string;
+  status?: number;
 }
 
 export interface PaginatedCorrectionsResponseType {

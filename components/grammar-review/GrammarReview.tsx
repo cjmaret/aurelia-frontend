@@ -1,4 +1,4 @@
-import { GrammarReviewContainer } from './styledGrammarReview'
+import { GrammarReviewContainer } from './styledGrammarReview';
 import {
   RefreshControl,
   NativeSyntheticEvent,
@@ -8,10 +8,15 @@ import CorrectionList from '../correction-list/CorrectionList';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useState } from 'react';
 import GrammarReviewHeader from './grammar-review-header/GrammarReviewHeader';
+import { showApiErrorToast } from '@/utils/functions/handleApiError';
+import { useToastModal } from '@/utils/contexts/ToastModalContext';
+import { useTranslation } from 'react-i18next';
 
 export default function GrammarReview() {
   const { fetchCorrections, searchCorrections, pagination } =
     useCorrectionsData();
+  const { showToast } = useToastModal();
+  const { t } = useTranslation();
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -43,8 +48,13 @@ export default function GrammarReview() {
 
     try {
       await fetchCorrections({ page: 1, limit: pagination.limit });
-    } catch (error) {
-      console.error('Error resetting to normal fetch:', error);
+    } catch (error: any) {
+      showApiErrorToast({
+        status: error?.status || 0,
+        message: error?.message || 'Unknown error',
+        showToast,
+        t,
+      });
     }
   };
 
@@ -56,8 +66,13 @@ export default function GrammarReview() {
         page: 1,
         limit: pagination.limit,
       });
-    } catch (error) {
-      console.error('Error refreshing corrections:', error);
+    } catch (error: any) {
+      showApiErrorToast({
+        status: error?.status || 0,
+        message: error?.message || 'Unknown error',
+        showToast,
+        t,
+      });
     } finally {
       setRefreshing(false);
     }
@@ -85,8 +100,13 @@ export default function GrammarReview() {
           limit: pagination.limit,
         });
       }
-    } catch (error) {
-      console.error('Error loading more corrections:', error);
+    } catch (error: any) {
+      showApiErrorToast({
+        status: error?.status || 0,
+        message: error?.message || 'Unknown error',
+        showToast,
+        t,
+      });
     } finally {
       setIsLoadingMore(false);
     }

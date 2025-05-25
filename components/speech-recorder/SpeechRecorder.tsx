@@ -14,7 +14,7 @@ import styled, { useTheme } from 'styled-components/native';
 import api from '@/lib/api';
 import { CorrectionDataType, CorrectionResponseType } from '@/types/types';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
-import { produceApiErrorAlert } from '@/utils/functions/handleApiError';
+import { showApiErrorToast } from '@/utils/functions/handleApiError';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { useTranslation } from 'react-i18next';
 
@@ -120,7 +120,6 @@ export default function SpeechRecorder() {
       );
 
       if (!response.success) {
-        console.error('Error from server:', response.error);
         showToast('error', 'Error Processing Recording', 'Please try again.');
         return;
       }
@@ -149,10 +148,9 @@ export default function SpeechRecorder() {
           translatedMessage = t('unexpectedError');
         }
       }
-
-      console.error('Error sending audio:', error);
+      // TODO: ????
       showToast('error', t('errorSendingAudio'), translatedMessage);
-      produceApiErrorAlert({ status, message, showToast, t });
+      showApiErrorToast({ status, message, showToast, t });
     }
   }
 

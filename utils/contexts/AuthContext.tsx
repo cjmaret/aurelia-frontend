@@ -102,9 +102,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       } else {
         router.replace('/(setup)/setupTab');
       }
-    } catch (error) {
-      console.error('Error during login in auth context:', error);
-      throw error;
+    } catch (err) {
+      console.error('Error during login in auth context:', err);
+      throw err;
     }
   };
 
@@ -114,9 +114,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setIsAuthenticated(false);
       setUser(null);
       router.replace('/signIn');
-    } catch (error) {
-      console.error('Error during logout:', error);
-      throw error;
+    } catch (err) {
+      console.error('Error during logout:', err);
+      throw err;
     }
   };
 
@@ -136,11 +136,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       await SecureStore.setItemAsync('refreshToken', newRefreshToken);
 
       return accessToken;
-    } catch (error) {
-      console.error('Error refreshing token:', error);
+    } catch (err) {
+      console.error('Error refreshing token:', err);
       console.warn('Token refresh failed. Logging out...');
       await logout();
-      throw error;
+      throw err;
     }
   };
 

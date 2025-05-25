@@ -22,6 +22,8 @@ import {
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
+import { showApiErrorToast } from '@/utils/functions/handleApiError';
+import { useToastModal } from '@/utils/contexts/ToastModalContext';
 
 export default function CorrectionList({
   searchQuery,
@@ -42,6 +44,7 @@ export default function CorrectionList({
 }) {
   const { correctionData, deleteCorrection } = useCorrectionsData();
   const theme: any = useTheme();
+  const { showToast } = useToastModal();
   const { t } = useTranslation();
 
   const handleDeleteCard = async (conversationId: string) => {
@@ -56,8 +59,13 @@ export default function CorrectionList({
           onPress: async () => {
             try {
               await deleteCorrection(conversationId);
-            } catch (error) {
-              Alert.alert(t('deleteError'), t('deleteErrorMessage'));
+            } catch (err: any) {
+              showApiErrorToast({
+                status: err?.status || 0,
+                message: err?.message || 'Unknown error',
+                showToast,
+                t,
+              });
             }
           },
         },
@@ -92,7 +100,7 @@ export default function CorrectionList({
       !previousDateLocal || !isSameDay(currentDateLocal, previousDateLocal);
 
     return (
-      <ReviewCardContainer key={cardData.conversationId.toString()}>
+      <ReviewCardContainer>
         {showDateSeparator && (
           <DateSeparatorContainer>
             <DateSeparatorLine />
@@ -119,7 +127,7 @@ export default function CorrectionList({
     <View style={{ flex: 1 }}>
       <FlatList
         data={correctionData}
-        keyExtractor={(item) => item.conversationId.toString()} // provides unique key for each item
+        keyExtractor={(item) => item.conversationId} // provides unique key for each item
         renderItem={({ item, index }) =>
           renderCard({
             item,

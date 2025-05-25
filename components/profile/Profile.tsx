@@ -43,6 +43,7 @@ import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
 import { getTranslatedLanguageName } from '@/utils/functions/generalFunctions';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
+import { showApiErrorToast } from '@/utils/functions/handleApiError';
 
 export default function Profile() {
   const { showToast } = useToastModal();
@@ -102,7 +103,6 @@ export default function Profile() {
         showToast('info', t('noChanges'), t('noFieldsUpdated'));
       }
     } catch (error) {
-      console.error('Error updating profile:', error);
       showToast('error', t('error'), t('profileUpdateFailed'));
     } finally {
       setLoading(false);
@@ -113,8 +113,13 @@ export default function Profile() {
     try {
       await logout();
       console.log('You have been logged out.');
-    } catch (error) {
-      console.error('Error logging out:', error);
+    } catch (error: any) {
+      showApiErrorToast({
+        status: error?.status || 0,
+        message: error?.message || 'Unknown error',
+        showToast,
+        t,
+      });
     }
   };
 
@@ -146,7 +151,6 @@ export default function Profile() {
       setCurrentPassword('');
       setNewPassword('');
     } catch (error: any) {
-      console.error('Error updating password:', error);
       showToast('error', t('error'), t('passwordUpdateFailed'));
     } finally {
       setCurrentPassword('');

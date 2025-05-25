@@ -8,11 +8,11 @@ import {
   SearchBarInput,
   SearchContainer,
 } from './styledGrammarReviewHeader';
-import ErrorMessage from '../../error/ErrorMessage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
+import { useToastModal } from '@/utils/contexts/ToastModalContext';
 
 export default function GrammarReviewHeader({
   hasScrolled,
@@ -32,12 +32,12 @@ export default function GrammarReviewHeader({
   resetToNormalFetch: () => void;
 }) {
   const {
-    correctionsFetchError,
     correctionData,
     searchCorrections,
     pagination,
   } = useCorrectionsData();
-  const theme = useTheme();
+  const theme: any = useTheme();
+  const { showToast } = useToastModal();
   const { t } = useTranslation();
 
   const handleSearchSubmit = async (query: string) => {
@@ -47,7 +47,11 @@ export default function GrammarReviewHeader({
     try {
       await searchCorrections({ query, page: 1, limit: pagination.limit });
     } catch (error) {
-      console.error('Error performing search:', error);
+      showToast(
+        'error',
+        t('error'),
+        t('searchCorrectionsError')
+      );
     }
   };
 
@@ -83,10 +87,7 @@ export default function GrammarReviewHeader({
           </SearchBar>
         </SearchContainer>
       </HeaderContainer>
-      {correctionsFetchError && (
-        <ErrorMessage message={correctionsFetchError.message} />
-      )}
-      {correctionData.length === 0 && correctionsFetchError === null && (
+      {correctionData.length === 0 && (
         <NoCorrectionsContainer>
           <NoCorrectionsText>
             {isSearching ? t('noResultsFound') : t('startRecording')}
