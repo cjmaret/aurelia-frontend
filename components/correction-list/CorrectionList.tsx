@@ -127,7 +127,7 @@ export default function CorrectionList({
     <View style={{ flex: 1 }}>
       <FlatList
         data={correctionData}
-        keyExtractor={(item) => item.conversationId} // provides unique key for each item
+        keyExtractor={(item) => item.conversationId}
         renderItem={({ item, index }) =>
           renderCard({
             item,
