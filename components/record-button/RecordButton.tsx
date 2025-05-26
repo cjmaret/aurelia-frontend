@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { View, Animated, Easing } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { Animated, Easing } from 'react-native';
 import { RecordButton, RecordButtonContainer } from './styledRecordButton';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components/native';

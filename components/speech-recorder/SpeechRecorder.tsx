@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from 'react';
-import { Animated, Easing } from 'react-native';
-import { Audio } from 'expo-av';
+import { useState, useEffect } from 'react';
+import { Alert, Animated } from 'react-native';
+import { AudioModule, RecordingPresets, useAudioRecorder } from 'expo-audio';
 import {
   LowerContainer,
   RecordingGroup,
@@ -23,8 +23,8 @@ export default function SpeechRecorder() {
   const { t } = useTranslation();
   const { setCorrectionData } = useCorrectionsData();
   const { showToast } = useToastModal();
-  const [recording, setRecording] = useState<Audio.Recording | null>(null);
-  const [permissionResponse, requestPermission] = Audio.usePermissions();
+  const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
+  const [isRecording, setIsRecording] = useState(false);
   const [waveformOpacity] = useState(new Animated.Value(0));
   const [elapsedTime, setElapsedTime] = useState(0);
   const [timerInterval, setTimerInterval] = useState<ReturnType<
@@ -33,30 +33,22 @@ export default function SpeechRecorder() {
   const MAX_RECORDING_SECONDS = 60;
 
   useEffect(() => {
-    if (!permissionResponse?.granted) {
-      requestPermission();
-    }
-  }, [permissionResponse]);
+    (async () => {
+      const status = await AudioModule.requestRecordingPermissionsAsync();
+      if (!status.granted) {
+        Alert.alert('Permission to access microphone was denied');
+      }
+    })();
+  }, []);
 
   async function startRecording() {
     try {
-      if (permissionResponse?.status !== 'granted') {
-        console.log('Requesting permission..');
-        await requestPermission();
-      }
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: true,
-        playsInSilentModeIOS: true,
-      });
-
+      await audioRecorder.prepareToRecordAsync();
       console.log('Starting recording..');
 
-      const { recording } = await Audio.Recording.createAsync(
-        Audio.RecordingOptionsPresets.HIGH_QUALITY
-      );
-      setRecording(recording);
+      audioRecorder.record();
+      setIsRecording(true);
       console.log('Recording started');
-      // start waveform animation
 
       setElapsedTime(0); // Reset the timer
       const interval = setInterval(() => {
@@ -70,18 +62,16 @@ export default function SpeechRecorder() {
 
   async function stopRecording() {
     console.log('Stopping recording..');
-    setRecording(null);
+    setIsRecording(false);
 
     if (timerInterval) {
       clearInterval(timerInterval);
       setTimerInterval(null);
     }
 
-    await recording?.stopAndUnloadAsync();
-    await Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
-    });
-    const uri = recording?.getURI();
+    await audioRecorder.stop();
+    const uri = audioRecorder.uri;
+    console.log('Recording stopped, URI:', uri);
     if (uri) {
       addCorrection(uri);
     }
@@ -90,7 +80,7 @@ export default function SpeechRecorder() {
   }
 
   useEffect(() => {
-    if (recording && elapsedTime >= MAX_RECORDING_SECONDS) {
+    if (isRecording && elapsedTime >= MAX_RECORDING_SECONDS) {
       stopRecording();
       showToast(
         'info',
@@ -98,7 +88,7 @@ export default function SpeechRecorder() {
         `Maximum recording length of ${MAX_RECORDING_SECONDS} seconds reached.`
       );
     }
-  }, [elapsedTime, recording]);
+  }, [elapsedTime, isRecording]);
 
   async function addCorrection(audioUri: string) {
     const formData = new FormData();
@@ -172,8 +162,8 @@ export default function SpeechRecorder() {
   return (
     <SpeechRecorderGroup>
       <UpperContainer>
+        {/* TODO: add isRecording to prop */}
         <Waveform recording={true} />
-        {/* <NewWaveform recording={true} color={theme.colors.primary} /> */}
       </UpperContainer>
       <LowerContainer>
         <RecordingGroup>

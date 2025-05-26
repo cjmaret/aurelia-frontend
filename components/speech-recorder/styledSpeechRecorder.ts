@@ -11,7 +11,7 @@ export const SpeechRecorderGroup = styled.View`
 export const UpperContainer = styled.View`
   background-color: ${({ theme }: { theme: any }) =>
     theme.colors.backgroundPrimary};
-  height: 55%;
+  height: 35%;
   display: flex;
   justify-content: flex-end;
 `;
@@ -22,7 +22,7 @@ export const LowerContainer = styled.View`
   align-items: center;
   background-color: ${({ theme }: { theme: any }) =>
     theme.colors.backgroundSecondary};
-  height: 45%;
+  height: 65%;
 `;
 
 export const RecordingGroup = styled.View`

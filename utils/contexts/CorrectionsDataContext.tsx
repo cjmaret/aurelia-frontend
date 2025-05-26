@@ -45,8 +45,6 @@ export const CorrectionsDataProvider: React.FC<{
         limit,
       });
 
-      console.log('response', response);
-
       if (!response.success) {
         throw new Error(response.error || 'Unknown error');
       }
