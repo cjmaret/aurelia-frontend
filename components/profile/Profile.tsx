@@ -188,7 +188,6 @@ export default function Profile() {
       </Container>
     );
   }
-  console.log('pagination', pagination);
 
   return (
     <>
