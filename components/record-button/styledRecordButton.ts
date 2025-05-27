@@ -28,19 +28,4 @@ export const RecordButton = styled.Pressable<{
     isRecordButtonPressed: boolean;
   }) =>
     isRecordButtonPressed ? `5px solid ${theme.colors.primaryDark}` : 'none'};
-
-  /* box-shadow: ${({
-    isRecordButtonPressed,
-  }: {
-    isRecordButtonPressed: boolean;
-  }) =>
-    isRecordButtonPressed
-      ? `0 0 15px ${({ theme }: { theme: any }) => theme.colors.rippleBorder};`
-      : 'none'}; */
 `;
-
-// export const ButtonText = styled.Text`
-//   color: white;
-//   font-size: 18px;
-//   font-weight: bold;
-// `;
