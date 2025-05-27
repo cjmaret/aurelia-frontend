@@ -150,6 +150,14 @@ export const CorrectionsDataProvider: React.FC<{
     }
   };
 
+  const resetPagination = () => {
+    setPagination({
+      page: 1,
+      limit: 10,
+      total: 0,
+    });
+  };
+
   return (
     <CorrectionDataContext.Provider
       value={{
@@ -160,6 +168,7 @@ export const CorrectionsDataProvider: React.FC<{
         deleteCorrection,
         pagination,
         setPagination,
+        resetPagination,
       }}>
       {children}
     </CorrectionDataContext.Provider>

@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
   TouchableWithoutFeedback,
   Keyboard,
-  View,
+  Alert,
 } from 'react-native';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import {
@@ -34,6 +34,9 @@ import {
   SaveButtonText,
   Name,
   LoadingOverlay,
+  DeleteUserButton,
+  DeleteUserButtonText,
+  DeleteUserSubsection,
 } from './styledProfile';
 import api from '@/lib/api';
 import { UserDataType } from '@/types/types';
@@ -47,8 +50,8 @@ import { showApiErrorToast } from '@/utils/functions/handleApiError';
 
 export default function Profile() {
   const { showToast } = useToastModal();
-  const { user, setUser, logout } = useAuth();
-  const { pagination } = useCorrectionsData();
+  const { user, setUser, logout, deleteUser } = useAuth();
+  const { pagination, resetPagination } = useCorrectionsData();
   const theme: any = useTheme();
   const { t } = useTranslation();
   const [localUser, setLocalUser] = useState<UserDataType | null>(user);
@@ -112,6 +115,7 @@ export default function Profile() {
   const handleLogout = async () => {
     try {
       await logout();
+      resetPagination();
       console.log('You have been logged out.');
     } catch (error: any) {
       showApiErrorToast({
@@ -159,6 +163,24 @@ export default function Profile() {
     }
   };
 
+  const confirmDelete = () => {
+    Alert.alert(
+      'Delete Account',
+      'Are you sure you want to delete your account? This action cannot be undone.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            await deleteUser();
+            resetPagination();
+          },
+        },
+      ]
+    );
+  };
+
   if (!localUser || !user) {
     return (
       <Container>
@@ -166,6 +188,7 @@ export default function Profile() {
       </Container>
     );
   }
+  console.log('pagination', pagination);
 
   return (
     <>
@@ -180,7 +203,6 @@ export default function Profile() {
               <Name>{user.username}</Name>
               <Label>{user.userEmail}</Label>
             </Header>
-
             {/* Progress Section */}
             <SubSection>
               <Stat>
@@ -192,7 +214,6 @@ export default function Profile() {
             <StatValue>5 Achieved</StatValue>
           </Stat> */}
             </SubSection>
-
             <ProfileInfoSection>
               {/* Edit Profile Info Subsection*/}
               <SubSection>
@@ -259,9 +280,8 @@ export default function Profile() {
                 </SaveButtonText>
               </SaveButton>
             </ProfileInfoSection>
-
             {/* Account Management Subsection*/}
-            <SubSection>
+            <SubSection style={{ marginTop: 40 }}>
               <SectionTitle>{t('accountManagement')}</SectionTitle>
               <Label>{t('currentPassword')}</Label>
               <Input
@@ -286,11 +306,20 @@ export default function Profile() {
                 </SaveButtonText>
               </SaveButton>
             </SubSection>
-
             <LogoutButton onPress={handleLogout}>
               <LogoutButtonText>{t('logOut')}</LogoutButtonText>
             </LogoutButton>
-
+            {/* Delete Account Section */}
+            <DeleteUserSubsection>
+              <SectionTitle>Delete Account</SectionTitle>
+              <Label>
+                If you wish to delete your account, please click the button
+                below.
+              </Label>
+              <DeleteUserButton onPress={confirmDelete}>
+                <DeleteUserButtonText>Delete Account</DeleteUserButtonText>
+              </DeleteUserButton>
+            </DeleteUserSubsection>
             <Modal
               visible={isModalVisible}
               transparent
@@ -317,10 +346,7 @@ export default function Profile() {
       </TouchableWithoutFeedback>
       {loading && (
         <LoadingOverlay>
-          <ActivityIndicator
-            size="large"
-            color={theme.colors.primary}
-          />
+          <ActivityIndicator size="large" color={theme.colors.primary} />
         </LoadingOverlay>
       )}
     </>

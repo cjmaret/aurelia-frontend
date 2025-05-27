@@ -167,3 +167,23 @@ export const LoadingOverlay = styled.View`
   justify-content: center;
   z-index: 10;
 `;
+
+export const DeleteUserSubsection = styled(SubSection)`
+  margin-top: 60px;
+`;
+
+export const DeleteUserButton = styled.TouchableOpacity`
+  background-color: ${({ theme }: { theme: any }) => theme.colors.errorText};
+  border-radius: 8px;
+  padding: 12px;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+export const DeleteUserButtonText = styled.Text`
+  color: ${({ theme }: { theme: any }) => theme.colors.textPrimary};
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  padding: 0 16px;
+`;

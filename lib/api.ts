@@ -209,6 +209,20 @@ class Api {
       });
   }
 
+  async deleteUser(): Promise<any> {
+    const headers = await this._getAuthHeaders();
+
+    return fetch(`${config.apiUrl}/delete-user`, {
+      method: 'DELETE',
+      headers,
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error deleting user:', err);
+        throw err;
+      });
+  }
+
   async getCorrections({
     page,
     limit,

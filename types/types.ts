@@ -14,6 +14,7 @@ export interface AuthContextType {
   user: UserDataType | null;
   setUser: React.Dispatch<React.SetStateAction<UserDataType | null>>;
   refreshToken: () => Promise<string>;
+  deleteUser: () => Promise<void>;
 }
 
 export interface CorrectionDataContextType {
@@ -24,6 +25,7 @@ export interface CorrectionDataContextType {
   deleteCorrection: (conversationId: string) => Promise<void>;
   pagination: PaginationType;
   setPagination: SetStateType<PaginationType>;
+  resetPagination: () => void;
 }
 
 // api data types

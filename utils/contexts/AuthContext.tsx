@@ -160,6 +160,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  const deleteUser = async () => {
+    try {
+      await api.deleteUser();
+      await SecureStore.deleteItemAsync('accessToken');
+      await SecureStore.deleteItemAsync('refreshToken');
+      setIsAuthenticated(false);
+      setUser(null);
+      router.replace('/signIn');
+    } catch (err) {
+      console.error('Error deleting user:', err);
+      throw err;
+    }
+  };
+
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -177,6 +191,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         user,
         setUser,
         refreshToken,
+        deleteUser,
       }}>
       {children}
     </AuthContext.Provider>
