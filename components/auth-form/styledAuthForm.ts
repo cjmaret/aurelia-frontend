@@ -55,3 +55,13 @@ export const AuthLinkText = styled.Text`
   text-align: center;
   font-size: 16px;
 `;
+
+export const PrivacyPolicyText = styled.Text`
+  color: ${({ theme }: { theme: any }) => theme.colors.primary};
+  font-size: 12px;
+  text-align: center;
+  margin-top: 35px;
+  width: 70%;
+  position: absolute;
+  bottom: 50px;
+`;

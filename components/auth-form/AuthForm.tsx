@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Alert, TouchableOpacity, Text } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useState } from 'react';
+import { Link, useRouter } from 'expo-router';
 import {
   Container,
   Title,
@@ -9,6 +8,7 @@ import {
   AuthButton,
   AuthButtonText,
   AuthLinkButton,
+  PrivacyPolicyText,
 } from './styledAuthForm';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import api from '@/lib/api';
@@ -87,16 +87,30 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
       </AuthButton>
       {!isSignUp && (
         <>
-          <AuthLinkButton onPress={() => router.navigate('/signUp')}>
+          <AuthLinkButton onPress={() => router.replace('/signUp')}>
             <AuthLinkText>New user? Sign up</AuthLinkText>
           </AuthLinkButton>
           {/* <GoogleSignInButton/> */}
         </>
       )}
       {isSignUp && (
-        <AuthLinkButton onPress={() => router.navigate('/signIn')}>
-          <AuthLinkText>Already have an account? Sign in</AuthLinkText>
-        </AuthLinkButton>
+        <>
+          <AuthLinkButton onPress={() => router.replace('/signIn')}>
+            <AuthLinkText>Already have an account? Sign in</AuthLinkText>
+          </AuthLinkButton>
+          <PrivacyPolicyText>
+            By creating an account, you agree to our{' '}
+            <Link
+              href="https://www.aurelialabs.net/privacy-policy.html"
+              target="_blank"
+              style={{
+                color: theme.colors.primary,
+                textDecorationLine: 'underline',
+              }}>
+              Privacy Policy
+            </Link>
+          </PrivacyPolicyText>
+        </>
       )}
     </Container>
   );
