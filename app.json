@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "conversant-frontend",
-    "slug": "conversant-frontend",
-    "owner": "conversant-ai",
+    "name": "aurelia-frontend",
+    "slug": "aurelia-frontend",
+    "owner": "aurelia",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "com.conversantai.myapp",
+    "scheme": "com.aureliaai.myapp",
     "platforms": [
       "ios",
       "android"
@@ -15,7 +15,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.cjmaret.conversantfrontend",
+      "bundleIdentifier": "com.cjmaret.aureliafrontend",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -25,7 +25,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.cjmaret.conversantfrontend"
+      "package": "com.cjmaret.aureliafrontend"
     },
     "web": {
       "bundler": "metro",

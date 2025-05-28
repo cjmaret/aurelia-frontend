@@ -1,8 +1,8 @@
-# 🤖 Conversant-AI Frontend 🤖
+# 🤖 Aurelia-AI Frontend 🤖
 
-Welcome to the frontend of **Conversant-AI**, an innovative application designed to help language learners improve their spoken language skills in real time. With Conversant-AI, users can engage in conversations, receive instant feedback, and get corrections to refine their language abilities.
+Welcome to the frontend of **Aurelia-AI**, an innovative application designed to help language learners improve their spoken language skills in real time. With Aurelia-AI, users can engage in conversations, receive instant feedback, and get corrections to refine their language abilities.
 
-This project serves as the front-end for the Conversant-AI backend.
+This project serves as the front-end for the Aurelia-AI backend.
 
 ---
 
@@ -26,8 +26,8 @@ This project serves as the front-end for the Conversant-AI backend.
 ### Installation
 
 1. Clone the repository:
-   ```git clone https://github.com/your-username/conversant-ai-frontend.git```
-   ```cd conversant-ai-frontend```
+   ```git clone https://github.com/your-username/aurelia-frontend.git```
+   ```cd aurelia-frontend```
 
 2. Install dependencies:
    ```npm install```
@@ -53,8 +53,12 @@ If you just want to **test or view the app** without setting up a local developm
    - Alternatively, use the provided Expo project link (e.g., `https://expo.dev/@username/project-name`).
 
 3. **Ensure Backend Accessibility**:
-   - The app will connect to the production backend at:
-     ```https://conversant-backend-qeq9t.ondigitalocean.app```
+   - The app connects to the backend running on your DigitalOcean Droplet.
+   - Make sure your backend server is running and accessible at your droplet's public IP and port, for example:
+     ```
+     http://24.144.89.186:8000
+     ```
+   - If you are running the backend locally for development, update your API URL in the config file accordingly.
 
 ---
 
@@ -98,8 +102,8 @@ If you want to **run the app locally** for development purposes:
 
 ## 🔗 Links
 
-- [➡️ Frontend GitHub Repository](https://github.com/cjmaret/conversant-frontend)
-- [➡️ Backend GitHub Repository](https://github.com/cjmaret/conversant-backend)
+- [➡️ Frontend GitHub Repository](https://github.com/cjmaret/aurelia-frontend)
+- [➡️ Backend GitHub Repository](https://github.com/cjmaret/aurelia-backend)
 
 ---
 
