@@ -1,16 +1,13 @@
 {
   "expo": {
     "name": "aurelia-frontend",
-    "slug": "aurelia-frontend",
+    "slug": "conversant-frontend",
     "owner": "cjmaret",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "com.aureliaai.myapp",
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "platforms": ["ios", "android"],
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -50,16 +47,10 @@
     "extra": {
       "router": {
         "origin": false
-      },
-      "eas": {
-        "projectId": "3e160366-85ea-42ca-98f4-8160c650db4e"
       }
     },
     "runtimeVersion": {
       "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/3e160366-85ea-42ca-98f4-8160c650db4e"
     }
   }
 }
