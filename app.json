@@ -17,7 +17,10 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.cjmaret.aureliafrontend",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to let users upload images.",
+        "NSMicrophoneUsageDescription": "This app uses the microphone to record audio as part of voice interaction features.",
+        "NSSpeechRecognitionUsageDescription": "This app uses speech recognition to improve your experience with voice commands."
       }
     },
     "android": {
