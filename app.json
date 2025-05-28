@@ -2,7 +2,7 @@
   "expo": {
     "name": "aurelia-frontend",
     "slug": "aurelia-frontend",
-    "owner": "aurelia",
+    "owner": "cjmaret",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
