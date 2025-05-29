@@ -61,21 +61,21 @@ const AnimatedWave = ({
       [x4, y4],
     ];
 
-    // Helper to get midpoints
+    // helper to get midpoints
     const getMid = (p1: any[], p2: any[]) => [
       (p1[0] + p2[0]) / 2,
       (p1[1] + p2[1]) / 2,
     ];
 
-    // Start path
+    // start path
     let d = `M ${points[0][0]} ${points[0][1]}`;
 
-    // For each segment, use the next point as the control for the previous midpoint
+    // for each segment, use the next point as the control for the previous midpoint
     for (let i = 0; i < points.length - 1; i++) {
       const mid = getMid(points[i], points[i + 1]);
       d += ` Q ${points[i][0]} ${points[i][1]}, ${mid[0]} ${mid[1]}`;
     }
-    // And finally, line to the last point
+    // line to the last point
     d += ` T ${points[points.length - 1][0]} ${points[points.length - 1][1]}`;
 
     return {
@@ -94,88 +94,77 @@ const AnimatedWave = ({
   );
 };
 
-export default function Waveform({ recording }: { recording: boolean }) {
+export default function Waveform({ isRecording }: { isRecording: boolean }) {
   const theme: any = useTheme();
   const animationProgress1 = useSharedValue<number>(0);
-  const opacity1 = useSharedValue<number>(1);
   const animationProgress2 = useSharedValue<number>(0);
-  const opacity2 = useSharedValue<number>(1);
   const animationProgress3 = useSharedValue<number>(0);
+  const opacity1 = useSharedValue<number>(1);
+  const opacity2 = useSharedValue<number>(1);
   const opacity3 = useSharedValue<number>(1);
-  const [randomX1, setRandomX1] = useState(Math.random());
-  const [randomX2, setRandomX2] = useState(Math.random());
-  const [randomX3, setRandomX3] = useState(Math.random());
+  const [xStart1, setXStart1] = useState(0);
+  const [xStart2, setXStart2] = useState(0.3);
+  const [xStart3, setXStart3] = useState(0.7);
 
   useEffect(() => {
-    animationProgress1.value = withRepeat(
-      withSequence(
-        withTiming(1, { duration: 3500 }),
-        withTiming(0, { duration: 0 })
-      ),
-      -1,
-      false
-    );
-    animationProgress2.value = withRepeat(
-      withSequence(
-        withTiming(1, { duration: 3000 }),
-        withTiming(0, { duration: 0 })
-      ),
-      -1,
-      false
-    );
-    animationProgress3.value = withRepeat(
-      withSequence(
-        withTiming(1, { duration: 3000 }),
-        withTiming(0, { duration: 0 })
-      ),
-      -1,
-      false
-    );
-    opacity1.value = withRepeat(
-      withSequence(
-        withTiming(0, { duration: 3500 }, (finished) => {
-          if (finished) {
-            // between 0 and 0.35
-            let randomX1 = Math.random() * 0.35;
-            console.log('randomX1', randomX1);
-            runOnJS(setRandomX1)(randomX1);
-          }
-        }),
-        withTiming(1, { duration: 0 })
-      ),
-      -1,
-      false
-    );
-    opacity2.value = withRepeat(
-      withSequence(
-        withTiming(0, { duration: 3000 }, (finished) => {
-          if (finished) {
-            // between 0.35 and 0.7
-            let randomX2 = 0.35 + Math.random() * 0.35;
-            console.log('randomX2', randomX2);
-            runOnJS(setRandomX2)(randomX2);
-          }
-        }),
-        withTiming(1, { duration: 0 })
-      ),
-      -1,
-      false
-    );
-    opacity3.value = withRepeat(
-      withSequence(
-        withTiming(0, { duration: 3000 }, (finished) => {
-          if (finished) {
-            // between 0 and 0.7
-            let randomX3 = Math.random() * 0.7;
-            console.log('randomX3', randomX3);
-            runOnJS(setRandomX3)(randomX3);
-          }
-        }),
-        withTiming(1, { duration: 0 })
-      ),
-      -1,
-      false
-    );
+    if (!isRecording) {
+      animationProgress1.value = 0;
+      opacity1.value = 1;
+      animationProgress2.value = 0;
+      opacity2.value = 1;
+      animationProgress3.value = 0;
+      opacity3.value = 1;
+      return;
+    }
+
+    setXStart1(0);
+    setXStart2(0.3);
+    setXStart3(0.7);
+
+    const startAnimation = (
+      sharedValue: Animated.SharedValue<number>,
+      duration: number
+    ) => {
+      sharedValue.value = withRepeat(
+        withSequence(
+          withTiming(1, { duration }),
+          withTiming(0, { duration: 0 })
+        ),
+        -1,
+        false
+      );
+    };
+
+    const startOpacityAndXPlacement = (
+      sharedValue: Animated.SharedValue<number>,
+      duration: number,
+      setRandomX: (x: number) => void,
+      min: number,
+      range: number
+    ) => {
+      sharedValue.value = withRepeat(
+        withSequence(
+          withTiming(0, { duration }, (finished) => {
+            if (finished) {
+              let randomX = min + Math.random() * range;
+              runOnJS(setRandomX)(randomX);
+            }
+          }),
+          withTiming(1, { duration: 0 })
+        ),
+        -1,
+        false
+      );
+    };
+
+    startAnimation(animationProgress1, 3500);
+    startAnimation(animationProgress2, 4000);
+    startAnimation(animationProgress3, 3000);
+
+    startOpacityAndXPlacement(opacity1, 3500, setXStart1, -0.15, 0.48);
+    startOpacityAndXPlacement(opacity2, 4000, setXStart2, 0.33, 0.33);
+    startOpacityAndXPlacement(opacity3, 3000, setXStart3, 0.66, 0.19);
+
     return () => {
       animationProgress1.value = 0;
       opacity1.value = 1;
@@ -184,7 +173,7 @@ export default function Waveform({ recording }: { recording: boolean }) {
       animationProgress3.value = 0;
       opacity3.value = 1;
     };
-  }, []);
+  }, [isRecording]);
 
   return (
     <WaveformContainer>
@@ -196,27 +185,27 @@ export default function Waveform({ recording }: { recording: boolean }) {
           strokeWidth={5}
           fill={theme.colors.primary}
         />
-        {[2, 2.5, 3].map((heightAdjuster, index) => (
+        {[1, 1.5, 2].map((heightAdjuster, index) => (
           <AnimatedWave
             key={`wave1-${index}`}
             animationProgress={animationProgress1}
             opacity={opacity1}
             arcHeightAdjuster={heightAdjuster}
             opacityAdjuster={1 / (index + 1)}
-            xStart={width * randomX1}
-            xWidth={width * 0.4}
+            xStart={width * xStart1}
+            xWidth={width * 0.3}
             theme={theme}
           />
         ))}
-        {[1, 1.5, 2].map((heightAdjuster, index) => (
+        {[2, 2.5, 3].map((heightAdjuster, index) => (
           <AnimatedWave
             key={`wave2-${index}`}
             animationProgress={animationProgress2}
             opacity={opacity2}
             arcHeightAdjuster={heightAdjuster}
             opacityAdjuster={1 / (index + 1)}
-            xStart={width * randomX2}
-            xWidth={width * 0.3}
+            xStart={width * xStart2}
+            xWidth={width * 0.4}
             theme={theme}
           />
         ))}
@@ -228,7 +217,7 @@ export default function Waveform({ recording }: { recording: boolean }) {
             arcHeightAdjuster={heightAdjuster}
             opacityAdjuster={1 / (index + 1)}
             /*??? vvv*/
-            xStart={(width - 0.25) * randomX3}
+            xStart={width * xStart3}
             xWidth={width * 0.3}
             theme={theme}
           />

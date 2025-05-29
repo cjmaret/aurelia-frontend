@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { isValidElement, memo, useEffect, useState } from 'react';
 import { TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import {
   CardContainer,
@@ -167,7 +167,9 @@ export default memo(function ReviewCard({
       }
 
       // since the text comes in as JSX, need to extract it
-      const wordChildren = (word as React.ReactElement).props.children;
+      const wordChildren = isValidElement(word)
+        ? (word as React.ReactElement<any>).props.children
+        : word;
       const wordText = Array.isArray(wordChildren)
         ? wordChildren.filter((child) => typeof child === 'string').join('')
         : wordChildren;

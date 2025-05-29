@@ -22,8 +22,9 @@ import {
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
-import { showApiErrorToast } from '@/utils/functions/handleApiError';
+import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
+import type { RefreshControlProps } from 'react-native';
 
 export default function CorrectionList({
   searchQuery,
@@ -35,7 +36,7 @@ export default function CorrectionList({
   setCollapseCardsAndErrors,
 }: {
   searchQuery: string;
-  refreshControl?: React.ReactElement;
+  refreshControl?: React.ReactElement<RefreshControlProps>;
   handleScroll?: (event: React.BaseSyntheticEvent<NativeScrollEvent>) => void;
   handleLoadMore: () => void;
   isLoadingMore: boolean;
@@ -59,10 +60,9 @@ export default function CorrectionList({
           onPress: async () => {
             try {
               await deleteCorrection(conversationId);
-            } catch (err: any) {
+            } catch (error: any) {
               showApiErrorToast({
-                status: err?.status || 0,
-                message: err?.message || 'Unknown error',
+                error,
                 showToast,
                 t,
               });

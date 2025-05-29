@@ -1,11 +1,9 @@
 export function showApiErrorToast({
-  status,
-  message,
+  error,
   showToast,
   t,
 }: {
-  status: number;
-  message: string;
+  error: any;
   showToast: (
     type: 'error' | 'info' | 'success',
     text1: string,
@@ -13,6 +11,8 @@ export function showApiErrorToast({
   ) => void;
   t: (key: string, options?: any) => string;
 }): void {
+  const { status = 0, message = 'Unknown Error' } = error;
+
   console.error(`API Error - Status: ${status}, Message: ${message}`);
 
   if (status === 422) {

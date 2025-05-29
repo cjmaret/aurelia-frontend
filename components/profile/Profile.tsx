@@ -46,7 +46,7 @@ import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
 import { getTranslatedLanguageName } from '@/utils/functions/generalFunctions';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
-import { showApiErrorToast } from '@/utils/functions/handleApiError';
+import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 
 export default function Profile() {
   const { showToast } = useToastModal();
@@ -119,8 +119,7 @@ export default function Profile() {
       console.log('You have been logged out.');
     } catch (error: any) {
       showApiErrorToast({
-        status: error?.status || 0,
-        message: error?.message || 'Unknown error',
+        error,
         showToast,
         t,
       });

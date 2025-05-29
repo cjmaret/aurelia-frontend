@@ -8,7 +8,7 @@ import CorrectionList from '../correction-list/CorrectionList';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useState } from 'react';
 import GrammarReviewHeader from './grammar-review-header/GrammarReviewHeader';
-import { showApiErrorToast } from '@/utils/functions/handleApiError';
+import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { useTranslation } from 'react-i18next';
 
@@ -50,8 +50,7 @@ export default function GrammarReview() {
       await fetchCorrections({ page: 1, limit: pagination.limit });
     } catch (error: any) {
       showApiErrorToast({
-        status: error?.status || 0,
-        message: error?.message || 'Unknown error',
+        error,
         showToast,
         t,
       });
@@ -68,8 +67,7 @@ export default function GrammarReview() {
       });
     } catch (error: any) {
       showApiErrorToast({
-        status: error?.status || 0,
-        message: error?.message || 'Unknown error',
+        error,
         showToast,
         t,
       });
@@ -102,8 +100,7 @@ export default function GrammarReview() {
       }
     } catch (error: any) {
       showApiErrorToast({
-        status: error?.status || 0,
-        message: error?.message || 'Unknown error',
+        error,
         showToast,
         t,
       });

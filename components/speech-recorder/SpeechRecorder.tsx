@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Alert, Animated } from 'react-native';
 import { AudioModule, RecordingPresets, useAudioRecorder } from 'expo-audio';
 import {
@@ -14,7 +14,7 @@ import styled, { useTheme } from 'styled-components/native';
 import api from '@/lib/api';
 import { CorrectionDataType, CorrectionResponseType } from '@/types/types';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
-import { showApiErrorToast } from '@/utils/functions/handleApiError';
+import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { useTranslation } from 'react-i18next';
 
@@ -26,10 +26,9 @@ export default function SpeechRecorder() {
   const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
   const [isRecording, setIsRecording] = useState(false);
   const [waveformOpacity] = useState(new Animated.Value(0));
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [timerInterval, setTimerInterval] = useState<ReturnType<
-    typeof setInterval
-  > | null>(null);
+
   const MAX_RECORDING_SECONDS = 60;
 
   useEffect(() => {
@@ -44,41 +43,39 @@ export default function SpeechRecorder() {
   async function startRecording() {
     try {
       await audioRecorder.prepareToRecordAsync();
-      console.log('Starting recording..');
 
       audioRecorder.record();
       setIsRecording(true);
-      console.log('Recording started');
 
-      setElapsedTime(0); // Reset the timer
-      const interval = setInterval(() => {
+      setElapsedTime(0);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+      timerRef.current = setInterval(() => {
         setElapsedTime((prev) => prev + 1);
       }, 1000);
-      setTimerInterval(interval);
     } catch (err) {
       console.error('Failed to start recording', err);
     }
   }
 
   async function stopRecording() {
-    console.log('Stopping recording..');
     setIsRecording(false);
 
-    if (timerInterval) {
-      clearInterval(timerInterval);
-      setTimerInterval(null);
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
     }
 
     await audioRecorder.stop();
     const uri = audioRecorder.uri;
-    console.log('Recording stopped, URI:', uri);
     if (uri) {
       addCorrection(uri);
     }
-    console.log('Recording stopped and stored at', uri);
     waveformOpacity.setValue(0);
   }
 
+  // stop recording if exceeds max length
   useEffect(() => {
     if (isRecording && elapsedTime >= MAX_RECORDING_SECONDS) {
       stopRecording();
@@ -99,14 +96,14 @@ export default function SpeechRecorder() {
     } as any);
 
     try {
+      const response: CorrectionResponseType = await api.addCorrection(
+        formData
+      );
+
       showToast(
         'info',
         t('processingRecording'),
         t('processingRecordingMessage')
-      );
-
-      const response: CorrectionResponseType = await api.addCorrection(
-        formData
       );
 
       if (!response.success) {
@@ -123,24 +120,7 @@ export default function SpeechRecorder() {
         showToast('success', t('recordingProcessed'), t('correctionsReady'));
       }
     } catch (error: any) {
-      const { status, message } = error;
-
-      const errorMap: any = {
-        'No speech detected in the audio file.': t('noSpeechError'),
-      };
-
-      let translatedMessage = t('unexpectedError');
-
-      if (typeof message === 'string') {
-        translatedMessage = errorMap[message] || message;
-
-        if (message.toLowerCase().includes('unexpected error')) {
-          translatedMessage = t('unexpectedError');
-        }
-      }
-      // TODO: ????
-      showToast('error', t('errorSendingAudio'), translatedMessage);
-      showApiErrorToast({ status, message, showToast, t });
+      showApiErrorToast({ error, showToast, t });
     }
   }
 
@@ -163,7 +143,7 @@ export default function SpeechRecorder() {
     <SpeechRecorderGroup>
       <UpperContainer>
         {/* TODO: add isRecording to prop */}
-        <Waveform recording={true} />
+        <Waveform isRecording={isRecording} />
       </UpperContainer>
       <LowerContainer>
         <RecordingGroup>
