@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import { useState } from 'react';
 import { Link, useRouter } from 'expo-router';
 import {
   Container,

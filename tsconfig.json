@@ -14,5 +14,5 @@
     "expo-env.d.ts",
     "types/declarations.d.ts",
     "components/speech-recorder/SpeechRecorder.tsx"
-  ]
+, "app/(auth)/signUp.jsx", "app/(auth)/signIn.jsx", "app/(auth)/reset-password.jsx"  ]
 }

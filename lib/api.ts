@@ -229,6 +229,28 @@ class Api {
       });
   }
 
+  async resetPassword({
+    token,
+    newPassword,
+  }: {
+    token: string;
+    newPassword: string;
+  }): Promise<any> {
+    return fetch(`${config.apiUrl}/auth/reset-password`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...this._headers,
+      },
+      body: JSON.stringify({ token, newPassword }),
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error resetting password:', err);
+        throw err;
+      });
+  }
+
   async deleteUser(): Promise<any> {
     const headers = await this._getAuthHeaders();
 

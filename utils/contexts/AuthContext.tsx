@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { jwtDecode } from 'jwt-decode';
 import * as SecureStore from 'expo-secure-store';
-import { useRouter } from 'expo-router';
+import { usePathname, useRouter } from 'expo-router';
 import api from '@/lib/api';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -15,6 +15,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
+  const PUBLIC_ROUTES = ['/signIn', '/signUp', '/reset-password'];
+
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -75,9 +78,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const handleNavigation = () => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated && !PUBLIC_ROUTES.includes(pathname)) {
       router.replace('/signIn');
-    } else if (user && !user.setupComplete) {
+    } else if (
+      user &&
+      !user.setupComplete &&
+      !PUBLIC_ROUTES.includes(pathname)
+    ) {
       router.replace('/(setup)/setupTab');
     }
   };

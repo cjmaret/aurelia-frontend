@@ -51,6 +51,7 @@ export default function RootLayout() {
     signUp: theme.colors.backgroundSecondary,
     setupTab: theme.colors.backgroundSecondary,
     '+not-found': theme.colors.backgroundSecondary,
+    'reset-password': theme.colors.backgroundSecondary,
     '(auth)': theme.colors.backgroundSecondary,
     default: theme.colors.backgroundPrimary,
   };
