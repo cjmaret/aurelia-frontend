@@ -8,6 +8,9 @@ import {
   SearchCorrectionsType,
 } from '@/types/types';
 import { useAuth } from '@/utils/contexts/AuthContext';
+import { showApiErrorToast } from '../functions/showApiErrorToast';
+import { useToastModal } from './ToastModalContext';
+import { useTranslation } from 'react-i18next';
 
 const CorrectionDataContext = createContext<CorrectionDataContextType | null>(
   null
@@ -17,6 +20,8 @@ export const CorrectionsDataProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const { isAuthenticated, refreshToken, logout } = useAuth();
+  const { showToast } = useToastModal();
+  const { t } = useTranslation();
   const [correctionData, setCorrectionData] = useState<CorrectionDataType[]>(
     []
   );
@@ -69,7 +74,8 @@ export const CorrectionsDataProvider: React.FC<{
     } catch (err: any) {
       console.error('Error fetching corrections:', err);
       if (err.status === 401) {
-        attemptRefreshAndRefetch();
+        await attemptRefreshAndRefetch();
+        return;
       }
       throw err;
     }
@@ -128,6 +134,7 @@ export const CorrectionsDataProvider: React.FC<{
       });
     } catch (err) {
       console.error('Token refresh failed. Logging out...');
+      showApiErrorToast({ error: err, showToast, t });
       await logout();
     }
   }
