@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { ActivityIndicator } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import api from '@/lib/api';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
@@ -12,8 +11,8 @@ import {
   AuthLinkButton,
   AuthLinkText,
 } from '../auth-form/styledAuthForm';
-import { LoadingOverlay } from '../profile/styledProfile';
 import { useTheme } from 'styled-components/native';
+import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 
 export default function ResetPasswordForm() {
   const { showToast } = useToastModal();
@@ -54,9 +53,7 @@ export default function ResetPasswordForm() {
         <AuthLinkText>Back to Login</AuthLinkText>
       </AuthLinkButton>
       {loading && (
-        <LoadingOverlay>
-          <ActivityIndicator size="large" color={theme.colors.primary} />
-        </LoadingOverlay>
+        <LoadingSpinner />
       )}
     </Container>
   );

@@ -17,6 +17,7 @@ import { useTheme } from 'styled-components/native';
 import GoogleSignInButton from '../google-signin-button/GoogleSignInButton';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { useTranslation } from 'react-i18next';
+import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 
 export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const { showToast } = useToastModal();
@@ -139,6 +140,7 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
           </PrivacyPolicyText>
         </>
       )}
+      {loading && <LoadingSpinner />}
     </Container>
   );
 }

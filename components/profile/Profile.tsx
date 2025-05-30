@@ -3,7 +3,6 @@ import {
   Modal,
   FlatList,
   Text,
-  ActivityIndicator,
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
@@ -33,7 +32,6 @@ import {
   SectionTitle,
   SaveButtonText,
   Name,
-  LoadingOverlay,
   DeleteUserButton,
   DeleteUserButtonText,
   DeleteUserSubsection,
@@ -47,6 +45,7 @@ import { useTranslation } from 'react-i18next';
 import { getTranslatedLanguageName } from '@/utils/functions/generalFunctions';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
+import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 
 export default function Profile() {
   const { showToast } = useToastModal();
@@ -342,11 +341,7 @@ export default function Profile() {
           </Container>
         </ScrollView>
       </TouchableWithoutFeedback>
-      {loading && (
-        <LoadingOverlay>
-          <ActivityIndicator size="large" color={theme.colors.primary} />
-        </LoadingOverlay>
-      )}
+      {loading && <LoadingSpinner />}
     </>
   );
 }
