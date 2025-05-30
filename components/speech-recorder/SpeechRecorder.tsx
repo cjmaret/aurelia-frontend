@@ -96,14 +96,14 @@ export default function SpeechRecorder() {
     } as any);
 
     try {
-      const response: CorrectionResponseType = await api.addCorrection(
-        formData
-      );
-
       showToast(
         'info',
         t('processingRecording'),
         t('processingRecordingMessage')
+      );
+      
+      const response: CorrectionResponseType = await api.addCorrection(
+        formData
       );
 
       if (!response.success) {

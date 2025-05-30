@@ -73,6 +73,9 @@ const resources = {
       passwordTooShort: 'Password must be at least 8 characters long.',
       passwordUpdateError: 'Error updating password',
       passwordUpdateFailed: 'Failed to update password. Please try again.',
+      resetEmailSentTitle: 'Reset Email Sent',
+      resetEmailSentMessage: 'Check your inbox for a password reset link.',
+      resetEmailFailed: 'Reset Email Failed',
       processingRecording: 'Processing Your Recording',
       processingRecordingMessage:
         'Hang tight! Check the Grammar Review tab for results.',
@@ -172,6 +175,10 @@ const resources = {
       passwordUpdateError: 'Erreur lors de la mise à jour du mot de passe',
       passwordUpdateFailed:
         'Échec de la mise à jour du mot de passe. Veuillez réessayer.',
+      resetEmailSentTitle: 'E-mail de réinitialisation envoyé',
+      resetEmailSentMessage:
+        'Vérifiez votre boîte de réception pour un lien de réinitialisation du mot de passe.',
+      resetEmailFailed: 'Échec de l’envoi de l’e-mail de réinitialisation',
       processingRecording: 'Traitement de votre enregistrement',
       processingRecordingMessage:
         'Patientez ! Consultez l’onglet Revue grammaticale pour les résultats.',
@@ -273,6 +280,10 @@ const resources = {
       passwordUpdateError: 'Error al actualizar la contraseña',
       passwordUpdateFailed:
         'Error al actualizar la contraseña. Por favor, inténtalo de nuevo.',
+      resetEmailSentTitle: 'Correo de restablecimiento enviado',
+      resetEmailSentMessage:
+        'Revisa tu bandeja de entrada para un enlace de restablecimiento de contraseña.',
+      resetEmailFailed: 'Error al enviar el correo de restablecimiento',
       processingRecording: 'Procesando tu grabación',
       processingRecordingMessage:
         '¡Espera un momento! Consulta la pestaña de Revisión Gramatical para ver los resultados.',

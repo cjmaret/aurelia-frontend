@@ -45,9 +45,10 @@ export const AuthButtonText = styled.Text`
   padding: 5px 0;
 `;
 
-export const AuthLinkButton = styled.TouchableOpacity`
+export const AuthLinkButton = styled.TouchableOpacity<{disabled?: boolean}>`
   margin-top: 16px;
   padding: 7px;
+  opacity: ${({ disabled }: { disabled?: boolean }) => (disabled ? 0.5 : 1)};
 `;
 
 export const AuthLinkText = styled.Text`

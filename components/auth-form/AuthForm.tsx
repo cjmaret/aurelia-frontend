@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { Link, useRouter } from 'expo-router';
 import {
   Container,
@@ -20,11 +20,11 @@ import { useTranslation } from 'react-i18next';
 
 export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const { showToast } = useToastModal();
+  const { login } = useAuth();
   const { t } = useTranslation();
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
   const router = useRouter();
   const theme: any = useTheme();
 
@@ -48,6 +48,28 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
       showToast(
         'error',
         isSignUp ? t('signUpFailed') : t('loginFailed'),
+        error.message || t('unexpectedError')
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePasswordReset = async () => {
+    try {
+      setLoading(true);
+      await api.requestPasswordReset({
+        userEmail: userEmail.trim().toLowerCase(),
+      });
+      showToast(
+        'success',
+        t('resetEmailSentTitle'),
+        t('resetEmailSentMessage')
+      );
+    } catch (error: any) {
+      showToast(
+        'error',
+        t('resetEmailFailed'),
         error.message || t('unexpectedError')
       );
     } finally {
@@ -87,6 +109,11 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
       </AuthButton>
       {!isSignUp && (
         <>
+          <AuthLinkButton
+            onPress={handlePasswordReset}
+            disabled={loading || !userEmail}>
+            <AuthLinkText>Forgot password? Reset</AuthLinkText>
+          </AuthLinkButton>
           <AuthLinkButton onPress={() => router.replace('/signUp')}>
             <AuthLinkText>New user? Sign up</AuthLinkText>
           </AuthLinkButton>
