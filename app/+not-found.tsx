@@ -7,7 +7,8 @@ const Container = styled.View`
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background-color: #fff;
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.backgroundSecondary};
 `;
 
 const Emoji = styled.Text`
@@ -20,6 +21,7 @@ const Title = styled.Text`
   font-weight: bold;
   margin-bottom: 8px;
   text-align: center;
+  color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
 `;
 
 const Subtitle = styled.Text`
@@ -27,11 +29,12 @@ const Subtitle = styled.Text`
   color: #666;
   margin-bottom: 32px;
   text-align: center;
+  color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
 `;
 
 const HomeButton = styled.TouchableOpacity`
   background-color: ${({ theme }: { theme: any }) =>
-    theme.colors.primary};
+    theme.colors.buttonPrimaryBackground};
   border-radius: 8px;
   padding: 12px 32px;
 `;
@@ -46,12 +49,12 @@ const ButtonText = styled.Text`
 export default function NotFoundScreen() {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
-  
+
   const handleGoHome = () => {
     if (isAuthenticated) {
       router.replace('/');
     } else {
-      router.replace('/signIn'); 
+      router.replace('/signIn');
     }
   };
 

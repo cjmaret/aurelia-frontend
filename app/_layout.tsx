@@ -42,6 +42,10 @@ export default function RootLayout() {
 
   const currentRouteName = useNavigationState(getActiveRouteName);
 
+  console.log(
+    `Current route name: ${currentRouteName}, Color scheme: ${colorScheme}`,
+  );
+
   // background colors for pages
   const backgroundColors: Record<string, string> = {
     index: theme.colors.backgroundPrimary,
@@ -50,6 +54,7 @@ export default function RootLayout() {
     signIn: theme.colors.backgroundSecondary,
     signUp: theme.colors.backgroundSecondary,
     setupTab: theme.colors.backgroundSecondary,
+    '(setup)': theme.colors.backgroundSecondary,
     '+not-found': theme.colors.backgroundSecondary,
     'reset-password': theme.colors.backgroundSecondary,
     '(auth)': theme.colors.backgroundSecondary,

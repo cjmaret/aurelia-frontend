@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import api from '@/lib/api';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
@@ -40,11 +40,12 @@ export default function ResetPasswordForm() {
       <Title>Reset Password</Title>
       <Input
         secureTextEntry
-        placeholder="Enter new password"
         value={newPassword}
         onChangeText={setNewPassword}
         editable={!loading}
         autoCapitalize="none"
+        placeholder="Enter new password"
+        placeholderTextColor={theme.colors.inputPlaceholder}
       />
       <AuthButton onPress={handleReset} disabled={loading || !newPassword}>
         <AuthButtonText>Reset Password</AuthButtonText>
@@ -52,9 +53,7 @@ export default function ResetPasswordForm() {
       <AuthLinkButton onPress={() => router.replace('/signIn')}>
         <AuthLinkText>Back to Login</AuthLinkText>
       </AuthLinkButton>
-      {loading && (
-        <LoadingSpinner />
-      )}
+      {loading && <LoadingSpinner />}
     </Container>
   );
 }

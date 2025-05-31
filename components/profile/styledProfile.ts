@@ -62,10 +62,13 @@ export const Label = styled.Text`
 
 export const Input = styled.TextInput`
   height: 40px;
-  border: 1px solid ${({ theme }: { theme: any }) => theme.colors.greySecondary};
+  border: 1px solid ${({ theme }: { theme: any }) => theme.colors.inputBorder};
   border-radius: 8px;
   margin-bottom: 16px;
   padding: 0 8px;
+  color: ${({ theme }: { theme: any }) => theme.colors.inputText};
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.inputBackground};
 `;
 
 export const Stat = styled.View`
@@ -92,6 +95,8 @@ export const LanguagePickerWrapper = styled.View`
   margin-bottom: 16px;
   justify-content: center;
   padding: 0 8px;
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.inputBackground};
 `;
 
 export const DropdownButton = styled.TouchableOpacity`
@@ -101,7 +106,7 @@ export const DropdownButton = styled.TouchableOpacity`
 
 export const DropdownButtonText = styled.Text`
   font-size: 16px;
-  color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
+  color: ${({ theme }: { theme: any }) => theme.colors.inputText};
 `;
 
 export const ProfileButton = styled.TouchableOpacity`
@@ -121,14 +126,15 @@ export const SaveButtonText = styled.Text<{ disabled: boolean }>`
 `;
 
 export const LogoutButton = styled(ProfileButton)`
-  background-color: ${({ theme }: { theme: any }) => theme.colors.primary};
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.buttonPrimaryBackground};
   border-radius: 8px;
   align-items: center;
   margin-top: 50px;
 `;
 
 export const LogoutButtonText = styled.Text`
-  color: ${({ theme }: { theme: any }) => theme.colors.textPrimary};
+  color: ${({ theme }: { theme: any }) => theme.colors.buttonPrimaryText};
   font-size: 16px;
   font-weight: bold;
 `;
@@ -160,7 +166,8 @@ export const DeleteUserSubsection = styled(SubSection)`
 `;
 
 export const DeleteUserButton = styled.TouchableOpacity`
-  background-color: ${({ theme }: { theme: any }) => theme.colors.errorText};
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.buttonDangerBackground};
   border-radius: 8px;
   padding: 12px;
   align-items: center;
@@ -168,7 +175,7 @@ export const DeleteUserButton = styled.TouchableOpacity`
 `;
 
 export const DeleteUserButtonText = styled.Text`
-  color: ${({ theme }: { theme: any }) => theme.colors.textPrimary};
+  color: ${({ theme }: { theme: any }) => theme.colors.buttonDangerText};
   font-size: 16px;
   font-weight: bold;
   text-align: center;

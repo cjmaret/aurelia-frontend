@@ -13,13 +13,13 @@ export const Title = styled.Text`
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: ${({ theme }: { theme: any }) => theme.colors.greyTertiary};
+  color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
 `;
 
 export const Subtitle = styled.Text`
   font-size: 16px;
   margin-bottom: 10px;
-  color: ${({ theme }: { theme: any }) => theme.colors.greyQuarternary};
+  color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
 `;
 
 export const ListContainer = styled.View`
@@ -35,7 +35,10 @@ export const LanguageButton = styled(SetupButton)<{ selected: boolean }>`
   }: {
     theme: any;
     selected: boolean;
-  }) => (selected ? theme.colors.primary : theme.colors.greySecondary)};
+  }) =>
+    selected
+      ? theme.colors.buttonPrimaryBackground
+      : theme.colors.greySecondary};
   padding: 10px 20px;
   border-radius: 5px;
   margin-top: 20px;
@@ -49,7 +52,8 @@ export const ButtonContainer = styled.View`
 `;
 
 const MoveButton = styled(SetupButton)`
-  background-color: ${({ theme }: { theme: any }) => theme.colors.primary};
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.buttonPrimaryBackground};
   padding: 16px;
   border-radius: 7px;
   width: 130px;
@@ -60,7 +64,7 @@ export const SaveButton = styled(MoveButton)``;
 export const BackButton = styled(MoveButton)``;
 
 export const ButtonText = styled.Text`
-  color: ${({ theme }: { theme: any }) => theme.colors.textPrimary};
+  color: ${({ theme }: { theme: any }) => theme.colors.buttonPrimaryText};
   font-size: 16px;
   font-weight: bold;
   text-align: center;

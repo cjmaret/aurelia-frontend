@@ -85,14 +85,14 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
         value={userEmail}
         onChangeText={setUserEmail}
         placeholder="Email"
-        placeholderTextColor={theme.colors.placeholderText}
+        placeholderTextColor={theme.colors.inputPlaceholder}
       />
       <Input
         value={password}
         onChangeText={setPassword}
         secureTextEntry
         placeholder="Password"
-        placeholderTextColor={theme.colors.placeholderText}
+        placeholderTextColor={theme.colors.inputPlaceholder}
       />
       <AuthButton
         title={
@@ -132,7 +132,7 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
               href="https://www.aurelialabs.net/privacy-policy.html"
               target="_blank"
               style={{
-                color: theme.colors.primary,
+                color: theme.colors.buttonSecondaryText,
                 textDecorationLine: 'underline',
               }}>
               Privacy Policy

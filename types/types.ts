@@ -30,7 +30,7 @@ export interface CorrectionDataContextType {
 
 // api data types
 
-// user data types
+// // user data types
 export interface UserDataType {
   username: string;
   userEmail: string;
@@ -39,7 +39,7 @@ export interface UserDataType {
   setupComplete: boolean;
 }
 
-// correction data types
+// // correction data types
 
 export interface CorrectionResponseType {
   success: boolean;
@@ -76,6 +76,7 @@ export interface ErrorDetail {
   suggestion: string;
   improvedClause: string;
 }
+
 // misc types
 
 export interface PaginationType {

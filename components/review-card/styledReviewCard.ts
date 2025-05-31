@@ -77,7 +77,7 @@ export const SnippetCard = styled.View`
   border: 1px solid ${({ theme }: { theme: any }) => theme.colors.cardBorder};
   padding: 20px 16px;
   border-radius: 8px;
-  shadow-color: #000000;
+  shadow-color: ${({ theme }: { theme: any }) => theme.colors.snippetShadow};
   shadow-offset: 0px 2px;
   shadow-opacity: 0.1;
   shadow-radius: 4px;

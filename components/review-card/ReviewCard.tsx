@@ -326,9 +326,9 @@ export default memo(function ReviewCard({
         <TouchableWithoutFeedback onPress={() => setIsCardExpanded(true)}>
           <LinearGradient
             colors={[
-              'rgba(255, 255, 255, 0)',
-              'rgba(255, 255, 255, 0)',
-              'rgba(255, 255, 255, 0.9)',
+              theme.colors.cardShadowTopGradient,
+              theme.colors.cardShadowTopGradient,
+              theme.colors.cardShadowBottomGradient,
             ]}
             style={{
               position: 'absolute',

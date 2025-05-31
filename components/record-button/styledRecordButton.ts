@@ -6,13 +6,8 @@ export const RecordButton = styled.Pressable<{
   theme: any;
   isRecordButtonPressed: boolean;
 }>`
-  background-color: ${({
-    theme,
-    isRecordButtonPressed,
-  }: {
-    theme: any;
-    isRecordButtonPressed: boolean;
-  }) => (isRecordButtonPressed ? theme.colors.primary : theme.colors.primary)};
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.buttonPrimaryBackground};
   width: ${({ isRecordButtonPressed }: { isRecordButtonPressed: boolean }) =>
     isRecordButtonPressed ? `145px` : '150px'};
   height: ${({ isRecordButtonPressed }: { isRecordButtonPressed: boolean }) =>

@@ -1,23 +1,15 @@
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
-
 export const Colors = {
   light: {
-    // default colors
-    text: '#11181C',
+    // // default colors
+    // text: '#11181C',
+
+    // backgrounds
     backgroundPrimary: '#e8f6fc',
     backgroundSecondary: '#ffffff',
-    tint: tintColorLight,
 
+    // tab bar colors
     tabBarBackground: '#ffffff',
     tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
-
-    // main colors
-    primary: '#81c6d0',
-    primaryDark: '#6daeb8',
-    primaryLight: '#9ad2dc',
-    secondary: '#ee9e9e',
 
     // text colors
     textPrimary: '#ffffff',
@@ -26,70 +18,132 @@ export const Colors = {
     correctedText: '#2b8a3e',
     warningText: '#f1c40f',
     errorText: '#e74c3c',
-    
-    
+
+    // accent colors
+    primary: '#81c6d0',
+    primaryDark: '#6daeb8',
+
     // card colors
     cardHeaderBorder: '#e7eaef',
     cardHeaderText: '#8fc7d0',
     cardTimeText: '#81c6d0',
     cardBackground: '#ffffff',
     cardBorder: '#e7eaef',
-    
+    cardShadowTopGradient: 'rgba(255, 255, 255, 0)',
+    cardShadowBottomGradient: 'rgba(255, 255, 255, 0.9)',
+
     // snippet colors
     snippetBackground: '#ffffff',
     snippetOriginalText: '#555',
     snippetErrorText: '#b22222',
     snippetErrorBackground: 'rgb(255, 236, 236)',
 
-    // profile colors:
+    // BUTTONS
+    buttonPrimaryBackground: '#81c6d0',
+    buttonPrimaryText: '#ffffff',
+    buttonPrimaryBorder: '#6daeb8',
+
+    buttonSecondaryText: '#81c6d0',
+
+    buttonDangerBackground: '#e74c3c',
+    buttonDangerText: '#ffffff',
+
+    // INPUTS
+    inputText: '#11181C',
+    inputBorder: '#ccc',
+    inputBackground: '#ffffff',
+    inputPlaceholder: '#a9a9a9',
 
     // greys
     greyPrimary: '#6c757d',
     greySecondary: '#ccc',
     greyTertiary: '#333',
-    greyQuaternary: '#555',
     modalOverlay: '#00000080',
 
     // misc colors
     dateSeparatorColor: '#81c6d0',
     rippleBorder: '#7ec4cf',
     textHighlight: '#f6fda6',
-    placeholderText: '#a9a9a9',
+    spinnerOverlay: 'rgba(255, 255, 255, 0.6)',
+
+    toastBackground: '#fff',
+    toastText: '#222',
+    toastPrimary: '#81c6d0',
+    toastPrimaryError: '#e74c3c',
+    toastShadow: 'rgba(0,0,0,0.12)',
   },
   dark: {
-    // Default dark mode colors
-    text: '#ECEDEE',
-    background: '#151718', // Dark mode background
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    toastBackground: '#262B31',
+    toastText: '#F3F6F9',
+    toastPrimary: '#2099a6',
+    toastPrimaryError: '#ff6b6b',
+    toastShadow: 'rgba(0,0,0,0.45)',
 
-    // Custom colors (adjusted for dark mode)
-    primary: '#4a5e73',
-    secondary: '#ee9e9e',
+    // backgrounds
+    backgroundPrimary: '#181C1F',
+    backgroundSecondary: '#23272A',
 
-    // General colors
-    textPrimary: '#e8e8e8',
-    textSecondary: '#5fb3ba',
+    // tab bar colors
+    tabBarBackground: '#23272A',
+    tabIconDefault: '#8A929A',
 
-    // Card colors
-    cardHeaderBorder: '#3a3f47',
-    cardHeaderText: '#5fb3ba',
-    cardTimeText: '#5fb3ba',
-    cardBackground: '#1e1e1e',
-    cardBorder: '#3a3f47',
+    // text colors
+    textPrimary: '#E3E6EA',
+    textSecondary: '#81c6d0',
+    textTertiary: '#A6B0BB',
+    correctedText: '#5dc585',
+    warningText: '#f1c40f',
+    errorText: '#ff6b6b',
 
-    // Snippet colors
-    snippetBackground: '#2a2a2a',
-    snippetOriginalText: '#aaa',
-    correctedText: '#50e3c2',
+    // accent colors
+    primary: '#2099a6',
+    primaryDark: '#39505a',
+
+    // card colors
+    cardHeaderBorder: '#2A2E33',
+    cardHeaderText: '#81c6d0',
+    cardTimeText: '#A6B0BB',
+    cardBackground: '#23272A',
+    cardBorder: '#2A2E33',
+    cardShadowTopGradient: 'rgba(24, 28, 31, 0)',
+    cardShadowBottomGradient: 'rgba(24, 28, 31, 0.7)',
+
+    // snippet colors
+    snippetBackground: '#23272A',
+    snippetOriginalText: '#d5e0ec',
     snippetErrorText: '#ff6b6b',
-    snippetErrorBackground: 'rgb(60, 20, 20)',
+    snippetErrorBackground: 'rgba(255, 107, 107, 0.08)',
 
-    // Misc colors
-    dateSeparatorText: '#5fb3ba',
-    rippleBorder: '#4a5e73',
+    // BUTTONS
+    buttonPrimaryBackground: '#2099a6',
+    buttonPrimaryText: '#ffffff',
+    buttonPrimaryBorder: '#39505a',
+
+    buttonSecondaryText: '#81c6d0',
+
+    buttonDangerBackground: '#ff6b6b',
+    buttonDangerText: '#181C1F',
+
+    // INPUTS
+    inputText: '#E3E6EA',
+    inputBorder: '#2A2E33',
+    inputBackground: '#545d65',
+    inputPlaceholder: '#A6B0BB',
+
+    // greys
+    greyPrimary: '#A6B0BB',
+    greySecondary: '#444',
+    greyTertiary: '#888',
+    modalOverlay: '#00000080',
+
+    // misc colors
+    dateSeparatorColor: '#81c6d0',
+    rippleBorder: '#39505a',
+    textHighlight: '#2b2f1a',
+    // ????? vvv vvvv
+    placeholderText: '#A6B0BB',
+    spinnerOverlay: 'rgba(255, 255, 255, 0.1)',
+    snippetShadow: 'rgba(0,0,0,0.25)',
   },
 };
 

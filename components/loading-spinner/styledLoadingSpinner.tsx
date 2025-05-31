@@ -6,7 +6,7 @@ export const LoadingOverlay = styled.View`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.6);
+  background: ${({ theme }: { theme: any }) => theme.colors.spinnerOverlay};
   display: flex;
   align-items: center;
   justify-content: center;

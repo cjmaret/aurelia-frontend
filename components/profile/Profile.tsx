@@ -222,6 +222,7 @@ export default function Profile() {
                     setLocalUser({ ...localUser, username: text })
                   }
                   placeholder={t('enterUsername')}
+                  placeholderTextColor={theme.colors.inputPlaceholder}
                 />
                 <Label>{t('email')}</Label>
                 <Input
@@ -230,6 +231,7 @@ export default function Profile() {
                     setLocalUser({ ...localUser, userEmail: text })
                   }
                   placeholder={t('enterEmail')}
+                  placeholderTextColor={theme.colors.inputPlaceholder}
                   keyboardType="email-address"
                 />
               </SubSection>
@@ -283,6 +285,7 @@ export default function Profile() {
               <Label>{t('currentPassword')}</Label>
               <Input
                 placeholder={t('enterCurrentPassword')}
+                placeholderTextColor={theme.colors.inputPlaceholder}
                 secureTextEntry
                 value={currentPassword}
                 onChangeText={(text: string) => setCurrentPassword(text)}
@@ -290,6 +293,7 @@ export default function Profile() {
               <Label>{t('newPassword')}</Label>
               <Input
                 placeholder={t('enterNewPassword')}
+                placeholderTextColor={theme.colors.inputPlaceholder}
                 secureTextEntry
                 value={newPassword}
                 onChangeText={(text: string) => setNewPassword(text)}
@@ -329,7 +333,7 @@ export default function Profile() {
                     keyExtractor={(item) => item}
                     renderItem={({ item }) => (
                       <ModalItem onPress={() => handleLanguageSelect(item)}>
-                        <Text>
+                        <Text style={{ color: theme.colors.inputText }}>
                           {getTranslatedLanguageName({ code: item, t })}
                         </Text>
                       </ModalItem>
