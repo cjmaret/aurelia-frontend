@@ -63,7 +63,7 @@ export default function RootLayout() {
   useEffect(() => {
     const hideSplash = async () => {
       if (loaded) {
-        // await SplashScreen.hideAsync();
+        await SplashScreen.hideAsync();
       }
     };
     hideSplash();
