@@ -18,7 +18,6 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components/native';
 import { I18nextProvider } from 'react-i18next';
 import i18n from '@/utils/app-language-wrapper/i18n';
 import LanguageUpdater from '@/utils/app-language-wrapper/LanguageUpdater';
-import Toast from 'react-native-toast-message';
 import { ToastModalProvider } from '@/utils/contexts/ToastModalContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -51,6 +50,7 @@ export default function RootLayout() {
     signUp: theme.colors.backgroundSecondary,
     setupTab: theme.colors.backgroundSecondary,
     '(setup)': theme.colors.backgroundSecondary,
+    '(tabs)': theme.colors.backgroundPrimary,
     '+not-found': theme.colors.backgroundSecondary,
     'reset-password': theme.colors.backgroundSecondary,
     '(auth)': theme.colors.backgroundSecondary,
@@ -61,9 +61,12 @@ export default function RootLayout() {
     backgroundColors[currentRouteName] || theme.colors.backgroundPrimary;
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
+    const hideSplash = async () => {
+      if (loaded) {
+        // await SplashScreen.hideAsync();
+      }
+    };
+    hideSplash();
   }, [loaded]);
 
   if (!loaded) {
