@@ -18,40 +18,38 @@ export default function GrammarReviewHeader({
   hasScrolled,
   searchText,
   handleSearch,
-  isSearching,
-  setIsSearching,
+  isInSearchMode,
+  setIsInSearchMode,
+  setIsSearchLoading,
   setSearchQuery,
   resetToNormalFetch,
 }: {
   hasScrolled: boolean;
   searchText: string;
   handleSearch: (text: string) => void;
-  isSearching: boolean;
-  setIsSearching: (isSearching: boolean) => void;
+  isInSearchMode: boolean;
+  setIsInSearchMode: (isInSearchMode: boolean) => void;
+  setIsSearchLoading: (isSearchLoading: boolean) => void;
   setSearchQuery: (query: string) => void;
   resetToNormalFetch: () => void;
 }) {
-  const {
-    correctionData,
-    searchCorrections,
-    pagination,
-  } = useCorrectionsData();
+  const { correctionData, searchCorrections, pagination } =
+    useCorrectionsData();
   const theme: any = useTheme();
   const { showToast } = useToastModal();
   const { t } = useTranslation();
 
   const handleSearchSubmit = async (query: string) => {
-    setIsSearching(true);
+    setIsInSearchMode(true);
     setSearchQuery(query);
+    setIsSearchLoading(true);
 
     try {
       await searchCorrections({ query, page: 1, limit: pagination.limit });
     } catch (error) {
-      showToast(
-        'error',
-        t('error'),
-        t('searchCorrectionsError')
-      );
+      showToast('error', t('error'), t('searchCorrectionsError'));
+    } finally {
+      setIsSearchLoading(false);
     }
   };
 
@@ -69,7 +67,7 @@ export default function GrammarReviewHeader({
               onSubmitEditing={() => handleSearchSubmit(searchText)}
               returnKeyType="search"
             />
-            {isSearching ? (
+            {isInSearchMode ? (
               <SearchBarButton onPress={resetToNormalFetch}>
                 <MaterialCommunityIcons
                   name="close"
@@ -90,7 +88,7 @@ export default function GrammarReviewHeader({
       {correctionData.length === 0 && (
         <NoCorrectionsContainer>
           <NoCorrectionsText>
-            {isSearching ? t('noResultsFound') : t('startRecording')}
+            {isInSearchMode ? t('noResultsFound') : t('startRecording')}
           </NoCorrectionsText>
         </NoCorrectionsContainer>
       )}

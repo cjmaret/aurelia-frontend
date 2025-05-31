@@ -11,23 +11,38 @@ import GrammarReviewHeader from './grammar-review-header/GrammarReviewHeader';
 import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { useTranslation } from 'react-i18next';
+import { useFocusEffect } from '@react-navigation/native';
+import React from 'react';
+import LoadingSpinner from '../loading-spinner/LoadingSpinner';
+import { useTheme } from 'styled-components/native';
 
 export default function GrammarReview() {
-  const { fetchCorrections, searchCorrections, pagination } =
-    useCorrectionsData();
+  const theme: any = useTheme();
   const { showToast } = useToastModal();
   const { t } = useTranslation();
+  const { fetchCorrections, searchCorrections, pagination } =
+    useCorrectionsData();
   const [hasScrolled, setHasScrolled] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
+  const [isInSearchMode, setIsInSearchMode] = useState(false);
+  const [isSearchLoading, setIsSearchLoading] = useState<boolean>(false);
   const [searchText, setSearchText] = useState('');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [refreshing, setRefreshing] = useState(false);
-  const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
+  const [isLoadingMoreCards, setIsLoadingMoreCards] = useState<boolean>(false);
   const [collapseCardsAndErrors, setCollapseCardsAndErrors] =
     useState<boolean>(false);
 
+  // reset search state when user leaves GrammarReview tab
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        resetToNormalFetch();
+      };
+    }, [])
+  );
+
   const resetStatesToNormalFetchState = async () => {
-    setIsSearching(false);
+    setIsInSearchMode(false);
     setSearchQuery('');
     setSearchText('');
     setCollapseCardsAndErrors(true);
@@ -39,21 +54,24 @@ export default function GrammarReview() {
   };
 
   const handleSearch = (text: string) => {
-    setIsSearching(true);
+    setIsInSearchMode(true);
     setSearchText(text);
   };
 
   const resetToNormalFetch = async () => {
-    resetStatesToNormalFetchState();
+    setIsSearchLoading(true);
 
     try {
       await fetchCorrections({ page: 1, limit: pagination.limit });
+      resetStatesToNormalFetchState();
     } catch (error: any) {
       showApiErrorToast({
         error,
         showToast,
         t,
       });
+    } finally {
+      setIsSearchLoading(false);
     }
   };
 
@@ -78,15 +96,15 @@ export default function GrammarReview() {
 
   const handleLoadMore = async () => {
     if (
-      isLoadingMore ||
+      isLoadingMoreCards ||
       pagination.page * pagination.limit >= pagination.total // no more data to fetch
     ) {
       return;
     }
 
-    setIsLoadingMore(true);
+    setIsLoadingMoreCards(true);
     try {
-      if (isSearching && searchQuery) {
+      if (isInSearchMode && searchQuery) {
         await searchCorrections({
           query: searchQuery,
           page: pagination.page + 1,
@@ -105,7 +123,7 @@ export default function GrammarReview() {
         t,
       });
     } finally {
-      setIsLoadingMore(false);
+      setIsLoadingMoreCards(false);
     }
   };
 
@@ -115,22 +133,29 @@ export default function GrammarReview() {
         hasScrolled={hasScrolled}
         searchText={searchText}
         handleSearch={handleSearch}
-        isSearching={isSearching}
-        setIsSearching={setIsSearching}
+        isInSearchMode={isInSearchMode}
+        setIsInSearchMode={setIsInSearchMode}
+        setIsSearchLoading={setIsSearchLoading}
         setSearchQuery={setSearchQuery}
         resetToNormalFetch={resetToNormalFetch}
       />
       <CorrectionList
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={handleRefresh}
+            tintColor={theme.colors.primary}
+            colors={[theme.colors.primary]}
+          />
         }
         searchQuery={searchQuery}
         handleScroll={handleScroll}
         handleLoadMore={handleLoadMore}
-        isLoadingMore={isLoadingMore}
+        isLoadingMoreCards={isLoadingMoreCards}
         collapseCardsAndErrors={collapseCardsAndErrors}
         setCollapseCardsAndErrors={setCollapseCardsAndErrors}
       />
+      {isSearchLoading && <LoadingSpinner />}
     </GrammarReviewContainer>
   );
 }

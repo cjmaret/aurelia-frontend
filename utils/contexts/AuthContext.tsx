@@ -5,12 +5,14 @@ import { jwtDecode } from 'jwt-decode';
 import * as SecureStore from 'expo-secure-store';
 import { usePathname, useRouter } from 'expo-router';
 import api from '@/lib/api';
+import { useTheme } from 'styled-components/native';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const theme: any = useTheme();
   const [user, setUser] = useState<UserDataType | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -184,7 +186,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color={theme.colors.primary} />
       </View>
     );
   }

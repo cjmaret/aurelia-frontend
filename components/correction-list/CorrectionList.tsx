@@ -31,7 +31,7 @@ export default function CorrectionList({
   refreshControl,
   handleScroll,
   handleLoadMore,
-  isLoadingMore,
+  isLoadingMoreCards,
   collapseCardsAndErrors,
   setCollapseCardsAndErrors,
 }: {
@@ -39,7 +39,7 @@ export default function CorrectionList({
   refreshControl?: React.ReactElement<RefreshControlProps>;
   handleScroll?: (event: React.BaseSyntheticEvent<NativeScrollEvent>) => void;
   handleLoadMore: () => void;
-  isLoadingMore: boolean;
+  isLoadingMoreCards: boolean;
   collapseCardsAndErrors: boolean;
   setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
@@ -143,11 +143,8 @@ export default function CorrectionList({
         refreshControl={refreshControl}
         extraData={correctionData}
         ListFooterComponent={
-          isLoadingMore ? (
-            <ActivityIndicator
-              size="small"
-              color={theme.colors.backgroundPrimary}
-            />
+          isLoadingMoreCards ? (
+            <ActivityIndicator size="large" color={theme.colors.primary} />
           ) : null
         } // spinner at the bottom
       />
