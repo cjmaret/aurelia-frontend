@@ -1,5 +1,6 @@
 const apiUrls = {
-  local: 'http://192.168.1.104:8000',
+  // local: 'http://192.168.1.104:8000',
+  local: 'https://api.aurelialabs.net',
   droplet: 'http://24.144.89.186:8000',
   production: 'https://api.aurelialabs.net',
 };
