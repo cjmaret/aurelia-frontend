@@ -17,7 +17,7 @@ const colors = {
   // snippet colors
   snippetBackground: '#ffffff',
   snippetOriginalText: '#555',
-  correctedText: '#2b8a3e',
+  textCorrected: '#2b8a3e',
   snippetErrorText: '#b22222',
   snippetErrorBackground: 'rgb(255, 236, 236)',
 

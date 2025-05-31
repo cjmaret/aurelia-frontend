@@ -53,7 +53,7 @@ export default memo(function ReviewCard({
 }) {
   const theme: any = useTheme();
   const { t } = useTranslation();
-  const { createdAt, sentenceFeedback, conversationId } = cardData;
+  const { createdAt, sentenceFeedback } = cardData;
   const [isCardExpanded, setIsCardExpanded] = useState(false);
   const [expandedErrors, setExpandedErrors] = useState<string[]>([]);
 
@@ -207,7 +207,7 @@ export default memo(function ReviewCard({
             <MaterialCommunityIcons
               name="close"
               size={14}
-              color={theme.colors.primary}
+              color={theme.colors.textSecondary}
             />
           </DeleteButton>
         </CardHeader>

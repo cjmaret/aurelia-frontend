@@ -42,10 +42,6 @@ export default function RootLayout() {
 
   const currentRouteName = useNavigationState(getActiveRouteName);
 
-  console.log(
-    `Current route name: ${currentRouteName}, Color scheme: ${colorScheme}`,
-  );
-
   // background colors for pages
   const backgroundColors: Record<string, string> = {
     index: theme.colors.backgroundPrimary,

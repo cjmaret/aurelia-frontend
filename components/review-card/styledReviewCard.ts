@@ -30,12 +30,9 @@ export const CardHeader = styled.View`
   shadow-radius: 4px;
   padding: 20px 15px;
   border-radius: 8px;
-  /* border: 1px solid red; */
 `;
 
-const ArrowIcon = styled.View`
-  /* border: 1px solid red; */
-`;
+const ArrowIcon = styled.View``;
 
 export const HeaderArrowIcon = styled(ArrowIcon)`
   display: flex;
@@ -47,8 +44,6 @@ export const CardHeaderTextContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  /* gap: 8px; */
-  /* border: 1px solid red; */
   width: 90%;
 `;
 
@@ -79,7 +74,8 @@ export const SnippetCard = styled.View`
   border-radius: 8px;
   shadow-color: ${({ theme }: { theme: any }) => theme.colors.snippetShadow};
   shadow-offset: 0px 2px;
-  shadow-opacity: 0.1;
+  shadow-opacity: ${({ theme }: { theme: any }) =>
+    theme.mode === 'light' ? 0.1 : 0.6};
   shadow-radius: 4px;
   elevation: 2;
   margin: 15px 0;
@@ -95,12 +91,13 @@ export const OriginalText = styled.Text`
 export const CorrectedText = styled.Text`
   font-size: 16px;
   font-weight: bold;
-  color: ${({ theme }: { theme: any }) => theme.colors.correctedText};
+  color: ${({ theme }: { theme: any }) => theme.colors.textCorrected};
   margin-bottom: 10px;
 `;
 
 export const HighlightedCorrectedText = styled.Text`
   font-weight: 900;
+  color: ${({ theme }: { theme: any }) => theme.colors.textCorrectedDark};
 `;
 
 export const ErrorList = styled.View`
@@ -207,7 +204,8 @@ export const DeleteButton = styled.TouchableOpacity`
   border-radius: 20px;
   width: 20px;
   height: 20px;
-  border: 1.5px solid ${({ theme }: { theme: any }) => theme.colors.primary};
+  border: 1.5px solid
+    ${({ theme }: { theme: any }) => theme.colors.textSecondary};
   position: absolute;
   left: -10px;
   top: -10px;

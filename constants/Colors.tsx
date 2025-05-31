@@ -15,7 +15,8 @@ export const Colors = {
     textPrimary: '#ffffff',
     textSecondary: '#81c6d0',
     textTertiary: '#5d5d5d',
-    correctedText: '#2b8a3e',
+    textCorrected: '#2b8a3e',
+    textCorrectedDark: '#14832b',
     warningText: '#f1c40f',
     errorText: '#e74c3c',
 
@@ -91,7 +92,8 @@ export const Colors = {
     textPrimary: '#E3E6EA',
     textSecondary: '#81c6d0',
     textTertiary: '#A6B0BB',
-    correctedText: '#5dc585',
+    textCorrected: '#3dc973',
+    textCorrectedDark: '#06933c',
     warningText: '#f1c40f',
     errorText: '#ff6b6b',
 
@@ -102,7 +104,7 @@ export const Colors = {
     // card colors
     cardHeaderBorder: '#2A2E33',
     cardHeaderText: '#81c6d0',
-    cardTimeText: '#A6B0BB',
+    cardTimeText: '#81c6d0',
     cardBackground: '#23272A',
     cardBorder: '#2A2E33',
     cardShadowTopGradient: 'rgba(24, 28, 31, 0)',
@@ -139,11 +141,11 @@ export const Colors = {
     // misc colors
     dateSeparatorColor: '#81c6d0',
     rippleBorder: '#39505a',
-    textHighlight: '#2b2f1a',
+    textHighlight: '#e6ed0a',
     // ????? vvv vvvv
     placeholderText: '#A6B0BB',
     spinnerOverlay: 'rgba(255, 255, 255, 0.1)',
-    snippetShadow: 'rgba(0,0,0,0.25)',
+    snippetShadow: 'rgb(0, 0, 0)',
   },
 };
 
