@@ -60,6 +60,7 @@ const resources = {
         'You have successfully signed up! You can now log in.',
       signUpFailed: 'Sign Up Failed',
       loginFailed: 'Login Failed',
+      pleaseEnterEmailAndPassword: 'Please enter both email and password.',
       success: 'Success',
       pleaseSelectLanguage: 'Please select a language.',
       setupComplete: 'Setup complete! You can now use the app.',
@@ -158,6 +159,8 @@ const resources = {
         'Vous vous êtes inscrit avec succès ! Vous pouvez maintenant vous connecter.',
       signUpFailed: "Échec de l'inscription",
       loginFailed: 'Échec de la connexion',
+      pleaseEnterEmailAndPassword:
+        'Veuillez entrer votre e-mail et votre mot de passe.',
       success: 'Succès',
       pleaseSelectLanguage: 'Veuillez sélectionner une langue.',
       setupComplete:
@@ -263,6 +266,8 @@ const resources = {
         '¡Te has registrado con éxito! Ahora puedes iniciar sesión.',
       signUpFailed: 'Error al registrarse',
       loginFailed: 'Error al iniciar sesión',
+      pleaseEnterEmailAndPassword:
+        'Por favor, ingresa tu correo electrónico y contraseña.',
       success: 'Éxito',
       pleaseSelectLanguage: 'Por favor, selecciona un idioma.',
       setupComplete:

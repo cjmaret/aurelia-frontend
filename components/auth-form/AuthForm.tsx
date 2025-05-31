@@ -30,10 +30,19 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const theme: any = useTheme();
 
   const handleSubmit = async () => {
+    const normalizedEmail = userEmail.trim().toLowerCase();
+
+    if (!normalizedEmail || !password) {
+      showToast(
+        'error',
+        t('loginFailed'),
+        t('Please enter both email and password.')
+      );
+      return;
+    }
+
     setLoading(true);
     try {
-      const normalizedEmail = userEmail.trim().toLowerCase();
-
       if (isSignUp) {
         await api.registerUser(normalizedEmail, password);
         showToast(
