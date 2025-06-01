@@ -31,10 +31,14 @@ export default function SpeechRecorder() {
   const [elapsedTime, setElapsedTime] = useState(0);
   const [isRecordButtonPressed, setIsRecordButtonPressed] =
     useState<boolean>(false);
-  // prevents duplicate calls if user holds button
+  // prevents duplicate calls if user holds record button past allotted time
   const hasStoppedRef = useRef(false);
+  const MAX_RECORDING_SECONDS = 60;
+  // prevents user from spamming record button
+  const [canRecord, setCanRecord] = useState(true);
+  const canRecordRef = useRef(true);
+  const RECORD_COOLDOWN_MS = 1000;
 
-  const MAX_RECORDING_SECONDS = 3;
 
   useEffect(() => {
     (async () => {
@@ -59,6 +63,9 @@ export default function SpeechRecorder() {
   }, [elapsedTime, isRecording]);
 
   async function startRecording() {
+    if (!canRecordRef.current) return; // Use ref for instant check
+    canRecordRef.current = false;
+    setCanRecord(false);
     hasStoppedRef.current = false;
     try {
       await audioRecorder.prepareToRecordAsync();
@@ -79,7 +86,6 @@ export default function SpeechRecorder() {
   }
 
   async function stopRecording() {
-    console.log('asdf', hasStoppedRef.current);
     if (hasStoppedRef.current) return;
     // prevents race condition from turning off ref
     hasStoppedRef.current = true;
@@ -97,11 +103,19 @@ export default function SpeechRecorder() {
       const info = await FileSystem.getInfoAsync(uri);
       if (!info.exists || info.size < 1000) {
         showToast('error', t('errorSendingAudio'), t('noSpeechDetectedError'));
+        setTimeout(() => {
+          canRecordRef.current = true;
+          setCanRecord(true);
+        }, RECORD_COOLDOWN_MS);
         return;
       }
       addCorrection(uri);
     }
     waveformOpacity.setValue(0);
+    setTimeout(() => {
+      canRecordRef.current = true;
+      setCanRecord(true);
+    }, RECORD_COOLDOWN_MS);
   }
 
   async function addCorrection(audioUri: string) {
@@ -175,6 +189,7 @@ export default function SpeechRecorder() {
             stopRecording={stopRecording}
             isRecordButtonPressed={isRecordButtonPressed}
             setIsRecordButtonPressed={setIsRecordButtonPressed}
+            disabled={!canRecord}
           />
         </RecordingGroup>
       </LowerContainer>
