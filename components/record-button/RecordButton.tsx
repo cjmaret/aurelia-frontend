@@ -8,17 +8,21 @@ import * as Haptics from 'expo-haptics';
 export default function RecordButtonComponent({
   startRecording,
   stopRecording,
+  isRecordButtonPressed,
+  setIsRecordButtonPressed,
+  disabled,
 }: {
   startRecording: any;
   stopRecording: any;
+  isRecordButtonPressed: boolean;
+  setIsRecordButtonPressed: React.Dispatch<React.SetStateAction<boolean>>;
+  disabled: boolean;
 }) {
   const [ripples, setRipples] = useState<
     { id: number; scale: Animated.Value; opacity: Animated.Value }[]
   >([]);
   const rippleInterval = useRef<ReturnType<typeof setInterval> | null>(null);
   const theme: any = useTheme();
-  const [isRecordButtonPressed, setIsRecordButtonPressed] =
-    useState<boolean>(false);
 
   useEffect(() => {
     if (isRecordButtonPressed) {
@@ -66,12 +70,15 @@ export default function RecordButtonComponent({
     });
   };
 
+  console.log('disabled', disabled);
+
   const handlePressIn = async () => {
+    if (disabled) return; // prevent interaction if disabled
     // for immediate style changes
     setIsRecordButtonPressed(true);
     for (let i = 0; i < 3; i++) {
       await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
-      await new Promise((resolve) => setTimeout(resolve, 80)); 
+      await new Promise((resolve) => setTimeout(resolve, 80));
     }
     startRecording();
   };

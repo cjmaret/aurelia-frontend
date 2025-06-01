@@ -29,8 +29,12 @@ export default function SpeechRecorder() {
   const [waveformOpacity] = useState(new Animated.Value(0));
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [elapsedTime, setElapsedTime] = useState(0);
+  const [isRecordButtonPressed, setIsRecordButtonPressed] =
+    useState<boolean>(false);
+  // prevents duplicate calls if user holds button
+  const hasStoppedRef = useRef(false);
 
-  const MAX_RECORDING_SECONDS = 60;
+  const MAX_RECORDING_SECONDS = 3;
 
   useEffect(() => {
     (async () => {
@@ -41,7 +45,21 @@ export default function SpeechRecorder() {
     })();
   }, []);
 
+  // stop recording if exceeds max length
+  useEffect(() => {
+    if (isRecording && elapsedTime >= MAX_RECORDING_SECONDS) {
+      stopRecording();
+      setIsRecordButtonPressed(false);
+      showToast(
+        'info',
+        'Recording Stopped',
+        `Maximum recording length of ${MAX_RECORDING_SECONDS} seconds reached.`
+      );
+    }
+  }, [elapsedTime, isRecording]);
+
   async function startRecording() {
+    hasStoppedRef.current = false;
     try {
       await audioRecorder.prepareToRecordAsync();
 
@@ -61,6 +79,11 @@ export default function SpeechRecorder() {
   }
 
   async function stopRecording() {
+    console.log('asdf', hasStoppedRef.current);
+    if (hasStoppedRef.current) return;
+    // prevents race condition from turning off ref
+    hasStoppedRef.current = true;
+
     setIsRecording(false);
 
     if (timerRef.current) {
@@ -81,19 +104,8 @@ export default function SpeechRecorder() {
     waveformOpacity.setValue(0);
   }
 
-  // stop recording if exceeds max length
-  useEffect(() => {
-    if (isRecording && elapsedTime >= MAX_RECORDING_SECONDS) {
-      stopRecording();
-      showToast(
-        'info',
-        'Recording Stopped',
-        `Maximum recording length of ${MAX_RECORDING_SECONDS} seconds reached.`
-      );
-    }
-  }, [elapsedTime, isRecording]);
-
   async function addCorrection(audioUri: string) {
+    console.log('Adding correction for audio:', audioUri);
     const formData = new FormData();
     formData.append('file', {
       uri: audioUri,
@@ -161,6 +173,8 @@ export default function SpeechRecorder() {
           <RecordButtonComponent
             startRecording={startRecording}
             stopRecording={stopRecording}
+            isRecordButtonPressed={isRecordButtonPressed}
+            setIsRecordButtonPressed={setIsRecordButtonPressed}
           />
         </RecordingGroup>
       </LowerContainer>
