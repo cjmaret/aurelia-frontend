@@ -26,6 +26,8 @@ export interface CorrectionDataContextType {
   pagination: PaginationType;
   setPagination: SetStateType<PaginationType>;
   resetPagination: () => void;
+  isProcessingRecording: boolean;
+  setIsProcessingRecording: SetStateType<boolean>;
 }
 
 // api data types

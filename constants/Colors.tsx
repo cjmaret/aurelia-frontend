@@ -25,10 +25,10 @@ export const Colors = {
     primaryDark: '#6daeb8',
 
     // card colors
+    cardBackground: '#ffffff',
     cardHeaderBorder: '#e7eaef',
     cardHeaderText: '#8fc7d0',
     cardTimeText: '#81c6d0',
-    cardBackground: '#ffffff',
     cardBorder: '#e7eaef',
     cardShadowTopGradient: 'rgba(255, 255, 255, 0)',
     cardShadowBottomGradient: 'rgba(255, 255, 255, 0.9)',
@@ -39,13 +39,10 @@ export const Colors = {
     snippetErrorText: '#b22222',
     snippetErrorBackground: 'rgb(255, 236, 236)',
 
-    // BUTTONS
+    // button colors
     buttonPrimaryBackground: '#81c6d0',
     buttonPrimaryText: '#ffffff',
-    buttonPrimaryBorder: '#6daeb8',
-
     buttonSecondaryText: '#81c6d0',
-
     buttonDangerBackground: '#e74c3c',
     buttonDangerText: '#ffffff',
 
@@ -66,20 +63,19 @@ export const Colors = {
     rippleBorder: '#7ec4cf',
     textHighlight: '#f6fda6',
     spinnerOverlay: 'rgba(255, 255, 255, 0.6)',
+    snippetShadow: 'rgb(0, 0, 0)',
 
+    // toast colors
     toastBackground: '#fff',
     toastText: '#222',
     toastPrimary: '#81c6d0',
     toastPrimaryError: '#e74c3c',
     toastShadow: 'rgba(0,0,0,0.12)',
+
+    beep: '#ffffff',
+
   },
   dark: {
-    toastBackground: '#262B31',
-    toastText: '#F3F6F9',
-    toastPrimary: '#2099a6',
-    toastPrimaryError: '#ff6b6b',
-    toastShadow: 'rgba(0,0,0,0.45)',
-
     // backgrounds
     backgroundPrimary: '#181C1F',
     backgroundSecondary: '#23272A',
@@ -102,10 +98,10 @@ export const Colors = {
     primaryDark: '#39505a',
 
     // card colors
+    cardBackground: '#23272A',
     cardHeaderBorder: '#2A2E33',
     cardHeaderText: '#81c6d0',
     cardTimeText: '#81c6d0',
-    cardBackground: '#23272A',
     cardBorder: '#2A2E33',
     cardShadowTopGradient: 'rgba(24, 28, 31, 0)',
     cardShadowBottomGradient: 'rgba(24, 28, 31, 0.7)',
@@ -116,13 +112,10 @@ export const Colors = {
     snippetErrorText: '#ff6b6b',
     snippetErrorBackground: 'rgba(255, 107, 107, 0.08)',
 
-    // BUTTONS
+    // button colors
     buttonPrimaryBackground: '#2099a6',
     buttonPrimaryText: '#ffffff',
     buttonPrimaryBorder: '#39505a',
-
-    buttonSecondaryText: '#81c6d0',
-
     buttonDangerBackground: '#ff6b6b',
     buttonDangerText: '#181C1F',
 
@@ -142,10 +135,15 @@ export const Colors = {
     dateSeparatorColor: '#81c6d0',
     rippleBorder: '#39505a',
     textHighlight: '#e6ed0a',
-    // ????? vvv vvvv
-    placeholderText: '#A6B0BB',
     spinnerOverlay: 'rgba(255, 255, 255, 0.1)',
     snippetShadow: 'rgb(0, 0, 0)',
+
+    // toast colors
+    toastBackground: '#262B31',
+    toastText: '#F3F6F9',
+    toastPrimary: '#2099a6',
+    toastPrimaryError: '#ff6b6b',
+    toastShadow: 'rgba(0,0,0,0.45)',
   },
 };
 

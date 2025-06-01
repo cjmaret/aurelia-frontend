@@ -21,7 +21,7 @@ import { useTranslation } from 'react-i18next';
 export default function SpeechRecorder() {
   const theme: any = useTheme();
   const { t } = useTranslation();
-  const { setCorrectionData } = useCorrectionsData();
+  const { setCorrectionData, setIsProcessingRecording } = useCorrectionsData();
   const { showToast } = useToastModal();
   const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
   const [isRecording, setIsRecording] = useState(false);
@@ -94,14 +94,14 @@ export default function SpeechRecorder() {
       name: 'audioRecording.m4a',
       type: 'audio/m4a',
     } as any);
-
+    setIsProcessingRecording(true);
     try {
       showToast(
         'info',
         t('processingRecording'),
         t('processingRecordingMessage')
       );
-      
+
       const response: CorrectionResponseType = await api.addCorrection(
         formData
       );
@@ -121,6 +121,8 @@ export default function SpeechRecorder() {
       }
     } catch (error: any) {
       showApiErrorToast({ error, showToast, t });
+    } finally {
+      setIsProcessingRecording(false);
     }
   }
 

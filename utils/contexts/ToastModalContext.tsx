@@ -35,12 +35,13 @@ export const ToastModalProvider: React.FC<{ children: React.ReactNode }> = ({
   const showToast = (
     type: 'info' | 'success' | 'error',
     text1: string,
-    text2?: string
+    text2?: string,
   ) => {
     Toast.show({
       type,
       text1,
       text2,
+      visibilityTime: 6000,
     });
   };
 

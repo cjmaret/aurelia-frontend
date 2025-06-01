@@ -30,7 +30,6 @@ export const DateSeparatorText = styled.Text`
   font-weight: bold;
   color: ${({ theme }: { theme: any }) => theme.colors.dateSeparatorColor};
   margin-left: 15px;
-  /* border: 1px solid red; */
   max-width: 90px;
   text-align: center;
 `;

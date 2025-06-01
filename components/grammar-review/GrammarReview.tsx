@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import CorrectionList from '../correction-list/CorrectionList';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import GrammarReviewHeader from './grammar-review-header/GrammarReviewHeader';
 import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
@@ -20,8 +20,12 @@ export default function GrammarReview() {
   const theme: any = useTheme();
   const { showToast } = useToastModal();
   const { t } = useTranslation();
-  const { fetchCorrections, searchCorrections, pagination } =
-    useCorrectionsData();
+  const {
+    fetchCorrections,
+    searchCorrections,
+    pagination,
+    isProcessingRecording,
+  } = useCorrectionsData();
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isInSearchMode, setIsInSearchMode] = useState(false);
   const [isSearchLoading, setIsSearchLoading] = useState<boolean>(false);
@@ -31,6 +35,16 @@ export default function GrammarReview() {
   const [isLoadingMoreCards, setIsLoadingMoreCards] = useState<boolean>(false);
   const [collapseCardsAndErrors, setCollapseCardsAndErrors] =
     useState<boolean>(false);
+
+  useEffect(() => {
+    if (isProcessingRecording) {
+      showToast(
+        'info',
+        t('processingRecording'),
+        t('processingRecordingMessage')
+      );
+    }
+  }, [isProcessingRecording]);
 
   // reset search state when user leaves GrammarReview tab
   useFocusEffect(

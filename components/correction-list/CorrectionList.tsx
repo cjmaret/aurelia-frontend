@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   ActivityIndicator,
   NativeScrollEvent,
   View,
   Alert,
+  Text,
 } from 'react-native';
 import ReviewCard from '../review-card/ReviewCard';
 import { isSameDay } from 'date-fns';
@@ -25,6 +26,7 @@ import { useTranslation } from 'react-i18next';
 import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import type { RefreshControlProps } from 'react-native';
+import SkeletonReviewCard from '../review-card-skeleton.tsx/SkeletonReviewCard';
 
 export default function CorrectionList({
   searchQuery,
@@ -43,10 +45,12 @@ export default function CorrectionList({
   collapseCardsAndErrors: boolean;
   setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { correctionData, deleteCorrection } = useCorrectionsData();
+  useCorrectionsData();
   const theme: any = useTheme();
   const { showToast } = useToastModal();
   const { t } = useTranslation();
+  const { correctionData, deleteCorrection, isProcessingRecording } =
+    useCorrectionsData();
 
   const handleDeleteCard = async (conversationId: string) => {
     Alert.alert(
@@ -142,6 +146,9 @@ export default function CorrectionList({
         scrollEventThrottle={16}
         refreshControl={refreshControl}
         extraData={correctionData}
+        ListHeaderComponent={
+          isProcessingRecording ? <SkeletonReviewCard /> : null
+        }
         ListFooterComponent={
           isLoadingMoreCards ? (
             <ActivityIndicator size="large" color={theme.colors.primary} />

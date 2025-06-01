@@ -25,6 +25,7 @@ export const CorrectionsDataProvider: React.FC<{
   const [correctionData, setCorrectionData] = useState<CorrectionDataType[]>(
     []
   );
+  const [isProcessingRecording, setIsProcessingRecording] = useState(false);
   const [pagination, setPagination] = useState<PaginationType>({
     total: 0,
     page: 1,
@@ -80,6 +81,7 @@ export const CorrectionsDataProvider: React.FC<{
       throw err;
     }
   };
+
 
   const searchCorrections = async ({
     query,
@@ -176,6 +178,8 @@ export const CorrectionsDataProvider: React.FC<{
         pagination,
         setPagination,
         resetPagination,
+        isProcessingRecording, 
+        setIsProcessingRecording,
       }}>
       {children}
     </CorrectionDataContext.Provider>
