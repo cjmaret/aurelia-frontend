@@ -18,10 +18,13 @@ import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { useTranslation } from 'react-i18next';
+import OnboardingBubbles from '../onboarding-bubbles/OnboardingBubbles';
+import { useAuth } from '@/utils/contexts/AuthContext';
 
 export default function SpeechRecorder() {
   const theme: any = useTheme();
   const { t } = useTranslation();
+  const { showOnboarding, setShowOnboarding } = useAuth();
   const { setCorrectionData, setIsProcessingRecording } = useCorrectionsData();
   const { showToast } = useToastModal();
   const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
@@ -38,7 +41,6 @@ export default function SpeechRecorder() {
   const [canRecord, setCanRecord] = useState(true);
   const canRecordRef = useRef(true);
   const RECORD_COOLDOWN_MS = 1000;
-
 
   useEffect(() => {
     (async () => {
@@ -175,8 +177,10 @@ export default function SpeechRecorder() {
 
   return (
     <SpeechRecorderGroup>
+      {showOnboarding && (
+        <OnboardingBubbles onFinish={() => setShowOnboarding(false)} />
+      )}
       <UpperContainer>
-        {/* TODO: add isRecording to prop */}
         <Waveform isRecording={isRecording} />
       </UpperContainer>
       <LowerContainer>

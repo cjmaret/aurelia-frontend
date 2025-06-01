@@ -15,6 +15,8 @@ export interface AuthContextType {
   setUser: React.Dispatch<React.SetStateAction<UserDataType | null>>;
   refreshToken: () => Promise<string>;
   deleteUser: () => Promise<void>;
+  showOnboarding: boolean;
+  setShowOnboarding: SetStateType<boolean>;
 }
 
 export interface CorrectionDataContextType {

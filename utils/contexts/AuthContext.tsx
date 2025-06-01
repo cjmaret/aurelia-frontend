@@ -15,6 +15,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const theme: any = useTheme();
   const [user, setUser] = useState<UserDataType | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
@@ -201,6 +202,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         setUser,
         refreshToken,
         deleteUser,
+        showOnboarding,
+        setShowOnboarding,
       }}>
       {children}
     </AuthContext.Provider>

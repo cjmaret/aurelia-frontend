@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import api from '@/lib/api';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import LanguageSelection from '../language-selection/LanguageSelection';
@@ -9,12 +9,16 @@ import i18n from '@/utils/app-language-wrapper/i18n';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 
 export default function Setup() {
-  const { setUser } = useAuth();
+  const { setUser, setShowOnboarding } = useAuth();
   const { showToast } = useToastModal();
   const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const [appLanguage, setAppLanguage] = useState<string>('en');
   const [targetLanguage, setTargetLanguage] = useState<string>('en');
+
+  useEffect(() => {
+    setShowOnboarding(true);
+  }, []);
 
   const handleSave = async () => {
     try {
@@ -39,7 +43,7 @@ export default function Setup() {
   };
 
   const moveToPreviousStep = () => {
-    setStep(1); 
+    setStep(1);
   };
 
   if (step === 1) {

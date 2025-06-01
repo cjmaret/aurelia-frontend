@@ -70,8 +70,6 @@ export default function RecordButtonComponent({
     });
   };
 
-  console.log('disabled', disabled);
-
   const handlePressIn = async () => {
     if (disabled) return; // prevent interaction if disabled
     // for immediate style changes
