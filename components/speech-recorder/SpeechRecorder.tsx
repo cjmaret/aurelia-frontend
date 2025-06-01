@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Alert, Animated } from 'react-native';
 import { AudioModule, RecordingPresets, useAudioRecorder } from 'expo-audio';
+import * as FileSystem from 'expo-file-system';
 import {
   LowerContainer,
   RecordingGroup,
@@ -70,6 +71,11 @@ export default function SpeechRecorder() {
     await audioRecorder.stop();
     const uri = audioRecorder.uri;
     if (uri) {
+      const info = await FileSystem.getInfoAsync(uri);
+      if (!info.exists || info.size < 1000) {
+        showToast('error', t('errorSendingAudio'), t('noSpeechDetectedError'));
+        return;
+      }
       addCorrection(uri);
     }
     waveformOpacity.setValue(0);
