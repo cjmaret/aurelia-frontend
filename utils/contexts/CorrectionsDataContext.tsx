@@ -35,6 +35,13 @@ export const CorrectionsDataProvider: React.FC<{
   useEffect(() => {
     if (isAuthenticated) {
       fetchCorrections({ page: pagination.page, limit: pagination.limit });
+    } else {
+      setCorrectionData([]);
+      setPagination({
+        total: 0,
+        page: 1,
+        limit: 10,
+      });
     }
   }, [isAuthenticated]);
 
@@ -81,7 +88,6 @@ export const CorrectionsDataProvider: React.FC<{
       throw err;
     }
   };
-
 
   const searchCorrections = async ({
     query,
@@ -178,7 +184,7 @@ export const CorrectionsDataProvider: React.FC<{
         pagination,
         setPagination,
         resetPagination,
-        isProcessingRecording, 
+        isProcessingRecording,
         setIsProcessingRecording,
       }}>
       {children}
