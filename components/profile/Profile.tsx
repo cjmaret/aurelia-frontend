@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Modal,
   FlatList,
@@ -35,6 +35,7 @@ import {
   DeleteUserButton,
   DeleteUserButtonText,
   DeleteUserSubsection,
+  VerifyEmailSaveButtonText,
 } from './styledProfile';
 import api from '@/lib/api';
 import { UserDataType } from '@/types/types';
@@ -46,10 +47,13 @@ import { getTranslatedLanguageName } from '@/utils/functions/generalFunctions';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
+import { useLocalSearchParams } from 'expo-router';
+import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
 
 export default function Profile() {
   const { showToast } = useToastModal();
-  const { user, setUser, logout, deleteUser } = useAuth();
+  const { token } = useLocalSearchParams<{ token?: string }>();
+  const { getUserDetails, user, setUser, logout, deleteUser } = useAuth();
   const { pagination, resetPagination } = useCorrectionsData();
   const theme: any = useTheme();
   const { t } = useTranslation();
@@ -80,6 +84,34 @@ export default function Profile() {
     );
   }, [localUser, user]);
 
+  useEffect(() => {
+    if (token) {
+      async function handleVerifyEmail() {
+        try {
+          await api.verifyEmail(token as string);
+          showToast('success', t('success'), t('emailVerifiedSuccess'));
+          await getUserDetails();
+        } catch (err) {
+          showToast('error', t('error'), t('emailVerifiedFailed'));
+        }
+      }
+      handleVerifyEmail();
+    }
+  }, [token]);
+
+  const handleRequestEmailVerification = async () => {
+    if (user?.emailVerified) return;
+    setLoading(true);
+    try {
+      await api.requestEmailVerification();
+      showToast('success', t('success'), t('verificationEmailSent'));
+    } catch (error) {
+      showToast('error', t('error'), t('requestVerificationEmailFailed'));
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleRequestEmailChange = async () => {
     if (!localUser?.userEmail) return;
     setLoading(true);
@@ -92,8 +124,6 @@ export default function Profile() {
       setLoading(false);
     }
   };
-
-  showToast('success', t('success'), t('verificationEmailSent'));
 
   const handleSave = async () => {
     setLoading(true);
@@ -217,6 +247,15 @@ export default function Profile() {
               <ProfilePicture source={languageFlags[user.targetLanguage]} />
               <Name>{user.username}</Name>
               <Label>{user.userEmail}</Label>
+              {!user.emailVerified && (
+                <SaveButton
+                  onPress={handleRequestEmailVerification}
+                  style={{ marginBottom: 12 }}>
+                  <VerifyEmailSaveButtonText>
+                    {t('verifyEmail')}
+                  </VerifyEmailSaveButtonText>
+                </SaveButton>
+              )}
             </Header>
             {/* Progress Section */}
             <SubSection>

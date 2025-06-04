@@ -147,6 +147,69 @@ class Api {
     }
   }
 
+  async requestEmailVerification(): Promise<any> {
+    const headers = await this._getAuthHeaders();
+    return fetch(`${config.apiUrl}/auth/request-email-verification`, {
+      method: 'POST',
+      headers,
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error sending verification email:', err);
+        throw err;
+      });
+  }
+
+  // Verify the user's email with a token
+  async verifyEmail(token: string): Promise<any> {
+    const headers = await this._getAuthHeaders();
+
+    return fetch(`${config.apiUrl}/auth/verify-email`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ token }),
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error verifying email:', err);
+        throw err;
+      });
+  }
+
+  async requestEmailChange({ newEmail }: { newEmail: string }): Promise<any> {
+    const headers = await this._getAuthHeaders();
+    return fetch(`${this._baseUrl}/user/request-email-change`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ newEmail }),
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error requesting email change:', err);
+        throw err;
+      });
+  }
+
+  async changeEmail({
+    token,
+    password,
+  }: {
+    token: string;
+    password: string;
+  }): Promise<any> {
+    const headers = await this._getAuthHeaders();
+    return fetch(`${this._baseUrl}/user/change-email`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ token, password }),
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error confirming email change:', err);
+        throw err;
+      });
+  }
+
   async getUserDetails(): Promise<any> {
     const headers = await this._getAuthHeaders();
 
@@ -248,40 +311,6 @@ class Api {
       .then((res) => this._returnRes(res))
       .catch((err) => {
         console.error('Error resetting password:', err);
-        throw err;
-      });
-  }
-
-  async requestEmailChange({ newEmail }: { newEmail: string }): Promise<any> {
-    const headers = await this._getAuthHeaders();
-    return fetch(`${this._baseUrl}/user/request-email-change`, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({ newEmail }),
-    })
-      .then((res) => this._returnRes(res))
-      .catch((err) => {
-        console.error('Error requesting email change:', err);
-        throw err;
-      });
-  }
-
-  async changeEmail({
-  token,
-    password,
-  }: {
-    token: string;
-    password: string;
-  }): Promise<any> {
-    const headers = await this._getAuthHeaders();
-    return fetch(`${this._baseUrl}/user/change-email`, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({ token, password }),
-    })
-      .then((res) => this._returnRes(res))
-      .catch((err) => {
-        console.error('Error confirming email change:', err);
         throw err;
       });
   }

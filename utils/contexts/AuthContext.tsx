@@ -21,7 +21,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const pathname = usePathname();
   const PUBLIC_ROUTES = ['/signIn', '/signUp', '/reset-password'];
 
-
   useEffect(() => {
     const interval = setInterval(async () => {
       const storedToken = await SecureStore.getItemAsync('accessToken');
@@ -64,9 +63,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           return;
         }
 
-        const userDetails = await api.getUserDetails();
-        setUser(userDetails);
-        setIsAuthenticated(true);
+        await getUserDetails();
       } else {
         setIsAuthenticated(false);
         setUser(null);
@@ -102,10 +99,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       await SecureStore.setItemAsync('accessToken', accessToken);
       await SecureStore.setItemAsync('refreshToken', refreshToken);
 
-      const userDetails = await api.getUserDetails();
-
-      setUser(userDetails);
-      setIsAuthenticated(true);
+      const userDetails = await getUserDetails();
 
       if (userDetails.setupComplete) {
         router.replace('/');
@@ -160,13 +154,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       const newToken = await refreshToken();
       if (newToken) {
         console.log('Token refreshed successfully');
-        const userDetails = await api.getUserDetails();
-        setUser(userDetails);
-        setIsAuthenticated(true);
+        await getUserDetails();
       }
     } catch (error) {
       console.warn('Token refresh failed. Logging out...');
       await logout();
+    }
+  };
+
+  const getUserDetails = async () => {
+    try {
+      const userDetails = await api.getUserDetails();
+      setUser(userDetails);
+      setIsAuthenticated(true);
+      return userDetails;
+    } catch (err) {
+      console.error('Error fetching user details:', err);
+      throw err;
     }
   };
 
@@ -198,6 +202,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         isAuthenticated,
         login,
         logout,
+        getUserDetails,
         user,
         setUser,
         refreshToken,

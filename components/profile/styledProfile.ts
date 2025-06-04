@@ -126,6 +126,10 @@ export const SaveButtonText = styled.Text<{ disabled: boolean }>`
   font-weight: bold;
 `;
 
+export const VerifyEmailSaveButtonText = styled(SaveButtonText)`
+  font-size: 14px;
+`;
+
 export const LogoutButton = styled(ProfileButton)`
   background-color: ${({ theme }: { theme: any }) =>
     theme.colors.buttonPrimaryBackground};

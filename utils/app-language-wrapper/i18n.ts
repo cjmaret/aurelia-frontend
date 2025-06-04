@@ -24,6 +24,7 @@ const resources = {
         'Once you’re done recording, your corrections will appear in the Grammar Review tab',
 
       //profile
+      verifyEmail: 'Verify Email',
       conversations: 'Conversations',
       profileInfo: 'Profile Info',
       username: 'Username',
@@ -79,6 +80,9 @@ const resources = {
       error: 'Error',
       verificationEmailSent:
         'A verification email has been sent to your new address. Please verify your new email to complete the change.',
+      requestVerificationEmailFailed: 'Failed to send verification email.',
+      emailVerifiedSuccess: 'Your email has been verified!',
+      emailVerifiedFailed: 'Verification failed.',
       requestEmailChangeFailed: 'Failed to request email change.',
       profileUpdateFailed: 'Failed to update profile. Please try again.',
       passwordUpdated: 'Your password has been successfully updated.',
@@ -134,6 +138,7 @@ const resources = {
       gotIt: 'Compris',
 
       // profile
+      verifyEmail: "Vérifier l'e-mail",
       conversations: 'Conversations',
       profileInfo: 'Infos du Profil',
       username: "Nom d'utilisateur",
@@ -192,6 +197,10 @@ const resources = {
       error: 'Erreur',
       verificationEmailSent:
         'Un e-mail de vérification a été envoyé à votre nouvelle adresse. Veuillez vérifier votre nouvel e-mail pour finaliser le changement.',
+      requestVerificationEmailFailed:
+        "Échec de l'envoi de l'e-mail de vérification.",
+      emailVerifiedSuccess: 'Votre e-mail a été vérifié !',
+      emailVerifiedFailed: 'Échec de la vérification.',
       requestEmailChangeFailed: "Échec de la demande de changement d'e-mail.",
       profileUpdateFailed:
         'Échec de la mise à jour du profil. Veuillez réessayer.',
@@ -252,6 +261,7 @@ const resources = {
       gotIt: 'Entendido',
 
       // profile
+      verifyEmail: 'Verificar correo electrónico',
       conversations: 'Conversaciones',
       profileInfo: 'Información del Perfil',
       username: 'Nombre de Usuario',
@@ -310,6 +320,10 @@ const resources = {
       error: 'Error',
       verificationEmailSent:
         'Se ha enviado un correo de verificación a tu nueva dirección. Por favor, verifica tu nuevo correo electrónico para completar el cambio.',
+      requestVerificationEmailFailed:
+        'No se pudo enviar el correo de verificación.',
+      emailVerifiedSuccess: '¡Tu correo electrónico ha sido verificado!',
+      emailVerifiedFailed: 'La verificación falló.',
       requestEmailChangeFailed:
         'No se pudo solicitar el cambio de correo electrónico.',
       profileUpdateFailed:

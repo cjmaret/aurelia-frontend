@@ -11,6 +11,7 @@ export interface AuthContextType {
   isAuthenticated: boolean;
   login: (userEmail: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  getUserDetails: () => Promise<UserDataType | null>;
   user: UserDataType | null;
   setUser: React.Dispatch<React.SetStateAction<UserDataType | null>>;
   refreshToken: () => Promise<string>;
@@ -36,10 +37,12 @@ export interface CorrectionDataContextType {
 
 // // user data types
 export interface UserDataType {
+  userId: string;
   username: string;
   userEmail: string;
-  targetLanguage: string;
+  emailVerified: boolean;
   appLanguage: string;
+  targetLanguage: string;
   setupComplete: boolean;
 }
 
