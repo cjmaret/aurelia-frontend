@@ -87,6 +87,9 @@ const resources = {
       profileUpdateFailed: 'Failed to update profile. Please try again.',
       passwordUpdated: 'Your password has been successfully updated.',
       passwordTooShort: 'Password must be at least 8 characters long.',
+      currentPasswordIncorrect: 'Current password is incorrect',
+      newPasswordSameAsCurrent:
+        'New password cannot be the same as the current password',
       passwordUpdateError: 'Error updating password',
       passwordUpdateFailed: 'Failed to update password. Please try again.',
       resetEmailSentTitle: 'Reset Email Sent',
@@ -206,6 +209,9 @@ const resources = {
         'Échec de la mise à jour du profil. Veuillez réessayer.',
       passwordUpdated: 'Votre mot de passe a été mis à jour avec succès.',
       passwordTooShort: 'Le mot de passe doit contenir au moins 8 caractères.',
+      currentPasswordIncorrect: 'Current password is incorrect',
+      newPasswordSameAsCurrent:
+        "Le nouveau mot de passe ne peut pas être identique à l'actuel",
       passwordUpdateError: 'Erreur lors de la mise à jour du mot de passe',
       passwordUpdateFailed:
         'Échec de la mise à jour du mot de passe. Veuillez réessayer.',
@@ -330,6 +336,9 @@ const resources = {
         'Error al actualizar el perfil. Por favor, inténtalo de nuevo.',
       passwordUpdated: 'Tu contraseña se ha actualizado con éxito.',
       passwordTooShort: 'La contraseña debe tener al menos 8 caracteres.',
+      currentPasswordIncorrect: 'Current password is incorrect',
+      newPasswordSameAsCurrent:
+        'La nueva contraseña no puede ser igual a la actual',
       passwordUpdateError: 'Error al actualizar la contraseña',
       passwordUpdateFailed:
         'Error al actualizar la contraseña. Por favor, inténtalo de nuevo.',

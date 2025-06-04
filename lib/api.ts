@@ -277,13 +277,10 @@ class Api {
   }: {
     userEmail: string;
   }): Promise<any> {
-    const headers = await this._getAuthHeaders();
 
     return fetch(`${config.apiUrl}/auth/request-password-reset`, {
       method: 'POST',
-      headers: {
-        ...headers,
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userEmail }),
     })
       .then((res) => this._returnRes(res))

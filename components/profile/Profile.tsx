@@ -68,24 +68,6 @@ export default function Profile() {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
 
-  const hasFieldChanged = (
-    key: string,
-    localUser: UserDataType,
-    user: UserDataType
-  ): boolean => {
-    return (
-      localUser[key as keyof UserDataType] !== user[key as keyof UserDataType]
-    );
-  };
-
-  const hasChanges = useMemo(() => {
-    if (!localUser || !user) return false;
-
-    return Object.keys(localUser).some(
-      (key) => localUser && user && hasFieldChanged(key, localUser, user)
-    );
-  }, [localUser, user]);
-
   useEffect(() => {
     if (token) {
       async function handleVerifyEmail() {
@@ -158,6 +140,16 @@ export default function Profile() {
     }
   };
 
+  const hasFieldChanged = (
+    key: string,
+    localUser: UserDataType,
+    user: UserDataType
+  ): boolean => {
+    return (
+      localUser[key as keyof UserDataType] !== user[key as keyof UserDataType]
+    );
+  };
+
   const handleLanguageSelect = (language: string) => {
     if (modalType === 'speaking') {
       localUser &&
@@ -186,7 +178,13 @@ export default function Profile() {
       setCurrentPassword('');
       setNewPassword('');
     } catch (error: any) {
-      showToast('error', t('error'), t('passwordUpdateFailed'));
+      if (error?.status === 400) {
+        showToast('error', t('error'), t('newPasswordSameAsCurrent'));
+      } else if (error?.status === 403) {
+        showToast('error', t('error'), t('currentPasswordIncorrect'));
+      } else {
+        showToast('error', t('error'), t('passwordUpdateFailed'));
+      }
     } finally {
       setCurrentPassword('');
       setNewPassword('');
@@ -236,6 +234,16 @@ export default function Profile() {
 
   const isRequestEmailChangeButtonDisabled =
     loading || !localUser.userEmail || localUser.userEmail === user.userEmail;
+
+  const isUpdateUsernameButtonDisabled =
+    loading || !localUser.username || localUser.username === user.username;
+
+  const isSaveLanguagePreferencesButtonDisabled =
+    loading ||
+    !localUser.appLanguage ||
+    !localUser.targetLanguage ||
+    (localUser.appLanguage === user.appLanguage &&
+      localUser.targetLanguage === user.targetLanguage);
 
   return (
     <>
@@ -296,8 +304,8 @@ export default function Profile() {
                 />
                 <SaveButton
                   onPress={handleSave}
-                  disabled={!hasChanges || loading}>
-                  <SaveButtonText disabled={!hasChanges || loading}>
+                  disabled={isUpdateUsernameButtonDisabled}>
+                  <SaveButtonText disabled={isUpdateUsernameButtonDisabled}>
                     {loading ? t('saving') : t('updateUsername')}
                   </SaveButtonText>
                 </SaveButton>
@@ -305,7 +313,10 @@ export default function Profile() {
                 <Input
                   value={localUser.userEmail}
                   onChangeText={(text: string) =>
-                    setLocalUser({ ...localUser, userEmail: text })
+                    setLocalUser({
+                      ...localUser,
+                      userEmail: text.trim().toLowerCase(),
+                    })
                   }
                   placeholder={t('enterEmail')}
                   placeholderTextColor={theme.colors.inputPlaceholder}
@@ -358,8 +369,9 @@ export default function Profile() {
               </SubSection>
               <SaveButton
                 onPress={handleSave}
-                disabled={!hasChanges || loading}>
-                <SaveButtonText disabled={!hasChanges || loading}>
+                disabled={isSaveLanguagePreferencesButtonDisabled}>
+                <SaveButtonText
+                  disabled={isSaveLanguagePreferencesButtonDisabled}>
                   {loading ? t('saving') : t('saveLanguagePreferences')}
                 </SaveButtonText>
               </SaveButton>
