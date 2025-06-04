@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useRouter } from 'expo-router';
+import { Link, useLocalSearchParams, useRouter } from 'expo-router';
 import {
   Container,
   Title,
@@ -21,8 +21,10 @@ import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 
 export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const { showToast } = useToastModal();
-  const { login } = useAuth();
+  const { login, getUserDetails } = useAuth();
   const { t } = useTranslation();
+  const params = useLocalSearchParams();
+  const token = (params as { token?: string }).token;
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -53,6 +55,15 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
         router.replace('/signIn');
       } else {
         await login(normalizedEmail, password);
+      }
+      if (token) {
+        try {
+          await api.verifyEmail(token);
+          showToast('success', t('success'), t('emailVerifiedSuccess'));
+          await getUserDetails();
+        } catch (err) {
+          showToast('error', t('error'), t('emailVerifiedFailed'));
+        }
       }
     } catch (error: any) {
       showToast(

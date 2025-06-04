@@ -162,11 +162,9 @@ class Api {
 
   // Verify the user's email with a token
   async verifyEmail(token: string): Promise<any> {
-    const headers = await this._getAuthHeaders();
-
     return fetch(`${config.apiUrl}/auth/verify-email`, {
       method: 'POST',
-      headers,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token }),
     })
       .then((res) => this._returnRes(res))
@@ -277,7 +275,6 @@ class Api {
   }: {
     userEmail: string;
   }): Promise<any> {
-
     return fetch(`${config.apiUrl}/auth/request-password-reset`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

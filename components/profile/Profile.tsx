@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Modal,
   FlatList,
@@ -48,14 +48,14 @@ import { getTranslatedLanguageName } from '@/utils/functions/generalFunctions';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
-import { useLocalSearchParams } from 'expo-router';
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
+import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function Profile() {
   const { showToast } = useToastModal();
   const { token } = useLocalSearchParams<{ token?: string }>();
-  const { getUserDetails, user, setUser, logout, deleteUser } = useAuth();
+  const { getUserDetails, user, setUser, logout, deleteUser, isAuthenticated } =
+    useAuth();
   const { pagination, resetPagination } = useCorrectionsData();
   const theme: any = useTheme();
   const { t } = useTranslation();
@@ -70,16 +70,20 @@ export default function Profile() {
 
   useEffect(() => {
     if (token) {
-      async function handleVerifyEmail() {
-        try {
-          await api.verifyEmail(token as string);
-          showToast('success', t('success'), t('emailVerifiedSuccess'));
-          await getUserDetails();
-        } catch (err) {
-          showToast('error', t('error'), t('emailVerifiedFailed'));
+      if (!isAuthenticated) {
+        router.replace({ pathname: '/signIn', params: { token } });
+      } else {
+        async function handleVerifyEmail() {
+          try {
+            await api.verifyEmail(token as string);
+            showToast('success', t('success'), t('emailVerifiedSuccess'));
+            await getUserDetails();
+          } catch (err) {
+            showToast('error', t('error'), t('emailVerifiedFailed'));
+          }
         }
+        handleVerifyEmail();
       }
-      handleVerifyEmail();
     }
   }, [token]);
 
