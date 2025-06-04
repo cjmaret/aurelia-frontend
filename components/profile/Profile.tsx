@@ -36,6 +36,7 @@ import {
   DeleteUserButtonText,
   DeleteUserSubsection,
   VerifyEmailSaveButtonText,
+  UsernameGroup,
 } from './styledProfile';
 import api from '@/lib/api';
 import { UserDataType } from '@/types/types';
@@ -49,6 +50,7 @@ import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 import { useLocalSearchParams } from 'expo-router';
 import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function Profile() {
   const { showToast } = useToastModal();
@@ -245,7 +247,18 @@ export default function Profile() {
           <Container>
             <Header>
               <ProfilePicture source={languageFlags[user.targetLanguage]} />
-              <Name>{user.username}</Name>
+              <UsernameGroup>
+                <Name>{user.username}</Name>
+                <Ionicons
+                  name="checkmark-circle-outline"
+                  size={20}
+                  color={
+                    user.emailVerified
+                      ? theme.colors.primary
+                      : theme.colors.greySecondary
+                  }
+                />
+              </UsernameGroup>
               <Label>{user.userEmail}</Label>
               {!user.emailVerified && (
                 <SaveButton

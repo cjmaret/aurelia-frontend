@@ -1,5 +1,4 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
 import { HapticTab } from '@/components/base-rn-components/HapticTab';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components/native';

@@ -31,10 +31,17 @@ export const ProfilePicture = styled.Image`
   shadow-radius: 6px;
 `;
 
+export const UsernameGroup = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 4px;
+`;
+
 export const Name = styled.Text`
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-right: 3px;
   color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
 `;
 
