@@ -35,7 +35,7 @@ export const Name = styled.Text`
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 4px;
-  color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
+  color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
 `;
 
 export const ProfileInfoSection = styled.View`
@@ -116,6 +116,7 @@ export const ProfileButton = styled.TouchableOpacity`
 export const SaveButton = styled(ProfileButton)`
   padding: 0;
   align-self: center;
+  margin-bottom: 16px;
 `;
 
 export const SaveButtonText = styled.Text<{ disabled: boolean }>`

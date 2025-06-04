@@ -53,6 +53,7 @@ export default function RootLayout() {
     '(tabs)': theme.colors.backgroundPrimary,
     '+not-found': theme.colors.backgroundSecondary,
     'reset-password': theme.colors.backgroundSecondary,
+    'change-email': theme.colors.backgroundSecondary,
     '(auth)': theme.colors.backgroundSecondary,
     default: theme.colors.backgroundPrimary,
   };

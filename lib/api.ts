@@ -214,11 +214,12 @@ class Api {
   }: {
     userEmail: string;
   }): Promise<any> {
+    const headers = await this._getAuthHeaders();
+
     return fetch(`${config.apiUrl}/auth/request-password-reset`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        ...this._headers,
+        ...headers,
       },
       body: JSON.stringify({ userEmail }),
     })
@@ -247,6 +248,40 @@ class Api {
       .then((res) => this._returnRes(res))
       .catch((err) => {
         console.error('Error resetting password:', err);
+        throw err;
+      });
+  }
+
+  async requestEmailChange({ newEmail }: { newEmail: string }): Promise<any> {
+    const headers = await this._getAuthHeaders();
+    return fetch(`${this._baseUrl}/user/request-email-change`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ newEmail }),
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error requesting email change:', err);
+        throw err;
+      });
+  }
+
+  async changeEmail({
+  token,
+    password,
+  }: {
+    token: string;
+    password: string;
+  }): Promise<any> {
+    const headers = await this._getAuthHeaders();
+    return fetch(`${this._baseUrl}/user/change-email`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ token, password }),
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error confirming email change:', err);
         throw err;
       });
   }

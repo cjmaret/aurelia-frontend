@@ -80,6 +80,21 @@ export default function Profile() {
     );
   }, [localUser, user]);
 
+  const handleRequestEmailChange = async () => {
+    if (!localUser?.userEmail) return;
+    setLoading(true);
+    try {
+      await api.requestEmailChange({ newEmail: localUser.userEmail });
+      showToast('success', t('success'), t('verificationEmailSent'));
+    } catch (error) {
+      showToast('error', t('error'), t('requestEmailChangeFailed'));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  showToast('success', t('success'), t('verificationEmailSent'));
+
   const handleSave = async () => {
     setLoading(true);
     try {
@@ -108,20 +123,6 @@ export default function Profile() {
       showToast('error', t('error'), t('profileUpdateFailed'));
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      resetPagination();
-      console.log('You have been logged out.');
-    } catch (error: any) {
-      showApiErrorToast({
-        error,
-        showToast,
-        t,
-      });
     }
   };
 
@@ -161,6 +162,20 @@ export default function Profile() {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+      resetPagination();
+      console.log('You have been logged out.');
+    } catch (error: any) {
+      showApiErrorToast({
+        error,
+        showToast,
+        t,
+      });
+    }
+  };
+
   const confirmDelete = () => {
     Alert.alert(
       'Delete Account',
@@ -186,6 +201,9 @@ export default function Profile() {
       </Container>
     );
   }
+
+  const isRequestEmailChangeButtonDisabled =
+    loading || !localUser.userEmail || localUser.userEmail === user.userEmail;
 
   return (
     <>
@@ -224,6 +242,13 @@ export default function Profile() {
                   placeholder={t('enterUsername')}
                   placeholderTextColor={theme.colors.inputPlaceholder}
                 />
+                <SaveButton
+                  onPress={handleSave}
+                  disabled={!hasChanges || loading}>
+                  <SaveButtonText disabled={!hasChanges || loading}>
+                    {loading ? t('saving') : t('updateUsername')}
+                  </SaveButtonText>
+                </SaveButton>
                 <Label>{t('email')}</Label>
                 <Input
                   value={localUser.userEmail}
@@ -234,6 +259,14 @@ export default function Profile() {
                   placeholderTextColor={theme.colors.inputPlaceholder}
                   keyboardType="email-address"
                 />
+                <SaveButton
+                  onPress={handleRequestEmailChange}
+                  disabled={isRequestEmailChangeButtonDisabled}
+                  style={{ marginBottom: 12 }}>
+                  <SaveButtonText disabled={isRequestEmailChangeButtonDisabled}>
+                    {loading ? 'Sending...' : t('updateEmail')}
+                  </SaveButtonText>
+                </SaveButton>
               </SubSection>
 
               {/* Language Preferences Subsection*/}
@@ -275,7 +308,7 @@ export default function Profile() {
                 onPress={handleSave}
                 disabled={!hasChanges || loading}>
                 <SaveButtonText disabled={!hasChanges || loading}>
-                  {loading ? t('saving') : t('saveProfileChanges')}
+                  {loading ? t('saving') : t('saveLanguagePreferences')}
                 </SaveButtonText>
               </SaveButton>
             </ProfileInfoSection>

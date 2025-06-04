@@ -33,7 +33,9 @@ const resources = {
       languagePreferences: 'Language Preferences',
       appLanguage: 'App Language',
       targetLanguage: 'Target Language',
-      saveProfileChanges: 'Save Profile Changes',
+      updateUsername: 'Update Username',
+      updateEmail: 'Update Email',
+      saveLanguagePreferences: 'Save Language Preferences',
       saving: 'Saving...',
       accountManagement: 'Account Management',
       currentPassword: 'Current Password',
@@ -75,6 +77,9 @@ const resources = {
       noChanges: 'No Changes',
       noFieldsUpdated: 'No fields were updated.',
       error: 'Error',
+      verificationEmailSent:
+        'A verification email has been sent to your new address. Please verify your new email to complete the change.',
+      requestEmailChangeFailed: 'Failed to request email change.',
       profileUpdateFailed: 'Failed to update profile. Please try again.',
       passwordUpdated: 'Your password has been successfully updated.',
       passwordTooShort: 'Password must be at least 8 characters long.',
@@ -138,7 +143,9 @@ const resources = {
       languagePreferences: 'Préférences Linguistiques',
       appLanguage: "Langue de l'Application",
       targetLanguage: 'Langue Cible',
-      saveProfileChanges: 'Enregistrer les Modifications du Profil',
+      updateUsername: "Mettre à jour le nom d'utilisateur",
+      updateEmail: "Mettre à jour l'e-mail",
+      saveLanguagePreferences: 'Enregistrer les préférences linguistiques',
       saving: 'Enregistrement...',
       accountManagement: 'Gestion du Compte',
       currentPassword: 'Mot de Passe Actuel',
@@ -183,6 +190,9 @@ const resources = {
       noChanges: 'Aucun changement',
       noFieldsUpdated: 'Aucun champ n’a été mis à jour.',
       error: 'Erreur',
+      verificationEmailSent:
+        'Un e-mail de vérification a été envoyé à votre nouvelle adresse. Veuillez vérifier votre nouvel e-mail pour finaliser le changement.',
+      requestEmailChangeFailed: "Échec de la demande de changement d'e-mail.",
       profileUpdateFailed:
         'Échec de la mise à jour du profil. Veuillez réessayer.',
       passwordUpdated: 'Votre mot de passe a été mis à jour avec succès.',
@@ -251,7 +261,9 @@ const resources = {
       languagePreferences: 'Preferencias de Idioma',
       appLanguage: 'Idioma de la Aplicación',
       targetLanguage: 'Idioma Objetivo',
-      saveProfileChanges: 'Guardar Cambios del Perfil',
+      updateUsername: 'Actualizar nombre de usuario',
+      updateEmail: 'Actualizar correo electrónico',
+      saveLanguagePreferences: 'Guardar preferencias de idioma',
       saving: 'Guardando...',
       accountManagement: 'Gestión de la Cuenta',
       currentPassword: 'Contraseña Actual',
@@ -296,6 +308,10 @@ const resources = {
       noChanges: 'Sin cambios',
       noFieldsUpdated: 'No se actualizaron campos.',
       error: 'Error',
+      verificationEmailSent:
+        'Se ha enviado un correo de verificación a tu nueva dirección. Por favor, verifica tu nuevo correo electrónico para completar el cambio.',
+      requestEmailChangeFailed:
+        'No se pudo solicitar el cambio de correo electrónico.',
       profileUpdateFailed:
         'Error al actualizar el perfil. Por favor, inténtalo de nuevo.',
       passwordUpdated: 'Tu contraseña se ha actualizado con éxito.',
