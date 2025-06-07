@@ -5,7 +5,7 @@
     "owner": "cjmaret",
     "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/aurelia-icon.png",
     "scheme": "com.aureliaai.myapp",
     "platforms": ["ios", "android"],
     "userInterfaceStyle": "automatic",
@@ -43,10 +43,10 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/jellyfish.png",
+          "image": "./assets/images/aurelia-splash-screen-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#81C6D0"
         }
       ]
     ],
