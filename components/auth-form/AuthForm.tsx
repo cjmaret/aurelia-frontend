@@ -11,6 +11,7 @@ import {
   PrivacyPolicyText,
   OAuthTextContainer,
   OAuthTextBorder,
+  OAuthText,
 } from './styledAuthForm';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import api from '@/lib/api';
@@ -161,7 +162,7 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
                 marginRight: 8,
               }}
             />
-            <OAuthTextBorder>Or continue with</OAuthTextBorder>
+            <OAuthText>Or continue with</OAuthText>
             <OAuthTextBorder
               style={{
                 marginLeft: 8,
