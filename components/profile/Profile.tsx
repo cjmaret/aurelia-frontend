@@ -45,7 +45,10 @@ import { languageFlags, languageCodes } from '@/constants/profileConstants';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
-import { getTranslatedLanguageName } from '@/utils/functions/generalFunctions';
+import {
+  getTranslatedLanguageName,
+  isValidEmail,
+} from '@/utils/functions/generalFunctions';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
@@ -104,6 +107,10 @@ export default function Profile() {
 
   const handleRequestEmailChange = async () => {
     if (!localUser?.userEmail) return;
+    if (!isValidEmail(localUser.userEmail)) {
+      showToast('error', t('error'), t('invalidEmailFormat'));
+      return;
+    }
     setLoading(true);
     try {
       await api.requestEmailChange({ newEmail: localUser.userEmail });
@@ -307,6 +314,7 @@ export default function Profile() {
                   }
                   placeholder={t('enterUsername')}
                   placeholderTextColor={theme.colors.inputPlaceholder}
+                  maxLength={25}
                 />
                 <SaveButton
                   onPress={handleSave}

@@ -89,13 +89,13 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
       });
       showToast(
         'success',
-        t('resetEmailSentTitle'),
-        t('resetEmailSentMessage')
+        t('resetPasswordEmailSentTitle'),
+        t('resetPasswordEmailSentMessage')
       );
     } catch (error: any) {
       showToast(
         'error',
-        t('resetEmailFailed'),
+        t('resetPasswordEmailFailed'),
         error.message || t('unexpectedError')
       );
     } finally {

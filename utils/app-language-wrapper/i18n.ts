@@ -84,6 +84,7 @@ const resources = {
       requestVerificationEmailFailed: 'Failed to send verification email.',
       emailVerifiedSuccess: 'Your email has been verified!',
       emailVerifiedFailed: 'Verification failed.',
+      invalidEmailFormat: 'Please enter a valid email address.',
       requestEmailChangeFailed: 'Failed to request email change.',
       profileUpdateFailed: 'Failed to update profile. Please try again.',
       passwordUpdated: 'Your password has been successfully updated.',
@@ -93,9 +94,9 @@ const resources = {
         'New password cannot be the same as the current password',
       passwordUpdateError: 'Error updating password',
       passwordUpdateFailed: 'Failed to update password. Please try again.',
-      resetEmailSentTitle: 'Reset Email Sent',
-      resetEmailSentMessage: 'Check your inbox for a password reset link.',
-      resetEmailFailed: 'Reset Email Failed',
+      resetPasswordEmailSentTitle: 'Reset Email Sent',
+      resetPasswordEmailSentMessage: 'Check your inbox for a password reset link.',
+      resetPasswordEmailFailed: 'Reset Email Failed',
       processingRecording: 'Processing Your Recording',
       processingRecordingMessage:
         'Hang tight! Check the Grammar Review tab for results.',
@@ -207,6 +208,7 @@ const resources = {
         "Échec de l'envoi de l'e-mail de vérification.",
       emailVerifiedSuccess: 'Votre e-mail a été vérifié !',
       emailVerifiedFailed: 'Échec de la vérification.',
+      invalidEmailFormat: 'Veuillez saisir une adresse e-mail valide.',
       requestEmailChangeFailed: "Échec de la demande de changement d'e-mail.",
       profileUpdateFailed:
         'Échec de la mise à jour du profil. Veuillez réessayer.',
@@ -218,10 +220,10 @@ const resources = {
       passwordUpdateError: 'Erreur lors de la mise à jour du mot de passe',
       passwordUpdateFailed:
         'Échec de la mise à jour du mot de passe. Veuillez réessayer.',
-      resetEmailSentTitle: 'E-mail de réinitialisation envoyé',
-      resetEmailSentMessage:
+      resetPasswordEmailSentTitle: 'E-mail de réinitialisation envoyé',
+      resetPasswordEmailSentMessage:
         'Vérifiez votre boîte de réception pour un lien de réinitialisation du mot de passe.',
-      resetEmailFailed: 'Échec de l’envoi de l’e-mail de réinitialisation',
+      resetPasswordEmailFailed: 'Échec de l’envoi de l’e-mail de réinitialisation',
       processingRecording: 'Traitement de votre enregistrement',
       processingRecordingMessage:
         'Patientez ! Consultez l’onglet Revue grammaticale pour les résultats.',
@@ -335,6 +337,8 @@ const resources = {
         'No se pudo enviar el correo de verificación.',
       emailVerifiedSuccess: '¡Tu correo electrónico ha sido verificado!',
       emailVerifiedFailed: 'La verificación falló.',
+      invalidEmailFormat:
+        'Por favor, introduce una dirección de correo electrónico válida.',
       requestEmailChangeFailed:
         'No se pudo solicitar el cambio de correo electrónico.',
       profileUpdateFailed:
@@ -347,10 +351,10 @@ const resources = {
       passwordUpdateError: 'Error al actualizar la contraseña',
       passwordUpdateFailed:
         'Error al actualizar la contraseña. Por favor, inténtalo de nuevo.',
-      resetEmailSentTitle: 'Correo de restablecimiento enviado',
-      resetEmailSentMessage:
+      resetPasswordEmailSentTitle: 'Correo de restablecimiento enviado',
+      resetPasswordEmailSentMessage:
         'Revisa tu bandeja de entrada para un enlace de restablecimiento de contraseña.',
-      resetEmailFailed: 'Error al enviar el correo de restablecimiento',
+      resetPasswordEmailFailed: 'Error al enviar el correo de restablecimiento',
       processingRecording: 'Procesando tu grabación',
       processingRecordingMessage:
         '¡Espera un momento! Consulta la pestaña de Revisión Gramatical para ver los resultados.',
