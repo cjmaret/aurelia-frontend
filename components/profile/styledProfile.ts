@@ -35,23 +35,30 @@ export const UsernameGroup = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 4px;
+  position: relative;
+  padding: 0 25px;
 `;
 
 export const Name = styled.Text`
   font-size: 24px;
   font-weight: bold;
-  margin-right: 3px;
   color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
+  justify-self: center;
+`;
+
+export const IconWrapper = styled.View`
+  justify-self: flex-end;
+  position: absolute;
+  right: 0;
 `;
 
 export const ProfileInfoSection = styled.View`
   margin-bottom: 24px;
 `;
 
-export const SubSection = styled.View`
-  /* margin-bottom: 24px; */
-`;
+export const SubSection = styled.View``;
 
 export const SectionTitle = styled.Text`
   font-size: 20px;

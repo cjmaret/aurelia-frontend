@@ -38,6 +38,7 @@ import {
   VerifyEmailSaveButtonText,
   UsernameGroup,
   GoogleEmailNotificationText,
+  IconWrapper,
 } from './styledProfile';
 import api from '@/lib/api';
 import { UserDataType } from '@/types/types';
@@ -270,15 +271,17 @@ export default function Profile() {
               <ProfilePicture source={languageFlags[user.targetLanguage]} />
               <UsernameGroup>
                 <Name>{user.username}</Name>
-                <Ionicons
-                  name="checkmark-circle-outline"
-                  size={20}
-                  color={
-                    user.emailVerified
-                      ? theme.colors.primary
-                      : theme.colors.greySecondary
-                  }
-                />
+                <IconWrapper>
+                  <Ionicons
+                    name="checkmark-circle-outline"
+                    size={20}
+                    color={
+                      user.emailVerified
+                        ? theme.colors.primary
+                        : theme.colors.greySecondary
+                    }
+                  />
+                </IconWrapper>
               </UsernameGroup>
               <Label>{user.userEmail}</Label>
               {!user.emailVerified && (
