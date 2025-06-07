@@ -120,31 +120,18 @@ class Api {
     userEmail: string,
     password: string
   ): Promise<{ accessToken: string; refreshToken: string }> {
-    try {
-      const response = await fetch(`${config.apiUrl}/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userEmail, password }),
+    return fetch(`${config.apiUrl}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userEmail, password }),
+    })
+      .then((res) => {
+        return this._returnRes(res);
+      })
+      .catch((err) => {
+        console.error('error logging in:', err);
+        throw err;
       });
-
-      if (!response.ok) {
-        throw new Error('Invalid username or password');
-      }
-
-      const data = await response.json();
-
-      if (!data.accessToken || !data.refreshToken) {
-        throw new Error('Tokens are missing');
-      }
-
-      return {
-        accessToken: data.accessToken,
-        refreshToken: data.refreshToken,
-      };
-    } catch (error) {
-      console.error('Error during login in api:', error);
-      throw error;
-    }
   }
 
   async requestEmailVerification(): Promise<any> {

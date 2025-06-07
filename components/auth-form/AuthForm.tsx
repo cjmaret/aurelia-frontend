@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocalSearchParams, useRouter } from 'expo-router';
 import {
   Container,
@@ -9,6 +9,9 @@ import {
   AuthButtonText,
   AuthLinkButton,
   PrivacyPolicyText,
+  RegisterText,
+  RegisterTextContainer,
+  RegisterTextBorder,
 } from './styledAuthForm';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import api from '@/lib/api';
@@ -18,6 +21,8 @@ import GoogleSignInButton from '../google-signin-button/GoogleSignInButton';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { useTranslation } from 'react-i18next';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
+import config from '@/lib/config';
+import { Linking } from 'react-native';
 
 export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const { showToast } = useToastModal();
@@ -27,7 +32,7 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const token = (params as { token?: string }).token;
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const theme: any = useTheme();
 
@@ -43,7 +48,7 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
       return;
     }
 
-    setLoading(true);
+    setIsLoading(true);
     try {
       if (isSignUp) {
         await api.registerUser(normalizedEmail, password);
@@ -72,13 +77,13 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
         error.message || t('unexpectedError')
       );
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
   const handlePasswordReset = async () => {
     try {
-      setLoading(true);
+      setIsLoading(true);
       await api.requestPasswordReset({
         userEmail: userEmail.trim().toLowerCase(),
       });
@@ -94,7 +99,20 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
         error.message || t('unexpectedError')
       );
     } finally {
-      setLoading(false);
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true);
+    console.log('Initiating Google sign-in...');
+    try {
+      const googleAuthUrl = `${config.apiUrl}/auth/login/google`;
+      Linking.openURL(googleAuthUrl);
+    } catch (error) {
+      console.error('Error initiating Google sign-in:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -116,7 +134,7 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
       />
       <AuthButton
         title={
-          loading
+          isLoading
             ? isSignUp
               ? 'Signing up...'
               : 'Logging in...'
@@ -125,20 +143,33 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
             : 'Login'
         }
         onPress={handleSubmit}
-        disabled={loading}>
+        disabled={isLoading}>
         <AuthButtonText>{isSignUp ? 'Sign Up' : 'Login'}</AuthButtonText>
       </AuthButton>
       {!isSignUp && (
         <>
           <AuthLinkButton
             onPress={handlePasswordReset}
-            disabled={loading || !userEmail}>
+            disabled={isLoading || !userEmail}>
             <AuthLinkText>Forgot password? Reset</AuthLinkText>
           </AuthLinkButton>
           <AuthLinkButton onPress={() => router.replace('/signUp')}>
             <AuthLinkText>New user? Sign up</AuthLinkText>
           </AuthLinkButton>
-          {/* <GoogleSignInButton/> */}
+          <RegisterTextContainer>
+            <RegisterTextBorder
+              style={{
+                marginRight: 8,
+              }}
+            />
+            <RegisterText>Or register with</RegisterText>
+            <RegisterTextBorder
+              style={{
+                marginLeft: 8,
+              }}
+            />
+          </RegisterTextContainer>
+          <GoogleSignInButton handleGoogleSignIn={handleGoogleSignIn} />
         </>
       )}
       {isSignUp && (
@@ -160,7 +191,7 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
           </PrivacyPolicyText>
         </>
       )}
-      {loading && <LoadingSpinner />}
+      {isLoading && <LoadingSpinner />}
     </Container>
   );
 }

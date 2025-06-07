@@ -162,8 +162,8 @@ export default function SpeechRecorder() {
 
   function getTimerColor(seconds: number) {
     const percent = seconds / MAX_RECORDING_SECONDS;
-    if (percent >= 0.85) return theme.colors.errorText;
-    if (percent >= 0.7) return theme.colors.warningText;
+    if (percent >= 0.85) return theme.colors.textError;
+    if (percent >= 0.7) return theme.colors.textWarning;
     return theme.colors.primary;
   }
 

@@ -6,6 +6,7 @@ export const Colors = {
     // backgrounds
     backgroundPrimary: '#e8f6fc',
     backgroundSecondary: '#ffffff',
+    backgroundDisabled: '#f0f0f0',
 
     // tab bar colors
     tabBarBackground: '#ffffff',
@@ -17,8 +18,9 @@ export const Colors = {
     textTertiary: '#5d5d5d',
     textCorrected: '#2b8a3e',
     textCorrectedDark: '#14832b',
-    warningText: '#f1c40f',
-    errorText: '#e74c3c',
+    textWarning: '#f1c40f',
+    textError: '#e74c3c',
+    textDisabled: '#6a6a6a',
 
     // accent colors
     primary: '#81c6d0',
@@ -45,6 +47,7 @@ export const Colors = {
     buttonSecondaryText: '#81c6d0',
     buttonDangerBackground: '#e74c3c',
     buttonDangerText: '#ffffff',
+    buttonBorder: '#b3b3b3',
 
     // INPUTS
     inputText: '#11181C',
@@ -71,14 +74,12 @@ export const Colors = {
     toastPrimary: '#81c6d0',
     toastPrimaryError: '#e74c3c',
     toastShadow: 'rgba(0,0,0,0.12)',
-
-    beep: '#ffffff',
-
   },
   dark: {
     // backgrounds
     backgroundPrimary: '#181C1F',
     backgroundSecondary: '#23272A',
+    backgroundDisabled: '#41484e',
 
     // tab bar colors
     tabBarBackground: '#23272A',
@@ -90,8 +91,9 @@ export const Colors = {
     textTertiary: '#A6B0BB',
     textCorrected: '#3dc973',
     textCorrectedDark: '#06933c',
-    warningText: '#f1c40f',
-    errorText: '#ff6b6b',
+    textWarning: '#f1c40f',
+    textError: '#ff6b6b',
+    textDisabled: '#a9b5c2',
 
     // accent colors
     primary: '#2099a6',
@@ -115,11 +117,13 @@ export const Colors = {
     // button colors
     buttonPrimaryBackground: '#2099a6',
     buttonPrimaryText: '#ffffff',
+    buttonSecondaryText: '#81c6d0',
     buttonPrimaryBorder: '#39505a',
     buttonDangerBackground: '#ff6b6b',
     buttonDangerText: '#181C1F',
+    buttonBorder: '#b3b3b3',
 
-    // INPUTS
+    // inputs
     inputText: '#E3E6EA',
     inputBorder: '#2A2E33',
     inputBackground: '#545d65',

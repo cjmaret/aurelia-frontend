@@ -37,6 +37,7 @@ import {
   DeleteUserSubsection,
   VerifyEmailSaveButtonText,
   UsernameGroup,
+  GoogleEmailNotificationText,
 } from './styledProfile';
 import api from '@/lib/api';
 import { UserDataType } from '@/types/types';
@@ -67,6 +68,7 @@ export default function Profile() {
   const [loading, setLoading] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const isGoogleUser = user?.oauthProvider === 'google' || false;
 
   useEffect(() => {
     if (token) {
@@ -315,6 +317,8 @@ export default function Profile() {
                 </SaveButton>
                 <Label>{t('email')}</Label>
                 <Input
+                  disabled={isGoogleUser}
+                  editable={!isGoogleUser}
                   value={localUser.userEmail}
                   onChangeText={(text: string) =>
                     setLocalUser({
@@ -326,14 +330,21 @@ export default function Profile() {
                   placeholderTextColor={theme.colors.inputPlaceholder}
                   keyboardType="email-address"
                 />
-                <SaveButton
-                  onPress={handleRequestEmailChange}
-                  disabled={isRequestEmailChangeButtonDisabled}
-                  style={{ marginBottom: 12 }}>
-                  <SaveButtonText disabled={isRequestEmailChangeButtonDisabled}>
-                    {loading ? 'Sending...' : t('updateEmail')}
-                  </SaveButtonText>
-                </SaveButton>
+                {!isGoogleUser ? (
+                  <SaveButton
+                    onPress={handleRequestEmailChange}
+                    disabled={isRequestEmailChangeButtonDisabled}
+                    style={{ marginBottom: 12 }}>
+                    <SaveButtonText
+                      disabled={isRequestEmailChangeButtonDisabled}>
+                      {loading ? 'Sending...' : t('updateEmail')}
+                    </SaveButtonText>
+                  </SaveButton>
+                ) : (
+                  <GoogleEmailNotificationText>
+                    {t('googleEmailCannotBeChanged')}
+                  </GoogleEmailNotificationText>
+                )}
               </SubSection>
 
               {/* Language Preferences Subsection*/}
@@ -381,33 +392,35 @@ export default function Profile() {
               </SaveButton>
             </ProfileInfoSection>
             {/* Account Management Subsection*/}
-            <SubSection style={{ marginTop: 40 }}>
-              <SectionTitle>{t('accountManagement')}</SectionTitle>
-              <Label>{t('currentPassword')}</Label>
-              <Input
-                placeholder={t('enterCurrentPassword')}
-                placeholderTextColor={theme.colors.inputPlaceholder}
-                secureTextEntry
-                value={currentPassword}
-                onChangeText={(text: string) => setCurrentPassword(text)}
-              />
-              <Label>{t('newPassword')}</Label>
-              <Input
-                placeholder={t('enterNewPassword')}
-                placeholderTextColor={theme.colors.inputPlaceholder}
-                secureTextEntry
-                value={newPassword}
-                onChangeText={(text: string) => setNewPassword(text)}
-              />
-              <SaveButton
-                onPress={handlePasswordUpdate}
-                disabled={!currentPassword || !newPassword || loading}>
-                <SaveButtonText
+            {!isGoogleUser && (
+              <SubSection style={{ marginTop: 40 }}>
+                <SectionTitle>{t('accountManagement')}</SectionTitle>
+                <Label>{t('currentPassword')}</Label>
+                <Input
+                  placeholder={t('enterCurrentPassword')}
+                  placeholderTextColor={theme.colors.inputPlaceholder}
+                  secureTextEntry
+                  value={currentPassword}
+                  onChangeText={(text: string) => setCurrentPassword(text)}
+                />
+                <Label>{t('newPassword')}</Label>
+                <Input
+                  placeholder={t('enterNewPassword')}
+                  placeholderTextColor={theme.colors.inputPlaceholder}
+                  secureTextEntry
+                  value={newPassword}
+                  onChangeText={(text: string) => setNewPassword(text)}
+                />
+                <SaveButton
+                  onPress={handlePasswordUpdate}
                   disabled={!currentPassword || !newPassword || loading}>
-                  {loading ? t('updating') : t('updatePassword')}
-                </SaveButtonText>
-              </SaveButton>
-            </SubSection>
+                  <SaveButtonText
+                    disabled={!currentPassword || !newPassword || loading}>
+                    {loading ? t('updating') : t('updatePassword')}
+                  </SaveButtonText>
+                </SaveButton>
+              </SubSection>
+            )}
             <LogoutButton onPress={handleLogout}>
               <LogoutButtonText>{t('logOut')}</LogoutButtonText>
             </LogoutButton>

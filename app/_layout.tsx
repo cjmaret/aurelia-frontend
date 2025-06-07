@@ -54,6 +54,7 @@ export default function RootLayout() {
     '+not-found': theme.colors.backgroundSecondary,
     'reset-password': theme.colors.backgroundSecondary,
     'change-email': theme.colors.backgroundSecondary,
+    'google-callback': theme.colors.backgroundSecondary,
     '(auth)': theme.colors.backgroundSecondary,
     default: theme.colors.backgroundPrimary,
   };

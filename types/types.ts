@@ -9,6 +9,7 @@ export interface ApiTypes {
 // context types
 export interface AuthContextType {
   isAuthenticated: boolean;
+  setIsAuthenticated: SetStateType<boolean>;
   login: (userEmail: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   getUserDetails: () => Promise<UserDataType | null>;
@@ -44,6 +45,7 @@ export interface UserDataType {
   appLanguage: string;
   targetLanguage: string;
   setupComplete: boolean;
+  oauthProvider: string;
 }
 
 // // correction data types

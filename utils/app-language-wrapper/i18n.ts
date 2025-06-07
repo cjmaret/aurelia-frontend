@@ -36,6 +36,7 @@ const resources = {
       targetLanguage: 'Target Language',
       updateUsername: 'Update Username',
       updateEmail: 'Update Email',
+      googleEmailCannotBeChanged: 'Google account email cannot be changed',
       saveLanguagePreferences: 'Save Language Preferences',
       saving: 'Saving...',
       accountManagement: 'Account Management',
@@ -153,6 +154,8 @@ const resources = {
       targetLanguage: 'Langue Cible',
       updateUsername: "Mettre à jour le nom d'utilisateur",
       updateEmail: "Mettre à jour l'e-mail",
+      googleEmailCannotBeChanged:
+        "L'adresse e-mail du compte Google ne peut pas être modifiée",
       saveLanguagePreferences: 'Enregistrer les préférences linguistiques',
       saving: 'Enregistrement...',
       accountManagement: 'Gestion du Compte',
@@ -279,6 +282,8 @@ const resources = {
       targetLanguage: 'Idioma Objetivo',
       updateUsername: 'Actualizar nombre de usuario',
       updateEmail: 'Actualizar correo electrónico',
+      googleEmailCannotBeChanged:
+        'El correo electrónico de la cuenta de Google no se puede cambiar',
       saveLanguagePreferences: 'Guardar preferencias de idioma',
       saving: 'Guardando...',
       accountManagement: 'Gestión de la Cuenta',

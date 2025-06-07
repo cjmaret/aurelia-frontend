@@ -67,15 +67,22 @@ export const Label = styled.Text`
   color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
 `;
 
-export const Input = styled.TextInput`
+export const Input = styled.TextInput<{ disabled?: boolean }>`
   height: 40px;
   border: 1px solid ${({ theme }: { theme: any }) => theme.colors.inputBorder};
   border-radius: 8px;
   margin-bottom: 16px;
   padding: 0 8px;
-  color: ${({ theme }: { theme: any }) => theme.colors.inputText};
-  background-color: ${({ theme }: { theme: any }) =>
-    theme.colors.inputBackground};
+  color: ${({ disabled, theme }: { disabled?: boolean; theme: any }) =>
+    disabled ? theme.colors.textDisabled : theme.colors.inputText};
+  background-color: ${({
+    disabled,
+    theme,
+  }: {
+    disabled?: boolean;
+    theme: any;
+  }) =>
+    disabled ? theme.colors.backgroundDisabled : theme.colors.inputBackground};
 `;
 
 export const Stat = styled.View`
@@ -192,4 +199,11 @@ export const DeleteUserButtonText = styled.Text`
   font-weight: bold;
   text-align: center;
   padding: 0 16px;
+`;
+
+export const GoogleEmailNotificationText = styled.Text`
+  font-size: 13px;
+  color: ${({ theme }: { theme: any }) => theme.colors.textDisabled};
+  text-align: center;
+  margin-bottom: 30px;
 `;
