@@ -33,8 +33,12 @@ export default function GrammarReviewHeader({
   setSearchQuery: (query: string) => void;
   resetToNormalFetch: () => void;
 }) {
-  const { correctionData, searchCorrections, pagination } =
-    useCorrectionsData();
+  const {
+    correctionData,
+    searchCorrections,
+    pagination,
+    isProcessingRecording,
+  } = useCorrectionsData();
   const theme: any = useTheme();
   const { showToast } = useToastModal();
   const { t } = useTranslation();
@@ -85,7 +89,7 @@ export default function GrammarReviewHeader({
           </SearchBar>
         </SearchContainer>
       </HeaderContainer>
-      {correctionData.length === 0 && (
+      {correctionData.length === 0 && !isProcessingRecording && (
         <NoCorrectionsContainer>
           <NoCorrectionsText>
             {isInSearchMode ? t('noResultsFound') : t('startRecording')}

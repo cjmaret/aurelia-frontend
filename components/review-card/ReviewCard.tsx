@@ -37,6 +37,7 @@ import {
 } from '@/utils/functions/generalFunctions';
 import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
+import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 
 export default memo(function ReviewCard({
   cardData,
@@ -44,12 +45,14 @@ export default memo(function ReviewCard({
   collapseCardsAndErrors,
   setCollapseCardsAndErrors,
   handleDeleteCard,
+  isDeleting,
 }: {
   cardData: CorrectionDataType;
   searchQuery: string;
   collapseCardsAndErrors: boolean;
   setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
   handleDeleteCard: () => void;
+  isDeleting?: boolean;
 }) {
   const theme: any = useTheme();
   const { t } = useTranslation();
@@ -341,6 +344,7 @@ export default memo(function ReviewCard({
           />
         </TouchableWithoutFeedback>
       )}
+      {isDeleting && <LoadingSpinner />}
     </CardContainer>
   );
 });

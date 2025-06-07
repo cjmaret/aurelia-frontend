@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   FlatList,
   ActivityIndicator,
   NativeScrollEvent,
   View,
   Alert,
-  Text,
 } from 'react-native';
 import ReviewCard from '../review-card/ReviewCard';
 import { isSameDay } from 'date-fns';
@@ -51,6 +50,7 @@ export default function CorrectionList({
   const { t } = useTranslation();
   const { correctionData, deleteCorrection, isProcessingRecording } =
     useCorrectionsData();
+  const [deletingCardId, setDeletingCardId] = useState<string | null>(null);
 
   const handleDeleteCard = async (conversationId: string) => {
     Alert.alert(
@@ -62,6 +62,7 @@ export default function CorrectionList({
           text: t('delete'),
           style: 'destructive',
           onPress: async () => {
+            setDeletingCardId(conversationId);
             try {
               await deleteCorrection(conversationId);
             } catch (error: any) {
@@ -70,6 +71,8 @@ export default function CorrectionList({
                 showToast,
                 t,
               });
+            } finally {
+              setDeletingCardId(null);
             }
           },
         },
@@ -121,6 +124,7 @@ export default function CorrectionList({
           collapseCardsAndErrors={collapseCardsAndErrors}
           setCollapseCardsAndErrors={setCollapseCardsAndErrors}
           handleDeleteCard={() => handleDeleteCard(cardData.conversationId)}
+          isDeleting={deletingCardId === cardData.conversationId}
         />
       </ReviewCardContainer>
     );

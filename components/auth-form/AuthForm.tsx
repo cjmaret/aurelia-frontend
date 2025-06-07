@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocalSearchParams, useRouter } from 'expo-router';
 import {
   Container,
@@ -9,9 +9,8 @@ import {
   AuthButtonText,
   AuthLinkButton,
   PrivacyPolicyText,
-  RegisterText,
-  RegisterTextContainer,
-  RegisterTextBorder,
+  OAuthTextContainer,
+  OAuthTextBorder,
 } from './styledAuthForm';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import api from '@/lib/api';
@@ -156,19 +155,19 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
           <AuthLinkButton onPress={() => router.replace('/signUp')}>
             <AuthLinkText>New user? Sign up</AuthLinkText>
           </AuthLinkButton>
-          <RegisterTextContainer>
-            <RegisterTextBorder
+          <OAuthTextContainer>
+            <OAuthTextBorder
               style={{
                 marginRight: 8,
               }}
             />
-            <RegisterText>Or register with</RegisterText>
-            <RegisterTextBorder
+            <OAuthTextBorder>Or continue with</OAuthTextBorder>
+            <OAuthTextBorder
               style={{
                 marginLeft: 8,
               }}
             />
-          </RegisterTextContainer>
+          </OAuthTextContainer>
           <GoogleSignInButton handleGoogleSignIn={handleGoogleSignIn} />
         </>
       )}

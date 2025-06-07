@@ -9,6 +9,7 @@ export const SkeletonContainer = styled.View`
   min-height: 110px;
   justify-content: center;
   overflow: hidden;
+  min-width: 80%;
 `;
 
 export const SkeletonBar = styled.View<{ width?: string; height?: number }>`

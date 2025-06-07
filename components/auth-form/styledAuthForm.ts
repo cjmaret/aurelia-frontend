@@ -53,7 +53,6 @@ export const AuthLinkButton = styled.TouchableOpacity<{ disabled?: boolean }>`
   margin-top: 5px;
   padding: 5px 7px;
   opacity: ${({ disabled }: { disabled?: boolean }) => (disabled ? 0.5 : 1)};
-  /* border: 1px solid red; */
 `;
 
 export const AuthLinkText = styled.Text`
@@ -72,20 +71,20 @@ export const PrivacyPolicyText = styled.Text`
   bottom: 50px;
 `;
 
-export const RegisterTextContainer = styled.View`
+export const OAuthTextContainer = styled.View`
   flex-direction: row;
   align-items: center;
   margin: 30px 0 20px 0;
 `;
 
-export const RegisterTextBorder = styled.View`
+export const OAuthTextBorder = styled.View`
   flex: 1;
   height: 1px;
   background-color: ${({ theme }: { theme: any }) =>
     theme.colors.greySecondary};
 `;
 
-export const RegisterText = styled.Text`
+export const OAuthText = styled.Text`
   color: ${({ theme }: { theme: any }) => theme.colors.greyPrimary};
   font-size: 16px;
   text-align: center;
