@@ -147,10 +147,16 @@ export default function SpeechRecorder() {
 
       const correctionData = response.data as CorrectionDataType[];
       if (correctionData) {
-        setCorrectionData((prevData: CorrectionDataType[]) => [
-          ...correctionData,
-          ...prevData,
-        ]);
+        setCorrectionData((prevData: CorrectionDataType[]) => {
+          // filter out existing corrections to avoid duplicates
+          const filtered = prevData.filter(
+            (c) =>
+              !correctionData.some(
+                (cd) => cd.conversationId === c.conversationId
+              )
+          );
+          return [...correctionData, ...filtered];
+        });
         showToast('success', t('recordingProcessed'), t('correctionsReady'));
       }
     } catch (error: any) {

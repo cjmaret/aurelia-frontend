@@ -3,7 +3,7 @@
     "name": "Aurelia",
     "slug": "aurelia-frontend",
     "owner": "cjmaret",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/aurelia-icon.png",
     "scheme": "com.aureliaai.myapp",
@@ -44,9 +44,9 @@
         "expo-splash-screen",
         {
           "image": "./assets/images/aurelia-splash-screen-icon.png",
-          "imageWidth": 200,
+          "imageWidth": 150,
           "resizeMode": "contain",
-          "backgroundColor": "#81C6D0"
+          "backgroundColor": "#9EE3ED"
         }
       ]
     ],
