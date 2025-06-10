@@ -12,6 +12,7 @@ import {
   Input,
   Title,
 } from '../auth-form/styledAuthForm';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 export default function ChangeEmailForm() {
   const { showToast } = useToastModal();
@@ -53,6 +54,8 @@ export default function ChangeEmailForm() {
   }
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
     <Container>
       <Title>Verify Your Account</Title>
       <Input
@@ -63,7 +66,7 @@ export default function ChangeEmailForm() {
         editable={!loading}
         autoCapitalize="none"
         autoCorrect={false}
-      />
+        />
       <AuthButton onPress={handleConfirm} disabled={loading || !password}>
         <AuthButtonText>
           {loading ? 'Verifying...' : 'Verify Account'}
@@ -73,5 +76,6 @@ export default function ChangeEmailForm() {
         <AuthLinkText>Return to Login</AuthLinkText>
       </AuthLinkButton>
     </Container>
+        </TouchableWithoutFeedback>
   );
 }

@@ -22,7 +22,7 @@ import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { useTranslation } from 'react-i18next';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 import config from '@/lib/config';
-import { Linking } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Linking, Platform, ScrollView, TouchableWithoutFeedback } from 'react-native';
 
 export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const { showToast } = useToastModal();
@@ -117,81 +117,92 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   };
 
   return (
-    <Container>
-      <Title>{isSignUp ? 'Sign Up' : 'Login'}</Title>
-      <Input
-        value={userEmail}
-        onChangeText={setUserEmail}
-        placeholder="Email"
-        placeholderTextColor={theme.colors.inputPlaceholder}
-      />
-      <Input
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        placeholder="Password"
-        placeholderTextColor={theme.colors.inputPlaceholder}
-      />
-      <AuthButton
-        title={
-          isLoading
-            ? isSignUp
-              ? 'Signing up...'
-              : 'Logging in...'
-            : isSignUp
-            ? 'Sign Up'
-            : 'Login'
-        }
-        onPress={handleSubmit}
-        disabled={isLoading}>
-        <AuthButtonText>{isSignUp ? 'Sign Up' : 'Login'}</AuthButtonText>
-      </AuthButton>
-      {!isSignUp && (
-        <>
-          <AuthLinkButton
-            onPress={handlePasswordReset}
-            disabled={isLoading || !userEmail}>
-            <AuthLinkText>Forgot password? Reset</AuthLinkText>
-          </AuthLinkButton>
-          <AuthLinkButton onPress={() => router.replace('/signUp')}>
-            <AuthLinkText>New user? Sign up</AuthLinkText>
-          </AuthLinkButton>
-          <OAuthTextContainer>
-            <OAuthTextBorder
-              style={{
-                marginRight: 8,
-              }}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={60}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
+          keyboardShouldPersistTaps="handled">
+          <Container>
+            <Title>{isSignUp ? 'Sign Up' : 'Login'}</Title>
+            <Input
+              value={userEmail}
+              onChangeText={setUserEmail}
+              placeholder="Email"
+              placeholderTextColor={theme.colors.inputPlaceholder}
             />
-            <OAuthText>Or continue with</OAuthText>
-            <OAuthTextBorder
-              style={{
-                marginLeft: 8,
-              }}
+            <Input
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+              placeholder="Password"
+              placeholderTextColor={theme.colors.inputPlaceholder}
             />
-          </OAuthTextContainer>
-          <GoogleSignInButton handleGoogleSignIn={handleGoogleSignIn} />
-        </>
-      )}
-      {isSignUp && (
-        <>
-          <AuthLinkButton onPress={() => router.replace('/signIn')}>
-            <AuthLinkText>Already have an account? Sign in</AuthLinkText>
-          </AuthLinkButton>
-          <PrivacyPolicyText>
-            By creating an account, you agree to our{' '}
-            <Link
-              href="https://www.aurelialabs.net/privacy-policy.html"
-              target="_blank"
-              style={{
-                color: theme.colors.buttonSecondaryText,
-                textDecorationLine: 'underline',
-              }}>
-              Privacy Policy
-            </Link>
-          </PrivacyPolicyText>
-        </>
-      )}
-      {isLoading && <LoadingSpinner />}
-    </Container>
+            <AuthButton
+              title={
+                isLoading
+                  ? isSignUp
+                    ? 'Signing up...'
+                    : 'Logging in...'
+                  : isSignUp
+                  ? 'Sign Up'
+                  : 'Login'
+              }
+              onPress={handleSubmit}
+              disabled={isLoading}>
+              <AuthButtonText>{isSignUp ? 'Sign Up' : 'Login'}</AuthButtonText>
+            </AuthButton>
+            {!isSignUp && (
+              <>
+                <AuthLinkButton
+                  onPress={handlePasswordReset}
+                  disabled={isLoading || !userEmail}>
+                  <AuthLinkText>Forgot password? Reset</AuthLinkText>
+                </AuthLinkButton>
+                <AuthLinkButton onPress={() => router.replace('/signUp')}>
+                  <AuthLinkText>New user? Sign up</AuthLinkText>
+                </AuthLinkButton>
+                <OAuthTextContainer>
+                  <OAuthTextBorder
+                    style={{
+                      marginRight: 8,
+                    }}
+                  />
+                  <OAuthText>Or continue with</OAuthText>
+                  <OAuthTextBorder
+                    style={{
+                      marginLeft: 8,
+                    }}
+                  />
+                </OAuthTextContainer>
+                <GoogleSignInButton handleGoogleSignIn={handleGoogleSignIn} />
+              </>
+            )}
+            {isSignUp && (
+              <>
+                <AuthLinkButton onPress={() => router.replace('/signIn')}>
+                  <AuthLinkText>Already have an account? Sign in</AuthLinkText>
+                </AuthLinkButton>
+                <PrivacyPolicyText>
+                  By creating an account, you agree to our{' '}
+                  <Link
+                    href="https://www.aurelialabs.net/privacy-policy.html"
+                    target="_blank"
+                    style={{
+                      color: theme.colors.buttonSecondaryText,
+                      textDecorationLine: 'underline',
+                    }}>
+                    Privacy Policy
+                  </Link>
+                </PrivacyPolicyText>
+              </>
+            )}
+            {isLoading && <LoadingSpinner />}
+          </Container>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }

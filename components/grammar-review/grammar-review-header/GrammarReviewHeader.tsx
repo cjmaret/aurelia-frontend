@@ -60,7 +60,11 @@ export default function GrammarReviewHeader({
   return (
     <>
       <HeaderContainer hasScrolled={hasScrolled}>
-        <HeaderText>{t('grammarReview')}</HeaderText>
+        <HeaderText
+          maxFontSizeMultiplier={2}
+          numberOfLines={2}>
+          {t('grammarReview')}
+        </HeaderText>
         <SearchContainer>
           <SearchBar>
             <SearchBarInput

@@ -19,7 +19,7 @@ export const Title = styled.Text`
 `;
 
 export const Input = styled.TextInput`
-  height: 40px;
+  min-height: 40px;
   width: 100%;
   border: 1px solid ${({ theme }: { theme: any }) => theme.colors.greySecondary};
   border-radius: 8px;

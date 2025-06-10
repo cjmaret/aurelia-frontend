@@ -72,6 +72,8 @@ export const ThemedToast = ({
       <View style={{ flex: 1 }}>
         {text1 ? (
           <Text
+            maxFontSizeMultiplier={2}
+            numberOfLines={2}
             style={{
               color: theme.colors.toastText,
               fontSize: 18,
@@ -82,7 +84,10 @@ export const ThemedToast = ({
           </Text>
         ) : null}
         {text2 ? (
-          <Text style={{ color: theme.colors.toastText, fontSize: 14 }}>
+          <Text
+            maxFontSizeMultiplier={2}
+            numberOfLines={4}
+            style={{ color: theme.colors.toastText, fontSize: 14 }}>
             {text2}
           </Text>
         ) : null}

@@ -21,6 +21,7 @@ export const HeaderText = styled.Text`
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 10px;
+  flex-wrap: wrap;
 `;
 
 export const SearchContainer = styled.View`

@@ -44,6 +44,7 @@ export const CardHeaderTextContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   width: 90%;
 `;
 
@@ -86,6 +87,7 @@ export const OriginalText = styled.Text`
   color: ${({ theme }: { theme: any }) => theme.colors.snippetOriginalText};
   font-style: italic;
   margin-bottom: 10px;
+  flex-wrap: wrap;
 `;
 
 export const CorrectedText = styled.Text`
@@ -93,11 +95,13 @@ export const CorrectedText = styled.Text`
   font-weight: bold;
   color: ${({ theme }: { theme: any }) => theme.colors.textCorrected};
   margin-bottom: 10px;
+  flex-wrap: wrap;
 `;
 
 export const HighlightedCorrectedText = styled.Text`
   font-weight: 900;
   color: ${({ theme }: { theme: any }) => theme.colors.textCorrectedDark};
+  flex-wrap: wrap;
 `;
 
 export const ErrorList = styled.View`

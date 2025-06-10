@@ -111,7 +111,9 @@ export default function CorrectionList({
         {showDateSeparator && (
           <DateSeparatorContainer>
             <DateSeparatorLine />
-            <DateSeparatorText>
+            <DateSeparatorText
+              maxFontSizeMultiplier={2}
+              numberOfLines={2}>
               {formatDate({
                 dateTimeString: cardData.createdAt,
               })}

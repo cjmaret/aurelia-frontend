@@ -63,12 +63,16 @@ export default function NotFoundScreen() {
       <Stack.Screen options={{ title: 'Oops!' }} />
       <Container>
         <Emoji>😬</Emoji>
-        <Title>Page Not Found</Title>
-        <Subtitle>
+        <Title maxFontSizeMultiplier={2} numberOfLines={2}>
+          Page Not Found
+        </Title>
+        <Subtitle maxFontSizeMultiplier={2} numberOfLines={2}>
           Sorry, we couldn't find the page you were looking for.
         </Subtitle>
         <HomeButton onPress={handleGoHome}>
-          <ButtonText>Go Home</ButtonText>
+          <ButtonText maxFontSizeMultiplier={2} numberOfLines={2}>
+            Go Home
+          </ButtonText>
         </HomeButton>
       </Container>
     </>

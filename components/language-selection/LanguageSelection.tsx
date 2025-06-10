@@ -67,10 +67,15 @@ export default function LanguageSelection({
 
   return (
     <Container>
-      <Title>{title}</Title>
-      <Subtitle>{subtitle}</Subtitle>
+      <Title maxFontSizeMultiplier={2} numberOfLines={2}>
+        {title}
+      </Title>
+      <Subtitle maxFontSizeMultiplier={2} numberOfLines={2}>
+        {subtitle}
+      </Subtitle>
       <ListContainer>
         <FlatList
+        style={{marginBottom: 20}}
           data={languageCodes}
           keyExtractor={(item) => item}
           renderItem={({ item }) => (
@@ -83,13 +88,17 @@ export default function LanguageSelection({
         />
       </ListContainer>
       <ButtonContainer>
-        {onBack && ( 
+        {onBack && (
           <BackButton onPress={onBack}>
-            <ButtonText>{t('Back')}</ButtonText>
+            <ButtonText maxFontSizeMultiplier={2} numberOfLines={1}>
+              {t('Back')}
+            </ButtonText>
           </BackButton>
         )}
         <SaveButton onPress={handleNext}>
-          <ButtonText>{isFinalStep ? t('save') : 'Next'}</ButtonText>
+          <ButtonText maxFontSizeMultiplier={2} numberOfLines={1}>
+            {isFinalStep ? t('save') : 'Next'}
+          </ButtonText>
         </SaveButton>
       </ButtonContainer>
     </Container>

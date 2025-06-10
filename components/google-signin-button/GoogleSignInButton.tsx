@@ -13,7 +13,9 @@ export default function GoogleSignInButton({
   return (
     <GoogleButtonContainer onPress={handleGoogleSignIn} activeOpacity={0.6}>
       <GoogleButtonIcon source={GoogleIcon} />
-      <GoogleButtonText>Google</GoogleButtonText>
+      <GoogleButtonText maxFontSizeMultiplier={1.3} numberOfLines={1}>
+        Google
+      </GoogleButtonText>
     </GoogleButtonContainer>
   );
 }

@@ -20,6 +20,7 @@ export const Subtitle = styled.Text`
   font-size: 16px;
   margin-bottom: 10px;
   color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
+  text-align: center;
 `;
 
 export const ListContainer = styled.View`
@@ -61,7 +62,8 @@ const MoveButton = styled(SetupButton)`
 
 export const SaveButton = styled(MoveButton)``;
 
-export const BackButton = styled(MoveButton)``;
+export const BackButton = styled(MoveButton)`
+`;
 
 export const ButtonText = styled.Text`
   color: ${({ theme }: { theme: any }) => theme.colors.buttonPrimaryText};

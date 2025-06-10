@@ -368,7 +368,9 @@ export default function Profile() {
                       setModalType('speaking');
                       setModalVisible(true);
                     }}>
-                    <DropdownButtonText>
+                    <DropdownButtonText
+                      maxFontSizeMultiplier={2}
+                      numberOfLines={2}>
                       {getTranslatedLanguageName({
                         code: localUser.appLanguage,
                         t,
@@ -384,7 +386,9 @@ export default function Profile() {
                       setModalType('correction');
                       setModalVisible(true);
                     }}>
-                    <DropdownButtonText>
+                    <DropdownButtonText
+                      maxFontSizeMultiplier={2}
+                      numberOfLines={1}>
                       {getTranslatedLanguageName({
                         code: localUser.targetLanguage,
                         t,

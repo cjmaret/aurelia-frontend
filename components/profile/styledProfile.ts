@@ -46,6 +46,7 @@ export const Name = styled.Text`
   font-weight: bold;
   color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
   justify-self: center;
+  flex-wrap: wrap;
 `;
 
 export const IconWrapper = styled.View`
@@ -65,6 +66,7 @@ export const SectionTitle = styled.Text`
   font-weight: bold;
   margin: 24px 0 16px 0;
   color: ${({ theme }: { theme: any }) => theme.colors.primary};
+  flex-wrap: wrap;
 `;
 
 export const Label = styled.Text`
@@ -72,10 +74,11 @@ export const Label = styled.Text`
   font-weight: bold;
   margin-bottom: 8px;
   color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
+  flex-wrap: wrap;
 `;
 
 export const Input = styled.TextInput<{ disabled?: boolean }>`
-  height: 40px;
+  min-height: 40px;
   border: 1px solid ${({ theme }: { theme: any }) => theme.colors.inputBorder};
   border-radius: 8px;
   margin-bottom: 16px;
@@ -90,27 +93,32 @@ export const Input = styled.TextInput<{ disabled?: boolean }>`
     theme: any;
   }) =>
     disabled ? theme.colors.backgroundDisabled : theme.colors.inputBackground};
+  flex-wrap: wrap;
 `;
 
 export const Stat = styled.View`
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 8px;
+  flex-wrap: wrap;
 `;
 
 export const StatLabel = styled.Text`
   font-size: 16px;
   color: ${({ theme }: { theme: any }) => theme.colors.greyPrimary};
+  flex-wrap: wrap;
 `;
 
 export const StatValue = styled.Text`
   font-size: 16px;
   font-weight: bold;
   color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
+  flex-wrap: wrap;
 `;
 
 export const LanguagePickerWrapper = styled.View`
   height: 40px;
+  max-height: 100px;
   border: 1px solid ${({ theme }: { theme: any }) => theme.colors.greySecondary};
   border-radius: 8px;
   margin-bottom: 16px;
@@ -128,6 +136,7 @@ export const DropdownButton = styled.TouchableOpacity`
 export const DropdownButtonText = styled.Text`
   font-size: 16px;
   color: ${({ theme }: { theme: any }) => theme.colors.inputText};
+  flex-wrap: wrap;
 `;
 
 export const ProfileButton = styled.TouchableOpacity`
@@ -145,10 +154,12 @@ export const SaveButtonText = styled.Text<{ disabled: boolean }>`
     disabled ? theme.colors.greySecondary : theme.colors.primary};
   font-size: 16px;
   font-weight: bold;
+  flex-wrap: wrap;
 `;
 
 export const VerifyEmailSaveButtonText = styled(SaveButtonText)`
   font-size: 14px;
+  flex-wrap: wrap;
 `;
 
 export const LogoutButton = styled(ProfileButton)`
@@ -163,6 +174,7 @@ export const LogoutButtonText = styled.Text`
   color: ${({ theme }: { theme: any }) => theme.colors.buttonPrimaryText};
   font-size: 16px;
   font-weight: bold;
+  flex-wrap: wrap;
 `;
 
 export const ModalOverlay = styled.TouchableOpacity`
@@ -206,6 +218,7 @@ export const DeleteUserButtonText = styled.Text`
   font-weight: bold;
   text-align: center;
   padding: 0 16px;
+  flex-wrap: wrap;
 `;
 
 export const GoogleEmailNotificationText = styled.Text`
@@ -213,4 +226,5 @@ export const GoogleEmailNotificationText = styled.Text`
   color: ${({ theme }: { theme: any }) => theme.colors.textDisabled};
   text-align: center;
   margin-bottom: 30px;
+  flex-wrap: wrap;
 `;
