@@ -116,6 +116,18 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
     }
   };
 
+  const handleAppleSignIn = async () => {
+    setIsLoading(true);
+    try {
+      const appleAuthUrl = `${config.apiUrl}/auth/login/apple`;
+      Linking.openURL(appleAuthUrl);
+    } catch (error) {
+      console.error('Error initiating Apple sign-in:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -164,7 +176,7 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
                 <AuthLinkButton onPress={() => router.replace('/signUp')}>
                   <AuthLinkText>New user? Sign up</AuthLinkText>
                 </AuthLinkButton>
-                <OAuthTextContainer>
+                {/* <OAuthTextContainer>
                   <OAuthTextBorder
                     style={{
                       marginRight: 8,
@@ -178,6 +190,9 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
                   />
                 </OAuthTextContainer>
                 <GoogleSignInButton handleGoogleSignIn={handleGoogleSignIn} />
+                <AuthButton onPress={handleAppleSignIn} disabled={isLoading}>
+                  <AuthButtonText>Sign in with Apple</AuthButtonText>
+                </AuthButton> */}
               </>
             )}
             {isSignUp && (
