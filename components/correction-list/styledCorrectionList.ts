@@ -1,4 +1,7 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
+
+const isTablet = Platform.OS === 'ios' && Platform.isPad;
 
 export const ReviewCardContainer = styled.View`
   display: flex;
@@ -21,7 +24,7 @@ export const DateSeparatorLine = styled.View`
   border: 0.5px solid
     ${({ theme }: { theme: any }) => theme.colors.dateSeparatorColor};
   height: 1px;
-  width: 60%;
+  width: ${isTablet ? '80%' : '60%'};
 `;
 
 export const DateSeparatorText = styled.Text`

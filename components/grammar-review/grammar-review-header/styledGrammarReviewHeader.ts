@@ -1,4 +1,7 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
+
+const isTablet = Platform.OS === 'ios' && Platform.isPad;
 
 export const HeaderContainer = styled.View<{ hasScrolled: boolean }>`
   width: 100%;
@@ -45,7 +48,7 @@ export const SearchBar = styled.View`
   shadow-radius: 4px;
   elevation: 2;
   width: 100%;
-  max-width: 300px;
+  max-width: ${isTablet ? '500px' : '300px'};
 `;
 
 export const SearchBarInput = styled.TextInput`

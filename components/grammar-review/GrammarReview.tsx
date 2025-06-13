@@ -1,9 +1,9 @@
-import { GrammarReviewContainer } from './styledGrammarReview';
 import {
   RefreshControl,
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from 'react-native';
+import { GrammarReviewContainer } from './styledGrammarReview';
 import CorrectionList from '../correction-list/CorrectionList';
 import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
 import { useEffect, useState } from 'react';

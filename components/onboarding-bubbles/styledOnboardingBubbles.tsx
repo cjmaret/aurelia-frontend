@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
-import { Animated } from 'react-native';
+import { Animated, Dimensions } from 'react-native';
+const screenHeight = Dimensions.get('window').height;
 
-export const BubbleContainer = styled(Animated.View)`
-  position: absolute;
-  left: 24px;
-  right: 24px;
+export const BubbleContainer = styled(Animated.View)<{ step: number }>`
+  width: 90%;
+  max-width: 400px;
   padding: 18px 16px;
   background: ${({ theme }: { theme: any }) => theme.colors.cardBackground};
   border-radius: 16px;
@@ -14,6 +14,11 @@ export const BubbleContainer = styled(Animated.View)`
   shadow-color: #000;
   shadow-offset: 0px 2px;
   elevation: 4;
+  z-index: 100;
+  align-self: ${({ step }: { step: number }) =>
+    step === 0 ? 'center' : 'flex-end'};
+  margin-bottom: ${({ step }: { step: number }) =>
+    step === 0 ? '0' : `${screenHeight * 0.05}px`};
 `;
 
 export const BubbleTitle = styled.Text`

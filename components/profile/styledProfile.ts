@@ -1,4 +1,7 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
+
+const isTablet = Platform.OS === 'ios' && Platform.isPad;
 
 export const ScrollView = styled.ScrollView`
   flex: 1;
@@ -10,6 +13,7 @@ export const ScrollView = styled.ScrollView`
 export const Container = styled.View`
   flex: 1;
   padding: 25px 0 50px 0;
+  margin: ${isTablet ? '0 10%' : '0'};
 `;
 
 export const Header = styled.View`

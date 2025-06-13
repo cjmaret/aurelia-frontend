@@ -1,10 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import {
-  Animated,
-  TouchableWithoutFeedback,
-  View,
-  Dimensions,
-} from 'react-native';
+import { Animated, TouchableWithoutFeedback, View } from 'react-native';
 import {
   BubbleContainer,
   BubbleText,
@@ -14,26 +9,22 @@ import {
 } from './styledOnboardingBubbles';
 import { useTranslation } from 'react-i18next';
 
-const SCREEN = Dimensions.get('window');
-
 export default function OnboardingBubbles({
   onFinish,
 }: {
   onFinish: () => void;
 }) {
   const { t } = useTranslation();
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   const bubbles = [
     {
       title: t('welcomeTitle'),
       text: t('welcomeRecordInstruction'),
-      top: SCREEN.height * 0.25,
     },
     {
       text: t('welcomeCorrectionsInstruction'),
-      top: SCREEN.height * 0.65,
     },
   ];
 
@@ -69,8 +60,12 @@ export default function OnboardingBubbles({
           right: 0,
           bottom: 0,
           zIndex: 100,
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}>
-        <BubbleContainer style={{ opacity: fadeAnim, top: bubbles[step].top }}>
+        <BubbleContainer style={{ opacity: fadeAnim }} step={step}>
           {bubbles[step]?.title && (
             <BubbleTitle>{bubbles[step].title}</BubbleTitle>
           )}

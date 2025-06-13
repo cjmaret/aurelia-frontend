@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import Animated, {
@@ -11,8 +11,6 @@ import Animated, {
   runOnJS,
 } from 'react-native-reanimated';
 import styled, { useTheme } from 'styled-components/native';
-
-const { width } = Dimensions.get('window');
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 const AnimatedWave = ({
@@ -96,6 +94,9 @@ const AnimatedWave = ({
 
 export default function Waveform({ isRecording }: { isRecording: boolean }) {
   const theme: any = useTheme();
+  const [windowWidth, setWindowWidth] = useState(
+    Dimensions.get('window').width
+  );
   const animationProgress1 = useSharedValue<number>(0);
   const animationProgress2 = useSharedValue<number>(0);
   const animationProgress3 = useSharedValue<number>(0);
@@ -105,6 +106,11 @@ export default function Waveform({ isRecording }: { isRecording: boolean }) {
   const [xStart1, setXStart1] = useState(0);
   const [xStart2, setXStart2] = useState(0.3);
   const [xStart3, setXStart3] = useState(0.7);
+
+  const handleLayout = useCallback((event: any) => {
+    const { width } = event.nativeEvent.layout;
+    setWindowWidth(width);
+  }, []);
 
   useEffect(() => {
     if (!isRecording) {
@@ -176,11 +182,11 @@ export default function Waveform({ isRecording }: { isRecording: boolean }) {
   }, [isRecording]);
 
   return (
-    <WaveformContainer>
-      <Svg width={width} height={150}>
+    <WaveformContainer onLayout={handleLayout}>
+      <Svg width={windowWidth} height={150}>
         <Path
           /* move to point (0, 150), draw line to (width, 150)*/
-          d={`M 0 150 L ${width} 150`}
+          d={`M 0 150 L ${windowWidth} 150`}
           stroke={theme.colors.primary}
           strokeWidth={5}
           fill={theme.colors.primary}
@@ -192,8 +198,8 @@ export default function Waveform({ isRecording }: { isRecording: boolean }) {
             opacity={opacity1}
             arcHeightAdjuster={heightAdjuster}
             opacityAdjuster={1 / (index + 1)}
-            xStart={width * xStart1}
-            xWidth={width * 0.3}
+            xStart={windowWidth * xStart1}
+            xWidth={windowWidth * 0.3}
             theme={theme}
           />
         ))}
@@ -204,8 +210,8 @@ export default function Waveform({ isRecording }: { isRecording: boolean }) {
             opacity={opacity2}
             arcHeightAdjuster={heightAdjuster}
             opacityAdjuster={1 / (index + 1)}
-            xStart={width * xStart2}
-            xWidth={width * 0.4}
+            xStart={windowWidth * xStart2}
+            xWidth={windowWidth * 0.4}
             theme={theme}
           />
         ))}
@@ -217,8 +223,8 @@ export default function Waveform({ isRecording }: { isRecording: boolean }) {
             arcHeightAdjuster={heightAdjuster}
             opacityAdjuster={1 / (index + 1)}
             /*??? vvv*/
-            xStart={width * xStart3}
-            xWidth={width * 0.3}
+            xStart={windowWidth * xStart3}
+            xWidth={windowWidth * 0.3}
             theme={theme}
           />
         ))}
