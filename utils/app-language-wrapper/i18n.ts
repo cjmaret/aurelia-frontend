@@ -8,10 +8,23 @@ const resources = {
       spanish: 'Spanish',
       french: 'French',
       profile: 'Profile',
-      login: 'Log In',
+      createAccount: 'Create Account',
+      signUp: 'Sign Up',
+      login: 'Login',
+      email: 'Email',
       logout: 'Log Out',
       record: 'Record',
       gotIt: 'Got it',
+
+      // AuthForm
+      password: 'Password',
+      signingUp: 'Signing up...',
+      loggingIn: 'Logging in...',
+      forgotPasswordReset: 'Forgot password? Reset',
+      newUserSignUp: 'New user? Sign up',
+      alreadyHaveAccountSignIn: 'Already have an account? Sign in',
+      byCreatingAccountYouAgree: 'By creating an account, you agree to our',
+      privacyPolicy: 'Privacy Policy',
 
       // setup
       setupProfile: 'Set up Your Profile',
@@ -31,7 +44,6 @@ const resources = {
       logInToUnlockProfileEditing: 'Log in to unlock profile editing!',
       username: 'Username',
       enterUsername: 'Enter username',
-      email: 'Email',
       enterEmail: 'Enter your email',
       languagePreferences: 'Language Preferences',
       appLanguage: 'App Language',
@@ -53,7 +65,8 @@ const resources = {
 
       // grammar review
       grammarReview: 'Grammar Review',
-      logInToContinueRecording: 'Log in to continue recording!',
+      createAccountToContinueRecording:
+        'Create an account to continue recording and save your recordings!',
       searchCorrections: 'Search corrections...',
       noResultsFound: 'No results found for your search.',
       startRecording: 'Start recording to see your corrections here!',
@@ -132,9 +145,22 @@ const resources = {
       spanish: 'Espagnol',
       french: 'Français',
       profile: 'Profil',
-      login: 'Se Connecter',
+      createAccount: 'Créer un compte',
+      signUp: "S'inscrire",
+      login: 'Connexion',
+      email: 'E-mail',
       logout: 'Se Déconnecter',
       record: 'Enregistrer',
+
+      // AuthForm
+      password: 'Mot de passe',
+      signingUp: 'Inscription...',
+      loggingIn: 'Connexion...',
+      forgotPasswordReset: 'Mot de passe oublié ? Réinitialiser',
+      newUserSignUp: 'Nouveau utilisateur ? Inscrivez-vous',
+      alreadyHaveAccountSignIn: 'Vous avez déjà un compte ? Connectez-vous',
+      byCreatingAccountYouAgree: 'En créant un compte, vous acceptez notre',
+      privacyPolicy: 'Politique de confidentialité',
 
       // setup
       setupProfile: 'Configurer votre profil',
@@ -156,7 +182,6 @@ const resources = {
         'Connectez-vous pour déverrouiller la modification du profil!',
       username: "Nom d'utilisateur",
       enterUsername: 'Entrez votre nom d’utilisateur',
-      email: 'E-mail',
       enterEmail: 'Entrez votre e-mail',
       languagePreferences: 'Préférences Linguistiques',
       appLanguage: "Langue de l'Application",
@@ -179,7 +204,8 @@ const resources = {
 
       // grammar review
       grammarReview: 'Révision de Grammaire',
-      logInToContinueRecording: 'Connectez-vous pour continuer à enregistrer !',
+      createAccountToContinueRecording:
+        'Créez un compte pour continuer à enregistrer et sauvegarder vos enregistrements !',
       searchCorrections: 'Rechercher des corrections...',
       noResultsFound: 'Aucun résultat trouvé pour votre recherche.',
       startRecording: 'Commencez à enregistrer pour voir vos corrections ici !',
@@ -267,9 +293,22 @@ const resources = {
       spanish: 'Español',
       french: 'Francés',
       profile: 'Perfil',
-      login: 'Iniciar Sesión',
+      createAccount: 'Crear cuenta',
+      signUp: 'Registrarse',
+      login: 'Iniciar sesión',
+      email: 'Correo Electrónico',
       logout: 'Cerrar Sesión',
       record: 'Grabar',
+
+      // AuthForm
+      password: 'Contraseña',
+      signingUp: 'Registrando...',
+      loggingIn: 'Iniciando sesión...',
+      forgotPasswordReset: '¿Olvidaste tu contraseña? Restablecer',
+      newUserSignUp: '¿Nuevo usuario? Regístrate',
+      alreadyHaveAccountSignIn: '¿Ya tienes una cuenta? Inicia sesión',
+      byCreatingAccountYouAgree: 'Al crear una cuenta, aceptas nuestra',
+      privacyPolicy: 'Política de privacidad',
 
       // setup
       setupProfile: 'Configura tu perfil',
@@ -291,7 +330,6 @@ const resources = {
         'Inicia sesión para desbloquear la edición del perfil!',
       username: 'Nombre de Usuario',
       enterUsername: 'Ingrese su nombre de usuario',
-      email: 'Correo Electrónico',
       enterEmail: 'Ingrese su correo electrónico',
       languagePreferences: 'Preferencias de Idioma',
       appLanguage: 'Idioma de la Aplicación',
@@ -314,7 +352,8 @@ const resources = {
 
       // grammar reivew
       grammarReview: 'Revisión de Gramática',
-      logInToContinueRecording: '¡Inicia sesión para seguir grabando!',
+      createAccountToContinueRecording:
+        'Crea una cuenta para seguir grabando y guardar tus grabaciones!',
       searchCorrections: 'Buscar correcciones...',
       noResultsFound: 'No se encontraron resultados para tu búsqueda.',
       startRecording: 'Comienza a grabar para ver tus correcciones aquí.',

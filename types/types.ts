@@ -11,6 +11,7 @@ export interface AuthContextType {
   isAuthenticated: boolean;
   setIsAuthenticated: SetStateType<boolean>;
   registerAnonymousUser: () => Promise<void>;
+  upgradeAnonymousUser: ({ userEmail, password }: { userEmail: string; password: string }) => Promise<void>;
   login: (userEmail: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   getUserDetails: () => Promise<UserDataType | null>;

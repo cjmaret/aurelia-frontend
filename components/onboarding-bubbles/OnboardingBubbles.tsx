@@ -15,7 +15,7 @@ export default function OnboardingBubbles({
   onFinish: () => void;
 }) {
   const { t } = useTranslation();
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   const bubbles = [

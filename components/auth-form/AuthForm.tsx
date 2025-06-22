@@ -22,11 +22,18 @@ import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { useTranslation } from 'react-i18next';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 import config from '@/lib/config';
-import { Keyboard, KeyboardAvoidingView, Linking, Platform, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Linking,
+  Platform,
+  ScrollView,
+  TouchableWithoutFeedback,
+} from 'react-native';
 
 export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const { showToast } = useToastModal();
-  const { login, getUserDetails } = useAuth();
+  const { upgradeAnonymousUser, login, user, getUserDetails } = useAuth();
   const { t } = useTranslation();
   const params = useLocalSearchParams();
   const token = (params as { token?: string }).token;
@@ -40,18 +47,23 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
     const normalizedEmail = userEmail.trim().toLowerCase();
 
     if (!normalizedEmail || !password) {
-      showToast(
-        'error',
-        t('loginFailed'),
-        t('Please enter both email and password.')
-      );
+      showToast('error', t('loginFailed'), t('pleaseEnterEmailAndPassword'));
       return;
     }
 
     setIsLoading(true);
     try {
       if (isSignUp) {
-        await api.registerUser(normalizedEmail, password);
+        if (user?.isAnonymous) {
+          console.log('Upgrading anonymous user...');
+          await upgradeAnonymousUser({
+            userEmail: normalizedEmail,
+            password,
+          });
+        } else {
+          console.log('Registering new user...');
+          await api.registerUser(normalizedEmail, password);
+        }
         showToast(
           'success',
           t('signUpSuccessTitle'),
@@ -61,6 +73,7 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
       } else {
         await login(normalizedEmail, password);
       }
+
       if (token) {
         try {
           await api.verifyEmail(token);
@@ -131,51 +144,51 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      // keyboardVerticalOffset={60}
-      >
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView
           contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
           keyboardShouldPersistTaps="handled">
           <Container>
-            <Title>{isSignUp ? 'Sign Up' : 'Login'}</Title>
+            <Title>{isSignUp ? t('signUp') : t('login')}</Title>
             <Input
               value={userEmail}
               onChangeText={setUserEmail}
-              placeholder="Email"
+              placeholder={t('email')}
               placeholderTextColor={theme.colors.inputPlaceholder}
             />
             <Input
               value={password}
               onChangeText={setPassword}
               secureTextEntry
-              placeholder="Password"
+              placeholder={t('password')}
               placeholderTextColor={theme.colors.inputPlaceholder}
             />
             <AuthButton
               title={
                 isLoading
                   ? isSignUp
-                    ? 'Signing up...'
-                    : 'Logging in...'
+                    ? t('signingUp')
+                    : t('loggingIn')
                   : isSignUp
-                  ? 'Sign Up'
-                  : 'Login'
+                  ? t('signUp')
+                  : t('login')
               }
               onPress={handleSubmit}
               disabled={isLoading}>
-              <AuthButtonText>{isSignUp ? 'Sign Up' : 'Login'}</AuthButtonText>
+              <AuthButtonText>
+                {isSignUp ? t('signUp') : t('login')}
+              </AuthButtonText>
             </AuthButton>
             {!isSignUp && (
               <>
                 <AuthLinkButton
                   onPress={handlePasswordReset}
                   disabled={isLoading || !userEmail}>
-                  <AuthLinkText>Forgot password? Reset</AuthLinkText>
+                  <AuthLinkText>{t('forgotPasswordReset')}</AuthLinkText>
                 </AuthLinkButton>
                 <AuthLinkButton onPress={() => router.replace('/signUp')}>
-                  <AuthLinkText>New user? Sign up</AuthLinkText>
+                  <AuthLinkText>{t('newUserSignUp')}</AuthLinkText>
                 </AuthLinkButton>
                 {/* <OAuthTextContainer>
                   <OAuthTextBorder
@@ -199,10 +212,10 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
             {isSignUp && (
               <>
                 <AuthLinkButton onPress={() => router.replace('/signIn')}>
-                  <AuthLinkText>Already have an account? Sign in</AuthLinkText>
+                  <AuthLinkText>{t('alreadyHaveAccountSignIn')}</AuthLinkText>
                 </AuthLinkButton>
                 <PrivacyPolicyText>
-                  By creating an account, you agree to our{' '}
+                  {t('byCreatingAccountYouAgree')}{' '}
                   <Link
                     href="https://www.aurelialabs.net/privacy-policy.html"
                     target="_blank"
@@ -210,7 +223,7 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
                       color: theme.colors.buttonSecondaryText,
                       textDecorationLine: 'underline',
                     }}>
-                    Privacy Policy
+                    {t('privacyPolicy')}
                   </Link>
                 </PrivacyPolicyText>
               </>

@@ -217,7 +217,7 @@ export default function SpeechRecorder() {
           />
           {hasReachedAnonLimit && (
             <LogInToContinueText>
-              {t('logInToContinueRecording')}
+              {t('createAccountToContinueRecording')}
             </LogInToContinueText>
           )}
         </RecordingGroup>

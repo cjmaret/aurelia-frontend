@@ -404,7 +404,6 @@ export default function Profile() {
                     </DropdownButtonText>
                   </DropdownButton>
                 </LanguagePickerWrapper>
-
                 <Label>{t('targetLanguage')}</Label>
                 <LanguagePickerWrapper>
                   <DropdownButton

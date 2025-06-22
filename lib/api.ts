@@ -124,25 +124,45 @@ class Api {
       });
   }
 
-  // TODO: convert this to the same flow as everybody else
-  async registerUser(userEmail: string, password: string): Promise<string> {
-    try {
-      const response = await fetch(`${config.apiUrl}/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userEmail, password }),
+  async upgradeAnonymousUser({
+    userId,
+    userSecret,
+    userEmail,
+    password,
+  }: {
+    userId: string;
+    userSecret: string;
+    userEmail: string;
+    password: string;
+  }): Promise<{
+    accessToken: string;
+    refreshToken: string;
+    userId: string;
+    userSecret: string;
+  }> {
+    return fetch(`${config.apiUrl}/auth/anonymous/upgrade`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, userSecret, userEmail, password }),
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error upgrading anonymous user:', err);
+        throw err;
       });
+  }
 
-      if (!response.ok) {
-        throw new Error('Invalid username or password');
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error during register:', error);
-      throw error;
-    }
+  async registerUser(userEmail: string, password: string): Promise<any> {
+    return fetch(`${config.apiUrl}/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userEmail, password }),
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error during register:', err);
+        throw err;
+      });
   }
 
   async authenticateUser(

@@ -94,7 +94,9 @@ export default function GrammarReviewHeader({
       </HeaderContainer>
       {hasReachedAnonLimit && !isInSearchMode && (
         <InfoMessageContainer>
-          <InfoMessageText>{t('logInToContinueRecording')}</InfoMessageText>
+          <InfoMessageText>
+            {t('createAccountToContinueRecording')}
+          </InfoMessageText>
         </InfoMessageContainer>
       )}
       {correctionData.length === 0 && !isProcessingRecording && (

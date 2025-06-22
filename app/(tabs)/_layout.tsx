@@ -19,7 +19,7 @@ export default function TabLayout() {
     right: 10px;
     z-index: 1000;
     padding-vertical: 10px;
-    padding-horizontal: 20px;
+    padding-horizontal: 15px;
     border-radius: 10px;
     shadow-radius: 2px;
     shadow-color: #000;
@@ -29,15 +29,15 @@ export default function TabLayout() {
 
   const LoginButtonText = styled.Text`
     color: ${theme.colors.buttonPrimaryText};
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
   `;
 
   return (
     <View style={{ flex: 1 }}>
       {user?.isAnonymous && (
-        <LoginButtonContainer onPress={() => router.replace('/signIn')}>
-          <LoginButtonText>{t('login')}</LoginButtonText>
+        <LoginButtonContainer onPress={() => router.replace('/signUp')}>
+          <LoginButtonText>{t('createAccount')}</LoginButtonText>
         </LoginButtonContainer>
       )}
       <Tabs
