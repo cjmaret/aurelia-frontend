@@ -39,6 +39,7 @@ import {
   UsernameGroup,
   GoogleEmailNotificationText,
   IconWrapper,
+  AnonymousBlockedText,
 } from './styledProfile';
 import api from '@/lib/api';
 import { UserDataType } from '@/types/types';
@@ -55,6 +56,7 @@ import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { BlurView } from 'expo-blur';
 
 export default function Profile() {
   const { showToast } = useToastModal();
@@ -73,6 +75,7 @@ export default function Profile() {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const isGoogleUser = user?.oauthProvider === 'google' || false;
+  const isAnonymousUser = user?.isAnonymous;
 
   useEffect(() => {
     if (token) {
@@ -259,6 +262,28 @@ export default function Profile() {
     (localUser.appLanguage === user.appLanguage &&
       localUser.targetLanguage === user.targetLanguage);
 
+  const renderBlurView = (translation: string) => {
+    return (
+      isAnonymousUser && (
+        <BlurView
+          intensity={15}
+          style={{
+            position: 'absolute',
+            top: 50,
+            left: -10,
+            right: -10,
+            bottom: 0,
+            zIndex: 1000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <AnonymousBlockedText>{t(translation)}</AnonymousBlockedText>
+        </BlurView>
+      )
+    );
+  };
+
   return (
     <>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -308,6 +333,7 @@ export default function Profile() {
             <ProfileInfoSection>
               {/* Edit Profile Info Subsection*/}
               <SubSection>
+                {renderBlurView('logInToUnlockProfileEditing')}
                 <SectionTitle>{t('profileInfo')}</SectionTitle>
                 <Label>{t('username')}</Label>
                 <Input
@@ -409,6 +435,7 @@ export default function Profile() {
             {/* Account Management Subsection*/}
             {!isGoogleUser && (
               <SubSection style={{ marginTop: 40 }}>
+                {renderBlurView('logInToManageAccount')}
                 <SectionTitle>{t('accountManagement')}</SectionTitle>
                 <Label>{t('currentPassword')}</Label>
                 <Input
@@ -436,20 +463,24 @@ export default function Profile() {
                 </SaveButton>
               </SubSection>
             )}
-            <LogoutButton onPress={handleLogout}>
-              <LogoutButtonText>{t('logOut')}</LogoutButtonText>
-            </LogoutButton>
-            {/* Delete Account Section */}
-            <DeleteUserSubsection>
-              <SectionTitle>Delete Account</SectionTitle>
-              <Label>
-                If you wish to delete your account, please click the button
-                below.
-              </Label>
-              <DeleteUserButton onPress={confirmDelete}>
-                <DeleteUserButtonText>Delete Account</DeleteUserButtonText>
-              </DeleteUserButton>
-            </DeleteUserSubsection>
+            {!isAnonymousUser && (
+              <>
+                <LogoutButton onPress={handleLogout}>
+                  <LogoutButtonText>{t('logOut')}</LogoutButtonText>
+                </LogoutButton>
+                {/* Delete Account Section */}
+                <DeleteUserSubsection>
+                  <SectionTitle>Delete Account</SectionTitle>
+                  <Label>
+                    If you wish to delete your account, please click the button
+                    below.
+                  </Label>
+                  <DeleteUserButton onPress={confirmDelete}>
+                    <DeleteUserButtonText>Delete Account</DeleteUserButtonText>
+                  </DeleteUserButton>
+                </DeleteUserSubsection>
+              </>
+            )}
             <Modal
               visible={isModalVisible}
               transparent

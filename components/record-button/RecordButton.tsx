@@ -11,12 +11,14 @@ export default function RecordButtonComponent({
   isRecordButtonPressed,
   setIsRecordButtonPressed,
   disabled,
+  isVisuallyDisabled,
 }: {
   startRecording: any;
   stopRecording: any;
   isRecordButtonPressed: boolean;
   setIsRecordButtonPressed: React.Dispatch<React.SetStateAction<boolean>>;
   disabled: boolean;
+  isVisuallyDisabled?: boolean;
 }) {
   const [ripples, setRipples] = useState<
     { id: number; scale: Animated.Value; opacity: Animated.Value }[]
@@ -106,7 +108,8 @@ export default function RecordButtonComponent({
       <RecordButton
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
-        isRecordButtonPressed={isRecordButtonPressed}>
+        isRecordButtonPressed={isRecordButtonPressed}
+        isVisuallyDisabled={isVisuallyDisabled}>
         <Ionicons
           name="mic-outline"
           size={55}

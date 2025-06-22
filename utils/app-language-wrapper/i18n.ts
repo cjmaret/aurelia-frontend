@@ -8,6 +8,7 @@ const resources = {
       spanish: 'Spanish',
       french: 'French',
       profile: 'Profile',
+      login: 'Log In',
       logout: 'Log Out',
       record: 'Record',
       gotIt: 'Got it',
@@ -27,6 +28,7 @@ const resources = {
       verifyEmail: 'Verify Email',
       conversations: 'Conversations',
       profileInfo: 'Profile Info',
+      logInToUnlockProfileEditing: 'Log in to unlock profile editing!',
       username: 'Username',
       enterUsername: 'Enter username',
       email: 'Email',
@@ -40,6 +42,7 @@ const resources = {
       saveLanguagePreferences: 'Save Language Preferences',
       saving: 'Saving...',
       accountManagement: 'Account Management',
+      logInToManageAccount: 'Log in to manage your account',
       currentPassword: 'Current Password',
       enterCurrentPassword: 'Enter current password',
       newPassword: 'New Password',
@@ -50,6 +53,7 @@ const resources = {
 
       // grammar review
       grammarReview: 'Grammar Review',
+      logInToContinueRecording: 'Log in to continue recording!',
       searchCorrections: 'Search corrections...',
       noResultsFound: 'No results found for your search.',
       startRecording: 'Start recording to see your corrections here!',
@@ -95,7 +99,8 @@ const resources = {
       passwordUpdateError: 'Error updating password',
       passwordUpdateFailed: 'Failed to update password. Please try again.',
       resetPasswordEmailSentTitle: 'Reset Email Sent',
-      resetPasswordEmailSentMessage: 'Check your inbox for a password reset link.',
+      resetPasswordEmailSentMessage:
+        'Check your inbox for a password reset link.',
       resetPasswordEmailFailed: 'Reset Email Failed',
       processingRecording: 'Processing Your Recording',
       processingRecordingMessage:
@@ -127,6 +132,7 @@ const resources = {
       spanish: 'Espagnol',
       french: 'Français',
       profile: 'Profil',
+      login: 'Se Connecter',
       logout: 'Se Déconnecter',
       record: 'Enregistrer',
 
@@ -146,6 +152,8 @@ const resources = {
       verifyEmail: "Vérifier l'e-mail",
       conversations: 'Conversations',
       profileInfo: 'Infos du Profil',
+      logInToUnlockProfileEditing:
+        'Connectez-vous pour déverrouiller la modification du profil!',
       username: "Nom d'utilisateur",
       enterUsername: 'Entrez votre nom d’utilisateur',
       email: 'E-mail',
@@ -160,6 +168,7 @@ const resources = {
       saveLanguagePreferences: 'Enregistrer les préférences linguistiques',
       saving: 'Enregistrement...',
       accountManagement: 'Gestion du Compte',
+      logInToManageAccount: 'Connectez-vous pour gérer votre compte',
       currentPassword: 'Mot de Passe Actuel',
       enterCurrentPassword: 'Entrez le mot de passe actuel',
       newPassword: 'Nouveau Mot de Passe',
@@ -170,6 +179,7 @@ const resources = {
 
       // grammar review
       grammarReview: 'Révision de Grammaire',
+      logInToContinueRecording: 'Connectez-vous pour continuer à enregistrer !',
       searchCorrections: 'Rechercher des corrections...',
       noResultsFound: 'Aucun résultat trouvé pour votre recherche.',
       startRecording: 'Commencez à enregistrer pour voir vos corrections ici !',
@@ -223,7 +233,8 @@ const resources = {
       resetPasswordEmailSentTitle: 'E-mail de réinitialisation envoyé',
       resetPasswordEmailSentMessage:
         'Vérifiez votre boîte de réception pour un lien de réinitialisation du mot de passe.',
-      resetPasswordEmailFailed: 'Échec de l’envoi de l’e-mail de réinitialisation',
+      resetPasswordEmailFailed:
+        'Échec de l’envoi de l’e-mail de réinitialisation',
       processingRecording: 'Traitement de votre enregistrement',
       processingRecordingMessage:
         'Patientez ! Consultez l’onglet Revue grammaticale pour les résultats.',
@@ -256,6 +267,7 @@ const resources = {
       spanish: 'Español',
       french: 'Francés',
       profile: 'Perfil',
+      login: 'Iniciar Sesión',
       logout: 'Cerrar Sesión',
       record: 'Grabar',
 
@@ -275,6 +287,8 @@ const resources = {
       verifyEmail: 'Verificar correo electrónico',
       conversations: 'Conversaciones',
       profileInfo: 'Información del Perfil',
+      logInToUnlockProfileEditing:
+        'Inicia sesión para desbloquear la edición del perfil!',
       username: 'Nombre de Usuario',
       enterUsername: 'Ingrese su nombre de usuario',
       email: 'Correo Electrónico',
@@ -289,6 +303,7 @@ const resources = {
       saveLanguagePreferences: 'Guardar preferencias de idioma',
       saving: 'Guardando...',
       accountManagement: 'Gestión de la Cuenta',
+      logInToManageAccount: 'Inicia sesión para gestionar tu cuenta',
       currentPassword: 'Contraseña Actual',
       enterCurrentPassword: 'Ingrese la contraseña actual',
       newPassword: 'Nueva Contraseña',
@@ -299,6 +314,7 @@ const resources = {
 
       // grammar reivew
       grammarReview: 'Revisión de Gramática',
+      logInToContinueRecording: '¡Inicia sesión para seguir grabando!',
       searchCorrections: 'Buscar correcciones...',
       noResultsFound: 'No se encontraron resultados para tu búsqueda.',
       startRecording: 'Comienza a grabar para ver tus correcciones aquí.',

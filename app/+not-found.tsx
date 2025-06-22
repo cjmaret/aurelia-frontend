@@ -34,7 +34,7 @@ const Subtitle = styled.Text`
 
 const HomeButton = styled.TouchableOpacity`
   background-color: ${({ theme }: { theme: any }) =>
-    theme.colors.buttonPrimaryBackground};
+    theme.colors.buttonBackgroundPrimary};
   border-radius: 8px;
   padding: 12px 32px;
 `;

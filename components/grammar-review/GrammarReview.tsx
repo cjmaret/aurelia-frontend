@@ -25,6 +25,7 @@ export default function GrammarReview() {
     searchCorrections,
     pagination,
     isProcessingRecording,
+    hasReachedAnonLimit,
   } = useCorrectionsData();
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isInSearchMode, setIsInSearchMode] = useState(false);

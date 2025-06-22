@@ -10,6 +10,7 @@ export interface ApiTypes {
 export interface AuthContextType {
   isAuthenticated: boolean;
   setIsAuthenticated: SetStateType<boolean>;
+  registerAnonymousUser: () => Promise<void>;
   login: (userEmail: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   getUserDetails: () => Promise<UserDataType | null>;
@@ -32,6 +33,7 @@ export interface CorrectionDataContextType {
   resetPagination: () => void;
   isProcessingRecording: boolean;
   setIsProcessingRecording: SetStateType<boolean>;
+  hasReachedAnonLimit: boolean;
 }
 
 // api data types
@@ -45,6 +47,7 @@ export interface UserDataType {
   appLanguage: string;
   targetLanguage: string;
   setupComplete: boolean;
+  isAnonymous: boolean;
   oauthProvider: string;
 }
 

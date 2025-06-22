@@ -96,6 +96,35 @@ class Api {
     }
   }
 
+  async registerAnonymousUser(): Promise<any> {
+    return fetch(`${config.apiUrl}/register/anonymous`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error registering anonymous user:', err);
+        throw err;
+      });
+  }
+
+  async restoreAnonymousUser(
+    userId: string,
+    userSecret: string
+  ): Promise<{ accessToken: string; refreshToken: string }> {
+    return fetch(`${config.apiUrl}/auth/anonymous/restore`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, userSecret }),
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error restoring anonymous user:', err);
+        throw err;
+      });
+  }
+
+  // TODO: convert this to the same flow as everybody else
   async registerUser(userEmail: string, password: string): Promise<string> {
     try {
       const response = await fetch(`${config.apiUrl}/register`, {

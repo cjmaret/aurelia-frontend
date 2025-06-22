@@ -1,8 +1,8 @@
 import {
   HeaderContainer,
   HeaderText,
-  NoCorrectionsContainer,
-  NoCorrectionsText,
+  InfoMessageContainer,
+  InfoMessageText,
   SearchBar,
   SearchBarButton,
   SearchBarInput,
@@ -38,6 +38,7 @@ export default function GrammarReviewHeader({
     searchCorrections,
     pagination,
     isProcessingRecording,
+    hasReachedAnonLimit,
   } = useCorrectionsData();
   const theme: any = useTheme();
   const { showToast } = useToastModal();
@@ -60,9 +61,7 @@ export default function GrammarReviewHeader({
   return (
     <>
       <HeaderContainer hasScrolled={hasScrolled}>
-        <HeaderText
-          maxFontSizeMultiplier={2}
-          numberOfLines={2}>
+        <HeaderText maxFontSizeMultiplier={2} numberOfLines={2}>
           {t('grammarReview')}
         </HeaderText>
         <SearchContainer>
@@ -93,12 +92,17 @@ export default function GrammarReviewHeader({
           </SearchBar>
         </SearchContainer>
       </HeaderContainer>
+      {hasReachedAnonLimit && !isInSearchMode && (
+        <InfoMessageContainer>
+          <InfoMessageText>{t('logInToContinueRecording')}</InfoMessageText>
+        </InfoMessageContainer>
+      )}
       {correctionData.length === 0 && !isProcessingRecording && (
-        <NoCorrectionsContainer>
-          <NoCorrectionsText>
+        <InfoMessageContainer needsMarginTop>
+          <InfoMessageText>
             {isInSearchMode ? t('noResultsFound') : t('startRecording')}
-          </NoCorrectionsText>
-        </NoCorrectionsContainer>
+          </InfoMessageText>
+        </InfoMessageContainer>
       )}
     </>
   );

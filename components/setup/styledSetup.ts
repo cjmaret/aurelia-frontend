@@ -38,7 +38,7 @@ export const LanguageButton = styled(SetupButton)<{ selected: boolean }>`
     selected: boolean;
   }) =>
     selected
-      ? theme.colors.buttonPrimaryBackground
+      ? theme.colors.buttonBackgroundPrimary
       : theme.colors.greySecondary};
   padding: 10px 20px;
   border-radius: 5px;
@@ -54,7 +54,7 @@ export const ButtonContainer = styled.View`
 
 const MoveButton = styled(SetupButton)`
   background-color: ${({ theme }: { theme: any }) =>
-    theme.colors.buttonPrimaryBackground};
+    theme.colors.buttonBackgroundPrimary};
   padding: 16px;
   border-radius: 7px;
   width: 130px;

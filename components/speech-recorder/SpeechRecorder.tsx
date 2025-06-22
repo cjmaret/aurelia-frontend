@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { Alert, Animated } from 'react-native';
+import { Alert, Animated, Text } from 'react-native';
 import { AudioModule, RecordingPresets, useAudioRecorder } from 'expo-audio';
 import * as FileSystem from 'expo-file-system';
 import {
+  LogInToContinueText,
   LowerContainer,
   RecordingGroup,
   SpeechRecorderGroup,
@@ -25,7 +26,12 @@ export default function SpeechRecorder() {
   const theme: any = useTheme();
   const { t } = useTranslation();
   const { showOnboarding, setShowOnboarding } = useAuth();
-  const { setCorrectionData, setIsProcessingRecording } = useCorrectionsData();
+  const {
+    setCorrectionData,
+    setIsProcessingRecording,
+    hasReachedAnonLimit,
+    setPagination,
+  } = useCorrectionsData();
   const { showToast } = useToastModal();
   const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
   const [isRecording, setIsRecording] = useState(false);
@@ -157,6 +163,10 @@ export default function SpeechRecorder() {
           );
           return [...correctionData, ...filtered];
         });
+        setPagination((prev) => ({
+          ...prev,
+          total: prev.total + 1,
+        }));
         showToast('success', t('recordingProcessed'), t('correctionsReady'));
       }
     } catch (error: any) {
@@ -173,12 +183,13 @@ export default function SpeechRecorder() {
     return theme.colors.primary;
   }
 
-  function formatElapsedTime(seconds: number): string {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${String(minutes).padStart(2, '0')}:${String(
-      remainingSeconds
-    ).padStart(2, '0')}`;
+  function formatElapsedTime(elaspedSeconds: number): string {
+    const minutes = Math.floor(elaspedSeconds / 60);
+    const seconds = elaspedSeconds % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(
+      2,
+      '0'
+    )}`;
   }
 
   return (
@@ -191,7 +202,9 @@ export default function SpeechRecorder() {
       </UpperContainer>
       <LowerContainer>
         <RecordingGroup>
-          <TimerText color={getTimerColor(elapsedTime)}>
+          <TimerText
+            color={getTimerColor(elapsedTime)}
+            isVisuallyDisabled={hasReachedAnonLimit}>
             {formatElapsedTime(elapsedTime)}
           </TimerText>
           <RecordButtonComponent
@@ -199,8 +212,14 @@ export default function SpeechRecorder() {
             stopRecording={stopRecording}
             isRecordButtonPressed={isRecordButtonPressed}
             setIsRecordButtonPressed={setIsRecordButtonPressed}
-            disabled={!canRecord}
+            disabled={!canRecord || hasReachedAnonLimit}
+            isVisuallyDisabled={hasReachedAnonLimit}
           />
+          {hasReachedAnonLimit && (
+            <LogInToContinueText>
+              {t('logInToContinueRecording')}
+            </LogInToContinueText>
+          )}
         </RecordingGroup>
       </LowerContainer>
     </SpeechRecorderGroup>

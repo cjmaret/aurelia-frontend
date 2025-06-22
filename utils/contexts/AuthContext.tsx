@@ -20,10 +20,46 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const router = useRouter();
   const pathname = usePathname();
   const PUBLIC_ROUTES = ['/signIn', '/signUp', '/reset-password'];
+  const getStoredAnonymousUserId = async () =>
+    await SecureStore.getItemAsync('anonymousUserId');
+  const getStoredAnonymousUserSecret = async () =>
+    await SecureStore.getItemAsync('anonymousUserSecret');
+  const getStoredAccessToken = async () =>
+    await SecureStore.getItemAsync('accessToken');
+  const getStoredRefreshToken = async () =>
+    await SecureStore.getItemAsync('refreshToken');
+  const getStoredUserId = async () => await SecureStore.getItemAsync('userId');
+  const clearAllStoredTokens = async () => {
+    await SecureStore.deleteItemAsync('accessToken');
+    await SecureStore.deleteItemAsync('refreshToken');
+  };
+
+  console.log('user:', user);
+  clearAllStoredTokens;
+
+  async function logAllSecureStore() {
+    const keys = [
+      'accessToken',
+      'refreshToken',
+      'userId',
+      'anonymousUserId',
+      'anonymousUserSecret',
+    ];
+
+    for (const key of keys) {
+      const value = await SecureStore.getItemAsync(key);
+      console.log(`${key}:`, value);
+    }
+  }
+
+  // Call this function where you want to debug
+  useEffect(() => {
+    logAllSecureStore();
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(async () => {
-      const storedToken = await SecureStore.getItemAsync('accessToken');
+      const storedToken = await getStoredAccessToken();
       if (storedToken) {
         const decodedToken: { exp: number } = jwtDecode(storedToken);
         const currentTime = Math.floor(Date.now() / 1000);
@@ -52,35 +88,98 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const checkToken = async () => {
     try {
-      const storedToken = await SecureStore.getItemAsync('accessToken');
-      if (storedToken) {
-        const decodedToken: { exp: number } = jwtDecode(storedToken);
+      const accessToken = await getStoredAccessToken();
+      // const refreshToken = await getStoredRefreshToken();
+      const userId = await getStoredUserId();
+      const anonymousUserId = await getStoredAnonymousUserId();
+      const anonymousUserSecret = await getStoredAnonymousUserSecret();
+
+      if (accessToken) {
+        // use token as normal
+        const decodedToken: { exp: number } = jwtDecode(accessToken);
         const currentTime = Math.floor(Date.now() / 1000);
 
         if (decodedToken.exp < currentTime) {
-          console.warn('Token has expired');
+          // Token expired, try to refresh
           await handleUnauthorized();
           return;
         }
-
         await getUserDetails();
-      } else {
+
+      } else if (userId) {
+        // Registered user, logged out: force login
         setIsAuthenticated(false);
         setUser(null);
+        router.replace('/signIn');
+        return;
+      } else if (anonymousUserId && anonymousUserSecret) {
+        // Anonymous user: restore session
+        await restoreAnonymousUser(anonymousUserId, anonymousUserSecret);
+      } else {
+        // First-time user: register anonymous
+        await registerAnonymousUser();
       }
     } catch (err) {
       console.error('Error during token check:', err);
       setIsAuthenticated(false);
       setUser(null);
+      router.replace('/signIn');
     } finally {
       setLoading(false);
     }
   };
 
+  const registerAnonymousUser = async () => {
+    try {
+      const response = await api.registerAnonymousUser();
+      const { accessToken, refreshToken } = response;
+
+      // store tokens and anonymous account details
+      await SecureStore.setItemAsync('accessToken', accessToken);
+      await SecureStore.setItemAsync('refreshToken', refreshToken);
+      await SecureStore.setItemAsync('anonymousUserId', response.userId);
+      await SecureStore.setItemAsync(
+        'anonymousUserSecret',
+        response.userSecret
+      );
+
+      const userDetails = await getUserDetails();
+
+      if (userDetails.setupComplete) {
+        router.replace('/');
+      } else {
+        router.replace('/(setup)/setupTab');
+      }
+    } catch (err) {
+      console.error('Error during anonymous login:', err);
+      setLoading(false);
+      // throw err;
+    }
+  };
+
+  const restoreAnonymousUser = async (userId: string, userSecret: string) => {
+    try {
+      const response = await api.restoreAnonymousUser(userId, userSecret);
+      const { accessToken, refreshToken } = response;
+      await SecureStore.setItemAsync('accessToken', accessToken);
+      await SecureStore.setItemAsync('refreshToken', refreshToken);
+      await getUserDetails();
+    } catch (err) {
+      console.error('Error restoring anonymous user:', err);
+      await registerAnonymousUser();
+    }
+  };
+
   const handleNavigation = () => {
+    // If not authenticated and not on a public route, force login
     if (!isAuthenticated && !PUBLIC_ROUTES.includes(pathname)) {
       router.replace('/signIn');
-    } else if (
+      return;
+    }
+
+    // If authenticated but setup not complete, force setup flow
+    if (
+      isAuthenticated &&
       user &&
       !user.setupComplete &&
       !PUBLIC_ROUTES.includes(pathname)
@@ -114,7 +213,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const logout = async () => {
     try {
-      await SecureStore.deleteItemAsync('accessToken');
+      await clearAllStoredTokens();
       setIsAuthenticated(false);
       setUser(null);
       router.replace('/signIn');
@@ -126,7 +225,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const refreshToken = async () => {
     try {
-      const storedRefreshToken = await SecureStore.getItemAsync('refreshToken');
+      const storedRefreshToken = await getStoredRefreshToken();
       if (!storedRefreshToken) {
         console.warn('No refresh token available. Logging out...');
         await logout();
@@ -201,6 +300,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       value={{
         isAuthenticated,
         setIsAuthenticated,
+        registerAnonymousUser,
         login,
         logout,
         getUserDetails,

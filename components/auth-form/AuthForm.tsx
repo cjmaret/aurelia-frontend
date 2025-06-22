@@ -132,7 +132,8 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      keyboardVerticalOffset={60}>
+      // keyboardVerticalOffset={60}
+      >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView
           contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}

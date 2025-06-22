@@ -42,7 +42,8 @@ export const Colors = {
     snippetErrorBackground: 'rgb(255, 236, 236)',
 
     // button colors
-    buttonPrimaryBackground: '#81c6d0',
+    buttonBackgroundPrimary: '#81c6d0',
+    buttonBackgroundDisabled: '#cccccc',
     buttonPrimaryText: '#ffffff',
     buttonSecondaryText: '#81c6d0',
     buttonDangerBackground: '#e74c3c',
@@ -115,7 +116,8 @@ export const Colors = {
     snippetErrorBackground: 'rgba(255, 107, 107, 0.08)',
 
     // button colors
-    buttonPrimaryBackground: '#2099a6',
+    buttonBackgroundPrimary: '#2099a6',
+    buttonBackgroundDisabled: '#949494',
     buttonPrimaryText: '#ffffff',
     buttonSecondaryText: '#81c6d0',
     buttonPrimaryBorder: '#39505a',

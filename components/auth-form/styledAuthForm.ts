@@ -30,7 +30,7 @@ export const Input = styled.TextInput`
 
 export const AuthButton = styled.TouchableOpacity`
   background-color: ${({ theme }: { theme: any }) =>
-    theme.colors.buttonPrimaryBackground};
+    theme.colors.buttonBackgroundPrimary};
   border-radius: 8px;
   padding: 12px;
   display: flex;

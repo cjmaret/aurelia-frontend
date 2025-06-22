@@ -59,7 +59,7 @@ export const SearchBarInput = styled.TextInput`
 
 export const SearchBarButton = styled.TouchableOpacity``;
 
-export const NoCorrectionsContainer = styled.View`
+export const InfoMessageContainer = styled.View<{ needsMarginTop?: boolean }>`
   max-width: 200px;
   border-radius: 10px;
   background-color: ${({ theme }: { theme: any }) =>
@@ -68,10 +68,11 @@ export const NoCorrectionsContainer = styled.View`
   align-items: center;
   justify-content: center;
   padding: 20px;
-  margin-top: 50px;
+  margin-top: ${({ needsMarginTop }: { needsMarginTop?: boolean }) =>
+    needsMarginTop ? '50px' : '0'};
 `;
 
-export const NoCorrectionsText = styled.Text`
+export const InfoMessageText = styled.Text`
   color: ${({ theme }: { theme: any }) => theme.colors.snippetOriginalText};
   font-size: 16px;
   font-weight: bold;

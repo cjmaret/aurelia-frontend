@@ -32,10 +32,30 @@ export const RecordingGroup = styled.View`
   justify-content: center;
 `;
 
-export const TimerText = styled.Text<{ color: string }>`
+export const TimerText = styled.Text<{
+  color: string;
+  isVisuallyDisabled: boolean;
+}>`
   margin-bottom: 10px;
   font-size: 24px;
-  color: ${({ color }: { color: string }) => color};
+  color: ${({
+    theme,
+    color,
+    isVisuallyDisabled,
+  }: {
+    theme: any;
+    color: string;
+    isVisuallyDisabled: boolean;
+  }) => (isVisuallyDisabled ? theme.colors.buttonBackgroundDisabled : color)};
+`;
+
+export const LogInToContinueText = styled.Text`
+  color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 16px;
+  font-size: 18px;
 `;
 
 export const WaveformBackground = styled(Animated.View)`

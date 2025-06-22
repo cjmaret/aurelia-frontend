@@ -1,4 +1,9 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import api from '@/lib/api';
 import {
   CorrectionDataContextType,
@@ -19,7 +24,7 @@ const CorrectionDataContext = createContext<CorrectionDataContextType | null>(
 export const CorrectionsDataProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const { isAuthenticated, refreshToken, logout } = useAuth();
+  const { isAuthenticated, refreshToken, logout, user } = useAuth();
   const { showToast } = useToastModal();
   const { t } = useTranslation();
   const [correctionData, setCorrectionData] = useState<CorrectionDataType[]>(
@@ -31,6 +36,10 @@ export const CorrectionsDataProvider: React.FC<{
     page: 1,
     limit: 10,
   });
+  const ANON_CORRECTION_LIMIT = 15;
+  const isAnonymous = user?.isAnonymous;
+  const hasReachedAnonLimit =
+    (isAnonymous && pagination.total >= ANON_CORRECTION_LIMIT) || false;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -159,6 +168,10 @@ export const CorrectionsDataProvider: React.FC<{
       setCorrectionData((prevData) =>
         prevData.filter((item) => item.conversationId !== conversationId)
       );
+      setPagination((prev) => ({
+        ...prev,
+        total: Math.max(0, prev.total - 1),
+      }));
     } catch (err: any) {
       console.error('Error deleting correction:', err);
       throw err;
@@ -186,6 +199,7 @@ export const CorrectionsDataProvider: React.FC<{
         resetPagination,
         isProcessingRecording,
         setIsProcessingRecording,
+        hasReachedAnonLimit,
       }}>
       {children}
     </CorrectionDataContext.Provider>

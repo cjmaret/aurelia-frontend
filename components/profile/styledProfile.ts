@@ -65,6 +65,18 @@ export const ProfileInfoSection = styled.View`
 
 export const SubSection = styled.View``;
 
+export const AnonymousBlockedText = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+  /* border: 1px solid red; */
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
+  text-align: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+`;
+
 export const SectionTitle = styled.Text`
   font-size: 20px;
   font-weight: bold;
@@ -168,7 +180,7 @@ export const VerifyEmailSaveButtonText = styled(SaveButtonText)`
 
 export const LogoutButton = styled(ProfileButton)`
   background-color: ${({ theme }: { theme: any }) =>
-    theme.colors.buttonPrimaryBackground};
+    theme.colors.buttonBackgroundPrimary};
   border-radius: 8px;
   align-items: center;
   margin-top: 50px;
