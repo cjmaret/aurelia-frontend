@@ -33,8 +33,18 @@ export default function RootLayout() {
   function getActiveRouteName(state: any): string {
     if (!state || !state.routes || state.index === undefined) return 'default';
     const route = state.routes[state.index];
+
+    // Drill down if nested state exists
     if (route.state) {
       return getActiveRouteName(route.state);
+    }
+    // Drill down if nested routes exist (React Navigation v6+)
+    if (route.routes && typeof route.index === 'number') {
+      return getActiveRouteName(route);
+    }
+    // Expo Router: check for params.screen or params.path
+    if (route.params && (route.params.screen || route.params.path)) {
+      return route.params.screen || route.params.path;
     }
     return route.name || 'default';
   }
@@ -57,6 +67,7 @@ export default function RootLayout() {
     'google-callback': theme.colors.backgroundSecondary,
     '(auth)': theme.colors.backgroundSecondary,
     default: theme.colors.backgroundPrimary,
+    welcomeTab: theme.colors.backgroundTertiary,
   };
 
   const backgroundColor =

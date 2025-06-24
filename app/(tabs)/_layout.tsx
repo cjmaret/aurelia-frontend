@@ -1,45 +1,16 @@
-import { router, Tabs } from 'expo-router';
+import { Tabs } from 'expo-router';
 import { HapticTab } from '@/components/base-rn-components/HapticTab';
 import { Ionicons } from '@expo/vector-icons';
-import styled, { useTheme } from 'styled-components/native';
+import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
-import { TouchableOpacity, View, Text } from 'react-native';
-import { useAuth } from '@/utils/contexts/AuthContext';
+import { View } from 'react-native';
 
 export default function TabLayout() {
   const theme: any = useTheme();
-  const { user } = useAuth();
   const { t } = useTranslation();
-
-  const LoginButtonContainer = styled.TouchableOpacity`
-    background-color: ${theme.colors.buttonBackgroundPrimary};
-    position: absolute;
-    display: flex;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-    padding-vertical: 10px;
-    padding-horizontal: 15px;
-    border-radius: 10px;
-    shadow-radius: 2px;
-    shadow-color: #000;
-    shadow-offset: 0px 2px;
-    shadow-opacity: 0.1;
-  `;
-
-  const LoginButtonText = styled.Text`
-    color: ${theme.colors.buttonPrimaryText};
-    font-size: 13px;
-    font-weight: bold;
-  `;
 
   return (
     <View style={{ flex: 1 }}>
-      {user?.isAnonymous && (
-        <LoginButtonContainer onPress={() => router.replace('/signUp')}>
-          <LoginButtonText>{t('createAccount')}</LoginButtonText>
-        </LoginButtonContainer>
-      )}
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: theme.colors.textSecondary,

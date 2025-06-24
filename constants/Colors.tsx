@@ -6,6 +6,7 @@ export const Colors = {
     // backgrounds
     backgroundPrimary: '#e8f6fc',
     backgroundSecondary: '#ffffff',
+    backgroundTertiary: '#9EE3ED',
     backgroundDisabled: '#f0f0f0',
 
     // tab bar colors
@@ -80,6 +81,7 @@ export const Colors = {
     // backgrounds
     backgroundPrimary: '#181C1F',
     backgroundSecondary: '#23272A',
+    backgroundTertiary: '#9EE3ED',
     backgroundDisabled: '#41484e',
 
     // tab bar colors

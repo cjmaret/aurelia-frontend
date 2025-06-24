@@ -25,6 +25,7 @@ export const HeaderText = styled.Text`
   font-weight: bold;
   margin-bottom: 10px;
   flex-wrap: wrap;
+  max-width: ${isTablet ? 'none' : '225px'};
 `;
 
 export const SearchContainer = styled.View`

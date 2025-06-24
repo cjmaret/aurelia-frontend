@@ -15,6 +15,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import React from 'react';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 import { useTheme } from 'styled-components/native';
+import LoginButton from '../login-button/LoginButton';
 
 export default function GrammarReview() {
   const theme: any = useTheme();
@@ -25,7 +26,6 @@ export default function GrammarReview() {
     searchCorrections,
     pagination,
     isProcessingRecording,
-    hasReachedAnonLimit,
   } = useCorrectionsData();
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isInSearchMode, setIsInSearchMode] = useState(false);
@@ -144,6 +144,7 @@ export default function GrammarReview() {
 
   return (
     <GrammarReviewContainer>
+      <LoginButton />
       <GrammarReviewHeader
         hasScrolled={hasScrolled}
         searchText={searchText}

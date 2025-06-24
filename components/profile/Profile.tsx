@@ -57,6 +57,7 @@ import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
+import LoginButton from '../login-button/LoginButton';
 
 export default function Profile() {
   const { showToast } = useToastModal();
@@ -291,6 +292,7 @@ export default function Profile() {
           contentContainerStyle={{ flexGrow: 1 }}
           keyboardShouldPersistTaps="handled"
           automaticallyAdjustKeyboardInsets={true}>
+          <LoginButton />
           <Container>
             <Header>
               <ProfilePicture source={languageFlags[user.targetLanguage]} />

@@ -21,6 +21,7 @@ import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { useTranslation } from 'react-i18next';
 import OnboardingBubbles from '../onboarding-bubbles/OnboardingBubbles';
 import { useAuth } from '@/utils/contexts/AuthContext';
+import LoginButton from '../login-button/LoginButton';
 
 export default function SpeechRecorder() {
   const theme: any = useTheme();
@@ -194,6 +195,7 @@ export default function SpeechRecorder() {
 
   return (
     <SpeechRecorderGroup>
+      <LoginButton />
       {showOnboarding && (
         <OnboardingBubbles onFinish={() => setShowOnboarding(false)} />
       )}

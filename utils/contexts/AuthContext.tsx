@@ -63,10 +63,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [loading, isAuthenticated, user]);
 
+  const handleNavigation = () => {
+    // if not authenticated, redirect to signin page
+    if (!isAuthenticated && !PUBLIC_ROUTES.includes(pathname)) {
+      router.replace('/signIn');
+    }
+  };
+
   const checkToken = async () => {
     try {
       const accessToken = await getStoredAccessToken();
-      // const refreshToken = await getStoredRefreshToken();
       const userId = await getStoredUserId();
       const anonymousUserId = await getStoredAnonymousUserId();
       const anonymousUserSecret = await getStoredAnonymousUserSecret();
@@ -121,7 +127,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       if (userDetails.setupComplete) {
         router.replace('/');
       } else {
-        router.replace('/(setup)/setupTab');
+        router.replace('/(setup)/welcomeTab');
       }
     } catch (err) {
       console.error('Error during anonymous login:', err);
@@ -184,24 +190,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     } catch (err) {
       console.error('Error upgrading anonymous user:', err);
       throw err;
-    }
-  };
-
-  const handleNavigation = () => {
-    // if not authenticated, redirect to singin page
-    if (!isAuthenticated && !PUBLIC_ROUTES.includes(pathname)) {
-      router.replace('/signIn');
-      return;
-    }
-
-    // if authenticated but setup not complete, do setup
-    if (
-      isAuthenticated &&
-      user &&
-      !user.setupComplete &&
-      !PUBLIC_ROUTES.includes(pathname)
-    ) {
-      router.replace('/(setup)/setupTab');
     }
   };
 

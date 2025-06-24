@@ -5,14 +5,13 @@ const isTablet = Platform.OS === 'ios' && Platform.isPad;
 
 export const ScrollView = styled.ScrollView`
   flex: 1;
-  padding: 16px;
   background-color: ${({ theme }: { theme: any }) =>
     theme.colors.backgroundSecondary};
 `;
 
 export const Container = styled.View`
   flex: 1;
-  padding: 25px 0 50px 0;
+  padding: 25px 16px 50px;
   margin: ${isTablet ? '0 10%' : '0'};
 `;
 

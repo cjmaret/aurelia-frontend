@@ -29,7 +29,6 @@ export default function Setup() {
       });
 
       setUser(updatedUser);
-      showToast('success', t('success'), t('setupComplete'));
       router.navigate('/');
     } catch (error) {
       console.error('Error saving setup:', error);
