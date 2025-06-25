@@ -1,6 +1,6 @@
-# 🤖 Aurelia-AI Frontend 🤖
+# 🤖 Aurelia Frontend 🤖
 
-Welcome to the frontend of **Aurelia-AI**, an innovative application designed to help language learners improve their spoken language skills in real time. With Aurelia-AI, users can engage in conversations, receive instant feedback, and get corrections to refine their language abilities.
+Welcome to the frontend of **Aurelia**, an innovative application designed to help language learners improve their spoken language skills in real time. With Aurelia-AI, users can engage in conversations, receive instant feedback, and get corrections to refine their language abilities.
 
 This project serves as the front-end for the Aurelia-AI backend.
 

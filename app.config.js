@@ -58,6 +58,7 @@ export default {
     },
     extra: {
       EXPO_PUBLIC_API_URL: process.env.EXPO_PUBLIC_API_URL,
+      EXPO_PUBLIC_ENV: process.env.EXPO_PUBLIC_ENV,
       router: {
         origin: false,
       },
