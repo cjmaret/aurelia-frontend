@@ -36,6 +36,7 @@ const ArrowIcon = styled.View``;
 
 export const HeaderArrowIcon = styled(ArrowIcon)`
   display: flex;
+  flex-direction: row;
   align-items: center;
 `;
 
@@ -44,7 +45,6 @@ export const CardHeaderTextContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
   width: 90%;
 `;
 
@@ -54,6 +54,7 @@ const CardHeaderText = styled.Text`
 `;
 
 export const CardHeaderTextTitle = styled(CardHeaderText)`
+  flex: 1;
   font-size: 16px;
 `;
 export const CardHeaderTextTime = styled(CardHeaderText)`

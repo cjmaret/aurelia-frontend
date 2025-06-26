@@ -62,6 +62,11 @@ const resources = {
       updatePassword: 'Update Password',
       updating: 'Updating...',
       logOut: 'Log Out',
+      deleteAccount: 'Delete Account',
+      deleteAccountDescription:
+        'If you wish to delete your account, please click the button below',
+      deleteAccountConfirm:
+        'Are you sure you want to delete your account? This action cannot be undone.',
 
       // grammar review
       grammarReview: 'Grammar Review',
@@ -201,6 +206,11 @@ const resources = {
       updatePassword: 'Mettre à Jour le Mot de Passe',
       updating: 'Mise à jour...',
       logOut: 'Se Déconnecter',
+      deleteAccount: 'Supprimer le compte',
+      deleteAccountDescription:
+        'Si vous souhaitez supprimer votre compte, veuillez cliquer sur le bouton ci-dessous',
+      deleteAccountConfirm:
+        'Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.',
 
       // grammar review
       grammarReview: 'Révision de Grammaire',
@@ -349,6 +359,11 @@ const resources = {
       updatePassword: 'Actualizar Contraseña',
       updating: 'Actualizando...',
       logOut: 'Cerrar Sesión',
+      deleteAccount: 'Eliminar cuenta',
+      deleteAccountDescription:
+        'Si deseas eliminar tu cuenta, haz clic en el botón de abajo',
+      deleteAccountConfirm:
+        '¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.',
 
       // grammar reivew
       grammarReview: 'Revisión de Gramática',

@@ -45,10 +45,10 @@ export const Colors = {
     // button colors
     buttonBackgroundPrimary: '#81c6d0',
     buttonBackgroundDisabled: '#cccccc',
-    buttonPrimaryText: '#ffffff',
-    buttonSecondaryText: '#81c6d0',
-    buttonDangerBackground: '#e74c3c',
-    buttonDangerText: '#ffffff',
+    buttonTextPrimary: '#ffffff',
+    buttonTextSecondary: '#81c6d0',
+    buttonBackgroundDanger: '#d85344',
+    buttonTextDanger: '#ffffff',
     buttonBorder: '#b3b3b3',
 
     // INPUTS
@@ -120,11 +120,11 @@ export const Colors = {
     // button colors
     buttonBackgroundPrimary: '#2099a6',
     buttonBackgroundDisabled: '#949494',
-    buttonPrimaryText: '#ffffff',
-    buttonSecondaryText: '#81c6d0',
+    buttonTextPrimary: '#ffffff',
+    buttonTextSecondary: '#81c6d0',
     buttonPrimaryBorder: '#39505a',
-    buttonDangerBackground: '#ff6b6b',
-    buttonDangerText: '#181C1F',
+    buttonBackgroundDanger: '#ff6b6b',
+    buttonTextDanger: '#181C1F',
     buttonBorder: '#b3b3b3',
 
     // inputs

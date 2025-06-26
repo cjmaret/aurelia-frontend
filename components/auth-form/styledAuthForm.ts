@@ -8,6 +8,28 @@ export const Container = styled.View`
   padding: 16px;
   background-color: ${({ theme }: { theme: any }) =>
     theme.colors.backgroundSecondary};
+  position: relative;
+`;
+
+export const BackButton = styled.TouchableOpacity`
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+  padding: 10px 22px;
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.buttonBackgroundPrimary};
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const BackButtonText = styled.Text`
+  color: ${({ theme }: { theme: any }) => theme.colors.buttonTextPrimary};
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
 `;
 
 export const Title = styled.Text`
@@ -41,7 +63,7 @@ export const AuthButton = styled.TouchableOpacity`
 `;
 
 export const AuthButtonText = styled.Text`
-  color: ${({ theme }: { theme: any }) => theme.colors.buttonPrimaryText};
+  color: ${({ theme }: { theme: any }) => theme.colors.buttonTextPrimary};
   font-size: 16px;
   font-weight: bold;
   text-align: center;
@@ -56,13 +78,13 @@ export const AuthLinkButton = styled.TouchableOpacity<{ disabled?: boolean }>`
 `;
 
 export const AuthLinkText = styled.Text`
-  color: ${({ theme }: { theme: any }) => theme.colors.buttonSecondaryText};
+  color: ${({ theme }: { theme: any }) => theme.colors.buttonTextSecondary};
   text-align: center;
   font-size: 16px;
 `;
 
 export const PrivacyPolicyText = styled.Text`
-  color: ${({ theme }: { theme: any }) => theme.colors.buttonSecondaryText};
+  color: ${({ theme }: { theme: any }) => theme.colors.buttonTextSecondary};
   font-size: 12px;
   text-align: center;
   margin-top: 35px;

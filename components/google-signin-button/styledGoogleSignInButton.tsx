@@ -12,7 +12,7 @@ export const GoogleButtonContainer = styled.TouchableOpacity`
   border-radius: 10px;
   align-items: center;
   justify-content: center;
-  color: ${({ theme }: { theme: any }) => theme.colors.buttonPrimaryText};
+  color: ${({ theme }: { theme: any }) => theme.colors.buttonTextPrimary};
   width: 100%;
 `;
 

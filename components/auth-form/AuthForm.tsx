@@ -12,6 +12,8 @@ import {
   OAuthTextContainer,
   OAuthTextBorder,
   OAuthText,
+  BackButton,
+  BackButtonText,
 } from './styledAuthForm';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import api from '@/lib/api';
@@ -33,7 +35,8 @@ import {
 
 export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const { showToast } = useToastModal();
-  const { upgradeAnonymousUser, login, user, getUserDetails } = useAuth();
+  const { upgradeAnonymousUser, login, isAuthenticated, user, getUserDetails } =
+    useAuth();
   const { t } = useTranslation();
   const params = useLocalSearchParams();
   const token = (params as { token?: string }).token;
@@ -47,7 +50,11 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
     const normalizedEmail = userEmail.trim().toLowerCase();
 
     if (!normalizedEmail || !password) {
-      showToast('error', t('loginFailed'), t('pleaseEnterEmailAndPassword'));
+      showToast(
+        'error',
+        isSignUp ? t('signUpFailed') : t('loginFailed'),
+        t('pleaseEnterEmailAndPassword')
+      );
       return;
     }
 
@@ -150,6 +157,11 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
           contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
           keyboardShouldPersistTaps="handled">
           <Container>
+            {isAuthenticated && (
+              <BackButton onPress={() => router.replace('/')}>
+                <BackButtonText>Back</BackButtonText>
+              </BackButton>
+            )}
             <Title>{isSignUp ? t('signUp') : t('login')}</Title>
             <Input
               value={userEmail}
@@ -220,7 +232,7 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
                     href="https://www.aurelialabs.net/privacy-policy.html"
                     target="_blank"
                     style={{
-                      color: theme.colors.buttonSecondaryText,
+                      color: theme.colors.buttonTextSecondary,
                       textDecorationLine: 'underline',
                     }}>
                     {t('privacyPolicy')}

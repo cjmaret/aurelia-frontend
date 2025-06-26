@@ -186,7 +186,7 @@ export const LogoutButton = styled(ProfileButton)`
 `;
 
 export const LogoutButtonText = styled.Text`
-  color: ${({ theme }: { theme: any }) => theme.colors.buttonPrimaryText};
+  color: ${({ theme }: { theme: any }) => theme.colors.buttonTextPrimary};
   font-size: 16px;
   font-weight: bold;
   flex-wrap: wrap;
@@ -220,7 +220,7 @@ export const DeleteUserSubsection = styled(SubSection)`
 
 export const DeleteUserButton = styled.TouchableOpacity`
   background-color: ${({ theme }: { theme: any }) =>
-    theme.colors.buttonDangerBackground};
+    theme.colors.buttonBackgroundDanger};
   border-radius: 8px;
   padding: 12px;
   align-items: center;
@@ -228,7 +228,7 @@ export const DeleteUserButton = styled.TouchableOpacity`
 `;
 
 export const DeleteUserButtonText = styled.Text`
-  color: ${({ theme }: { theme: any }) => theme.colors.buttonDangerText};
+  color: ${({ theme }: { theme: any }) => theme.colors.buttonTextDanger};
   font-size: 16px;
   font-weight: bold;
   text-align: center;

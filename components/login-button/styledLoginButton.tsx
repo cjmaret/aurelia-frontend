@@ -18,7 +18,7 @@ export const LoginButtonContainer = styled.TouchableOpacity`
 `;
 
 export const LoginButtonText = styled.Text`
-  color: ${({ theme }: { theme: any }) => theme.colors.buttonPrimaryText};
+  color: ${({ theme }: { theme: any }) => theme.colors.buttonTextPrimary};
   font-size: 13px;
   font-weight: bold;
 `;

@@ -208,7 +208,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       if (userDetails.setupComplete) {
         router.replace('/');
       } else {
-        router.replace('/(setup)/setupTab');
+        router.replace('/(setup)/welcomeTab');
       }
     } catch (err) {
       console.error('Error during login in auth context:', err);

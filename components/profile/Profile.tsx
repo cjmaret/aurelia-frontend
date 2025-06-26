@@ -225,21 +225,17 @@ export default function Profile() {
   };
 
   const confirmDelete = () => {
-    Alert.alert(
-      'Delete Account',
-      'Are you sure you want to delete your account? This action cannot be undone.',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: async () => {
-            await deleteUser();
-            resetPagination();
-          },
+    Alert.alert(t('deleteAccount'), t('deleteAccountConfirm'), [
+      { text: t('cancel'), style: 'cancel' },
+      {
+        text: t('delete'),
+        style: 'destructive',
+        onPress: async () => {
+          await deleteUser();
+          resetPagination();
         },
-      ]
-    );
+      },
+    ]);
   };
 
   if (!localUser || !user) {
@@ -471,13 +467,12 @@ export default function Profile() {
                 </LogoutButton>
                 {/* Delete Account Section */}
                 <DeleteUserSubsection>
-                  <SectionTitle>Delete Account</SectionTitle>
-                  <Label>
-                    If you wish to delete your account, please click the button
-                    below.
-                  </Label>
+                  <SectionTitle>{t('deleteAccount')}</SectionTitle>
+                  <Label>{t('deleteAccountDescription')}</Label>
                   <DeleteUserButton onPress={confirmDelete}>
-                    <DeleteUserButtonText>Delete Account</DeleteUserButtonText>
+                    <DeleteUserButtonText>
+                      {t('deleteAccount')}
+                    </DeleteUserButtonText>
                   </DeleteUserButton>
                 </DeleteUserSubsection>
               </>

@@ -66,7 +66,7 @@ export const BackButton = styled(MoveButton)`
 `;
 
 export const ButtonText = styled.Text`
-  color: ${({ theme }: { theme: any }) => theme.colors.buttonPrimaryText};
+  color: ${({ theme }: { theme: any }) => theme.colors.buttonTextPrimary};
   font-size: 16px;
   font-weight: bold;
   text-align: center;
