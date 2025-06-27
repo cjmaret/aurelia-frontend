@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Modal,
   FlatList,
@@ -54,16 +54,14 @@ import {
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
-import { router, useLocalSearchParams } from 'expo-router';
+import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import LoginButton from '../login-button/LoginButton';
 
 export default function Profile() {
   const { showToast } = useToastModal();
-  const { token } = useLocalSearchParams<{ token?: string }>();
-  const { getUserDetails, user, setUser, logout, deleteUser, isAuthenticated } =
-    useAuth();
+  const { user, setUser, logout, deleteUser } = useAuth();
   const { pagination, resetPagination } = useCorrectionsData();
   const theme: any = useTheme();
   const { t } = useTranslation();
@@ -78,31 +76,15 @@ export default function Profile() {
   const isGoogleUser = user?.oauthProvider === 'google' || false;
   const isAnonymousUser = user?.isAnonymous;
 
-  useEffect(() => {
-    if (token) {
-      if (!isAuthenticated) {
-        router.replace({ pathname: '/signIn', params: { token } });
-      } else {
-        async function handleVerifyEmail() {
-          try {
-            await api.verifyEmail(token as string);
-            showToast('success', t('success'), t('emailVerifiedSuccess'));
-            await getUserDetails();
-          } catch (err) {
-            showToast('error', t('error'), t('emailVerifiedFailed'));
-          }
-        }
-        handleVerifyEmail();
-      }
-    }
-  }, [token]);
-
   const handleRequestEmailVerification = async () => {
     if (user?.emailVerified) return;
     setLoading(true);
     try {
       await api.requestEmailVerification();
-      showToast('success', t('success'), t('verificationEmailSent'));
+      showToast('success', t('success'), t('verificationCodeSent'));
+      router.replace({
+        pathname: '/verify-email',
+      });
     } catch (error) {
       showToast('error', t('error'), t('requestVerificationEmailFailed'));
     } finally {
@@ -119,7 +101,11 @@ export default function Profile() {
     setLoading(true);
     try {
       await api.requestEmailChange({ newEmail: localUser.userEmail });
-      showToast('success', t('success'), t('verificationEmailSent'));
+      showToast('success', t('success'), t('changeEmailVerificationCodeSent'));
+      router.replace({
+        pathname: '/verify-email',
+        params: { newEmail: localUser.userEmail },
+      });
     } catch (error) {
       showToast('error', t('error'), t('requestEmailChangeFailed'));
     } finally {

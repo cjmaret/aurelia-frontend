@@ -7,7 +7,7 @@ export default function AuthLayout() {
       <Stack.Screen name="signIn" />
       <Stack.Screen name="signUp" />
       <Stack.Screen name="reset-password" />
-      <Stack.Screen name="change-email" />
+      <Stack.Screen name="verify-email" />
       <Stack.Screen name="google-callback" />
     </Stack>
   );

@@ -86,6 +86,14 @@ const resources = {
       tryThisInstead: 'Try this instead',
       improvedClause: 'Improved clause',
 
+      // email verification tab
+      enterVerificationCode: 'Enter Verification Code',
+      enterCodeSentToEmail: 'Enter the code sent to your email',
+      verifyCode: 'Verify Code',
+      verifying: 'Verifying...',
+      returnToProfile: 'Return to your profile',
+      returnToLogin: 'Return to Login',
+
       // Toast notifications
       signUpSuccessTitle: 'Sign Up Successful',
       signUpSuccessMessage:
@@ -101,13 +109,37 @@ const resources = {
       noChanges: 'No Changes',
       noFieldsUpdated: 'No fields were updated.',
       error: 'Error',
-      verificationEmailSent:
-        'A verification email has been sent to your new address. Please verify your new email to complete the change.',
+      processingRecording: 'Processing Your Recording',
+      processingRecordingMessage:
+        'Hang tight! Check the Grammar Review tab for results.',
+      recordingProcessed: 'Recording Processed',
+      correctionsReady: 'Your corrections are ready!',
+      errorSendingAudio: 'Error Sending Audio',
+      unexpectedError: 'An unexpected error occurred.',
+      noSpeechDetectedError:
+        'No speech detected. Please record your voice and try again.',
+      searchCorrectionsError: 'An error occurred while searching corrections',
+      verificationCodeSent:
+        'A verification code has been sent to your email address. Please verify your new email to complete the change.',
       requestVerificationEmailFailed: 'Failed to send verification email.',
       emailVerifiedSuccess: 'Your email has been verified!',
       emailVerifiedFailed: 'Verification failed.',
       invalidEmailFormat: 'Please enter a valid email address.',
+      changeEmailVerificationCodeSent:
+        'A verification email has been sent to your new address. Please verify your new email to complete the change.',
       requestEmailChangeFailed: 'Failed to request email change.',
+      emailChangedSuccess:
+        'Your email was changed successfully! Please log in.',
+      verificationFailed: 'Verification failed',
+      emailChangeFailed: 'Email change failed',
+      emailAlreadyInUse: 'This email is already in use.',
+      incorrectOrExpiredCode: 'Incorrect or expired code. Please try again.',
+      userNotFoundOrUpdate: 'User not found or could not update email.',
+      invalidVerificationCode: 'Invalid verification code.',
+      invalidRequest: 'Invalid request. Please check your input.',
+      unauthorized: 'Unauthorized. Please log in again.',
+      userNotFound: 'User not found.',
+      pleaseTryAgain: 'Please try again.',
       profileUpdateFailed: 'Failed to update profile. Please try again.',
       passwordUpdated: 'Your password has been successfully updated.',
       passwordTooShort: 'Password must be at least 8 characters long.',
@@ -120,16 +152,6 @@ const resources = {
       resetPasswordEmailSentMessage:
         'Check your inbox for a password reset link.',
       resetPasswordEmailFailed: 'Reset Email Failed',
-      processingRecording: 'Processing Your Recording',
-      processingRecordingMessage:
-        'Hang tight! Check the Grammar Review tab for results.',
-      recordingProcessed: 'Recording Processed',
-      correctionsReady: 'Your corrections are ready!',
-      errorSendingAudio: 'Error Sending Audio',
-      unexpectedError: 'An unexpected error occurred.',
-      noSpeechDetectedError:
-        'No speech detected. Please record your voice and try again.',
-      searchCorrectionsError: 'An error occurred while searching corrections',
       sessionExpiredError: 'Your session has expired. Please log in again.',
       serverError: 'A server error occurred. Please try again later.',
 
@@ -230,6 +252,14 @@ const resources = {
       tryThisInstead: 'Essayez ceci à la place',
       improvedClause: 'Clause améliorée',
 
+      // email verification tab
+      enterVerificationCode: 'Entrez le code de vérification',
+      enterCodeSentToEmail: 'Entrez le code envoyé à votre e-mail',
+      verifyCode: 'Vérifier le code',
+      verifying: 'Vérification...',
+      returnToProfile: 'Retour à votre profil',
+      returnToLogin: 'Retour à la connexion',
+
       // Toast notifications
       signUpSuccessTitle: 'Inscription réussie',
       signUpSuccessMessage:
@@ -248,14 +278,40 @@ const resources = {
       noChanges: 'Aucun changement',
       noFieldsUpdated: 'Aucun champ n’a été mis à jour.',
       error: 'Erreur',
-      verificationEmailSent:
-        'Un e-mail de vérification a été envoyé à votre nouvelle adresse. Veuillez vérifier votre nouvel e-mail pour finaliser le changement.',
+      processingRecording: 'Traitement de votre enregistrement',
+      processingRecordingMessage:
+        'Patientez ! Consultez l’onglet Revue grammaticale pour les résultats.',
+      recordingProcessed: 'Enregistrement traité',
+      correctionsReady: 'Vos corrections sont prêtes !',
+      errorSendingAudio: 'Erreur lors de l’envoi de l’audio',
+      unexpectedError: 'Une erreur inattendue est survenue.',
+      noSpeechDetectedError:
+        'Aucune voix détectée. Veuillez enregistrer votre voix et réessayer.',
+      searchCorrectionsError:
+        "Une erreur s'est produite lors de la recherche de corrections.",
+      verificationCodeSent:
+        'Un code de vérification a été envoyé à votre adresse e-mail. Veuillez vérifier votre nouvel e-mail pour finaliser le changement.',
       requestVerificationEmailFailed:
         "Échec de l'envoi de l'e-mail de vérification.",
       emailVerifiedSuccess: 'Votre e-mail a été vérifié !',
       emailVerifiedFailed: 'Échec de la vérification.',
       invalidEmailFormat: 'Veuillez saisir une adresse e-mail valide.',
+      changeEmailVerificationCodeSent:
+        'Un e-mail de vérification a été envoyé à votre nouvelle adresse. Veuillez vérifier votre nouvel e-mail pour finaliser le changement.',
       requestEmailChangeFailed: "Échec de la demande de changement d'e-mail.",
+      emailChangedSuccess:
+        'Votre e-mail a été modifié avec succès ! Veuillez vous connecter.',
+      verificationFailed: 'Échec de la vérification',
+      emailChangeFailed: "Échec du changement d'e-mail",
+      emailAlreadyInUse: 'Cet e-mail est déjà utilisé.',
+      incorrectOrExpiredCode: 'Code incorrect ou expiré. Veuillez réessayer.',
+      userNotFoundOrUpdate:
+        "Utilisateur introuvable ou impossible de mettre à jour l'e-mail.",
+      invalidVerificationCode: 'Code de vérification invalide.',
+      invalidRequest: 'Requête invalide. Veuillez vérifier vos informations.',
+      unauthorized: 'Non autorisé. Veuillez vous reconnecter.',
+      userNotFound: 'Utilisateur introuvable.',
+      pleaseTryAgain: 'Veuillez réessayer.',
       profileUpdateFailed:
         'Échec de la mise à jour du profil. Veuillez réessayer.',
       passwordUpdated: 'Votre mot de passe a été mis à jour avec succès.',
@@ -271,17 +327,6 @@ const resources = {
         'Vérifiez votre boîte de réception pour un lien de réinitialisation du mot de passe.',
       resetPasswordEmailFailed:
         'Échec de l’envoi de l’e-mail de réinitialisation',
-      processingRecording: 'Traitement de votre enregistrement',
-      processingRecordingMessage:
-        'Patientez ! Consultez l’onglet Revue grammaticale pour les résultats.',
-      recordingProcessed: 'Enregistrement traité',
-      correctionsReady: 'Vos corrections sont prêtes !',
-      errorSendingAudio: 'Erreur lors de l’envoi de l’audio',
-      unexpectedError: 'Une erreur inattendue est survenue.',
-      noSpeechDetectedError:
-        'Aucune voix détectée. Veuillez enregistrer votre voix et réessayer.',
-      searchCorrectionsError:
-        "Une erreur s'est produite lors de la recherche de corrections.",
       sessionExpiredError: 'Votre session a expiré. Veuillez vous reconnecter.',
       serverError:
         'Une erreur du serveur s’est produite. Veuillez réessayer plus tard.',
@@ -383,6 +428,14 @@ const resources = {
       tryThisInstead: 'Prueba esto en su lugar',
       improvedClause: 'Cláusula mejorada',
 
+      // email verification tab
+      enterVerificationCode: 'Ingresa el código de verificación',
+      enterCodeSentToEmail: 'Ingresa el código enviado a tu correo electrónico',
+      verifyCode: 'Verificar código',
+      verifying: 'Verificando...',
+      returnToProfile: 'Volver a tu perfil',
+      returnToLogin: 'Volver al inicio de sesión',
+
       // Toast notifications
       signUpSuccessTitle: 'Registro exitoso',
       signUpSuccessMessage:
@@ -401,16 +454,44 @@ const resources = {
       noChanges: 'Sin cambios',
       noFieldsUpdated: 'No se actualizaron campos.',
       error: 'Error',
-      verificationEmailSent:
-        'Se ha enviado un correo de verificación a tu nueva dirección. Por favor, verifica tu nuevo correo electrónico para completar el cambio.',
+      processingRecording: 'Procesando tu grabación',
+      processingRecordingMessage:
+        '¡Espera un momento! Consulta la pestaña de Revisión Gramatical para ver los resultados.',
+      recordingProcessed: 'Grabación procesada',
+      correctionsReady: '¡Tus correcciones están listas!',
+      errorSendingAudio: 'Error al enviar el audio',
+      unexpectedError: 'Ocurrió un error inesperado.',
+      noSpeechDetectedError:
+        'No se detectó voz. Por favor, graba tu voz e inténtalo de nuevo.',
+      searchCorrectionsError: 'Ocurrió un error al buscar correcciones.',
+      verificationCodeSent:
+        'Se ha enviado un código de verificación a tu dirección de correo electrónico. Por favor, verifica tu nuevo correo electrónico para completar el cambio.',
       requestVerificationEmailFailed:
         'No se pudo enviar el correo de verificación.',
       emailVerifiedSuccess: '¡Tu correo electrónico ha sido verificado!',
       emailVerifiedFailed: 'La verificación falló.',
       invalidEmailFormat:
         'Por favor, introduce una dirección de correo electrónico válida.',
+      changeEmailVerificationCodeSent:
+        'Se ha enviado un correo de verificación a tu nueva dirección. Por favor, verifica tu nuevo correo electrónico para completar el cambio.',
       requestEmailChangeFailed:
         'No se pudo solicitar el cambio de correo electrónico.',
+      emailChangedSuccess:
+        '¡Tu correo electrónico se cambió correctamente! Por favor, inicia sesión.',
+      verificationFailed:
+        'La verificación falló',
+      emailChangeFailed:
+        'El cambio de correo electrónico falló',
+      emailAlreadyInUse: 'Este correo electrónico ya está en uso.',
+      incorrectOrExpiredCode:
+        'Código incorrecto o caducado. Por favor, inténtalo de nuevo.',
+      userNotFoundOrUpdate:
+        'Usuario no encontrado o no se pudo actualizar el correo electrónico.',
+      invalidVerificationCode: 'Código de verificación inválido.',
+      invalidRequest: 'Solicitud inválida. Por favor, revisa tus datos.',
+      unauthorized: 'No autorizado. Por favor, inicia sesión de nuevo.',
+      userNotFound: 'Usuario no encontrado.',
+      pleaseTryAgain: 'Por favor, inténtalo de nuevo.',
       profileUpdateFailed:
         'Error al actualizar el perfil. Por favor, inténtalo de nuevo.',
       passwordUpdated: 'Tu contraseña se ha actualizado con éxito.',
@@ -425,16 +506,6 @@ const resources = {
       resetPasswordEmailSentMessage:
         'Revisa tu bandeja de entrada para un enlace de restablecimiento de contraseña.',
       resetPasswordEmailFailed: 'Error al enviar el correo de restablecimiento',
-      processingRecording: 'Procesando tu grabación',
-      processingRecordingMessage:
-        '¡Espera un momento! Consulta la pestaña de Revisión Gramatical para ver los resultados.',
-      recordingProcessed: 'Grabación procesada',
-      correctionsReady: '¡Tus correcciones están listas!',
-      errorSendingAudio: 'Error al enviar el audio',
-      unexpectedError: 'Ocurrió un error inesperado.',
-      noSpeechDetectedError:
-        'No se detectó voz. Por favor, graba tu voz e inténtalo de nuevo.',
-      searchCorrectionsError: 'Ocurrió un error al buscar correcciones.',
       sessionExpiredError:
         'Tu sesión ha expirado. Por favor, inicia sesión de nuevo.',
       serverError:

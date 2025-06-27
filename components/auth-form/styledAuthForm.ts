@@ -11,27 +11,6 @@ export const Container = styled.View`
   position: relative;
 `;
 
-export const BackButton = styled.TouchableOpacity`
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 1;
-  padding: 10px 22px;
-  background-color: ${({ theme }: { theme: any }) =>
-    theme.colors.buttonBackgroundPrimary};
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const BackButtonText = styled.Text`
-  color: ${({ theme }: { theme: any }) => theme.colors.buttonTextPrimary};
-  font-size: 13px;
-  font-weight: bold;
-  text-align: center;
-`;
-
 export const Title = styled.Text`
   font-size: 24px;
   font-weight: bold;
@@ -48,6 +27,11 @@ export const Input = styled.TextInput`
   margin-bottom: 16px;
   padding: 0 8px;
   color: ${({ theme }: { theme: any }) => theme.colors.inputText};
+`;
+
+export const VerificationCodeInput = styled(Input)`
+  text-align: center;
+  font-size: 15px;
 `;
 
 export const AuthButton = styled.TouchableOpacity`

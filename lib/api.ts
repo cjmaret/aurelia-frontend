@@ -196,12 +196,16 @@ class Api {
       });
   }
 
-  // Verify the user's email with a token
-  async verifyEmail(token: string): Promise<any> {
+  async verifyEmail({
+    code,
+  }: {
+    code: string;
+  }): Promise<any> {
+    const headers = await this._getAuthHeaders();
     return fetch(`${config.apiUrl}/auth/verify-email`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token }),
+      headers,
+      body: JSON.stringify({ code }),
     })
       .then((res) => this._returnRes(res))
       .catch((err) => {
@@ -225,17 +229,17 @@ class Api {
   }
 
   async changeEmail({
-    token,
-    password,
+    newEmail,
+    code,
   }: {
-    token: string;
-    password: string;
+    newEmail: string;
+    code: string;
   }): Promise<any> {
     const headers = await this._getAuthHeaders();
     return fetch(`${this._baseUrl}/user/change-email`, {
       method: 'POST',
       headers,
-      body: JSON.stringify({ token, password }),
+      body: JSON.stringify({ newEmail, code }),
     })
       .then((res) => this._returnRes(res))
       .catch((err) => {

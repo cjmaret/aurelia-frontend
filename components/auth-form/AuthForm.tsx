@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useLocalSearchParams, useRouter } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import {
   Container,
   Title,
@@ -12,9 +12,8 @@ import {
   OAuthTextContainer,
   OAuthTextBorder,
   OAuthText,
-  BackButton,
-  BackButtonText,
 } from './styledAuthForm';
+import { BackButton, BackButtonText } from '@/utils/generalStyles';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import api from '@/lib/api';
 import { AuthFormTypes } from '@/types/types';
@@ -38,8 +37,6 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const { upgradeAnonymousUser, login, isAuthenticated, user, getUserDetails } =
     useAuth();
   const { t } = useTranslation();
-  const params = useLocalSearchParams();
-  const token = (params as { token?: string }).token;
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -79,16 +76,6 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
         router.replace('/signIn');
       } else {
         await login(normalizedEmail, password);
-      }
-
-      if (token) {
-        try {
-          await api.verifyEmail(token);
-          showToast('success', t('success'), t('emailVerifiedSuccess'));
-          await getUserDetails();
-        } catch (err) {
-          showToast('error', t('error'), t('emailVerifiedFailed'));
-        }
       }
     } catch (error: any) {
       showToast(
