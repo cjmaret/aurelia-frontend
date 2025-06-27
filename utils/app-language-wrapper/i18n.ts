@@ -159,9 +159,12 @@ const resources = {
       serverError: 'A server error occurred. Please try again later.',
 
       // alerts
-      confirmDeleteTitle: 'Delete Conversation',
-      confirmDeleteMessage:
+      confirmDeleteConversationTitle: 'Delete Conversation',
+      confirmDeleteConversationMessage:
         'Are you sure you want to delete this conversation?',
+      confirmDeleteCorrectionTitle: 'Delete Correction',
+      confirmDeleteCorrectionMessage:
+        'Are you sure you want to delete this correction?',
       cancel: 'Cancel',
       delete: 'Delete',
       deleteError: 'Error',
@@ -340,9 +343,12 @@ const resources = {
         'Une erreur du serveur s’est produite. Veuillez réessayer plus tard.',
 
       // alerts
-      confirmDeleteTitle: 'Supprimer la conversation',
-      confirmDeleteMessage:
+      confirmDeleteConversationTitle: 'Supprimer la conversation',
+      confirmDeleteConversationMessage:
         'Êtes-vous sûr de vouloir supprimer cette conversation ?',
+      confirmDeleteCorrectionTitle: 'Supprimer la correction',
+      confirmDeleteCorrectionMessage:
+        'Êtes-vous sûr de vouloir supprimer cette correction ?',
       cancel: 'Annuler',
       delete: 'Supprimer',
       deleteError: 'Erreur',
@@ -523,9 +529,12 @@ const resources = {
         'Ocurrió un error del servidor. Por favor, inténtalo de nuevo más tarde.',
 
       // alerts
-      confirmDeleteTitle: 'Eliminar conversación',
-      confirmDeleteMessage:
+      confirmDeleteConversationTitle: 'Eliminar conversación',
+      confirmDeleteConversationMessage:
         '¿Estás seguro de que deseas eliminar esta conversación?',
+      confirmDeleteCorrectionTitle: 'Eliminar corrección',
+      confirmDeleteCorrectionMessage:
+        '¿Estás seguro de que deseas eliminar esta corrección?',
       cancel: 'Cancelar',
       delete: 'Eliminar',
       deleteError: 'Error',

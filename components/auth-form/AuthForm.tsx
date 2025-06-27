@@ -16,7 +16,7 @@ import {
 import { BackButton, BackButtonText, EyeIconContainer, PasswordInput, PasswordInputContainer } from '@/utils/generalStyles';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import api from '@/lib/api';
-import { AuthFormTypes } from '@/types/types';
+import { AuthFormType } from '@/types/types';
 import { useTheme } from 'styled-components/native';
 import GoogleSignInButton from '../google-signin-button/GoogleSignInButton';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
@@ -33,7 +33,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
+export default function AuthForm({ isSignUp = false }: AuthFormType) {
   const { showToast } = useToastModal();
   const { upgradeAnonymousUser, login, isAuthenticated, user } = useAuth();
   const { t } = useTranslation();
@@ -149,7 +149,7 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
           contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
           keyboardShouldPersistTaps="handled">
           <Container>
-            {isAuthenticated && (
+            {isAuthenticated && user?.isAnonymous && (
               <BackButton onPress={() => router.replace('/')}>
                 <BackButtonText>Back</BackButtonText>
               </BackButton>

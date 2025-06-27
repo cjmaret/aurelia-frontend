@@ -437,6 +437,26 @@ class Api {
         throw err;
       });
   }
+
+  async deleteCorrectionFromConversation({
+    conversationId,
+    correctionId,
+  }: {
+    conversationId: string;
+    correctionId: string;
+  }): Promise<ConversationResponseType> {
+    const headers = await this._getAuthHeaders();
+
+    return fetch(this._baseUrl + `/conversations/${conversationId}/corrections/${correctionId}`, {
+      method: 'DELETE',
+      headers,
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error deleting conversation:', err);
+        throw err;
+      });
+  }
 }
 
 const api = new Api({

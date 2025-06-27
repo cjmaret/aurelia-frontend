@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import ReviewCard from '../review-card/ReviewCard';
 import { isSameDay } from 'date-fns';
-import { ConversationDataType } from '@/types/types';
+import { ConversationDataType, DeleteConfirmationType } from '@/types/types';
 import {
   DateSeparatorContainer,
   DateSeparatorLine,
@@ -48,23 +48,32 @@ export default function ConversationList({
   const theme: any = useTheme();
   const { showToast } = useToastModal();
   const { t } = useTranslation();
-  const { conversationData, deleteConversation, isProcessingRecording } =
-    useConversationData();
+  const {
+    conversationData,
+    deleteConversation,
+    deleteCorrectionFromConversation,
+    isProcessingRecording,
+  } = useConversationData();
   const [deletingCardId, setDeletingCardId] = useState<string | null>(null);
 
-  const handleDeleteCard = async (conversationId: string) => {
+  const handleDelete = async ({
+    id,
+    apiCall,
+    alertTitle,
+    alertMessage,
+  }: DeleteConfirmationType) => {
     Alert.alert(
-      t('confirmDeleteTitle'),
-      t('confirmDeleteMessage'),
+      alertTitle,
+      alertMessage,
       [
         { text: t('cancel'), style: 'cancel' },
         {
           text: t('delete'),
           style: 'destructive',
           onPress: async () => {
-            setDeletingCardId(conversationId);
+            setDeletingCardId(id);
             try {
-              await deleteConversation(conversationId);
+              await apiCall();
             } catch (error: any) {
               showApiErrorToast({
                 error,
@@ -80,6 +89,29 @@ export default function ConversationList({
       { cancelable: true }
     );
   };
+
+  const handleDeleteCard = ({ conversationId }: { conversationId: string }) =>
+    handleDelete({
+      id: conversationId,
+      apiCall: () => deleteConversation({ conversationId }),
+      alertTitle: t('confirmDeleteConversationTitle'),
+      alertMessage: t('confirmDeleteConversationMessage'),
+    });
+
+  const handleDeleteCorrection = ({
+    conversationId,
+    correctionId,
+  }: {
+    conversationId: string;
+    correctionId: string;
+  }) =>
+    handleDelete({
+      id: conversationId,
+      apiCall: () =>
+        deleteCorrectionFromConversation({ conversationId, correctionId }),
+      alertTitle: t('confirmDeleteCorrectionTitle'),
+      alertMessage: t('confirmDeleteCorrectionMessage'),
+    });
 
   const renderCard = ({
     item: cardData,
@@ -111,9 +143,7 @@ export default function ConversationList({
         {showDateSeparator && (
           <DateSeparatorContainer>
             <DateSeparatorLine />
-            <DateSeparatorText
-              maxFontSizeMultiplier={2}
-              numberOfLines={2}>
+            <DateSeparatorText maxFontSizeMultiplier={2} numberOfLines={2}>
               {formatDate({
                 dateTimeString: cardData.createdAt,
               })}
@@ -125,7 +155,12 @@ export default function ConversationList({
           searchQuery={searchQuery}
           collapseCardsAndErrors={collapseCardsAndErrors}
           setCollapseCardsAndErrors={setCollapseCardsAndErrors}
-          handleDeleteCard={() => handleDeleteCard(cardData.conversationId)}
+          handleDeleteCard={(conversationId) =>
+            handleDeleteCard({ conversationId })
+          }
+          handleDeleteCorrection={(conversationId, correctionId) =>
+            handleDeleteCorrection({ conversationId, correctionId })
+          }
           isDeleting={deletingCardId === cardData.conversationId}
         />
       </ReviewCardContainer>

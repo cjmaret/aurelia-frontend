@@ -45,13 +45,18 @@ export default memo(function ReviewCard({
   collapseCardsAndErrors,
   setCollapseCardsAndErrors,
   handleDeleteCard,
+  handleDeleteCorrection,
   isDeleting,
 }: {
   cardData: ConversationDataType;
   searchQuery: string;
   collapseCardsAndErrors: boolean;
   setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
-  handleDeleteCard: () => void;
+  handleDeleteCard: (conversationId: string) => void;
+  handleDeleteCorrection: (
+    conversationId: string,
+    correctionId: string
+  ) => void;
   isDeleting?: boolean;
 }) {
   const theme: any = useTheme();
@@ -92,33 +97,63 @@ export default memo(function ReviewCard({
   };
 
   const highlightCorrectedText = (original: string, corrected: string) => {
-    // remove punctuation
     const normalizeWord = (word: string) =>
       normalizeText(word.replace(/[.,!?;:]/g, ''));
 
-    // split by whitespace
-    const originalWords = new Set(original.split(/\s+/).map(normalizeWord));
+    const originalWords = original.split(/\s+/).map(normalizeWord);
     const correctedWords = corrected.split(/\s+/);
 
-    return correctedWords.map((word, index) => {
-      const normalizedWord = normalizeWord(word);
-      const isLastWord = index === correctedWords.length - 1;
+    // build longest common subsequence table
+    const m = originalWords.length;
+    const n = correctedWords.length;
+    const lcs: number[][] = Array(m + 1)
+      .fill(null)
+      .map(() => Array(n + 1).fill(0));
 
-      if (!originalWords.has(normalizedWord)) {
+    for (let i = 0; i < m; i++) {
+      for (let j = 0; j < n; j++) {
+        if (originalWords[i] === normalizeWord(correctedWords[j])) {
+          lcs[i + 1][j + 1] = lcs[i][j] + 1;
+        } else {
+          lcs[i + 1][j + 1] = Math.max(lcs[i + 1][j], lcs[i][j + 1]);
+        }
+      }
+    }
+
+    // find which correctedWords are in the lcs
+    let i = m,
+      j = n;
+    const inLCS = Array(n).fill(false);
+    while (i > 0 && j > 0) {
+      if (originalWords[i - 1] === normalizeWord(correctedWords[j - 1])) {
+        inLCS[j - 1] = true;
+        i--;
+        j--;
+      } else if (lcs[i - 1][j] >= lcs[i][j - 1]) {
+        i--;
+      } else {
+        j--;
+      }
+    }
+
+    // highlight words not in lcs
+    return correctedWords.map((word, idx) => {
+      const isLastWord = idx === correctedWords.length - 1;
+      if (inLCS[idx]) {
         return (
-          <HighlightedCorrectedText key={index}>
+          <React.Fragment key={idx}>
+            {word}
+            {!isLastWord && ' '}
+          </React.Fragment>
+        );
+      } else {
+        return (
+          <HighlightedCorrectedText key={idx}>
             {word}
             {!isLastWord && ' '}
           </HighlightedCorrectedText>
         );
       }
-
-      return (
-        <React.Fragment key={index}>
-          {word}
-          {!isLastWord && ' '}
-        </React.Fragment>
-      );
     });
   };
 
@@ -208,7 +243,8 @@ export default memo(function ReviewCard({
               {formatTime({ dateTimeString: createdAt })}
             </CardHeaderTextTime>
           </CardHeaderTextContainer>
-          <DeleteButton onPress={handleDeleteCard}>
+          <DeleteButton
+            onPress={() => handleDeleteCard(cardData.conversationId)}>
             <MaterialCommunityIcons
               name="close"
               size={14}
@@ -225,6 +261,18 @@ export default memo(function ReviewCard({
         <CardContent>
           {sentenceFeedback.map((sentence) => (
             <SnippetCard key={sentence.id}>
+              {isCardExpanded && sentenceFeedback.length > 1 && (
+                <DeleteButton
+                  onPress={() =>
+                    handleDeleteCorrection(cardData.conversationId, sentence.id)
+                  }>
+                  <MaterialCommunityIcons
+                    name="close"
+                    size={14}
+                    color={theme.colors.textSecondary}
+                  />
+                </DeleteButton>
+              )}
               {sentence?.errors?.length > 0 ? (
                 <>
                   <OriginalText>

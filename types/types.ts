@@ -11,7 +11,13 @@ export interface AuthContextType {
   isAuthenticated: boolean;
   setIsAuthenticated: SetStateType<boolean>;
   registerAnonymousUser: () => Promise<void>;
-  upgradeAnonymousUser: ({ userEmail, password }: { userEmail: string; password: string }) => Promise<void>;
+  upgradeAnonymousUser: ({
+    userEmail,
+    password,
+  }: {
+    userEmail: string;
+    password: string;
+  }) => Promise<void>;
   login: (userEmail: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   getUserDetails: () => Promise<UserDataType | null>;
@@ -26,9 +32,16 @@ export interface AuthContextType {
 export interface ConversationDataContextType {
   conversationData: ConversationDataType[];
   setConversationData: SetStateType<ConversationDataType[]>;
-  fetchConversations: (params: { page: number; limit: number }) => Promise<void>;
+  fetchConversations: (params: {
+    page: number;
+    limit: number;
+  }) => Promise<void>;
   searchConversations: (params: SearchConversationsType) => Promise<void>;
-  deleteConversation: (conversationId: string) => Promise<void>;
+  deleteConversation: (params: { conversationId: string }) => Promise<void>;
+  deleteCorrectionFromConversation: (params: {
+    conversationId: string;
+    correctionId: string;
+  }) => Promise<void>;
   pagination: PaginationType;
   setPagination: SetStateType<PaginationType>;
   resetPagination: () => void;
@@ -105,6 +118,13 @@ export interface SearchConversationsType {
 }
 
 // AuthForm types
-export interface AuthFormTypes {
+export interface AuthFormType {
   isSignUp?: boolean;
+}
+
+export interface DeleteConfirmationType {
+  id: string;
+  apiCall: () => Promise<void>;
+  alertTitle: string;
+  alertMessage: string;
 }

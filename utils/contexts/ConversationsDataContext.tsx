@@ -1,9 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import api from '@/lib/api';
 import {
   ConversationDataContextType,
@@ -17,9 +12,8 @@ import { showApiErrorToast } from '../functions/showApiErrorToast';
 import { useToastModal } from './ToastModalContext';
 import { useTranslation } from 'react-i18next';
 
-const ConversationDataContext = createContext<ConversationDataContextType | null>(
-  null
-);
+const ConversationDataContext =
+  createContext<ConversationDataContextType | null>(null);
 
 export const ConversationDataProvider: React.FC<{
   children: React.ReactNode;
@@ -27,9 +21,9 @@ export const ConversationDataProvider: React.FC<{
   const { isAuthenticated, refreshToken, logout, user } = useAuth();
   const { showToast } = useToastModal();
   const { t } = useTranslation();
-  const [conversationData, setConversationData] = useState<ConversationDataType[]>(
-    []
-  );
+  const [conversationData, setConversationData] = useState<
+    ConversationDataType[]
+  >([]);
   const [isProcessingRecording, setIsProcessingRecording] = useState(false);
   const [pagination, setPagination] = useState<PaginationType>({
     total: 0,
@@ -156,7 +150,11 @@ export const ConversationDataProvider: React.FC<{
     }
   }
 
-  const deleteConversation = async (conversationId: string): Promise<void> => {
+  const deleteConversation = async ({
+    conversationId,
+  }: {
+    conversationId: string;
+  }): Promise<void> => {
     try {
       const response = await api.deleteConversation({ conversationId });
 
@@ -178,6 +176,42 @@ export const ConversationDataProvider: React.FC<{
     }
   };
 
+  const deleteCorrectionFromConversation = async ({
+    conversationId,
+    correctionId,
+  }: {
+    conversationId: string;
+    correctionId: string;
+  }): Promise<void> => {
+    try {
+      const response = await api.deleteCorrectionFromConversation({
+        conversationId,
+        correctionId,
+      });
+
+      if (!response.success) {
+        throw new Error('Failed to delete correction');
+      }
+
+      // update the conversation data to remove the deleted correction
+      setConversationData((prevData) =>
+        prevData.map((item) =>
+          item.conversationId === conversationId
+            ? {
+                ...item,
+                sentenceFeedback: item.sentenceFeedback.filter(
+                  (correction) => correction.id !== correctionId
+                ),
+              }
+            : item
+        )
+      );
+    } catch (err: any) {
+      console.error('Error deleting correction:', err);
+      throw err;
+    }
+  };
+
   const resetPagination = () => {
     setPagination({
       page: 1,
@@ -194,6 +228,7 @@ export const ConversationDataProvider: React.FC<{
         fetchConversations,
         searchConversations,
         deleteConversation,
+        deleteCorrectionFromConversation,
         pagination,
         setPagination,
         resetPagination,
