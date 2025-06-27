@@ -13,7 +13,7 @@ import {
   OAuthTextBorder,
   OAuthText,
 } from './styledAuthForm';
-import { BackButton, BackButtonText } from '@/utils/generalStyles';
+import { BackButton, BackButtonText, EyeIconContainer, PasswordInput, PasswordInputContainer } from '@/utils/generalStyles';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import api from '@/lib/api';
 import { AuthFormTypes } from '@/types/types';
@@ -31,17 +31,18 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
   const { showToast } = useToastModal();
-  const { upgradeAnonymousUser, login, isAuthenticated, user, getUserDetails } =
-    useAuth();
+  const { upgradeAnonymousUser, login, isAuthenticated, user } = useAuth();
   const { t } = useTranslation();
+  const theme: any = useTheme();
+  const router = useRouter();
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
-  const theme: any = useTheme();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async () => {
     const normalizedEmail = userEmail.trim().toLowerCase();
@@ -99,6 +100,10 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
         t('resetPasswordEmailSentTitle'),
         t('resetPasswordEmailSentMessage')
       );
+      router.replace({
+        pathname: '/reset-password',
+        params: { userEmail },
+      });
     } catch (error: any) {
       showToast(
         'error',
@@ -156,13 +161,26 @@ export default function AuthForm({ isSignUp = false }: AuthFormTypes) {
               placeholder={t('email')}
               placeholderTextColor={theme.colors.inputPlaceholder}
             />
-            <Input
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-              placeholder={t('password')}
-              placeholderTextColor={theme.colors.inputPlaceholder}
-            />
+            <PasswordInputContainer>
+              <PasswordInput
+                placeholder={t('password')}
+                placeholderTextColor={theme.colors.inputPlaceholder}
+                secureTextEntry={!showPassword}
+                value={password}
+                onChangeText={setPassword}
+                editable={!isLoading}
+                autoCapitalize="none"
+              />
+              <EyeIconContainer
+                onPress={() => setShowPassword((prev) => !prev)}
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+                <Ionicons
+                  name={showPassword ? 'eye' : 'eye-off'}
+                  size={24}
+                  color={theme.colors.inputPlaceholder}
+                />
+              </EyeIconContainer>
+            </PasswordInputContainer>
             <AuthButton
               title={
                 isLoading

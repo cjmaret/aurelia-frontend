@@ -86,11 +86,14 @@ const resources = {
       tryThisInstead: 'Try this instead',
       improvedClause: 'Improved clause',
 
-      // email verification tab
-      enterVerificationCode: 'Enter Verification Code',
+      // email / password tabs
+      enterVerificationCode: 'Enter verification code',
       enterCodeSentToEmail: 'Enter the code sent to your email',
       verifyCode: 'Verify Code',
       verifying: 'Verifying...',
+      passwordResetSuccess: 'Password reset successful! Please log in.',
+      passwordResetError: 'Error resetting password. Please try again.',
+      resetPassword: 'Reset Password',
       returnToProfile: 'Return to your profile',
       returnToLogin: 'Return to Login',
 
@@ -252,9 +255,14 @@ const resources = {
       tryThisInstead: 'Essayez ceci à la place',
       improvedClause: 'Clause améliorée',
 
-      // email verification tab
+      // email / password tabs
       enterVerificationCode: 'Entrez le code de vérification',
       enterCodeSentToEmail: 'Entrez le code envoyé à votre e-mail',
+      passwordResetSuccess:
+        'Réinitialisation du mot de passe réussie ! Veuillez vous connecter.',
+      passwordResetError:
+        'Erreur lors de la réinitialisation du mot de passe. Veuillez réessayer.',
+      resetPassword: 'Réinitialiser le mot de passe',
       verifyCode: 'Vérifier le code',
       verifying: 'Vérification...',
       returnToProfile: 'Retour à votre profil',
@@ -428,9 +436,14 @@ const resources = {
       tryThisInstead: 'Prueba esto en su lugar',
       improvedClause: 'Cláusula mejorada',
 
-      // email verification tab
+      // email / password tabs
       enterVerificationCode: 'Ingresa el código de verificación',
       enterCodeSentToEmail: 'Ingresa el código enviado a tu correo electrónico',
+      passwordResetSuccess:
+        '¡Contraseña restablecida con éxito! Por favor, inicia sesión.',
+      passwordResetError:
+        'Error al restablecer la contraseña. Por favor, inténtalo de nuevo.',
+      resetPassword: 'Restablecer contraseña',
       verifyCode: 'Verificar código',
       verifying: 'Verificando...',
       returnToProfile: 'Volver a tu perfil',
@@ -478,10 +491,8 @@ const resources = {
         'No se pudo solicitar el cambio de correo electrónico.',
       emailChangedSuccess:
         '¡Tu correo electrónico se cambió correctamente! Por favor, inicia sesión.',
-      verificationFailed:
-        'La verificación falló',
-      emailChangeFailed:
-        'El cambio de correo electrónico falló',
+      verificationFailed: 'La verificación falló',
+      emailChangeFailed: 'El cambio de correo electrónico falló',
       emailAlreadyInUse: 'Este correo electrónico ya está en uso.',
       incorrectOrExpiredCode:
         'Código incorrecto o caducado. Por favor, inténtalo de nuevo.',
