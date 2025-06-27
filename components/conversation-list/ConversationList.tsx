@@ -8,18 +8,18 @@ import {
 } from 'react-native';
 import ReviewCard from '../review-card/ReviewCard';
 import { isSameDay } from 'date-fns';
-import { CorrectionDataType } from '@/types/types';
+import { ConversationDataType } from '@/types/types';
 import {
   DateSeparatorContainer,
   DateSeparatorLine,
   DateSeparatorText,
   ReviewCardContainer,
-} from './styledCorrectionList';
+} from './styledConversationList';
 import {
   formatDate,
   formatToLocalDate,
 } from '@/utils/functions/generalFunctions';
-import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
+import { useConversationData } from '@/utils/contexts/ConversationsDataContext';
 import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
 import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
@@ -27,7 +27,7 @@ import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import type { RefreshControlProps } from 'react-native';
 import SkeletonReviewCard from '../review-card-skeleton.tsx/SkeletonReviewCard';
 
-export default function CorrectionList({
+export default function ConversationList({
   searchQuery,
   refreshControl,
   handleScroll,
@@ -44,12 +44,12 @@ export default function CorrectionList({
   collapseCardsAndErrors: boolean;
   setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  useCorrectionsData();
+  useConversationData();
   const theme: any = useTheme();
   const { showToast } = useToastModal();
   const { t } = useTranslation();
-  const { correctionData, deleteCorrection, isProcessingRecording } =
-    useCorrectionsData();
+  const { conversationData, deleteConversation, isProcessingRecording } =
+    useConversationData();
   const [deletingCardId, setDeletingCardId] = useState<string | null>(null);
 
   const handleDeleteCard = async (conversationId: string) => {
@@ -64,7 +64,7 @@ export default function CorrectionList({
           onPress: async () => {
             setDeletingCardId(conversationId);
             try {
-              await deleteCorrection(conversationId);
+              await deleteConversation(conversationId);
             } catch (error: any) {
               showApiErrorToast({
                 error,
@@ -87,7 +87,7 @@ export default function CorrectionList({
     collapseCardsAndErrors,
     setCollapseCardsAndErrors,
   }: {
-    item: CorrectionDataType;
+    item: ConversationDataType;
     index: number;
     collapseCardsAndErrors: boolean;
     setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
@@ -99,7 +99,7 @@ export default function CorrectionList({
     const previousDateLocal =
       index > 0
         ? formatToLocalDate({
-            dateTimeString: correctionData[index - 1].createdAt,
+            dateTimeString: conversationData[index - 1].createdAt,
           })
         : null;
 
@@ -136,7 +136,7 @@ export default function CorrectionList({
     // dont cut off final cards if height changes dynamically
     <View style={{ flex: 1 }}>
       <FlatList
-        data={correctionData}
+        data={conversationData}
         keyExtractor={(item) => item.conversationId}
         renderItem={({ item, index }) =>
           renderCard({
@@ -151,7 +151,7 @@ export default function CorrectionList({
         onScroll={handleScroll}
         scrollEventThrottle={16}
         refreshControl={refreshControl}
-        extraData={correctionData}
+        extraData={conversationData}
         ListHeaderComponent={
           isProcessingRecording ? <SkeletonReviewCard /> : null
         }

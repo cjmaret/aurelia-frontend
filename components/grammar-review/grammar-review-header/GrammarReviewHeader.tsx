@@ -9,7 +9,7 @@ import {
   SearchContainer,
 } from './styledGrammarReviewHeader';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
+import { useConversationData } from '@/utils/contexts/ConversationsDataContext';
 import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
@@ -34,12 +34,12 @@ export default function GrammarReviewHeader({
   resetToNormalFetch: () => void;
 }) {
   const {
-    correctionData,
-    searchCorrections,
+    conversationData,
+    searchConversations,
     pagination,
     isProcessingRecording,
     hasReachedAnonLimit,
-  } = useCorrectionsData();
+  } = useConversationData();
   const theme: any = useTheme();
   const { showToast } = useToastModal();
   const { t } = useTranslation();
@@ -50,9 +50,9 @@ export default function GrammarReviewHeader({
     setIsSearchLoading(true);
 
     try {
-      await searchCorrections({ query, page: 1, limit: pagination.limit });
+      await searchConversations({ query, page: 1, limit: pagination.limit });
     } catch (error) {
-      showToast('error', t('error'), t('searchCorrectionsError'));
+      showToast('error', t('error'), t('searchConversationsError'));
     } finally {
       setIsSearchLoading(false);
     }
@@ -67,7 +67,7 @@ export default function GrammarReviewHeader({
         <SearchContainer>
           <SearchBar>
             <SearchBarInput
-              placeholder={t('searchCorrections')}
+              placeholder={t('searchConversations')}
               placeholderTextColor={theme.colors.textSecondary}
               value={searchText}
               onChangeText={handleSearch}
@@ -99,7 +99,7 @@ export default function GrammarReviewHeader({
           </InfoMessageText>
         </InfoMessageContainer>
       )}
-      {correctionData.length === 0 && !isProcessingRecording && (
+      {conversationData.length === 0 && !isProcessingRecording && (
         <InfoMessageContainer needsMarginTop>
           <InfoMessageText>
             {isInSearchMode ? t('noResultsFound') : t('startRecording')}

@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { AuthProvider } from '@/utils/contexts/AuthContext';
-import { CorrectionsDataProvider } from '@/utils/contexts/CorrectionsDataContext';
+import { ConversationDataProvider } from '@/utils/contexts/ConversationsDataContext';
 import { getTheme } from '@/utils/themes/ColorsThemeProvider';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components/native';
 import { I18nextProvider } from 'react-i18next';
@@ -91,7 +91,7 @@ export default function RootLayout() {
       <StyledThemeProvider theme={theme}>
         <ToastModalProvider>
           <AuthProvider>
-            <CorrectionsDataProvider>
+            <ConversationDataProvider>
               <SafeAreaProvider>
                 <I18nextProvider i18n={i18n}>
                   <LanguageUpdater>
@@ -113,7 +113,7 @@ export default function RootLayout() {
                   </LanguageUpdater>
                 </I18nextProvider>
               </SafeAreaProvider>
-            </CorrectionsDataProvider>
+            </ConversationDataProvider>
           </AuthProvider>
         </ToastModalProvider>
       </StyledThemeProvider>

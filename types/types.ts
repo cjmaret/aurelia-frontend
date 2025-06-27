@@ -23,12 +23,12 @@ export interface AuthContextType {
   setShowOnboarding: SetStateType<boolean>;
 }
 
-export interface CorrectionDataContextType {
-  correctionData: CorrectionDataType[];
-  setCorrectionData: SetStateType<CorrectionDataType[]>;
-  fetchCorrections: (params: { page: number; limit: number }) => Promise<void>;
-  searchCorrections: (params: SearchCorrectionsType) => Promise<void>;
-  deleteCorrection: (conversationId: string) => Promise<void>;
+export interface ConversationDataContextType {
+  conversationData: ConversationDataType[];
+  setConversationData: SetStateType<ConversationDataType[]>;
+  fetchConversations: (params: { page: number; limit: number }) => Promise<void>;
+  searchConversations: (params: SearchConversationsType) => Promise<void>;
+  deleteConversation: (conversationId: string) => Promise<void>;
   pagination: PaginationType;
   setPagination: SetStateType<PaginationType>;
   resetPagination: () => void;
@@ -52,23 +52,23 @@ export interface UserDataType {
   oauthProvider: string;
 }
 
-// // correction data types
+// // conversation data types
 
-export interface CorrectionResponseType {
+export interface ConversationResponseType {
   success: boolean;
-  data?: CorrectionDataType[] | PaginatedCorrectionsResponseType; // paginated type for fetches, data type for add new corrections
+  data?: ConversationDataType[] | PaginatedConversationsResponseType; // paginated type for fetches, data type for add new conversations
   error?: string;
   status?: number;
 }
 
-export interface PaginatedCorrectionsResponseType {
-  corrections: CorrectionDataType[];
+export interface PaginatedConversationsResponseType {
+  conversations: ConversationDataType[];
   total: number;
   page: number;
   limit: number;
 }
 
-export interface CorrectionDataType {
+export interface ConversationDataType {
   conversationId: string;
   createdAt: string;
   originalText: string;
@@ -98,7 +98,7 @@ export interface PaginationType {
   limit: number;
 }
 
-export interface SearchCorrectionsType {
+export interface SearchConversationsType {
   query: string;
   page: number;
   limit: number;

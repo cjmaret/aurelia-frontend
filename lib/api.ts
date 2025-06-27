@@ -1,4 +1,4 @@
-import { ApiTypes, CorrectionResponseType } from '@/types/types';
+import { ApiTypes, ConversationResponseType } from '@/types/types';
 import config from './config';
 import * as SecureStore from 'expo-secure-store';
 import { jwtDecode } from 'jwt-decode';
@@ -358,27 +358,27 @@ class Api {
       });
   }
 
-  async getCorrections({
+  async getConversations({
     page,
     limit,
   }: {
     page: number;
     limit: number;
-  }): Promise<CorrectionResponseType> {
+  }): Promise<ConversationResponseType> {
     const headers = await this._getAuthHeaders();
 
-    return fetch(this._baseUrl + `/corrections?page=${page}&limit=${limit}`, {
+    return fetch(this._baseUrl + `/conversations?page=${page}&limit=${limit}`, {
       method: 'GET',
       headers,
     })
       .then((res) => this._returnRes(res))
       .catch((err) => {
-        console.error('Error fetching corrections:', err);
+        console.error('Error fetching conversations:', err);
         throw err;
       });
   }
 
-  async searchCorrections({
+  async searchConversations({
     query,
     page = 1,
     limit = 0,
@@ -386,11 +386,11 @@ class Api {
     query: string;
     page: number;
     limit: number;
-  }): Promise<CorrectionResponseType> {
+  }): Promise<ConversationResponseType> {
     const headers = await this._getAuthHeaders();
 
     return fetch(
-      `${this._baseUrl}/corrections/search?query=${encodeURIComponent(
+      `${this._baseUrl}/conversations/search?query=${encodeURIComponent(
         query
       )}&page=${page}&limit=${limit}`,
       {
@@ -400,15 +400,15 @@ class Api {
     )
       .then((res) => this._returnRes(res))
       .catch((err) => {
-        console.error('Error while searching corrections', err);
+        console.error('Error while searching conversations', err);
         throw err;
       });
   }
 
-  async addCorrection(formData: FormData): Promise<CorrectionResponseType> {
+  async addConversation(formData: FormData): Promise<ConversationResponseType> {
     const headers = await this._getAuthHeaders();
 
-    return fetch(this._baseUrl + `/corrections`, {
+    return fetch(this._baseUrl + `/conversations`, {
       method: 'POST',
       headers,
       body: formData,
@@ -424,16 +424,16 @@ class Api {
     conversationId,
   }: {
     conversationId: string;
-  }): Promise<CorrectionResponseType> {
+  }): Promise<ConversationResponseType> {
     const headers = await this._getAuthHeaders();
 
-    return fetch(this._baseUrl + `/corrections/${conversationId}`, {
+    return fetch(this._baseUrl + `/conversations/${conversationId}`, {
       method: 'DELETE',
       headers,
     })
       .then((res) => this._returnRes(res))
       .catch((err) => {
-        console.error('Error deleting correction:', err);
+        console.error('Error deleting conversation:', err);
         throw err;
       });
   }

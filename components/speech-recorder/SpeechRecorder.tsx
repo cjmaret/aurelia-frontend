@@ -14,8 +14,8 @@ import Waveform from '../waveform/Waveform';
 import RecordButtonComponent from '../record-button/RecordButton';
 import styled, { useTheme } from 'styled-components/native';
 import api from '@/lib/api';
-import { CorrectionDataType, CorrectionResponseType } from '@/types/types';
-import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
+import { ConversationDataType, ConversationResponseType } from '@/types/types';
+import { useConversationData } from '@/utils/contexts/ConversationsDataContext';
 import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
 import { useToastModal } from '@/utils/contexts/ToastModalContext';
 import { useTranslation } from 'react-i18next';
@@ -28,11 +28,11 @@ export default function SpeechRecorder() {
   const { t } = useTranslation();
   const { showOnboarding, setShowOnboarding } = useAuth();
   const {
-    setCorrectionData,
+    setConversationData,
     setIsProcessingRecording,
     hasReachedAnonLimit,
     setPagination,
-  } = useCorrectionsData();
+  } = useConversationData();
   const { showToast } = useToastModal();
   const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
   const [isRecording, setIsRecording] = useState(false);
@@ -118,7 +118,7 @@ export default function SpeechRecorder() {
         }, RECORD_COOLDOWN_MS);
         return;
       }
-      addCorrection(uri);
+      addConversation(uri);
     }
     waveformOpacity.setValue(0);
     setTimeout(() => {
@@ -127,8 +127,8 @@ export default function SpeechRecorder() {
     }, RECORD_COOLDOWN_MS);
   }
 
-  async function addCorrection(audioUri: string) {
-    console.log('Adding correction for audio:', audioUri);
+  async function addConversation(audioUri: string) {
+    console.log('Adding conversation for audio:', audioUri);
     const formData = new FormData();
     formData.append('file', {
       uri: audioUri,
@@ -143,7 +143,7 @@ export default function SpeechRecorder() {
         t('processingRecordingMessage')
       );
 
-      const response: CorrectionResponseType = await api.addCorrection(
+      const response: ConversationResponseType = await api.addConversation(
         formData
       );
 
@@ -152,17 +152,17 @@ export default function SpeechRecorder() {
         return;
       }
 
-      const correctionData = response.data as CorrectionDataType[];
-      if (correctionData) {
-        setCorrectionData((prevData: CorrectionDataType[]) => {
-          // filter out existing corrections to avoid duplicates
+      const conversationData = response.data as ConversationDataType[];
+      if (conversationData) {
+        setConversationData((prevData: ConversationDataType[]) => {
+          // filter out existing conversations to avoid duplicates
           const filtered = prevData.filter(
             (c) =>
-              !correctionData.some(
+              !conversationData.some(
                 (cd) => cd.conversationId === c.conversationId
               )
           );
-          return [...correctionData, ...filtered];
+          return [...conversationData, ...filtered];
         });
         setPagination((prev) => ({
           ...prev,

@@ -6,28 +6,28 @@ import React, {
 } from 'react';
 import api from '@/lib/api';
 import {
-  CorrectionDataContextType,
-  CorrectionDataType,
-  PaginatedCorrectionsResponseType,
+  ConversationDataContextType,
+  ConversationDataType,
+  PaginatedConversationsResponseType,
   PaginationType,
-  SearchCorrectionsType,
+  SearchConversationsType,
 } from '@/types/types';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import { showApiErrorToast } from '../functions/showApiErrorToast';
 import { useToastModal } from './ToastModalContext';
 import { useTranslation } from 'react-i18next';
 
-const CorrectionDataContext = createContext<CorrectionDataContextType | null>(
+const ConversationDataContext = createContext<ConversationDataContextType | null>(
   null
 );
 
-export const CorrectionsDataProvider: React.FC<{
+export const ConversationDataProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const { isAuthenticated, refreshToken, logout, user } = useAuth();
   const { showToast } = useToastModal();
   const { t } = useTranslation();
-  const [correctionData, setCorrectionData] = useState<CorrectionDataType[]>(
+  const [conversationData, setConversationData] = useState<ConversationDataType[]>(
     []
   );
   const [isProcessingRecording, setIsProcessingRecording] = useState(false);
@@ -36,16 +36,16 @@ export const CorrectionsDataProvider: React.FC<{
     page: 1,
     limit: 10,
   });
-  const ANON_CORRECTION_LIMIT = 15;
+  const ANON_CONVERSATION_LIMIT = 15;
   const isAnonymous = user?.isAnonymous;
   const hasReachedAnonLimit =
-    (isAnonymous && pagination.total >= ANON_CORRECTION_LIMIT) || false;
+    (isAnonymous && pagination.total >= ANON_CONVERSATION_LIMIT) || false;
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetchCorrections({ page: pagination.page, limit: pagination.limit });
+      fetchConversations({ page: pagination.page, limit: pagination.limit });
     } else {
-      setCorrectionData([]);
+      setConversationData([]);
       setPagination({
         total: 0,
         page: 1,
@@ -54,7 +54,7 @@ export const CorrectionsDataProvider: React.FC<{
     }
   }, [isAuthenticated]);
 
-  const fetchCorrections = async ({
+  const fetchConversations = async ({
     page = 1,
     limit = 10,
   }: {
@@ -62,7 +62,7 @@ export const CorrectionsDataProvider: React.FC<{
     limit: number;
   }) => {
     try {
-      const response: any = await api.getCorrections({
+      const response: any = await api.getConversations({
         page,
         limit,
       });
@@ -72,11 +72,11 @@ export const CorrectionsDataProvider: React.FC<{
       }
 
       // data can be one of two types so we have to assert this one
-      const data = response.data as PaginatedCorrectionsResponseType;
+      const data = response.data as PaginatedConversationsResponseType;
 
-      if (data && data.corrections.length > 0) {
-        setCorrectionData((prev) =>
-          page === 1 ? data.corrections : [...prev, ...data.corrections]
+      if (data && data.conversations.length > 0) {
+        setConversationData((prev) =>
+          page === 1 ? data.conversations : [...prev, ...data.conversations]
         );
 
         // update pagination metadata
@@ -86,10 +86,10 @@ export const CorrectionsDataProvider: React.FC<{
           limit: data.limit,
         });
       } else if (page === 1) {
-        setCorrectionData([]);
+        setConversationData([]);
       }
     } catch (err: any) {
-      console.error('Error fetching corrections:', err);
+      console.error('Error fetching conversations:', err);
       if (err.status === 401) {
         await attemptRefreshAndRefetch();
         return;
@@ -98,24 +98,24 @@ export const CorrectionsDataProvider: React.FC<{
     }
   };
 
-  const searchCorrections = async ({
+  const searchConversations = async ({
     query,
     page = 1,
     limit = 10,
-  }: SearchCorrectionsType) => {
+  }: SearchConversationsType) => {
     try {
-      const response = await api.searchCorrections({
+      const response = await api.searchConversations({
         query,
         page,
         limit,
       });
 
       if (response.success) {
-        const data = response.data as PaginatedCorrectionsResponseType;
+        const data = response.data as PaginatedConversationsResponseType;
 
-        if (data && data.corrections.length > 0) {
-          setCorrectionData((prev) =>
-            page === 1 ? data.corrections : [...prev, ...data.corrections]
+        if (data && data.conversations.length > 0) {
+          setConversationData((prev) =>
+            page === 1 ? data.conversations : [...prev, ...data.conversations]
           );
 
           setPagination({
@@ -124,8 +124,8 @@ export const CorrectionsDataProvider: React.FC<{
             limit: data.limit,
           });
         } else if (page === 1) {
-          // Clear corrections if no results are found on the first page
-          setCorrectionData([]);
+          // Clear conversations if no results are found on the first page
+          setConversationData([]);
           setPagination({
             total: 0,
             page: 1,
@@ -145,7 +145,7 @@ export const CorrectionsDataProvider: React.FC<{
     try {
       console.warn('Unauthorized error. Attempting to refresh token...');
       await refreshToken();
-      await fetchCorrections({
+      await fetchConversations({
         page: pagination.page,
         limit: pagination.limit,
       });
@@ -156,16 +156,16 @@ export const CorrectionsDataProvider: React.FC<{
     }
   }
 
-  const deleteCorrection = async (conversationId: string): Promise<void> => {
+  const deleteConversation = async (conversationId: string): Promise<void> => {
     try {
       const response = await api.deleteConversation({ conversationId });
 
       if (!response.success) {
-        throw new Error('Failed to delete correction');
+        throw new Error('Failed to delete conversation');
       }
 
       // remove deleted card
-      setCorrectionData((prevData) =>
+      setConversationData((prevData) =>
         prevData.filter((item) => item.conversationId !== conversationId)
       );
       setPagination((prev) => ({
@@ -173,7 +173,7 @@ export const CorrectionsDataProvider: React.FC<{
         total: Math.max(0, prev.total - 1),
       }));
     } catch (err: any) {
-      console.error('Error deleting correction:', err);
+      console.error('Error deleting conversation:', err);
       throw err;
     }
   };
@@ -187,13 +187,13 @@ export const CorrectionsDataProvider: React.FC<{
   };
 
   return (
-    <CorrectionDataContext.Provider
+    <ConversationDataContext.Provider
       value={{
-        correctionData,
-        setCorrectionData,
-        fetchCorrections,
-        searchCorrections,
-        deleteCorrection,
+        conversationData,
+        setConversationData,
+        fetchConversations,
+        searchConversations,
+        deleteConversation,
         pagination,
         setPagination,
         resetPagination,
@@ -202,15 +202,15 @@ export const CorrectionsDataProvider: React.FC<{
         hasReachedAnonLimit,
       }}>
       {children}
-    </CorrectionDataContext.Provider>
+    </ConversationDataContext.Provider>
   );
 };
 
-export const useCorrectionsData = (): CorrectionDataContextType => {
-  const context = useContext(CorrectionDataContext);
+export const useConversationData = (): ConversationDataContextType => {
+  const context = useContext(ConversationDataContext);
   if (!context) {
     throw new Error(
-      'useCorrectionsData must be used within a CorrectionsDataProvider'
+      'useConversationData must be used within a ConversationDataProvider'
     );
   }
   return context;

@@ -4,8 +4,8 @@ import {
   NativeScrollEvent,
 } from 'react-native';
 import { GrammarReviewContainer } from './styledGrammarReview';
-import CorrectionList from '../correction-list/CorrectionList';
-import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
+import ConversationList from '../conversation-list/ConversationList';
+import { useConversationData } from '@/utils/contexts/ConversationsDataContext';
 import { useEffect, useState } from 'react';
 import GrammarReviewHeader from './grammar-review-header/GrammarReviewHeader';
 import { showApiErrorToast } from '@/utils/functions/showApiErrorToast';
@@ -22,11 +22,11 @@ export default function GrammarReview() {
   const { showToast } = useToastModal();
   const { t } = useTranslation();
   const {
-    fetchCorrections,
-    searchCorrections,
+    fetchConversations,
+    searchConversations,
     pagination,
     isProcessingRecording,
-  } = useCorrectionsData();
+  } = useConversationData();
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isInSearchMode, setIsInSearchMode] = useState(false);
   const [isSearchLoading, setIsSearchLoading] = useState<boolean>(false);
@@ -77,7 +77,7 @@ export default function GrammarReview() {
     setIsSearchLoading(true);
 
     try {
-      await fetchCorrections({ page: 1, limit: pagination.limit });
+      await fetchConversations({ page: 1, limit: pagination.limit });
       resetStatesToNormalFetchState();
     } catch (error: any) {
       showApiErrorToast({
@@ -94,7 +94,7 @@ export default function GrammarReview() {
     setRefreshing(true);
     resetStatesToNormalFetchState();
     try {
-      await fetchCorrections({
+      await fetchConversations({
         page: 1,
         limit: pagination.limit,
       });
@@ -120,13 +120,13 @@ export default function GrammarReview() {
     setIsLoadingMoreCards(true);
     try {
       if (isInSearchMode && searchQuery) {
-        await searchCorrections({
+        await searchConversations({
           query: searchQuery,
           page: pagination.page + 1,
           limit: pagination.limit,
         });
       } else {
-        await fetchCorrections({
+        await fetchConversations({
           page: pagination.page + 1,
           limit: pagination.limit,
         });
@@ -155,7 +155,7 @@ export default function GrammarReview() {
         setSearchQuery={setSearchQuery}
         resetToNormalFetch={resetToNormalFetch}
       />
-      <CorrectionList
+      <ConversationList
         refreshControl={
           <RefreshControl
             refreshing={refreshing}

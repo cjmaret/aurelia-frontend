@@ -30,7 +30,7 @@ import {
 } from './styledReviewCard';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { CorrectionDataType } from '@/types/types';
+import { ConversationDataType } from '@/types/types';
 import {
   formatTime,
   getConversationTitle,
@@ -47,7 +47,7 @@ export default memo(function ReviewCard({
   handleDeleteCard,
   isDeleting,
 }: {
-  cardData: CorrectionDataType;
+  cardData: ConversationDataType;
   searchQuery: string;
   collapseCardsAndErrors: boolean;
   setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;

@@ -72,7 +72,7 @@ const resources = {
       grammarReview: 'Grammar Review',
       createAccountToContinueRecording:
         'Create an account to continue recording and save your recordings!',
-      searchCorrections: 'Search corrections...',
+      searchConversations: 'Search corrections...',
       noResultsFound: 'No results found for your search.',
       startRecording: 'Start recording to see your corrections here!',
       morningConversation: 'Morning Conversation',
@@ -121,7 +121,7 @@ const resources = {
       unexpectedError: 'An unexpected error occurred.',
       noSpeechDetectedError:
         'No speech detected. Please record your voice and try again.',
-      searchCorrectionsError: 'An error occurred while searching corrections',
+      searchConversationsError: 'An error occurred while searching corrections',
       verificationCodeSent:
         'A verification code has been sent to your email address. Please verify your new email to complete the change.',
       requestVerificationEmailFailed: 'Failed to send verification email.',
@@ -241,7 +241,7 @@ const resources = {
       grammarReview: 'Révision de Grammaire',
       createAccountToContinueRecording:
         'Créez un compte pour continuer à enregistrer et sauvegarder vos enregistrements !',
-      searchCorrections: 'Rechercher des corrections...',
+      searchConversations: 'Rechercher des corrections...',
       noResultsFound: 'Aucun résultat trouvé pour votre recherche.',
       startRecording: 'Commencez à enregistrer pour voir vos corrections ici !',
       morningConversation: 'Conversation du Matin',
@@ -295,7 +295,7 @@ const resources = {
       unexpectedError: 'Une erreur inattendue est survenue.',
       noSpeechDetectedError:
         'Aucune voix détectée. Veuillez enregistrer votre voix et réessayer.',
-      searchCorrectionsError:
+      searchConversationsError:
         "Une erreur s'est produite lors de la recherche de corrections.",
       verificationCodeSent:
         'Un code de vérification a été envoyé à votre adresse e-mail. Veuillez vérifier votre nouvel e-mail pour finaliser le changement.',
@@ -422,7 +422,7 @@ const resources = {
       grammarReview: 'Revisión de Gramática',
       createAccountToContinueRecording:
         'Crea una cuenta para seguir grabando y guardar tus grabaciones!',
-      searchCorrections: 'Buscar correcciones...',
+      searchConversations: 'Buscar correcciones...',
       noResultsFound: 'No se encontraron resultados para tu búsqueda.',
       startRecording: 'Comienza a grabar para ver tus correcciones aquí.',
       morningConversation: 'Conversación de la Mañana',
@@ -476,7 +476,7 @@ const resources = {
       unexpectedError: 'Ocurrió un error inesperado.',
       noSpeechDetectedError:
         'No se detectó voz. Por favor, graba tu voz e inténtalo de nuevo.',
-      searchCorrectionsError: 'Ocurrió un error al buscar correcciones.',
+      searchConversationsError: 'Ocurrió un error al buscar correcciones.',
       verificationCodeSent:
         'Se ha enviado un código de verificación a tu dirección de correo electrónico. Por favor, verifica tu nuevo correo electrónico para completar el cambio.',
       requestVerificationEmailFailed:

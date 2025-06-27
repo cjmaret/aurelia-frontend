@@ -44,7 +44,7 @@ import {
 import api from '@/lib/api';
 import { UserDataType } from '@/types/types';
 import { languageFlags, languageCodes } from '@/constants/profileConstants';
-import { useCorrectionsData } from '@/utils/contexts/CorrectionsDataContext';
+import { useConversationData } from '@/utils/contexts/ConversationsDataContext';
 import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
 import {
@@ -62,13 +62,13 @@ import LoginButton from '../login-button/LoginButton';
 export default function Profile() {
   const { showToast } = useToastModal();
   const { user, setUser, logout, deleteUser } = useAuth();
-  const { pagination, resetPagination } = useCorrectionsData();
+  const { pagination, resetPagination } = useConversationData();
   const theme: any = useTheme();
   const { t } = useTranslation();
   const [localUser, setLocalUser] = useState<UserDataType | null>(user);
   const [isModalVisible, setModalVisible] = useState(false);
-  const [modalType, setModalType] = useState<'speaking' | 'correction'>(
-    'speaking'
+  const [modalType, setModalType] = useState<'appLanguage' | 'targetLanguage'>(
+    'appLanguage'
   );
   const [loading, setLoading] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
@@ -155,10 +155,10 @@ export default function Profile() {
   };
 
   const handleLanguageSelect = (language: string) => {
-    if (modalType === 'speaking') {
+    if (modalType === 'appLanguage') {
       localUser &&
         setLocalUser({ ...localUser, appLanguage: language.toLowerCase() });
-    } else {
+    } else if (modalType === 'targetLanguage') {
       localUser &&
         setLocalUser({ ...localUser, targetLanguage: language.toLowerCase() });
     }
@@ -375,7 +375,7 @@ export default function Profile() {
                 <LanguagePickerWrapper>
                   <DropdownButton
                     onPress={() => {
-                      setModalType('speaking');
+                      setModalType('appLanguage');
                       setModalVisible(true);
                     }}>
                     <DropdownButtonText
@@ -392,7 +392,7 @@ export default function Profile() {
                 <LanguagePickerWrapper>
                   <DropdownButton
                     onPress={() => {
-                      setModalType('correction');
+                      setModalType('targetLanguage');
                       setModalVisible(true);
                     }}>
                     <DropdownButtonText
