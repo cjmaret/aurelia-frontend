@@ -3,7 +3,7 @@ export default {
     name: 'Aurelia',
     slug: 'aurelia-frontend',
     owner: 'cjmaret',
-    version: '1.0.3',
+    version: '1.0.4',
     orientation: 'portrait',
     icon: './assets/images/aurelia-icon.png',
     scheme: 'com.aureliaai.myapp',
