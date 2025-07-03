@@ -236,10 +236,8 @@ export default memo(function ReviewCard({
             />
           </HeaderArrowIcon>
           <CardHeaderTextContainer>
-            <CardHeaderTextTitle maxFontSizeMultiplier={2} numberOfLines={2}>
-              {title}
-            </CardHeaderTextTitle>
-            <CardHeaderTextTime maxFontSizeMultiplier={2} numberOfLines={2}>
+            <CardHeaderTextTitle>{title}</CardHeaderTextTitle>
+            <CardHeaderTextTime>
               {formatTime({ dateTimeString: createdAt })}
             </CardHeaderTextTime>
           </CardHeaderTextContainer>

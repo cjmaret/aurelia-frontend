@@ -44,7 +44,9 @@ export const UsernameGroup = styled.View`
   padding: 0 25px;
 `;
 
-export const Name = styled.Text`
+export const Name = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 24px;
   font-weight: bold;
   color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
@@ -67,7 +69,6 @@ export const SubSection = styled.View``;
 export const AnonymousBlockedText = styled.Text`
   font-size: 20px;
   font-weight: bold;
-  /* border: 1px solid red; */
   border-radius: 10px;
   padding: 10px 20px;
   color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
@@ -76,7 +77,9 @@ export const AnonymousBlockedText = styled.Text`
   flex-wrap: wrap;
 `;
 
-export const SectionTitle = styled.Text`
+export const SectionTitle = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 20px;
   font-weight: bold;
   margin: 24px 0 16px 0;
@@ -84,7 +87,9 @@ export const SectionTitle = styled.Text`
   flex-wrap: wrap;
 `;
 
-export const Label = styled.Text`
+export const Label = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 8px;
@@ -92,7 +97,9 @@ export const Label = styled.Text`
   flex-wrap: wrap;
 `;
 
-export const Input = styled.TextInput<{ disabled?: boolean }>`
+export const Input = styled.TextInput.attrs({
+  maxFontSizeMultiplier: 2,
+})<{ disabled?: boolean }>`
   min-height: 40px;
   border: 1px solid ${({ theme }: { theme: any }) => theme.colors.inputBorder};
   border-radius: 8px;
@@ -118,13 +125,17 @@ export const Stat = styled.View`
   flex-wrap: wrap;
 `;
 
-export const StatLabel = styled.Text`
+export const StatLabel = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 16px;
   color: ${({ theme }: { theme: any }) => theme.colors.greyPrimary};
   flex-wrap: wrap;
 `;
 
-export const StatValue = styled.Text`
+export const StatValue = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 16px;
   font-weight: bold;
   color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
@@ -148,7 +159,9 @@ export const DropdownButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export const DropdownButtonText = styled.Text`
+export const DropdownButtonText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 16px;
   color: ${({ theme }: { theme: any }) => theme.colors.inputText};
   flex-wrap: wrap;
@@ -164,7 +177,9 @@ export const SaveButton = styled(ProfileButton)`
   margin-bottom: 16px;
 `;
 
-export const SaveButtonText = styled.Text<{ disabled: boolean }>`
+export const SaveButtonText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})<{ disabled: boolean }>`
   color: ${({ theme, disabled }: { theme: any; disabled: boolean }) =>
     disabled ? theme.colors.greySecondary : theme.colors.primary};
   font-size: 16px;
@@ -172,7 +187,9 @@ export const SaveButtonText = styled.Text<{ disabled: boolean }>`
   flex-wrap: wrap;
 `;
 
-export const VerifyEmailSaveButtonText = styled(SaveButtonText)`
+export const VerifyEmailSaveButtonText = styled(SaveButtonText).attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 14px;
   flex-wrap: wrap;
 `;
@@ -185,7 +202,9 @@ export const LogoutButton = styled(ProfileButton)`
   margin-top: 50px;
 `;
 
-export const LogoutButtonText = styled.Text`
+export const LogoutButtonText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   color: ${({ theme }: { theme: any }) => theme.colors.buttonTextPrimary};
   font-size: 16px;
   font-weight: bold;
@@ -227,7 +246,9 @@ export const DeleteUserButton = styled.TouchableOpacity`
   margin-top: 20px;
 `;
 
-export const DeleteUserButtonText = styled.Text`
+export const DeleteUserButtonText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   color: ${({ theme }: { theme: any }) => theme.colors.buttonTextDanger};
   font-size: 16px;
   font-weight: bold;

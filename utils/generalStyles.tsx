@@ -1,4 +1,3 @@
-import { Input } from '@/components/auth-form/styledAuthForm';
 import styled from 'styled-components/native';
 
 export const BackButton = styled.TouchableOpacity`
@@ -34,7 +33,9 @@ export const PasswordInputContainer = styled.View`
   border: 1px solid ${({ theme }: { theme: any }) => theme.colors.greySecondary};
 `;
 
-export const PasswordInput = styled.TextInput`
+export const PasswordInput = styled.TextInput.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   flex: 1;
   height: 100%;
   padding: 0 8px;

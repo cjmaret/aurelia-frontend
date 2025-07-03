@@ -378,9 +378,7 @@ export default function Profile() {
                       setModalType('appLanguage');
                       setModalVisible(true);
                     }}>
-                    <DropdownButtonText
-                      maxFontSizeMultiplier={2}
-                      numberOfLines={2}>
+                    <DropdownButtonText>
                       {getTranslatedLanguageName({
                         code: localUser.appLanguage,
                         t,
@@ -395,9 +393,7 @@ export default function Profile() {
                       setModalType('targetLanguage');
                       setModalVisible(true);
                     }}>
-                    <DropdownButtonText
-                      maxFontSizeMultiplier={2}
-                      numberOfLines={1}>
+                    <DropdownButtonText>
                       {getTranslatedLanguageName({
                         code: localUser.targetLanguage,
                         t,

@@ -11,7 +11,9 @@ export const Container = styled.View`
   position: relative;
 `;
 
-export const Title = styled.Text`
+export const Title = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 16px;
@@ -19,7 +21,9 @@ export const Title = styled.Text`
   color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
 `;
 
-export const Input = styled.TextInput`
+export const Input = styled.TextInput.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   min-height: 40px;
   width: 100%;
   border: 1px solid ${({ theme }: { theme: any }) => theme.colors.greySecondary};
@@ -46,7 +50,9 @@ export const AuthButton = styled.TouchableOpacity`
   margin-bottom: 5px;
 `;
 
-export const AuthButtonText = styled.Text`
+export const AuthButtonText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   color: ${({ theme }: { theme: any }) => theme.colors.buttonTextPrimary};
   font-size: 16px;
   font-weight: bold;
@@ -61,13 +67,17 @@ export const AuthLinkButton = styled.TouchableOpacity<{ disabled?: boolean }>`
   opacity: ${({ disabled }: { disabled?: boolean }) => (disabled ? 0.5 : 1)};
 `;
 
-export const AuthLinkText = styled.Text`
+export const AuthLinkText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   color: ${({ theme }: { theme: any }) => theme.colors.buttonTextSecondary};
   text-align: center;
   font-size: 16px;
 `;
 
-export const PrivacyPolicyText = styled.Text`
+export const PrivacyPolicyText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   color: ${({ theme }: { theme: any }) => theme.colors.buttonTextSecondary};
   font-size: 12px;
   text-align: center;

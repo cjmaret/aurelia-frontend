@@ -9,14 +9,18 @@ export const Container = styled.View`
   padding: 16px;
 `;
 
-export const Title = styled.Text`
+export const Title = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
   color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
 `;
 
-export const Subtitle = styled.Text`
+export const Subtitle = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 16px;
   margin-bottom: 10px;
   color: ${({ theme }: { theme: any }) => theme.colors.textTertiary};
@@ -65,7 +69,9 @@ export const SaveButton = styled(MoveButton)``;
 export const BackButton = styled(MoveButton)`
 `;
 
-export const ButtonText = styled.Text`
+export const ButtonText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   color: ${({ theme }: { theme: any }) => theme.colors.buttonTextPrimary};
   font-size: 16px;
   font-weight: bold;

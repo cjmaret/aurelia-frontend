@@ -39,7 +39,9 @@ export const WelcomeSubContainerLower = styled.View`
   gap: 30px;
 `;
 
-export const WelcomeTitle = styled.Text`
+export const WelcomeTitle = styled.Text.attrs({
+  maxFontSizeMultiplier: 1,
+})`
   font-size: 32px;
   font-weight: 700;
   color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
@@ -48,7 +50,9 @@ export const WelcomeTitle = styled.Text`
 
 export const WelcomeTextContainer = styled.View``;
 
-export const WelcomeText = styled.Text`
+export const WelcomeText = styled.Text.attrs({
+  maxFontSizeMultiplier: 1,
+})`
   font-size: 20px;
   font-weight: 500;
   line-height: 28px;
@@ -65,7 +69,9 @@ export const GetStartedButton = styled.TouchableOpacity`
   margin-top: 20px;
 `;
 
-export const GetStartedButtonText = styled.Text`
+export const GetStartedButtonText = styled.Text.attrs({
+  maxFontSizeMultiplier: 1,
+})`
   font-size: 20px;
   color: ${({ theme }: { theme: any }) => theme.colors.textPrimary};
   font-weight: bold;

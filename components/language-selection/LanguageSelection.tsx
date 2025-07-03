@@ -1,5 +1,4 @@
-import React from 'react';
-import { FlatList, Alert } from 'react-native';
+import { FlatList } from 'react-native';
 import {
   Container,
   Title,
@@ -67,22 +66,24 @@ export default function LanguageSelection({
 
   return (
     <Container>
-      <Title maxFontSizeMultiplier={2} numberOfLines={2}>
+      <Title>
         {title}
       </Title>
-      <Subtitle maxFontSizeMultiplier={2} numberOfLines={2}>
+      <Subtitle>
         {subtitle}
       </Subtitle>
       <ListContainer>
         <FlatList
-        style={{marginBottom: 20}}
+          style={{ marginBottom: 20 }}
           data={languageCodes}
           keyExtractor={(item) => item}
           renderItem={({ item }) => (
             <LanguageButton
               onPress={() => onSelectLanguage(item.toLowerCase())}
               selected={selectedLanguage === item.toLowerCase()}>
-              <ButtonText>{getLanguageName({ code: item })}</ButtonText>
+              <ButtonText>
+                {getLanguageName({ code: item })}
+              </ButtonText>
             </LanguageButton>
           )}
         />
@@ -90,13 +91,13 @@ export default function LanguageSelection({
       <ButtonContainer>
         {onBack && (
           <BackButton onPress={onBack}>
-            <ButtonText maxFontSizeMultiplier={2} numberOfLines={1}>
+            <ButtonText>
               {t('Back')}
             </ButtonText>
           </BackButton>
         )}
         <SaveButton onPress={handleNext}>
-          <ButtonText maxFontSizeMultiplier={2} numberOfLines={1}>
+          <ButtonText>
             {isFinalStep ? t('save') : 'Next'}
           </ButtonText>
         </SaveButton>

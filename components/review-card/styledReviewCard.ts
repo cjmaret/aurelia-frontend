@@ -48,7 +48,9 @@ export const CardHeaderTextContainer = styled.View`
   width: 90%;
 `;
 
-const CardHeaderText = styled.Text`
+const CardHeaderText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   color: ${({ theme }: { theme: any }) => theme.colors.cardHeaderText};
   font-weight: bold;
 `;
@@ -83,7 +85,9 @@ export const SnippetCard = styled.View`
   margin: 15px 0;
 `;
 
-export const OriginalText = styled.Text`
+export const OriginalText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 15px;
   color: ${({ theme }: { theme: any }) => theme.colors.snippetOriginalText};
   font-style: italic;
@@ -91,7 +95,9 @@ export const OriginalText = styled.Text`
   flex-wrap: wrap;
 `;
 
-export const CorrectedText = styled.Text`
+export const CorrectedText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 16px;
   font-weight: bold;
   color: ${({ theme }: { theme: any }) => theme.colors.textCorrected};
@@ -159,14 +165,18 @@ export const ErrorDetailContainer = styled.View`
   margin-bottom: 15px;
 `;
 
-export const ErrorDetailHeader = styled.Text`
+export const ErrorDetailHeader = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 15px;
   font-weight: bold;
   color: ${({ theme }: { theme: any }) => theme.colors.snippetErrorText};
   margin-bottom: 4px;
 `;
 
-export const ErrorDetailText = styled.Text`
+export const ErrorDetailText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 14px;
   font-weight: 500;
   color: ${({ theme }: { theme: any }) => theme.colors.snippetErrorText};
@@ -189,7 +199,9 @@ export const ContragulatoryTextContainer = styled.View`
   padding: 20px;
 `;
 
-export const ContragulatoryText = styled.Text`
+export const ContragulatoryText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
   font-size: 16px;
   font-weight: bold;
   color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};

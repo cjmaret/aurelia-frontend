@@ -1,5 +1,6 @@
 import { useAuth } from '@/utils/contexts/AuthContext';
 import { Stack, useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
@@ -11,12 +12,18 @@ const Container = styled.View`
     theme.colors.backgroundSecondary};
 `;
 
-const Emoji = styled.Text`
+const Emoji = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+  numberOfLines: 2,
+})`
   font-size: 56px;
   margin-bottom: 12px;
 `;
 
-const Title = styled.Text`
+const Title = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+  numberOfLines: 2,
+})`
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 8px;
@@ -24,7 +31,10 @@ const Title = styled.Text`
   color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
 `;
 
-const Subtitle = styled.Text`
+const Subtitle = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+  numberOfLines: 2,
+})`
   font-size: 16px;
   color: #666;
   margin-bottom: 32px;
@@ -39,7 +49,10 @@ const HomeButton = styled.TouchableOpacity`
   padding: 12px 32px;
 `;
 
-const ButtonText = styled.Text`
+const ButtonText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+  numberOfLines: 2,
+})`
   color: #fff;
   font-weight: bold;
   font-size: 16px;
@@ -48,6 +61,7 @@ const ButtonText = styled.Text`
 
 export default function NotFoundScreen() {
   const { isAuthenticated } = useAuth();
+  const { t } = useTranslation();
   const router = useRouter();
 
   const handleGoHome = () => {
@@ -63,16 +77,10 @@ export default function NotFoundScreen() {
       <Stack.Screen options={{ title: 'Oops!' }} />
       <Container>
         <Emoji>😬</Emoji>
-        <Title maxFontSizeMultiplier={2} numberOfLines={2}>
-          Page Not Found
-        </Title>
-        <Subtitle maxFontSizeMultiplier={2} numberOfLines={2}>
-          Sorry, we couldn't find the page you were looking for.
-        </Subtitle>
+        <Title>{t('pageNotFound')}</Title>
+        <Subtitle>{t('notFoundMessage')}</Subtitle>
         <HomeButton onPress={handleGoHome}>
-          <ButtonText maxFontSizeMultiplier={2} numberOfLines={2}>
-            Go Home
-          </ButtonText>
+          <ButtonText>{t('goHome')}</ButtonText>
         </HomeButton>
       </Container>
     </>

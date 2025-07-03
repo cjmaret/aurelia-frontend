@@ -97,6 +97,11 @@ const resources = {
       returnToProfile: 'Return to your profile',
       returnToLogin: 'Return to Login',
 
+      // +not-found
+      pageNotFound: 'Page Not Found',
+      notFoundMessage: "Sorry, we couldn't find the page you were looking for.",
+      goHome: 'Go Home',
+
       // Toast notifications
       signUpSuccessTitle: 'Sign Up Successful',
       signUpSuccessMessage:
@@ -270,6 +275,12 @@ const resources = {
       verifying: 'Vérification...',
       returnToProfile: 'Retour à votre profil',
       returnToLogin: 'Retour à la connexion',
+
+      // +not-found
+      pageNotFound: 'Page introuvable',
+      notFoundMessage:
+        "Désolé, nous n'avons pas trouvé la page que vous cherchiez.",
+      goHome: 'Accueil',
 
       // Toast notifications
       signUpSuccessTitle: 'Inscription réussie',
@@ -454,6 +465,12 @@ const resources = {
       verifying: 'Verificando...',
       returnToProfile: 'Volver a tu perfil',
       returnToLogin: 'Volver al inicio de sesión',
+
+      // +not-found
+      pageNotFound: 'Página no encontrada',
+      notFoundMessage:
+        'Lo sentimos, no pudimos encontrar la página que buscabas.',
+      goHome: 'Ir al inicio',
 
       // Toast notifications
       signUpSuccessTitle: 'Registro exitoso',
