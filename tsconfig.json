@@ -5,7 +5,8 @@
     "strict": true,
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "esModuleInterop": true
   },
   "include": [
     "**/*.ts",
@@ -13,6 +14,10 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "types/declarations.d.ts",
-    "components/speech-recorder/SpeechRecorder.tsx"
-, "app/(auth)/signUp.jsx", "app/(auth)/signIn.jsx", "app/(auth)/reset-password.jsx", "app/(auth)/google-callback.jsx"  ]
+    "components/speech-recorder/SpeechRecorder.tsx",
+    "app/(auth)/signUp.jsx",
+    "app/(auth)/signIn.jsx",
+    "app/(auth)/reset-password.jsx",
+    "app/(auth)/google-callback.jsx"
+  ]
 }
