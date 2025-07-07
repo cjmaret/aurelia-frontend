@@ -2,6 +2,8 @@ import { ApiTypes, ConversationResponseType } from '@/types/types';
 import config from './config';
 import * as SecureStore from 'expo-secure-store';
 import { jwtDecode } from 'jwt-decode';
+import * as FileSystem from 'expo-file-system';
+
 
 class Api {
   private _baseUrl: string | undefined;
@@ -405,19 +407,22 @@ class Api {
       });
   }
 
-  async addConversation(formData: FormData): Promise<ConversationResponseType> {
+  async addConversation(fileUri: string): Promise<ConversationResponseType> {
     const headers = await this._getAuthHeaders();
+    const apiUrl = this._baseUrl + `/conversations`;
 
-    return fetch(this._baseUrl + `/conversations`, {
-      method: 'POST',
-      headers,
-      body: formData,
-    })
-      .then((res) => this._returnRes(res))
-      .catch((err) => {
-        console.error('Error sending audio:', err);
-        throw err;
-      });
+    const result = await FileSystem.uploadAsync(apiUrl, fileUri, {
+      httpMethod: 'POST',
+      headers, 
+      uploadType: FileSystem.FileSystemUploadType.MULTIPART,
+      fieldName: 'file', 
+    });
+
+    if (result.status !== 200) {
+      throw new Error(`Upload failed: ${result.status} ${result.body}`);
+    }
+
+    return JSON.parse(result.body);
   }
 
   async deleteConversation({
@@ -447,10 +452,14 @@ class Api {
   }): Promise<ConversationResponseType> {
     const headers = await this._getAuthHeaders();
 
-    return fetch(this._baseUrl + `/conversations/${conversationId}/corrections/${correctionId}`, {
-      method: 'DELETE',
-      headers,
-    })
+    return fetch(
+      this._baseUrl +
+        `/conversations/${conversationId}/corrections/${correctionId}`,
+      {
+        method: 'DELETE',
+        headers,
+      }
+    )
       .then((res) => this._returnRes(res))
       .catch((err) => {
         console.error('Error deleting conversation:', err);

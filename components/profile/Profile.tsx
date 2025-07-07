@@ -6,6 +6,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  Platform,
+  View,
 } from 'react-native';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import {
@@ -246,24 +248,39 @@ export default function Profile() {
       localUser.targetLanguage === user.targetLanguage);
 
   const renderBlurView = (translation: string) => {
+    if (!isAnonymousUser) return null;
+
+    let baseStyles: Record<string, any> = {
+      position: 'absolute',
+      top: 50,
+      left: -10,
+      right: -10,
+      bottom: 0,
+      zIndex: 1000,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 16,
+    };
+
+    if (Platform.OS === 'android') {
+      return (
+        <View
+          style={[
+            baseStyles,
+            { backgroundColor: 'rgba(86, 86, 86, 0.564)' },
+          ]}>
+          <AnonymousBlockedText style={{ color: '#fff', fontWeight: '600' }}>
+            {t(translation)}
+          </AnonymousBlockedText>
+        </View>
+      );
+    }
+
+    // ios
     return (
-      isAnonymousUser && (
-        <BlurView
-          intensity={15}
-          style={{
-            position: 'absolute',
-            top: 50,
-            left: -10,
-            right: -10,
-            bottom: 0,
-            zIndex: 1000,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <AnonymousBlockedText>{t(translation)}</AnonymousBlockedText>
-        </BlurView>
-      )
+      <BlurView intensity={15} style={baseStyles}>
+        <AnonymousBlockedText>{t(translation)}</AnonymousBlockedText>
+      </BlurView>
     );
   };
 

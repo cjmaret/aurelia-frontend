@@ -129,12 +129,6 @@ export default function SpeechRecorder() {
 
   async function addConversation(audioUri: string) {
     console.log('Adding conversation for audio:', audioUri);
-    const formData = new FormData();
-    formData.append('file', {
-      uri: audioUri,
-      name: 'audioRecording.m4a',
-      type: 'audio/m4a',
-    } as any);
     setIsProcessingRecording(true);
     try {
       showToast(
@@ -144,7 +138,7 @@ export default function SpeechRecorder() {
       );
 
       const response: ConversationResponseType = await api.addConversation(
-        formData
+        audioUri
       );
 
       if (!response.success) {
