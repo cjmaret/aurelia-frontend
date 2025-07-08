@@ -27,6 +27,7 @@ import {
   HighlightedSearchText,
   ErrorWhatsWongText,
   DeleteButton,
+  CorrectionCountText,
 } from './styledReviewCard';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -257,6 +258,13 @@ export default memo(function ReviewCard({
           overflow: 'hidden',
         }}>
         <CardContent>
+          {sentenceFeedback.length > 1 && (
+            <CorrectionCountText>
+              {t('sentencesInThisConversation', {
+                count: sentenceFeedback.length,
+              })}
+            </CorrectionCountText>
+          )}
           {sentenceFeedback.map((sentence) => (
             <SnippetCard key={sentence.id}>
               {isCardExpanded && sentenceFeedback.length > 1 && (

@@ -70,6 +70,16 @@ export const CardContent = styled.View`
   align-items: center;
 `;
 
+export const CorrectionCountText = styled.Text`
+  font-size: 12px;
+  font-weight: 700;
+  color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  width: 93%;
+`;
+
 export const SnippetCard = styled.View`
   width: 93%;
   background: ${({ theme }: { theme: any }) => theme.colors.snippetBackground};
@@ -82,7 +92,7 @@ export const SnippetCard = styled.View`
     theme.mode === 'light' ? 0.1 : 0.6};
   shadow-radius: 4px;
   elevation: 2;
-  margin: 15px 0;
+  margin: 10px 0 15px 0;
 `;
 
 export const OriginalText = styled.Text.attrs({
