@@ -3,7 +3,7 @@ export default {
     name: 'Aurelia',
     slug: 'aurelia-frontend',
     owner: 'cjmaret',
-    version: '1.0.4',
+    version: '1.0.5',
     orientation: 'portrait',
     icon: './assets/images/aurelia-icon.png',
     scheme: 'com.aureliaai.myapp',
@@ -13,7 +13,7 @@ export default {
     ios: {
       supportsTablet: true,
       bundleIdentifier: 'com.cjmaret.aureliafrontend',
-      buildNumber: '3',
+      buildNumber: '4',
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,
         NSPhotoLibraryUsageDescription:
@@ -30,6 +30,8 @@ export default {
         backgroundColor: '#ffffff',
       },
       package: 'com.cjmaret.aureliafrontend',
+      versionCode: 18,
+      versionName: '1.0.5',
     },
     web: {
       bundler: 'metro',
@@ -66,7 +68,7 @@ export default {
         projectId: 'da01ca79-b1e8-465d-bf37-f21ccb7d8bfb',
       },
     },
-    runtimeVersion: '1.0.4',
+    runtimeVersion: '1.0.5',
     updates: {
       url: 'https://u.expo.dev/da01ca79-b1e8-465d-bf37-f21ccb7d8bfb',
     },
