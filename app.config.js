@@ -16,8 +16,6 @@ export default {
       buildNumber: '4',
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,
-        NSPhotoLibraryUsageDescription:
-          'This app needs access to your photo library to let users upload images.',
         NSMicrophoneUsageDescription:
           'This app uses the microphone to record audio as part of voice interaction features.',
         NSSpeechRecognitionUsageDescription:
@@ -32,6 +30,10 @@ export default {
       package: 'com.cjmaret.aureliafrontend',
       versionCode: 20,
       versionName: '1.0.5',
+      permissions: [
+        'INTERNET',
+        'RECORD_AUDIO',
+      ],
     },
     web: {
       bundler: 'metro',
