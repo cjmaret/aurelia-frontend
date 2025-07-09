@@ -30,7 +30,7 @@ export default {
         backgroundColor: '#ffffff',
       },
       package: 'com.cjmaret.aureliafrontend',
-      versionCode: 19,
+      versionCode: 20,
       versionName: '1.0.5',
     },
     web: {
