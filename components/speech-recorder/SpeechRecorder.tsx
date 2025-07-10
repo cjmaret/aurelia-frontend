@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Alert, Animated } from 'react-native';
-import { AudioModule, RecordingPresets, useAudioRecorder } from 'expo-audio';
+import { AudioModule, AudioQuality, IOSOutputFormat, useAudioRecorder } from 'expo-audio';
 import * as FileSystem from 'expo-file-system';
 import {
   LogInToContinueText,
@@ -34,7 +34,24 @@ export default function SpeechRecorder() {
     setPagination,
   } = useConversationData();
   const { showToast } = useToastModal();
-  const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
+  // individual audio options to avoid device crashes
+  const audioRecorder = useAudioRecorder({
+    extension: '.m4a',
+    sampleRate: 44100,
+    numberOfChannels: 2,
+    bitRate: 128000,
+    android: {
+      outputFormat: 'mpeg4',
+      audioEncoder: 'aac',
+    },
+    ios: {
+      outputFormat: IOSOutputFormat.MPEG4AAC,
+      audioQuality: AudioQuality.MAX,
+      linearPCMBitDepth: 16,
+      linearPCMIsBigEndian: false,
+      linearPCMIsFloat: false,
+    },
+  });
   const [isRecording, setIsRecording] = useState(false);
   const [waveformOpacity] = useState(new Animated.Value(0));
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
