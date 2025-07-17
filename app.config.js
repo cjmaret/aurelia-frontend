@@ -28,7 +28,7 @@ export default {
         backgroundColor: '#ffffff',
       },
       package: 'com.cjmaret.aureliafrontend',
-      versionCode: 23,
+      versionCode: 25,
       versionName: '1.0.5',
       permissions: [
         'INTERNET',
