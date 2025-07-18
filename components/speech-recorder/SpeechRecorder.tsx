@@ -221,4 +221,4 @@ export default function SpeechRecorder() {
   );
 }
 
-export const RecordButton = styled.View``;
+// export const RecordButton = styled.View``;

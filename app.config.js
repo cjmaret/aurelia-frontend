@@ -30,10 +30,7 @@ export default {
       package: 'com.cjmaret.aureliafrontend',
       versionCode: 25,
       versionName: '1.0.5',
-      permissions: [
-        'INTERNET',
-        'RECORD_AUDIO',
-      ],
+      permissions: ['INTERNET', 'RECORD_AUDIO'],
     },
     web: {
       bundler: 'metro',
