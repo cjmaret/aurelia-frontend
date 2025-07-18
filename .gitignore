@@ -41,4 +41,5 @@ app-example
 
 .idea
 
+# android
 build/

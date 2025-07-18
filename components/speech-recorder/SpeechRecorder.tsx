@@ -1,6 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { Alert, Animated } from 'react-native';
-import { AudioModule, RecordingPresets, useAudioRecorder } from 'expo-audio';
+import {
+  AudioModule,
+  AudioQuality,
+  IOSOutputFormat,
+  RecordingOptions,
+  useAudioRecorder,
+} from 'expo-audio';
 import * as FileSystem from 'expo-file-system';
 import {
   LogInToContinueText,
@@ -12,7 +18,7 @@ import {
 } from './styledSpeechRecorder';
 import Waveform from '../waveform/Waveform';
 import RecordButtonComponent from '../record-button/RecordButton';
-import styled, { useTheme } from 'styled-components/native';
+import { useTheme } from 'styled-components/native';
 import api from '@/lib/api';
 import { ConversationDataType, ConversationResponseType } from '@/types/types';
 import { useConversationData } from '@/utils/contexts/ConversationsDataContext';
@@ -22,6 +28,24 @@ import { useTranslation } from 'react-i18next';
 import OnboardingBubbles from '../onboarding-bubbles/OnboardingBubbles';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import LoginButton from '../login-button/LoginButton';
+
+const HIGH_QUALITY_RECORDING_OPTIONS: RecordingOptions = {
+  extension: '.m4a',
+  sampleRate: 44100,
+  numberOfChannels: 2,
+  bitRate: 128000,
+  android: {
+    outputFormat: 'mpeg4',
+    audioEncoder: 'aac',
+  },
+  ios: {
+    outputFormat: IOSOutputFormat.MPEG4AAC,
+    audioQuality: AudioQuality.MAX,
+    linearPCMBitDepth: 16,
+    linearPCMIsBigEndian: false,
+    linearPCMIsFloat: false,
+  },
+};
 
 export default function SpeechRecorder() {
   const theme: any = useTheme();
@@ -34,7 +58,7 @@ export default function SpeechRecorder() {
     setPagination,
   } = useConversationData();
   const { showToast } = useToastModal();
-  const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
+  const audioRecorder = useAudioRecorder(HIGH_QUALITY_RECORDING_OPTIONS);
   const [isRecording, setIsRecording] = useState(false);
   const [waveformOpacity] = useState(new Animated.Value(0));
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -53,10 +77,20 @@ export default function SpeechRecorder() {
     (async () => {
       const status = await AudioModule.requestRecordingPermissionsAsync();
       if (!status.granted) {
-        Alert.alert('Permission to access microphone was denied');
+        Alert.alert(
+          'Permission denied',
+          'Please enable microphone permissions.'
+        );
+      }
+      try {
+        await audioRecorder.prepareToRecordAsync();
+      } catch (err) {
+        console.error('[AudioRecorder] Failed to prepare recording:', err);
+        Alert.alert('Recording Error', 'Failed to initialize audio recorder.');
       }
     })();
   }, []);
+  
 
   // stop recording if exceeds max length
   useEffect(() => {
@@ -220,5 +254,3 @@ export default function SpeechRecorder() {
     </SpeechRecorderGroup>
   );
 }
-
-// export const RecordButton = styled.View``;
