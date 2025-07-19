@@ -28,9 +28,12 @@ export default {
         backgroundColor: '#ffffff',
       },
       package: 'com.cjmaret.aureliafrontend',
-      versionCode: 28,
+      versionCode: 29,
       versionName: '1.0.5',
-      permissions: ['INTERNET', 'RECORD_AUDIO'],
+      permissions: [
+        'android.permission.INTERNET',
+        'android.permission.RECORD_AUDIO',
+      ],
     },
     web: {
       bundler: 'metro',
