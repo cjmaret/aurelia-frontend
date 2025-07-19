@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { Alert, Animated } from 'react-native';
+import { useState, useEffect, useRef, use, useCallback } from 'react';
+import { Alert, Animated, AppState, Linking, Platform } from 'react-native';
 import {
   AudioModule,
   AudioQuality,
@@ -59,6 +59,8 @@ export default function SpeechRecorder() {
   } = useConversationData();
   const { showToast } = useToastModal();
   const audioRecorder = useAudioRecorder(HIGH_QUALITY_RECORDING_OPTIONS);
+  const [isAudioPermissionGranted, setIsAudioPermissionGranted] =
+    useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [waveformOpacity] = useState(new Animated.Value(0));
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -74,23 +76,25 @@ export default function SpeechRecorder() {
   const RECORD_COOLDOWN_MS = 1000;
 
   useEffect(() => {
-    (async () => {
+    const checkPermission = async () => {
       const status = await AudioModule.requestRecordingPermissionsAsync();
-      if (!status.granted) {
-        Alert.alert(
-          'Permission denied',
-          'Please enable microphone permissions.'
-        );
+      setIsAudioPermissionGranted(!!status.granted);
+    };
+
+    // initial check
+    checkPermission();
+
+    // listen for app coming to foreground
+    const subscription = AppState.addEventListener('change', (state) => {
+      if (state === 'active') {
+        checkPermission();
       }
-      try {
-        await audioRecorder.prepareToRecordAsync();
-      } catch (err) {
-        console.error('[AudioRecorder] Failed to prepare recording:', err);
-        Alert.alert('Recording Error', 'Failed to initialize audio recorder.');
-      }
-    })();
+    });
+
+    return () => {
+      subscription.remove();
+    };
   }, []);
-  
 
   // stop recording if exceeds max length
   useEffect(() => {
@@ -220,6 +224,26 @@ export default function SpeechRecorder() {
     )}`;
   }
 
+  const showAudioPermissionAlert = () => {
+    Alert.alert(
+      'Microphone Permission Required',
+      'Please enable microphone permissions for Aurelia in your device settings.',
+      [
+        {
+          text: 'Open Settings',
+          onPress: () => {
+            if (Platform.OS === 'ios') {
+              Linking.openURL('app-settings:');
+            } else {
+              Linking.openSettings();
+            }
+          },
+        },
+        { text: 'Cancel', style: 'cancel' },
+      ]
+    );
+  };
+
   return (
     <SpeechRecorderGroup>
       <LoginButton />
@@ -237,6 +261,8 @@ export default function SpeechRecorder() {
             {formatElapsedTime(elapsedTime)}
           </TimerText>
           <RecordButtonComponent
+            isAudioPermissionGranted={isAudioPermissionGranted}
+            showAudioPermissionAlert={showAudioPermissionAlert}
             startRecording={startRecording}
             stopRecording={stopRecording}
             isRecordButtonPressed={isRecordButtonPressed}

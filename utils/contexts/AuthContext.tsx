@@ -122,8 +122,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
       const userDetails = await getUserDetails();
 
-      console.log('Anonymous user details:', userDetails);
-
       if (userDetails.setupComplete) {
         router.replace('/');
       } else {
@@ -204,10 +202,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       await SecureStore.setItemAsync('refreshToken', refreshToken);
       await SecureStore.deleteItemAsync('anonymousUserId');
       await SecureStore.deleteItemAsync('anonymousUserSecret');
-      
+
       const userDetails = await getUserDetails();
+
       await SecureStore.setItemAsync('userId', userDetails.userId);
-      
+
       if (userDetails.setupComplete) {
         router.replace('/');
       } else {

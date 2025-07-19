@@ -10,8 +10,5 @@
 # react-native-reanimated
 -keep class com.swmansion.reanimated.** { *; }
 -keep class com.facebook.react.turbomodule.** { *; }
--keep class expo.modules.audio.** { *; }
--keep class expo.modules.** { *; }
--keep class com.facebook.react.bridge.** { *; }
 
 # Add any project specific keep options here:

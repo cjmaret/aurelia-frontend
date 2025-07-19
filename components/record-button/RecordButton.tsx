@@ -6,6 +6,8 @@ import { useTheme } from 'styled-components/native';
 import * as Haptics from 'expo-haptics';
 
 export default function RecordButtonComponent({
+  isAudioPermissionGranted,
+  showAudioPermissionAlert,
   startRecording,
   stopRecording,
   isRecordButtonPressed,
@@ -13,6 +15,8 @@ export default function RecordButtonComponent({
   disabled,
   isVisuallyDisabled,
 }: {
+  isAudioPermissionGranted: boolean;
+  showAudioPermissionAlert: () => void;
   startRecording: any;
   stopRecording: any;
   isRecordButtonPressed: boolean;
@@ -27,7 +31,7 @@ export default function RecordButtonComponent({
   const theme: any = useTheme();
 
   useEffect(() => {
-    if (isRecordButtonPressed) {
+    if (isRecordButtonPressed && isAudioPermissionGranted) {
       // start generating ripples continuously
       rippleInterval.current = setInterval(triggerRipple, 1000);
       triggerRipple();
@@ -80,7 +84,9 @@ export default function RecordButtonComponent({
       await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
       await new Promise((resolve) => setTimeout(resolve, 80));
     }
-    startRecording();
+    isAudioPermissionGranted
+      ? startRecording()
+      : showAudioPermissionAlert();
   };
 
   const handlePressOut = () => {
