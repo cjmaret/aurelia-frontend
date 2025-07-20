@@ -97,34 +97,34 @@ export default function SpeechRecorder() {
   // }, []);
 
   useEffect(() => {
-    console.log('[SpeechRecorder] useEffect mounted');
+    console.error('[SpeechRecorder] useEffect mounted');
 
     const checkPermission = async () => {
-      console.log('[SpeechRecorder] Checking microphone permission...');
+      console.error('[SpeechRecorder] Checking microphone permission...');
       const status = await AudioModule.requestRecordingPermissionsAsync();
-      console.log('[SpeechRecorder] Permission status:', status);
+      console.error('[SpeechRecorder] Permission status:', status);
       setIsAudioPermissionGranted(!!status.granted);
-      console.log(
+      console.error(
         '[SpeechRecorder] isAudioPermissionGranted set to:',
         !!status.granted
       );
     };
 
     // initial check
-    console.log('[SpeechRecorder] Running initial permission check');
+    console.error('[SpeechRecorder] Running initial permission check');
     checkPermission();
 
     // listen for app coming to foreground
     const subscription = AppState.addEventListener('change', (state) => {
-      console.log('[SpeechRecorder] AppState changed:', state);
+      console.error('[SpeechRecorder] AppState changed:', state);
       if (state === 'active') {
-        console.log('[SpeechRecorder] App is active, re-checking permission');
+        console.error('[SpeechRecorder] App is active, re-checking permission');
         checkPermission();
       }
     });
 
     return () => {
-      console.log(
+      console.error(
         '[SpeechRecorder] useEffect cleanup, removing AppState listener'
       );
       subscription.remove();
