@@ -1,12 +1,6 @@
-import { useState, useEffect, useRef, use, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Alert, Animated, AppState, Linking, Platform } from 'react-native';
-import {
-  AudioModule,
-  AudioQuality,
-  IOSOutputFormat,
-  RecordingOptions,
-  useAudioRecorder,
-} from 'expo-audio';
+import { AudioModule, RecordingPresets, useAudioRecorder } from 'expo-audio';
 import * as FileSystem from 'expo-file-system';
 import {
   LogInToContinueText,
@@ -29,24 +23,6 @@ import OnboardingBubbles from '../onboarding-bubbles/OnboardingBubbles';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import LoginButton from '../login-button/LoginButton';
 
-const HIGH_QUALITY_RECORDING_OPTIONS: RecordingOptions = {
-  extension: '.m4a',
-  sampleRate: 44100,
-  numberOfChannels: 2,
-  bitRate: 128000,
-  android: {
-    outputFormat: 'mpeg4',
-    audioEncoder: 'aac',
-  },
-  ios: {
-    outputFormat: IOSOutputFormat.MPEG4AAC,
-    audioQuality: AudioQuality.MAX,
-    linearPCMBitDepth: 16,
-    linearPCMIsBigEndian: false,
-    linearPCMIsFloat: false,
-  },
-};
-
 export default function SpeechRecorder() {
   const theme: any = useTheme();
   const { t } = useTranslation();
@@ -58,7 +34,7 @@ export default function SpeechRecorder() {
     setPagination,
   } = useConversationData();
   const { showToast } = useToastModal();
-  const audioRecorder = useAudioRecorder(HIGH_QUALITY_RECORDING_OPTIONS);
+  const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
   const [isAudioPermissionGranted, setIsAudioPermissionGranted] =
     useState(false);
   const [isRecording, setIsRecording] = useState(false);
@@ -75,58 +51,33 @@ export default function SpeechRecorder() {
   const canRecordRef = useRef(true);
   const RECORD_COOLDOWN_MS = 1000;
 
-  // useEffect(() => {
-  //   const checkPermission = async () => {
-  //     const status = await AudioModule.requestRecordingPermissionsAsync();
-  //     setIsAudioPermissionGranted(!!status.granted);
-  //   };
-
-  //   // initial check
-  //   checkPermission();
-
-  //   // listen for app coming to foreground
-  //   const subscription = AppState.addEventListener('change', (state) => {
-  //     if (state === 'active') {
-  //       checkPermission();
-  //     }
-  //   });
-
-  //   return () => {
-  //     subscription.remove();
-  //   };
-  // }, []);
-
   useEffect(() => {
-    console.error('[SpeechRecorder] useEffect mounted');
-
-    const checkPermission = async () => {
-      console.error('[SpeechRecorder] Checking microphone permission...');
+    // Request permission with dialogue
+    const requestPermission = async () => {
       const status = await AudioModule.requestRecordingPermissionsAsync();
-      console.error('[SpeechRecorder] Permission status:', status);
-      setIsAudioPermissionGranted(!!status.granted);
-      console.error(
-        '[SpeechRecorder] isAudioPermissionGranted set to:',
-        !!status.granted
-      );
+      setIsAudioPermissionGranted(status.status === 'granted');
     };
 
-    // initial check
-    console.error('[SpeechRecorder] Running initial permission check');
-    checkPermission();
+    // silently checks for permission
+    const checkPermission = async () => {
+      const status = await AudioModule.getRecordingPermissionsAsync();
+      setIsAudioPermissionGranted((prev) => {
+        const newValue = status.status === 'granted';
+        return prev !== newValue ? newValue : prev;
+      });
+    };
 
-    // listen for app coming to foreground
-    const subscription = AppState.addEventListener('change', (state) => {
-      console.error('[SpeechRecorder] AppState changed:', state);
-      if (state === 'active') {
-        console.error('[SpeechRecorder] App is active, re-checking permission');
+    // request permission on mount
+    requestPermission();
+
+    // listen for app coming back to foreground
+    const subscription = AppState.addEventListener('change', (nextState) => {
+      if (nextState === 'active') {
         checkPermission();
       }
     });
 
     return () => {
-      console.error(
-        '[SpeechRecorder] useEffect cleanup, removing AppState listener'
-      );
       subscription.remove();
     };
   }, []);

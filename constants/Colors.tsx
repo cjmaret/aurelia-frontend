@@ -124,7 +124,7 @@ export const Colors = {
     buttonTextSecondary: '#81c6d0',
     buttonPrimaryBorder: '#39505a',
     buttonBackgroundDanger: '#ff6b6b',
-    buttonTextDanger: '#181C1F',
+    buttonTextDanger: '#ffffff',
     buttonBorder: '#b3b3b3',
 
     // inputs

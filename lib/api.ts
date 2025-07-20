@@ -419,7 +419,10 @@ class Api {
     });
 
     if (result.status !== 200) {
-      throw new Error(`Upload failed: ${result.status} ${result.body}`);
+      throw {
+        status: result.status,
+        message: result.body,
+      };
     }
 
     return JSON.parse(result.body);
