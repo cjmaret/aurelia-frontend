@@ -75,23 +75,58 @@ export default function SpeechRecorder() {
   const canRecordRef = useRef(true);
   const RECORD_COOLDOWN_MS = 1000;
 
+  // useEffect(() => {
+  //   const checkPermission = async () => {
+  //     const status = await AudioModule.requestRecordingPermissionsAsync();
+  //     setIsAudioPermissionGranted(!!status.granted);
+  //   };
+
+  //   // initial check
+  //   checkPermission();
+
+  //   // listen for app coming to foreground
+  //   const subscription = AppState.addEventListener('change', (state) => {
+  //     if (state === 'active') {
+  //       checkPermission();
+  //     }
+  //   });
+
+  //   return () => {
+  //     subscription.remove();
+  //   };
+  // }, []);
+
   useEffect(() => {
+    console.log('[SpeechRecorder] useEffect mounted');
+
     const checkPermission = async () => {
+      console.log('[SpeechRecorder] Checking microphone permission...');
       const status = await AudioModule.requestRecordingPermissionsAsync();
+      console.log('[SpeechRecorder] Permission status:', status);
       setIsAudioPermissionGranted(!!status.granted);
+      console.log(
+        '[SpeechRecorder] isAudioPermissionGranted set to:',
+        !!status.granted
+      );
     };
 
     // initial check
+    console.log('[SpeechRecorder] Running initial permission check');
     checkPermission();
 
     // listen for app coming to foreground
     const subscription = AppState.addEventListener('change', (state) => {
+      console.log('[SpeechRecorder] AppState changed:', state);
       if (state === 'active') {
+        console.log('[SpeechRecorder] App is active, re-checking permission');
         checkPermission();
       }
     });
 
     return () => {
+      console.log(
+        '[SpeechRecorder] useEffect cleanup, removing AppState listener'
+      );
       subscription.remove();
     };
   }, []);
@@ -110,25 +145,33 @@ export default function SpeechRecorder() {
   }, [elapsedTime, isRecording]);
 
   async function startRecording() {
-    if (!canRecordRef.current) return; // Use ref for instant check
-    canRecordRef.current = false;
-    setCanRecord(false);
-    hasStoppedRef.current = false;
-    try {
-      await audioRecorder.prepareToRecordAsync();
+    if (isAudioPermissionGranted) {
+      try {
+        if (!canRecordRef.current) return; // Use ref for instant check
+        canRecordRef.current = false;
+        setCanRecord(false);
+        hasStoppedRef.current = false;
+        try {
+          await audioRecorder.prepareToRecordAsync();
 
-      audioRecorder.record();
-      setIsRecording(true);
+          audioRecorder.record();
+          setIsRecording(true);
 
-      setElapsedTime(0);
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
+          setElapsedTime(0);
+          if (timerRef.current) {
+            clearInterval(timerRef.current);
+          }
+          timerRef.current = setInterval(() => {
+            setElapsedTime((prev) => prev + 1);
+          }, 1000);
+        } catch (err) {
+          console.error('Failed to start recording', err);
+        }
+      } catch (error) {
+        console.error('Error starting recording:', error);
       }
-      timerRef.current = setInterval(() => {
-        setElapsedTime((prev) => prev + 1);
-      }, 1000);
-    } catch (err) {
-      console.error('Failed to start recording', err);
+    } else {
+      showAudioPermissionAlert();
     }
   }
 
