@@ -7,29 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0309E61A9A03871B7808E249 /* libPods-Aurelia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E84CA458DD2362A998369AE2 /* libPods-Aurelia.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		8E43FB5A09BF5DE06DD8E7F0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 646F06141DA988EBB36F58D1 /* PrivacyInfo.xcprivacy */; };
-		94DC13320A6AE5FD9A906074 /* libPods-Aurelia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5A266AC257361FAD3EFF22B /* libPods-Aurelia.a */; };
+		B0BC0F49618021EAEB1887CB /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665AF063CF808ECEECB5C43C /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		E1A3ACB581B142BD40BF3AF1 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFFC33E60C9F1627CE279D /* ExpoModulesProvider.swift */; };
+		C3B34BAA5CA1418C748F95B7 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 64ADE1A1B06F644B7D7C5E89 /* PrivacyInfo.xcprivacy */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		10B1AC3DBB2AF70F9D72BAB5 /* Pods-Aurelia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aurelia.debug.xcconfig"; path = "Target Support Files/Pods-Aurelia/Pods-Aurelia.debug.xcconfig"; sourceTree = "<group>"; };
-		10EFFC33E60C9F1627CE279D /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Aurelia/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Aurelia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aurelia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Aurelia/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Aurelia/Info.plist; sourceTree = "<group>"; };
-		646F06141DA988EBB36F58D1 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = Aurelia/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		65EC093C841D6EAB38136579 /* Pods-Aurelia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aurelia.release.xcconfig"; path = "Target Support Files/Pods-Aurelia/Pods-Aurelia.release.xcconfig"; sourceTree = "<group>"; };
+		64ADE1A1B06F644B7D7C5E89 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = Aurelia/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		665AF063CF808ECEECB5C43C /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Aurelia/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = Aurelia/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		E5A266AC257361FAD3EFF22B /* libPods-Aurelia.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Aurelia.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2A2962510230D7B465FDB76 /* Pods-Aurelia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aurelia.release.xcconfig"; path = "Target Support Files/Pods-Aurelia/Pods-Aurelia.release.xcconfig"; sourceTree = "<group>"; };
+		E84CA458DD2362A998369AE2 /* libPods-Aurelia.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Aurelia.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Aurelia/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* Aurelia-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Aurelia-Bridging-Header.h"; path = "Aurelia/Aurelia-Bridging-Header.h"; sourceTree = "<group>"; };
+		FAFD4D3E7C528736DB0A0F5D /* Pods-Aurelia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aurelia.debug.xcconfig"; path = "Target Support Files/Pods-Aurelia/Pods-Aurelia.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94DC13320A6AE5FD9A906074 /* libPods-Aurelia.a in Frameworks */,
+				0309E61A9A03871B7808E249 /* libPods-Aurelia.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,36 +53,18 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				646F06141DA988EBB36F58D1 /* PrivacyInfo.xcprivacy */,
+				64ADE1A1B06F644B7D7C5E89 /* PrivacyInfo.xcprivacy */,
 			);
 			name = Aurelia;
-			sourceTree = "<group>";
-		};
-		1433BEDA67AFFC97ED1708B6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				10B1AC3DBB2AF70F9D72BAB5 /* Pods-Aurelia.debug.xcconfig */,
-				65EC093C841D6EAB38136579 /* Pods-Aurelia.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				E5A266AC257361FAD3EFF22B /* libPods-Aurelia.a */,
+				E84CA458DD2362A998369AE2 /* libPods-Aurelia.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		801259FEB76B5550F67A461A /* ExpoModulesProviders */ = {
-			isa = PBXGroup;
-			children = (
-				9343F49652FFEE30677C38AB /* Aurelia */,
-			);
-			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -99,8 +81,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				1433BEDA67AFFC97ED1708B6 /* Pods */,
-				801259FEB76B5550F67A461A /* ExpoModulesProviders */,
+				C94A8D430BC538803197DE52 /* Pods */,
+				FBA3CC49C7175A80321DC228 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -115,14 +97,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9343F49652FFEE30677C38AB /* Aurelia */ = {
-			isa = PBXGroup;
-			children = (
-				10EFFC33E60C9F1627CE279D /* ExpoModulesProvider.swift */,
-			);
-			name = Aurelia;
-			sourceTree = "<group>";
-		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +104,32 @@
 			);
 			name = Supporting;
 			path = Aurelia/Supporting;
+			sourceTree = "<group>";
+		};
+		C0D199E57039486D3948E979 /* Aurelia */ = {
+			isa = PBXGroup;
+			children = (
+				665AF063CF808ECEECB5C43C /* ExpoModulesProvider.swift */,
+			);
+			name = Aurelia;
+			sourceTree = "<group>";
+		};
+		C94A8D430BC538803197DE52 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FAFD4D3E7C528736DB0A0F5D /* Pods-Aurelia.debug.xcconfig */,
+				E2A2962510230D7B465FDB76 /* Pods-Aurelia.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FBA3CC49C7175A80321DC228 /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				C0D199E57039486D3948E979 /* Aurelia */,
+			);
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,13 +140,13 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Aurelia" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				D3F99793AF5FDB68E129DBBF /* [Expo] Configure project */,
+				9976F05599B141B145EE5C5C /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				7076DF1B5CE0F9B03020FDDF /* [CP] Embed Pods Frameworks */,
+				ABAAABC9D228753F15438566 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -196,7 +196,7 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				8E43FB5A09BF5DE06DD8E7F0 /* PrivacyInfo.xcprivacy in Resources */,
+				C3B34BAA5CA1418C748F95B7 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,24 +240,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7076DF1B5CE0F9B03020FDDF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Aurelia/Pods-Aurelia-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Aurelia/Pods-Aurelia-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -276,6 +258,8 @@
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/React-Core_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact/React-cxxreact_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/boost/boost_privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/expo-dev-launcher/EXDevLauncher.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/expo-dev-menu/EXDevMenu.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/glog/glog_privacy.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -291,6 +275,8 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/React-Core_privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/React-cxxreact_privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/boost_privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EXDevLauncher.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EXDevMenu.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/glog_privacy.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,7 +284,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Aurelia/Pods-Aurelia-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D3F99793AF5FDB68E129DBBF /* [Expo] Configure project */ = {
+		9976F05599B141B145EE5C5C /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -317,6 +303,24 @@
 			shellPath = /bin/sh;
 			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-Aurelia/expo-configure-project.sh\"\n";
 		};
+		ABAAABC9D228753F15438566 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Aurelia/Pods-Aurelia-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Aurelia/Pods-Aurelia-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -325,7 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
-				E1A3ACB581B142BD40BF3AF1 /* ExpoModulesProvider.swift in Sources */,
+				B0BC0F49618021EAEB1887CB /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,7 +338,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 10B1AC3DBB2AF70F9D72BAB5 /* Pods-Aurelia.debug.xcconfig */;
+			baseConfigurationReference = FAFD4D3E7C528736DB0A0F5D /* Pods-Aurelia.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -370,7 +374,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 65EC093C841D6EAB38136579 /* Pods-Aurelia.release.xcconfig */;
+			baseConfigurationReference = E2A2962510230D7B465FDB76 /* Pods-Aurelia.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
