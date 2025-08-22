@@ -1,6 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { Alert, Animated, AppState, Linking, Platform } from 'react-native';
-import { AudioModule, RecordingPresets, useAudioRecorder } from 'expo-audio';
+import {
+  RecordingPresets,
+  useAudioRecorder,
+  setAudioModeAsync,
+  requestRecordingPermissionsAsync,
+  getRecordingPermissionsAsync,
+} from 'expo-audio';
 import * as FileSystem from 'expo-file-system';
 import {
   LogInToContinueText,
@@ -52,15 +58,21 @@ export default function SpeechRecorder() {
   const RECORD_COOLDOWN_MS = 1000;
 
   useEffect(() => {
-    // Request permission with dialogue
+    // request permission with dialogue
     const requestPermission = async () => {
-      const status = await AudioModule.requestRecordingPermissionsAsync();
+      const status = await requestRecordingPermissionsAsync();
       setIsAudioPermissionGranted(status.status === 'granted');
+      if (status.status === 'granted') {
+        await setAudioModeAsync({
+          playsInSilentMode: true,
+          allowsRecording: true,
+        });
+      }
     };
 
     // silently checks for permission
     const checkPermission = async () => {
-      const status = await AudioModule.getRecordingPermissionsAsync();
+      const status = await getRecordingPermissionsAsync();
       setIsAudioPermissionGranted((prev) => {
         const newValue = status.status === 'granted';
         return prev !== newValue ? newValue : prev;
