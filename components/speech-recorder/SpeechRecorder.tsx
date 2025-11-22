@@ -28,11 +28,13 @@ import { useTranslation } from 'react-i18next';
 import OnboardingBubbles from '../onboarding-bubbles/OnboardingBubbles';
 import { useAuth } from '@/utils/contexts/AuthContext';
 import LoginButton from '../login-button/LoginButton';
+import { useReviewPromptContext } from '@/utils/contexts/ReviewPromptContext';
 
 export default function SpeechRecorder() {
   const theme: any = useTheme();
   const { t } = useTranslation();
   const { showOnboarding, setShowOnboarding } = useAuth();
+  const { incrementSuccessfulAction } = useReviewPromptContext();
   const {
     setConversationData,
     setIsProcessingRecording,
@@ -206,6 +208,7 @@ export default function SpeechRecorder() {
           total: prev.total + 1,
         }));
         showToast('success', t('recordingProcessed'), t('correctionsReady'));
+        incrementSuccessfulAction();
       }
     } catch (error: any) {
       showApiErrorToast({ error, showToast, t });
@@ -218,7 +221,7 @@ export default function SpeechRecorder() {
     const percent = seconds / MAX_RECORDING_SECONDS;
     if (percent >= 0.85) return theme.colors.textError;
     if (percent >= 0.7) return theme.colors.textWarning;
-    return theme.colors.primary;
+    return theme.colors.textSecondary;
   }
 
   function formatElapsedTime(elaspedSeconds: number): string {

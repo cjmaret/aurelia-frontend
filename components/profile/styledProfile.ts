@@ -83,7 +83,7 @@ export const SectionTitle = styled.Text.attrs({
   font-size: 20px;
   font-weight: bold;
   margin: 24px 0 16px 0;
-  color: ${({ theme }: { theme: any }) => theme.colors.primary};
+  color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
   flex-wrap: wrap;
 `;
 
@@ -181,7 +181,7 @@ export const SaveButtonText = styled.Text.attrs({
   maxFontSizeMultiplier: 2,
 })<{ disabled: boolean }>`
   color: ${({ theme, disabled }: { theme: any; disabled: boolean }) =>
-    disabled ? theme.colors.greySecondary : theme.colors.primary};
+    disabled ? theme.colors.greySecondary : theme.colors.textSecondary};
   font-size: 16px;
   font-weight: bold;
   flex-wrap: wrap;

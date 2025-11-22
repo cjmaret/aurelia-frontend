@@ -233,7 +233,7 @@ export default memo(function ReviewCard({
             <MaterialCommunityIcons
               name={isCardExpanded ? 'chevron-up' : 'chevron-down'}
               size={25}
-              color={theme.colors.cardHeaderText}
+              color={theme.colors.textSecondary}
             />
           </HeaderArrowIcon>
           <CardHeaderTextContainer>

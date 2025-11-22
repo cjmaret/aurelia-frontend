@@ -38,7 +38,7 @@ export default function GoogleCallback() {
         alignItems: 'center',
         backgroundColor: theme.colors.backgroundSecondary,
       }}>
-      <ActivityIndicator size="large" color={theme.colors.primary} />
+      <ActivityIndicator size="large" color={theme.colors.textSecondary} />
       <Text
         style={{
           marginTop: 16,

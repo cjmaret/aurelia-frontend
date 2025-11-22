@@ -85,9 +85,9 @@ const AnimatedWave = ({
   return (
     <AnimatedPath
       animatedProps={animatedProps}
-      stroke={theme.colors.primary}
+      stroke={theme.colors.textSecondary}
       strokeWidth={3}
-      fill={theme.colors.primary}
+      fill={theme.colors.textSecondary}
     />
   );
 };
@@ -187,9 +187,9 @@ export default function Waveform({ isRecording }: { isRecording: boolean }) {
         <Path
           /* move to point (0, 150), draw line to (width, 150)*/
           d={`M 0 150 L ${windowWidth} 150`}
-          stroke={theme.colors.primary}
+          stroke={theme.colors.textSecondary}
           strokeWidth={5}
-          fill={theme.colors.primary}
+          fill={theme.colors.textSecondary}
         />
         {[1, 1.5, 2].map((heightAdjuster, index) => (
           <AnimatedWave

@@ -78,7 +78,7 @@ const resources = {
       morningConversation: 'Morning Conversation',
       afternoonConversation: 'Afternoon Conversation',
       eveningConversation: 'Evening Conversation',
-      sentencesInThisConversation: "{{count}} sentences in this conversation",
+      sentencesInThisConversation: '{{count}} sentences in this conversation',
       youSaid: 'You said',
       corrected: 'Corrected',
       greatJobNoErrors: '🎊 Great job! No errors! 🎊',
@@ -97,6 +97,25 @@ const resources = {
       resetPassword: 'Reset Password',
       returnToProfile: 'Return to your profile',
       returnToLogin: 'Return to Login',
+
+      // review prompt
+      enjoyingAureliaTitle: 'Are you enjoying Aurelia?',
+      enjoyingAureliaDescription:
+        "We'd love to know how we're doing! Your thoughts help us make Aurelia even better.",
+      notReally: 'Not Really',
+      yes: 'Yes!',
+      rateAureliaAlertTitle: 'Rate Aurelia',
+      rateAureliaAlertDescription:
+        'Help others discover Aurelia by leaving a quick review!',
+      maybeLater: 'Maybe Later',
+      rateNow: 'Rate Now',
+      thankYouAlertTitle: 'Thank You!',
+      thankYouAlertDescription: 'Your feedback helps us improve Aurelia',
+      reviewPromptTitle: 'Help us make Aurelia amazing 🚀',
+      reviewPromptDescription:
+        "We're always working to improve your experience. What would make Aurelia even better for you?",
+      feedbackPlaceholder: 'Your feedback...',
+      submitButtonText: 'Submit',
 
       // +not-found
       pageNotFound: 'Page Not Found',
@@ -256,7 +275,7 @@ const resources = {
       morningConversation: 'Conversation du Matin',
       afternoonConversation: "Conversation de l'Après-Midi",
       eveningConversation: 'Conversation du Soir',
-      sentencesInThisConversationl: "{{count}} phrases dans cette conversation",
+      sentencesInThisConversationl: '{{count}} phrases dans cette conversation',
       youSaid: 'Vous avez dit',
       corrected: 'Corrigé',
       greatJobNoErrors: '🎊 Bon travail ! Pas d’erreurs ! 🎊',
@@ -277,6 +296,26 @@ const resources = {
       verifying: 'Vérification...',
       returnToProfile: 'Retour à votre profil',
       returnToLogin: 'Retour à la connexion',
+
+      // review prompt
+      enjoyingAureliaTitle: 'Appréciez-vous Aurelia ?',
+      enjoyingAureliaDescription:
+        'Nous aimerions savoir ce que vous en pensez ! Vos commentaires nous aident à améliorer Aurelia.',
+      notReally: 'Pas vraiment',
+      yes: 'Oui !',
+      rateAureliaAlertTitle: 'Évaluer Aurelia',
+      rateAureliaAlertDescription:
+        'Aidez les autres à découvrir Aurelia en laissant un avis rapide !',
+      maybeLater: 'Plus tard',
+      rateNow: 'Évaluer maintenant',
+      thankYouAlertTitle: 'Merci !',
+      thankYouAlertDescription:
+        'Vos commentaires nous aident à améliorer Aurelia',
+      reviewPromptTitle: 'Aidez-nous à rendre Aurelia extraordinaire 🚀',
+      reviewPromptDescription:
+        "Nous travaillons toujours à améliorer votre expérience. Qu'est-ce qui rendrait Aurelia encore meilleur pour vous ?",
+      feedbackPlaceholder: 'Vos commentaires...',
+      submitButtonText: 'Soumettre',
 
       // +not-found
       pageNotFound: 'Page introuvable',
@@ -447,7 +486,7 @@ const resources = {
       morningConversation: 'Conversación de la Mañana',
       afternoonConversation: 'Conversación de la Tarde',
       eveningConversation: 'Conversación de la Noche',
-      sentencesInThisConversation: "{{count}} frases en esta conversación",
+      sentencesInThisConversation: '{{count}} frases en esta conversación',
       youSaid: 'Dijiste',
       corrected: 'Corregido',
       greatJobNoErrors: '🎊 ¡Buen trabajo! ¡Sin errores! 🎊',
@@ -468,6 +507,25 @@ const resources = {
       verifying: 'Verificando...',
       returnToProfile: 'Volver a tu perfil',
       returnToLogin: 'Volver al inicio de sesión',
+
+      // review prompt
+      enjoyingAureliaTitle: '¿Estás disfrutando Aurelia?',
+      enjoyingAureliaDescription:
+        '¡Nos encantaría saber cómo lo estamos haciendo! Tus opiniones nos ayudan a hacer Aurelia aún mejor.',
+      notReally: 'No mucho',
+      yes: '¡Sí!',
+      rateAureliaAlertTitle: 'Calificar Aurelia',
+      rateAureliaAlertDescription:
+        'Ayuda a otros a descubrir Aurelia dejando una reseña rápida!',
+      maybeLater: 'Tal vez más tarde',
+      rateNow: 'Calificar ahora',
+      thankYouAlertTitle: '¡Gracias!',
+      thankYouAlertDescription: 'Tus comentarios nos ayudan a mejorar Aurelia',
+      reviewPromptTitle: 'Ayúdanos a hacer Aurelia increíble 🚀',
+      reviewPromptDescription:
+        'Siempre estamos trabajando para mejorar tu experiencia. ¿Qué haría que Aurelia fuera aún mejor para ti?',
+      feedbackPlaceholder: 'Tus comentarios...',
+      submitButtonText: 'Enviar',
 
       // +not-found
       pageNotFound: 'Página no encontrada',

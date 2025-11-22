@@ -38,7 +38,7 @@ export const BubbleText = styled.Text`
 export const GotItButton = styled.TouchableOpacity`
   margin-top: 18px;
   align-self: center;
-  background: ${({ theme }: { theme: any }) => theme.colors.primary};
+  background: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
   padding: 8px 24px;
   border-radius: 8px;
 `;

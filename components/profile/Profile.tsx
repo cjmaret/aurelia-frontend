@@ -303,7 +303,7 @@ export default function Profile() {
                     size={20}
                     color={
                       user.emailVerified
-                        ? theme.colors.primary
+                        ? theme.colors.textSecondary
                         : theme.colors.greySecondary
                     }
                   />

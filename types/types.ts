@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type SetStateType<T> = React.Dispatch<React.SetStateAction<T>>;
 
 // api types
@@ -48,6 +50,16 @@ export interface ConversationDataContextType {
   isProcessingRecording: boolean;
   setIsProcessingRecording: SetStateType<boolean>;
   hasReachedAnonLimit: boolean;
+}
+
+export interface ReviewPromptContextType {
+  showPrompt: () => void;
+  hidePrompt: () => void;
+  incrementSuccessfulAction: () => Promise<void>;
+}
+
+export interface ReviewPromptProviderProps {
+  children: ReactNode;
 }
 
 // api data types

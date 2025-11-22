@@ -4,7 +4,6 @@ import * as SecureStore from 'expo-secure-store';
 import { jwtDecode } from 'jwt-decode';
 import * as FileSystem from 'expo-file-system';
 
-
 class Api {
   private _baseUrl: string | undefined;
   private _headers: any;
@@ -413,9 +412,9 @@ class Api {
 
     const result = await FileSystem.uploadAsync(apiUrl, fileUri, {
       httpMethod: 'POST',
-      headers, 
+      headers,
       uploadType: FileSystem.FileSystemUploadType.MULTIPART,
-      fieldName: 'file', 
+      fieldName: 'file',
     });
 
     if (result.status !== 200) {
@@ -466,6 +465,24 @@ class Api {
       .then((res) => this._returnRes(res))
       .catch((err) => {
         console.error('Error deleting conversation:', err);
+        throw err;
+      });
+  }
+
+  async addUserFeedback(feedback: string): Promise<any> {
+    const headers = await this._getAuthHeaders();
+
+    return fetch(this._baseUrl + '/feedback', {
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text: feedback }),
+    })
+      .then((res) => this._returnRes(res))
+      .catch((err) => {
+        console.error('Error submitting feedback', err);
         throw err;
       });
   }

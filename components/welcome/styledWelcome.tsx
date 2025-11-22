@@ -63,7 +63,7 @@ export const WelcomeText = styled.Text.attrs({
 `;
 
 export const GetStartedButton = styled.TouchableOpacity`
-  background-color: ${({ theme }: { theme: any }) => theme.colors.primary};
+  background-color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
   padding: 15px 65px;
   border-radius: 15px;
   margin-top: 20px;

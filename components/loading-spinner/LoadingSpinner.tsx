@@ -7,7 +7,7 @@ export default function LoadingSpinner() {
 
   return (
     <LoadingOverlay>
-      <ActivityIndicator size="large" color={theme.colors.primary} />
+      <ActivityIndicator size="large" color={theme.colors.textSecondary} />
     </LoadingOverlay>
   );
 }

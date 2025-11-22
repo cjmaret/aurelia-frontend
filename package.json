@@ -13,12 +13,25 @@
     "postinstall": "patch-package"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "setupFilesAfterEnv": ["<rootDir>/__tests__/setup.js"],
+    "testMatch": [
+      "**/__tests__/**/*.test.[jt]s?(x)",
+      "**/?(*.)+(spec|test).[jt]s?(x)"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/__tests__/setup.js"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|styled-components|react-native-modal)"
+    ]
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
     "@expo/config-plugins": "~10.1.1",
     "@expo/vector-icons": "^14.1.0",
+    "@react-native-async-storage/async-storage": "^2.2.0",
     "@react-navigation/bottom-tabs": "^7.4.2",
     "@react-navigation/elements": "^2.5.2",
     "@react-navigation/native": "^7.1.14",
@@ -41,6 +54,7 @@
     "expo-secure-store": "~14.2.3",
     "expo-splash-screen": "~0.30.10",
     "expo-status-bar": "~2.2.3",
+    "expo-store-review": "^9.0.8",
     "expo-symbols": "~0.4.5",
     "expo-system-ui": "~5.0.10",
     "expo-updates": "~0.28.17",
@@ -56,6 +70,7 @@
     "react-i18next": "^15.6.0",
     "react-native": "0.79.5",
     "react-native-gesture-handler": "~2.24.0",
+    "react-native-modal": "^14.0.0-rc.1",
     "react-native-reanimated": "~3.17.4",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
@@ -69,6 +84,8 @@
     "@babel/core": "^7.28.0",
     "@expo/ngrok": "^4.1.3",
     "@react-native-community/cli": "^19.1.0",
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^13.3.3",
     "@types/d3-interpolate": "^3.0.4",
     "@types/d3-shape": "^3.1.7",
     "@types/jest": "^30.0.0",

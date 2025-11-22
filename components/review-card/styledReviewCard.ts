@@ -9,7 +9,7 @@ export const CardContainer = styled.View`
     theme.colors.cardBackground};
   shadow-color: #000000;
   shadow-offset: 0px 5px;
-  shadow-opacity: 0.1;
+  shadow-opacity: 0.2;
   shadow-radius: 4px;
   elevation: 3;
   align-self: center;
@@ -23,7 +23,7 @@ export const CardHeader = styled.View`
   background-color: ${({ theme }: { theme: any }) =>
     theme.colors.cardBackground};
   border: 1px solid
-    ${({ theme }: { theme: any }) => theme.colors.cardHeaderBorder};
+    ${({ theme }: { theme: any }) => theme.colors.cardBorder};
   shadow-color: #000000;
   shadow-offset: 0px 2px;
   shadow-opacity: 0.1;
@@ -51,7 +51,7 @@ export const CardHeaderTextContainer = styled.View`
 const CardHeaderText = styled.Text.attrs({
   maxFontSizeMultiplier: 2,
 })`
-  color: ${({ theme }: { theme: any }) => theme.colors.cardHeaderText};
+  color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
   font-weight: bold;
 `;
 
@@ -82,7 +82,7 @@ export const CorrectionCountText = styled.Text`
 
 export const SnippetCard = styled.View`
   width: 93%;
-  background: ${({ theme }: { theme: any }) => theme.colors.snippetBackground};
+  background: ${({ theme }: { theme: any }) => theme.colors.cardBackground};
   border: 1px solid ${({ theme }: { theme: any }) => theme.colors.cardBorder};
   padding: 20px 16px;
   border-radius: 8px;

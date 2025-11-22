@@ -27,8 +27,6 @@ export default function VerifyEmailForm() {
 
   const isEmailChange = !!newEmail;
 
-  // TODO: translate everything
-
   const handleConfirm = async () => {
     setLoading(true);
     try {

@@ -15,7 +15,7 @@ export const HeaderContainer = styled.View<{ hasScrolled: boolean }>`
   border-bottom-width: 0.5px;
   border-bottom-color: ${({ hasScrolled }: { hasScrolled: boolean }) =>
     hasScrolled
-      ? ({ theme }: { theme: any }) => theme.colors.cardHeaderBorder
+      ? ({ theme }: { theme: any }) => theme.colors.grammarReviewHeaderBorder
       : 'transparent'};
 `;
 

@@ -31,5 +31,5 @@ export const RecordButton = styled.Pressable<{
     theme: any;
     isRecordButtonPressed: boolean;
   }) =>
-    isRecordButtonPressed ? `5px solid ${theme.colors.primaryDark}` : 'none'};
+    isRecordButtonPressed ? `5px solid ${theme.colors.accentPrimaryDark}` : 'none'};
 `;

@@ -19,6 +19,7 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from '@/utils/app-language-wrapper/i18n';
 import LanguageUpdater from '@/utils/app-language-wrapper/LanguageUpdater';
 import { ToastModalProvider } from '@/utils/contexts/ToastModalContext';
+import { ReviewPromptProvider } from '@/utils/contexts/ReviewPromptContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -54,7 +55,7 @@ export default function RootLayout() {
   // background colors for pages
   const backgroundColors: Record<string, string> = {
     index: theme.colors.backgroundPrimary,
-    grammarReviewTab: theme.colors.backgroundPrimary,
+    grammarReviewTab: theme.colors.backgroundSecondary,
     profileTab: theme.colors.backgroundSecondary,
     signIn: theme.colors.backgroundSecondary,
     signUp: theme.colors.backgroundSecondary,
@@ -92,27 +93,29 @@ export default function RootLayout() {
         <ToastModalProvider>
           <AuthProvider>
             <ConversationDataProvider>
-              <SafeAreaProvider>
-                <I18nextProvider i18n={i18n}>
-                  <LanguageUpdater>
-                    <SafeAreaView
-                      style={{
-                        flex: 1,
-                        backgroundColor: backgroundColor,
-                      }}
-                      edges={['top', 'left', 'right']}>
-                      <Stack screenOptions={{ headerShown: false }}>
-                        <Stack.Screen
-                          name="(tabs)"
-                          options={{ headerShown: false }}
-                        />
-                        <Stack.Screen name="+not-found" />
-                      </Stack>
-                      <StatusBar style="auto" />
-                    </SafeAreaView>
-                  </LanguageUpdater>
-                </I18nextProvider>
-              </SafeAreaProvider>
+              <ReviewPromptProvider>
+                <SafeAreaProvider>
+                  <I18nextProvider i18n={i18n}>
+                    <LanguageUpdater>
+                      <SafeAreaView
+                        style={{
+                          flex: 1,
+                          backgroundColor: backgroundColor,
+                        }}
+                        edges={['top', 'left', 'right']}>
+                        <Stack screenOptions={{ headerShown: false }}>
+                          <Stack.Screen
+                            name="(tabs)"
+                            options={{ headerShown: false }}
+                          />
+                          <Stack.Screen name="+not-found" />
+                        </Stack>
+                        <StatusBar style="auto" />
+                      </SafeAreaView>
+                    </LanguageUpdater>
+                  </I18nextProvider>
+                </SafeAreaProvider>
+              </ReviewPromptProvider>
             </ConversationDataProvider>
           </AuthProvider>
         </ToastModalProvider>

@@ -160,8 +160,8 @@ export default function GrammarReview() {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={handleRefresh}
-            tintColor={theme.colors.primary}
-            colors={[theme.colors.primary]}
+            tintColor={theme.colors.textSecondary}
+            colors={[theme.colors.textSecondary]}
           />
         }
         searchQuery={searchQuery}

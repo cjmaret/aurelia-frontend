@@ -192,7 +192,7 @@ export default function ConversationList({
         }
         ListFooterComponent={
           isLoadingMoreCards ? (
-            <ActivityIndicator size="large" color={theme.colors.primary} />
+            <ActivityIndicator size="large" color={theme.colors.textSecondary} />
           ) : null
         } // spinner at the bottom
       />
