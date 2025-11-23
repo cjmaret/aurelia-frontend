@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   FlatList,
   ActivityIndicator,
@@ -90,40 +90,37 @@ export default function ConversationList({
     );
   };
 
-  const handleDeleteCard = ({ conversationId }: { conversationId: string }) =>
-    handleDelete({
-      id: conversationId,
-      apiCall: () => deleteConversation({ conversationId }),
-      alertTitle: t('confirmDeleteConversationTitle'),
-      alertMessage: t('confirmDeleteConversationMessage'),
-    });
+  const handleDeleteCard = useCallback(
+    (conversationId: string) =>
+      handleDelete({
+        id: conversationId,
+        apiCall: () => deleteConversation({ conversationId }),
+        alertTitle: t('confirmDeleteConversationTitle'),
+        alertMessage: t('confirmDeleteConversationMessage'),
+      }),
+    [deleteConversation, t]
+  );
 
-  const handleDeleteCorrection = ({
-    conversationId,
-    correctionId,
-  }: {
-    conversationId: string;
-    correctionId: string;
-  }) =>
-    handleDelete({
-      id: conversationId,
-      apiCall: () =>
-        deleteCorrectionFromConversation({ conversationId, correctionId }),
-      alertTitle: t('confirmDeleteCorrectionTitle'),
-      alertMessage: t('confirmDeleteCorrectionMessage'),
-    });
+  const handleDeleteCorrection = useCallback(
+    (conversationId: string, correctionId: string) =>
+      handleDelete({
+        id: conversationId,
+        apiCall: () =>
+          deleteCorrectionFromConversation({ conversationId, correctionId }),
+        alertTitle: t('confirmDeleteCorrectionTitle'),
+        alertMessage: t('confirmDeleteCorrectionMessage'),
+      }),
+    [deleteCorrectionFromConversation, t]
+  );
 
-  const renderCard = ({
-    item: cardData,
-    index,
-    collapseCardsAndErrors,
-    setCollapseCardsAndErrors,
-  }: {
-    item: ConversationDataType;
-    index: number;
-    collapseCardsAndErrors: boolean;
-    setCollapseCardsAndErrors: React.Dispatch<React.SetStateAction<boolean>>;
-  }) => {
+  const renderCard = useCallback(
+    ({
+      item: cardData,
+      index,
+    }: {
+      item: ConversationDataType;
+      index: number;
+    }) => {
     const currentDateLocal = formatToLocalDate({
       dateTimeString: cardData.createdAt,
     });
@@ -155,38 +152,56 @@ export default function ConversationList({
           searchQuery={searchQuery}
           collapseCardsAndErrors={collapseCardsAndErrors}
           setCollapseCardsAndErrors={setCollapseCardsAndErrors}
-          handleDeleteCard={(conversationId) =>
-            handleDeleteCard({ conversationId })
-          }
-          handleDeleteCorrection={(conversationId, correctionId) =>
-            handleDeleteCorrection({ conversationId, correctionId })
-          }
+          handleDeleteCard={handleDeleteCard}
+          handleDeleteCorrection={handleDeleteCorrection}
           isDeleting={deletingCardId === cardData.conversationId}
         />
       </ReviewCardContainer>
     );
-  };
+  },
+  [
+    conversationData,
+    searchQuery,
+    collapseCardsAndErrors,
+    setCollapseCardsAndErrors,
+    handleDeleteCard,
+    handleDeleteCorrection,
+    deletingCardId,
+  ]
+);
+
+  const keyExtractor = useCallback(
+    (item: ConversationDataType) => item.conversationId,
+    []
+  );
 
   return (
     // dont cut off final cards if height changes dynamically
     <View style={{ flex: 1 }}>
       <FlatList
         data={conversationData}
-        keyExtractor={(item) => item.conversationId}
+        keyExtractor={keyExtractor}
         renderItem={({ item, index }) =>
           renderCard({
             item,
             index,
-            collapseCardsAndErrors,
-            setCollapseCardsAndErrors,
           })
         } // renders each item (card)
+        removeClippedSubviews={true}
+        maxToRenderPerBatch={10}
+        updateCellsBatchingPeriod={50}
+        initialNumToRender={10}
+        windowSize={10}
         onEndReached={handleLoadMore} // fetch more data when scrolled to the bottom
         onEndReachedThreshold={0.5} // fetch when 50% to the bottom
         onScroll={handleScroll}
         scrollEventThrottle={16}
         refreshControl={refreshControl}
-        extraData={conversationData}
+        extraData={{
+          searchQuery,
+          collapseCardsAndErrors,
+          deletingCardId,
+        }}
         ListHeaderComponent={
           isProcessingRecording ? <SkeletonReviewCard /> : null
         }

@@ -403,4 +403,12 @@ export default memo(function ReviewCard({
       {isDeleting && <LoadingSpinner />}
     </CardContainer>
   );
+},
+// comparison func, only rerender if card data or state changes
+(prevProps, nextProps) => {
+  return (
+    prevProps.cardData === nextProps.cardData &&
+    prevProps.searchQuery === nextProps.searchQuery &&
+    prevProps.isDeleting === nextProps.isDeleting
+  );
 });
