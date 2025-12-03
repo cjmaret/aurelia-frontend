@@ -68,6 +68,7 @@ export const Colors = {
     rippleBorder: '#7ec4cf',
     textHighlight: '#f6fda6',
     spinnerOverlay: 'rgba(255, 255, 255, 0.6)',
+    speechRecorderUpperContainer: '#e8f6fc',
 
     // toast colors
     toastBackground: '#fff',
@@ -78,8 +79,8 @@ export const Colors = {
   },
   dark: {
     // backgrounds
-    backgroundPrimary: '#181C1F',
-    backgroundSecondary: '#32373c',
+    backgroundPrimary: '#282d31',
+    backgroundSecondary: '#282d31',
     backgroundTertiary: '#9EE3ED',
     backgroundDisabled: '#41484e',
 
@@ -101,7 +102,7 @@ export const Colors = {
     accentPrimaryDark: '#39505a',
 
     // card colors
-    cardBackground: '#41474d',
+    cardBackground: '#35393f',
     cardTimeText: '#81c6d0',
     cardBorder: '#363b40',
     cardShadowTopGradient: 'rgba(24, 28, 31, 0)',
@@ -147,9 +148,10 @@ export const Colors = {
     rippleBorder: '#39505a',
     textHighlight: '#e6ed0a',
     spinnerOverlay: 'rgba(255, 255, 255, 0.1)',
+    speechRecorderUpperContainer: '#181C1F',
 
     // toast colors
-    toastBackground: '#262B31',
+    toastBackground: '#24282c',
     toastText: '#F3F6F9',
     toastPrimary: '#2099a6',
     toastPrimaryError: '#ff6b6b',

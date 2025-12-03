@@ -54,8 +54,8 @@ export default function RootLayout() {
 
   // background colors for pages
   const backgroundColors: Record<string, string> = {
-    index: theme.colors.backgroundPrimary,
-    grammarReviewTab: theme.colors.backgroundSecondary,
+    index: theme.colors.speechRecorderUpperContainer,
+    grammarReviewTab: theme.colors.backgroundPrimary,
     profileTab: theme.colors.backgroundSecondary,
     signIn: theme.colors.backgroundSecondary,
     signUp: theme.colors.backgroundSecondary,

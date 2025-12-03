@@ -10,7 +10,7 @@ export const SpeechRecorderGroup = styled.View`
 
 export const UpperContainer = styled.View`
   background-color: ${({ theme }: { theme: any }) =>
-    theme.colors.backgroundPrimary};
+    theme.colors.speechRecorderUpperContainer};
   height: 40%;
   display: flex;
   justify-content: flex-end;
