@@ -22,8 +22,7 @@ export const CardHeader = styled.View`
   justify-content: space-between;
   background-color: ${({ theme }: { theme: any }) =>
     theme.colors.cardBackground};
-  border: 1px solid
-    ${({ theme }: { theme: any }) => theme.colors.cardBorder};
+  border: 1px solid ${({ theme }: { theme: any }) => theme.colors.cardBorder};
   shadow-color: #000000;
   shadow-offset: 0px 2px;
   shadow-opacity: 0.1;
@@ -103,6 +102,11 @@ export const OriginalText = styled.Text.attrs({
   font-style: italic;
   margin-bottom: 10px;
   flex-wrap: wrap;
+`;
+
+export const CorrectedTextContainer = styled.View`
+  display: flex;
+  flex-direction: row;
 `;
 
 export const CorrectedText = styled.Text.attrs({

@@ -62,6 +62,15 @@ export interface ReviewPromptProviderProps {
   children: ReactNode;
 }
 
+export interface AudioPlayerContextType {
+  isPlaying: boolean;
+  isLoading: boolean;
+  currentAudioId: string | null;
+  playbackRate: number;
+  setPlaybackRate: (rate: number) => Promise<void>;
+  togglePlayPause: (text: string, audioId: string) => Promise<void>;
+}
+
 // api data types
 
 // // user data types

@@ -28,6 +28,7 @@ import {
   ErrorWhatsWongText,
   DeleteButton,
   CorrectionCountText,
+  CorrectedTextContainer,
 } from './styledReviewCard';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -39,6 +40,7 @@ import {
 import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
+import AudioPlayer from '../audio-player/AudioPlayer';
 
 export default memo(function ReviewCard({
   cardData,
@@ -285,21 +287,33 @@ export default memo(function ReviewCard({
                     <BoldText>{t('youSaid')}:</BoldText> "
                     {highlightSearchedText(sentence.original)}"
                   </OriginalText>
-                  <CorrectedText key={sentence.id}>
-                    <BoldText>{t('corrected')}:</BoldText> "
-                    {combinedHighlightedText(
-                      sentence.original,
-                      sentence.corrected
-                    )}
-                    "
-                  </CorrectedText>
+                  <CorrectedTextContainer>
+                    <AudioPlayer
+                      correctedSentence={sentence.corrected}
+                      sentenceId={sentence.id}
+                    />
+                    <CorrectedText key={sentence.id}>
+                      <BoldText>{t('corrected')}:</BoldText> "
+                      {combinedHighlightedText(
+                        sentence.original,
+                        sentence.corrected
+                      )}
+                      "
+                    </CorrectedText>
+                  </CorrectedTextContainer>
                 </>
               ) : (
                 <>
-                  <CorrectedText>
-                    <BoldText>{t('youSaid')}:</BoldText> "
-                    {highlightSearchedText(sentence.corrected)}"
-                  </CorrectedText>
+                  <CorrectedTextContainer>
+                    <AudioPlayer
+                      correctedSentence={sentence.corrected}
+                      sentenceId={sentence.id}
+                    />
+                    <CorrectedText>
+                      <BoldText>{t('youSaid')}:</BoldText> "
+                      {highlightSearchedText(sentence.corrected)}"
+                    </CorrectedText>
+                  </CorrectedTextContainer>
                   <ContragulatoryTextContainer>
                     <ContragulatoryText>
                       {t('greatJobNoErrors')}

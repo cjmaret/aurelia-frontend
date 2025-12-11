@@ -368,15 +368,20 @@ class Api {
   }): Promise<ConversationResponseType> {
     const headers = await this._getAuthHeaders();
 
-    return fetch(this._baseUrl + `/conversations?page=${page}&limit=${limit}`, {
-      method: 'GET',
-      headers,
-    })
-      .then((res) => this._returnRes(res))
-      .catch((err) => {
-        console.error('Error fetching conversations:', err);
-        throw err;
-      });
+    try {
+      const response = await fetch(
+        this._baseUrl + `/conversations?page=${page}&limit=${limit}`,
+        {
+          method: 'GET',
+          headers,
+        }
+      );
+      const data = await this._returnRes(response);
+      return data;
+    } catch (err) {
+      console.error('Error fetching conversations:', err);
+      throw err;
+    }
   }
 
   async searchConversations({
@@ -485,6 +490,31 @@ class Api {
         console.error('Error submitting feedback', err);
         throw err;
       });
+  }
+
+  async textToSpeech({ text }: { text: string }): Promise<Blob> {
+    const headers = await this._getAuthHeaders();
+
+    try {
+      const response = await fetch(this._baseUrl + '/tts', {
+        method: 'POST',
+        headers: {
+          ...headers,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`TTS request failed: ${response.status}`);
+      }
+
+      const blob = await response.blob();
+      return blob;
+    } catch (err) {
+      console.error('Error generating text-to-speech:', err);
+      throw err;
+    }
   }
 }
 

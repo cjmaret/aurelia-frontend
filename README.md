@@ -56,7 +56,7 @@ If you just want to **test or view the app** without setting up a local developm
    - The app connects to the backend running on your DigitalOcean Droplet.
    - Make sure your backend server is running and accessible at your droplet's public IP and port, for example:
      ```
-     http://24.144.89.186:8000
+     http://104.236.98.182:8000
      ```
    - If you are running the backend locally for development, update your API URL in the config file accordingly.
 

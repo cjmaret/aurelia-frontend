@@ -20,6 +20,7 @@ import i18n from '@/utils/app-language-wrapper/i18n';
 import LanguageUpdater from '@/utils/app-language-wrapper/LanguageUpdater';
 import { ToastModalProvider } from '@/utils/contexts/ToastModalContext';
 import { ReviewPromptProvider } from '@/utils/contexts/ReviewPromptContext';
+import { AudioPlayerProvider } from '@/utils/contexts/AudioPlayerContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -94,27 +95,29 @@ export default function RootLayout() {
           <AuthProvider>
             <ConversationDataProvider>
               <ReviewPromptProvider>
-                <SafeAreaProvider>
-                  <I18nextProvider i18n={i18n}>
-                    <LanguageUpdater>
-                      <SafeAreaView
-                        style={{
-                          flex: 1,
-                          backgroundColor: backgroundColor,
-                        }}
-                        edges={['top', 'left', 'right']}>
-                        <Stack screenOptions={{ headerShown: false }}>
-                          <Stack.Screen
-                            name="(tabs)"
-                            options={{ headerShown: false }}
-                          />
-                          <Stack.Screen name="+not-found" />
-                        </Stack>
-                        <StatusBar style="auto" />
-                      </SafeAreaView>
-                    </LanguageUpdater>
-                  </I18nextProvider>
-                </SafeAreaProvider>
+                <AudioPlayerProvider>
+                  <SafeAreaProvider>
+                    <I18nextProvider i18n={i18n}>
+                      <LanguageUpdater>
+                        <SafeAreaView
+                          style={{
+                            flex: 1,
+                            backgroundColor: backgroundColor,
+                          }}
+                          edges={['top', 'left', 'right']}>
+                          <Stack screenOptions={{ headerShown: false }}>
+                            <Stack.Screen
+                              name="(tabs)"
+                              options={{ headerShown: false }}
+                            />
+                            <Stack.Screen name="+not-found" />
+                          </Stack>
+                          <StatusBar style="auto" />
+                        </SafeAreaView>
+                      </LanguageUpdater>
+                    </I18nextProvider>
+                  </SafeAreaProvider>
+                </AudioPlayerProvider>
               </ReviewPromptProvider>
             </ConversationDataProvider>
           </AuthProvider>

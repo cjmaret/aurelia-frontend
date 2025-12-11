@@ -14,7 +14,9 @@
   },
   "jest": {
     "preset": "jest-expo",
-    "setupFilesAfterEnv": ["<rootDir>/__tests__/setup.js"],
+    "setupFilesAfterEnv": [
+      "<rootDir>/__tests__/setup.js"
+    ],
     "testMatch": [
       "**/__tests__/**/*.test.[jt]s?(x)",
       "**/?(*.)+(spec|test).[jt]s?(x)"
@@ -41,7 +43,7 @@
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.0",
     "expo": "53.0.20",
-    "expo-audio": "~0.4.8",
+    "expo-audio": "~0.4.9",
     "expo-blur": "~14.1.5",
     "expo-constants": "~17.1.7",
     "expo-dev-client": "~5.2.4",
