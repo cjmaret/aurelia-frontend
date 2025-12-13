@@ -14,8 +14,6 @@ export const Colors = {
     textPrimary: '#ffffff',
     textSecondary: '#81c6d0',
     textTertiary: '#5d5d5d',
-    textCorrected: '#2b8a3e',
-    textCorrectedDark: '#14832b',
     textWarning: '#f1c40f',
     textError: '#e74c3c',
     textDisabled: '#6a6a6a',
@@ -25,6 +23,7 @@ export const Colors = {
 
     // card colors
     cardBackground: '#ffffff',
+    cardBackgroundGray: 'hsl(0, 0%, 97.5%)',
     cardTimeText: '#81c6d0',
     cardBorder: '#e7eaef',
     cardShadowTopGradient: 'rgba(255, 255, 255, 0)',
@@ -34,10 +33,13 @@ export const Colors = {
     modalBackgroundPrimary: '#ffffff',
 
     // snippet colors
+    snippetTextOriginal: '#555',
+    snippetTextCorrected: '#2b8a3e',
+    snippetTextCorrectedDark: '#14832b',
+    snippetTextError: '#b22222',
     snippetBackground: '#ffffff',
-    snippetOriginalText: '#555',
-    snippetErrorText: '#b22222',
-    snippetErrorBackground: 'rgb(255, 236, 236)',
+    snippetBackgroundCorrected: '#DBFDE2',
+    snippetBackgroundError: 'rgb(255, 236, 236)',
     snippetShadow: 'rgb(0, 0, 0)',
 
     // button colors
@@ -92,8 +94,8 @@ export const Colors = {
     textPrimary: '#E3E6EA',
     textSecondary: '#8de2eb',
     textTertiary: '#cdd4de',
-    textCorrected: '#3dc973',
-    textCorrectedDark: '#06933c',
+    snippetTextCorrected: '#3dc973',
+    snippetTextCorrectedDark: '#06933c',
     textWarning: '#f1c40f',
     textError: '#ff6b6b',
     textDisabled: '#a9b5c2',
@@ -114,9 +116,9 @@ export const Colors = {
 
     // snippet colors
     snippetBackground: '#23272A',
-    snippetOriginalText: '#d5e0ec',
-    snippetErrorText: '#fa7474',
-    snippetErrorBackground: 'rgba(155, 27, 27, 0.2)',
+    snippetTextOriginal: '#d5e0ec',
+    snippetTextError: '#fa7474',
+    snippetBackgroundError: 'rgba(155, 27, 27, 0.2)',
     snippetShadow: 'rgb(28, 28, 28)',
 
     // button colors

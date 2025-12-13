@@ -74,7 +74,7 @@ export const InfoMessageContainer = styled.View<{ needsMarginTop?: boolean }>`
 `;
 
 export const InfoMessageText = styled.Text`
-  color: ${({ theme }: { theme: any }) => theme.colors.snippetOriginalText};
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetTextOriginal};
   font-size: 16px;
   font-weight: bold;
   text-align: center;

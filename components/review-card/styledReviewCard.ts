@@ -19,7 +19,7 @@ export const CardContainer = styled.View`
 export const CardHeader = styled.View`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   background-color: ${({ theme }: { theme: any }) =>
     theme.colors.cardBackground};
   border: 1px solid ${({ theme }: { theme: any }) => theme.colors.cardBorder};
@@ -27,7 +27,7 @@ export const CardHeader = styled.View`
   shadow-offset: 0px 2px;
   shadow-opacity: 0.1;
   shadow-radius: 4px;
-  padding: 20px 15px;
+  padding: 20px 0;
   border-radius: 8px;
 `;
 
@@ -44,7 +44,7 @@ export const CardHeaderTextContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
+  width: 91%;
 `;
 
 const CardHeaderText = styled.Text.attrs({
@@ -56,11 +56,13 @@ const CardHeaderText = styled.Text.attrs({
 
 export const CardHeaderTextTitle = styled(CardHeaderText)`
   flex: 1;
-  font-size: 16px;
+  font-size: 17px;
 `;
+
 export const CardHeaderTextTime = styled(CardHeaderText)`
   font-size: 13px;
   color: ${({ theme }: { theme: any }) => theme.colors.cardTimeText};
+  margin-right: 5px;
 `;
 
 export const CardContent = styled.View`
@@ -81,86 +83,123 @@ export const CorrectionCountText = styled.Text`
 
 export const SnippetCard = styled.View`
   width: 93%;
-  background: ${({ theme }: { theme: any }) => theme.colors.cardBackground};
-  border: 1px solid ${({ theme }: { theme: any }) => theme.colors.cardBorder};
-  padding: 20px 16px;
-  border-radius: 8px;
-  shadow-color: ${({ theme }: { theme: any }) => theme.colors.snippetShadow};
-  shadow-offset: 0px 2px;
-  shadow-opacity: ${({ theme }: { theme: any }) =>
-    theme.mode === 'light' ? 0.1 : 0.6};
-  shadow-radius: 4px;
-  elevation: 2;
+  background: ${({ theme }: { theme: any }) => theme.colors.cardBackgroundGray};
   margin: 10px 0 15px 0;
+  padding: 20px 12px 5px;
+  border-radius: 8px;
 `;
 
-export const OriginalText = styled.Text.attrs({
+// snippet styles
+
+const SnippetItem = styled.View`
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin-bottom: 18px;
+`;
+
+export const SnippetContentHeader = styled.View`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 7px;
+`;
+
+export const SnippetContainerLeft = styled.View`
+  flex: 1;
+`;
+
+export const SnippetContainerRight = styled.View`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const SnippetContentHeaderLabelContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 0 5px 0;
+`;
+
+export const IconContainer = styled.View`
+  margin-right: 5px;
+`;
+
+export const SnippetContentHeaderLabelText = styled.Text.attrs({
+  maxFontSizeMultiplier: 2,
+})`
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: bold;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+`;
+
+export const SnippetContentHeaderValueText = styled.Text.attrs({
   maxFontSizeMultiplier: 2,
 })`
   font-size: 15px;
-  color: ${({ theme }: { theme: any }) => theme.colors.snippetOriginalText};
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  font-weight: 500;
+`;
+
+export const OriginalItem = styled(SnippetItem)`
+  padding: 0 5px 0 10px;
+`;
+
+export const OriginalLabelText = styled(SnippetContentHeaderLabelText)``;
+
+export const OriginalValueText = styled(SnippetContentHeaderValueText)`
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetTextOriginal};
   font-style: italic;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
+  margin-bottom: 0;
 `;
 
-export const CorrectedTextContainer = styled.View`
-  display: flex;
-  flex-direction: row;
+export const CorrectedItem = styled(SnippetItem)`
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.snippetBackgroundCorrected};
 `;
 
-export const CorrectedText = styled.Text.attrs({
-  maxFontSizeMultiplier: 2,
-})`
+export const CorrectedHeaderLabelText = styled(SnippetContentHeaderLabelText)`
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetTextCorrected};
+`;
+
+export const CorrectedHeaderValueText = styled(SnippetContentHeaderValueText)`
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetTextCorrected};
+  font-weight: 700;
   font-size: 16px;
-  font-weight: bold;
-  color: ${({ theme }: { theme: any }) => theme.colors.textCorrected};
-  margin-bottom: 10px;
-  flex-wrap: wrap;
 `;
 
 export const HighlightedCorrectedText = styled.Text`
   font-weight: 900;
-  color: ${({ theme }: { theme: any }) => theme.colors.textCorrectedDark};
+  color: ${({ theme }: { theme: any }) =>
+    theme.colors.snippetTextCorrectedDark};
   flex-wrap: wrap;
 `;
 
-export const ErrorList = styled.View`
-  margin-top: 8px;
-`;
+export const ErrorList = styled.View``;
 
-export const ErrorItem = styled.View`
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
+export const ErrorItem = styled(SnippetItem)`
   background-color: ${({ theme }: { theme: any }) =>
-    theme.colors.snippetErrorBackground};
-`;
-
-export const ErrorHeader = styled.View`
-  display: flex;
-  flex-direction: row;
-  padding: 5px 0;
+    theme.colors.snippetBackgroundError};
 `;
 
 export const ErrorArrowIcon = styled(ArrowIcon)`
-  margin-right: 5px;
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
 
-export const ErrorHeaderText = styled.Text`
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  font-size: 16px;
-  color: ${({ theme }: { theme: any }) => theme.colors.snippetErrorText};
-  flex-wrap: wrap;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  margin-left: 5px;
+export const ErrorHeaderLabelText = styled(SnippetContentHeaderLabelText)`
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetTextError};
+`;
+
+export const ErrorHeaderValueText = styled(SnippetContentHeaderValueText)`
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetTextError};
 `;
 
 export const BoldText = styled.Text`
@@ -184,7 +223,7 @@ export const ErrorDetailHeader = styled.Text.attrs({
 })`
   font-size: 15px;
   font-weight: bold;
-  color: ${({ theme }: { theme: any }) => theme.colors.snippetErrorText};
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetTextError};
   margin-bottom: 4px;
 `;
 
@@ -193,7 +232,7 @@ export const ErrorDetailText = styled.Text.attrs({
 })`
   font-size: 14px;
   font-weight: 500;
-  color: ${({ theme }: { theme: any }) => theme.colors.snippetErrorText};
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetTextError};
   margin-left: 10px;
   flex-wrap: wrap;
   word-wrap: break-word;
@@ -210,7 +249,11 @@ export const ContragulatoryTextContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 20px 15px;
+  background-color: ${({ theme }: { theme: any }) =>
+    theme.colors.backgroundSecondary};
 `;
 
 export const ContragulatoryText = styled.Text.attrs({
@@ -220,7 +263,7 @@ export const ContragulatoryText = styled.Text.attrs({
   font-weight: bold;
   color: ${({ theme }: { theme: any }) => theme.colors.textSecondary};
   text-align: center;
-  margin-left: 10px;
+  width: 100%;
 `;
 
 export const HighlightedSearchText = styled.Text`

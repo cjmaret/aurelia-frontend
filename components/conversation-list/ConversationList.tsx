@@ -121,54 +121,54 @@ export default function ConversationList({
       item: ConversationDataType;
       index: number;
     }) => {
-    const currentDateLocal = formatToLocalDate({
-      dateTimeString: cardData.createdAt,
-    });
+      const currentDateLocal = formatToLocalDate({
+        dateTimeString: cardData.createdAt,
+      });
 
-    const previousDateLocal =
-      index > 0
-        ? formatToLocalDate({
-            dateTimeString: conversationData[index - 1].createdAt,
-          })
-        : null;
+      const previousDateLocal =
+        index > 0
+          ? formatToLocalDate({
+              dateTimeString: conversationData[index - 1].createdAt,
+            })
+          : null;
 
-    const showDateSeparator =
-      !previousDateLocal || !isSameDay(currentDateLocal, previousDateLocal);
+      const showDateSeparator =
+        !previousDateLocal || !isSameDay(currentDateLocal, previousDateLocal);
 
-    return (
-      <ReviewCardContainer>
-        {showDateSeparator && (
-          <DateSeparatorContainer>
-            <DateSeparatorLine />
-            <DateSeparatorText maxFontSizeMultiplier={2} numberOfLines={2}>
-              {formatDate({
-                dateTimeString: cardData.createdAt,
-              })}
-            </DateSeparatorText>
-          </DateSeparatorContainer>
-        )}
-        <ReviewCard
-          cardData={cardData}
-          searchQuery={searchQuery}
-          collapseCardsAndErrors={collapseCardsAndErrors}
-          setCollapseCardsAndErrors={setCollapseCardsAndErrors}
-          handleDeleteCard={handleDeleteCard}
-          handleDeleteCorrection={handleDeleteCorrection}
-          isDeleting={deletingCardId === cardData.conversationId}
-        />
-      </ReviewCardContainer>
-    );
-  },
-  [
-    conversationData,
-    searchQuery,
-    collapseCardsAndErrors,
-    setCollapseCardsAndErrors,
-    handleDeleteCard,
-    handleDeleteCorrection,
-    deletingCardId,
-  ]
-);
+      return (
+        <ReviewCardContainer>
+          {showDateSeparator && (
+            <DateSeparatorContainer>
+              <DateSeparatorLine />
+              <DateSeparatorText maxFontSizeMultiplier={2} numberOfLines={2}>
+                {formatDate({
+                  dateTimeString: cardData.createdAt,
+                })}
+              </DateSeparatorText>
+            </DateSeparatorContainer>
+          )}
+          <ReviewCard
+            cardData={cardData}
+            searchQuery={searchQuery}
+            collapseCardsAndErrors={collapseCardsAndErrors}
+            setCollapseCardsAndErrors={setCollapseCardsAndErrors}
+            handleDeleteCard={handleDeleteCard}
+            handleDeleteCorrection={handleDeleteCorrection}
+            isDeleting={deletingCardId === cardData.conversationId}
+          />
+        </ReviewCardContainer>
+      );
+    },
+    [
+      conversationData,
+      searchQuery,
+      collapseCardsAndErrors,
+      setCollapseCardsAndErrors,
+      handleDeleteCard,
+      handleDeleteCorrection,
+      deletingCardId,
+    ]
+  );
 
   const keyExtractor = useCallback(
     (item: ConversationDataType) => item.conversationId,
@@ -177,7 +177,7 @@ export default function ConversationList({
 
   return (
     // dont cut off final cards if height changes dynamically
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, width: '97%' }}>
       <FlatList
         data={conversationData}
         keyExtractor={keyExtractor}
@@ -207,7 +207,10 @@ export default function ConversationList({
         }
         ListFooterComponent={
           isLoadingMoreCards ? (
-            <ActivityIndicator size="large" color={theme.colors.textSecondary} />
+            <ActivityIndicator
+              size="large"
+              color={theme.colors.textSecondary}
+            />
           ) : null
         } // spinner at the bottom
       />

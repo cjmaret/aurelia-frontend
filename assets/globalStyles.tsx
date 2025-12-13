@@ -16,10 +16,10 @@ const colors = {
 
   // snippet colors
   snippetBackground: '#ffffff',
-  snippetOriginalText: '#555',
-  textCorrected: '#2b8a3e',
-  snippetErrorText: '#b22222',
-  snippetErrorBackground: 'rgb(255, 236, 236)',
+  snippetTextOriginal: '#555',
+  snippetTextCorrected: '#2b8a3e',
+  snippetTextError: '#b22222',
+  snippetBackgroundError: 'rgb(255, 236, 236)',
 
   // misc colors
   dateSeparatorText: '#81c6d0',
