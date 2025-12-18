@@ -37,6 +37,7 @@ export const Colors = {
     snippetTextCorrected: '#2b8a3e',
     snippetTextCorrectedDark: '#14832b',
     snippetTextError: '#b22222',
+    // TODO: ADD DARK MODE VERSIONS
     snippetBackground: '#ffffff',
     snippetBackgroundCorrected: '#DBFDE2',
     snippetBackgroundError: 'rgb(255, 236, 236)',

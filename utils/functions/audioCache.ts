@@ -8,7 +8,7 @@ function hashText(text: string): string {
   return text
     .split('')
     .reduce((hash, char) => {
-      return ((hash << 5) - hash) + char.charCodeAt(0);
+      return (hash << 5) - hash + char.charCodeAt(0);
     }, 0)
     .toString();
 }
@@ -51,14 +51,13 @@ export async function getAudioForText(text: string): Promise<string> {
   try {
     const fileInfo = await FileSystem.getInfoAsync(cachedFilePath);
     if (fileInfo.exists) {
-      console.log('Using cached audio file:', cachedFilePath);
       return cachedFilePath;
     }
 
     await ensureCacheDirectory();
 
     const blob = await api.textToSpeech({ text });
-    
+
     const base64String = await new Promise<string>((resolve, reject) => {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -69,12 +68,11 @@ export async function getAudioForText(text: string): Promise<string> {
       reader.onerror = reject;
       reader.readAsDataURL(blob);
     });
-    
+
     await FileSystem.writeAsStringAsync(cachedFilePath, base64String, {
       encoding: FileSystem.EncodingType.Base64,
     });
 
-    console.log('Cached audio file:', cachedFilePath);
     return cachedFilePath;
   } catch (error) {
     console.error('Error getting audio for text:', error);
@@ -90,7 +88,6 @@ export async function clearCachedAudio(text: string): Promise<void> {
     const fileInfo = await FileSystem.getInfoAsync(cachedFilePath);
     if (fileInfo.exists) {
       await FileSystem.deleteAsync(cachedFilePath, { idempotent: true });
-      console.log('Deleted cached audio:', cachedFilePath);
     }
   } catch (error) {
     console.error('Error clearing cached audio:', error);
@@ -102,7 +99,6 @@ export async function clearAllCachedAudio(): Promise<void> {
     const dirInfo = await FileSystem.getInfoAsync(CACHE_DIR);
     if (dirInfo.exists) {
       await FileSystem.deleteAsync(CACHE_DIR, { idempotent: true });
-      console.log('Audio cache cleared');
     }
   } catch (error) {
     console.error('Error clearing audio cache:', error);
@@ -130,7 +126,10 @@ export async function cleanupOldCacheFiles(): Promise<void> {
         const info = await FileSystem.getInfoAsync(fullPath);
         return {
           path: fullPath,
-          modificationTime: info.exists && 'modificationTime' in info ? info.modificationTime || 0 : 0,
+          modificationTime:
+            info.exists && 'modificationTime' in info
+              ? info.modificationTime || 0
+              : 0,
           size: info.exists && 'size' in info ? info.size || 0 : 0,
         };
       })
@@ -146,10 +145,13 @@ export async function cleanupOldCacheFiles(): Promise<void> {
 
       await FileSystem.deleteAsync(fileInfo.path, { idempotent: true });
       currentSize -= fileInfo.size;
-      console.log(`Deleted old cache file: ${fileInfo.path}`);
     }
 
-    console.log(`Cache cleanup complete. New size: ${(currentSize / 1024 / 1024).toFixed(2)}MB`);
+    console.log(
+      `Cache cleanup complete. New size: ${(currentSize / 1024 / 1024).toFixed(
+        2
+      )}MB`
+    );
   } catch (error) {
     console.error('Error cleaning up cache files:', error);
   }

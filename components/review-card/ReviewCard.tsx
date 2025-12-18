@@ -37,7 +37,7 @@ import {
   OriginalLabelText,
   IconContainer,
 } from './styledReviewCard';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ConversationDataType } from '@/types/types';
 import {
@@ -47,8 +47,7 @@ import {
 import { useTheme } from 'styled-components/native';
 import { useTranslation } from 'react-i18next';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
-import AudioPlayer from '../audio-player/AudioPlayer';
-import { useAudioPlayerContext } from '@/utils/contexts/AudioPlayerContext';
+import SnippetItem from '../snippet-item/SnippetItem';
 
 export default memo(
   function ReviewCard({
@@ -73,7 +72,6 @@ export default memo(
   }) {
     const theme: any = useTheme();
     const { t } = useTranslation();
-    const { togglePlayPause } = useAudioPlayerContext();
     const { createdAt, sentenceFeedback } = cardData;
     const [isCardExpanded, setIsCardExpanded] = useState(false);
     const [expandedErrors, setExpandedErrors] = useState<string[]>([]);
@@ -307,81 +305,19 @@ export default memo(
                         {highlightSearchedText(sentence.original)}
                       </OriginalValueText>
                     </OriginalItem>
-                    <TouchableOpacity
-                      onPress={() =>
-                        togglePlayPause(sentence.corrected, sentence.id)
-                      }>
-                      <CorrectedItem>
-                        <SnippetContentHeader>
-                          <SnippetContainerLeft>
-                            <SnippetContentHeaderLabelContainer>
-                              <IconContainer>
-                                <MaterialCommunityIcons
-                                  name={'check-bold'}
-                                  size={20}
-                                  color={theme.colors.snippetTextCorrected}
-                                />
-                              </IconContainer>
-                              <CorrectedHeaderLabelText>
-                                {t('corrected')}:
-                              </CorrectedHeaderLabelText>
-                            </SnippetContentHeaderLabelContainer>
-
-                            <CorrectedHeaderValueText key={sentence.id}>
-                              {combinedHighlightedText(
-                                sentence.original,
-                                sentence.corrected
-                              )}
-                            </CorrectedHeaderValueText>
-                          </SnippetContainerLeft>
-                          <SnippetContainerRight>
-                            <AudioPlayer
-                              correctedSentence={sentence.corrected}
-                              sentenceId={sentence.id}
-                            />
-                          </SnippetContainerRight>
-                        </SnippetContentHeader>
-                      </CorrectedItem>
-                    </TouchableOpacity>
+                    <SnippetItem
+                      variant="corrected"
+                      sentence={sentence}
+                      combinedHighlightedText={combinedHighlightedText}
+                    />
                   </>
                 ) : (
                   <>
-                    <TouchableOpacity
-                      onPress={() =>
-                        togglePlayPause(sentence.corrected, sentence.id)
-                      }>
-                      <CorrectedItem>
-                        <SnippetContentHeader>
-                          <SnippetContainerLeft>
-                            <SnippetContentHeaderLabelContainer>
-                              <IconContainer>
-                                <MaterialCommunityIcons
-                                  name={'check-bold'}
-                                  size={20}
-                                  color={theme.colors.snippetTextCorrected}
-                                />
-                              </IconContainer>
-                              <CorrectedHeaderLabelText>
-                                {t('youSaid')}:
-                              </CorrectedHeaderLabelText>
-                            </SnippetContentHeaderLabelContainer>
-
-                            <CorrectedHeaderValueText key={sentence.id}>
-                              {combinedHighlightedText(
-                                sentence.original,
-                                sentence.corrected
-                              )}
-                            </CorrectedHeaderValueText>
-                          </SnippetContainerLeft>
-                          <SnippetContainerRight>
-                            <AudioPlayer
-                              correctedSentence={sentence.corrected}
-                              sentenceId={sentence.id}
-                            />
-                          </SnippetContainerRight>
-                        </SnippetContentHeader>
-                      </CorrectedItem>
-                    </TouchableOpacity>
+                    <SnippetItem
+                      variant="youSaid"
+                      sentence={sentence}
+                      combinedHighlightedText={combinedHighlightedText}
+                    />
                     <ContragulatoryTextContainer>
                       <ContragulatoryText>
                         {t('greatJobNoErrors')}
@@ -395,78 +331,40 @@ export default memo(
                     {sentence.errors.map((error) => {
                       let errorIsExpanded = expandedErrors.includes(error.id);
                       return (
-                        <ErrorItem key={error.id}>
-                          <TouchableOpacity
-                            onPress={() => toggleExpandError(error.id)}>
-                            <View
-                              style={{
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                              }}>
-                              <SnippetContentHeader>
-                                <SnippetContainerLeft>
-                                  <SnippetContentHeaderLabelContainer>
-                                    <IconContainer>
-                                      <Ionicons
-                                        name={'alert-circle'}
-                                        size={24}
-                                        color={theme.colors.snippetTextError}
-                                      />
-                                    </IconContainer>
-                                    <ErrorHeaderLabelText>
-                                      {t('whatsWrong')}:
-                                    </ErrorHeaderLabelText>
-                                  </SnippetContentHeaderLabelContainer>
-                                  <ErrorHeaderValueText>
-                                    {highlightSearchedText(error.error)}
-                                  </ErrorHeaderValueText>
-                                </SnippetContainerLeft>
-                                <SnippetContainerRight>
-                                  <ErrorArrowIcon>
-                                    <MaterialCommunityIcons
-                                      name={
-                                        errorIsExpanded
-                                          ? 'chevron-up'
-                                          : 'chevron-down'
-                                      }
-                                      size={25}
-                                      color={theme.colors.snippetTextError}
-                                    />
-                                  </ErrorArrowIcon>
-                                </SnippetContainerRight>
-                              </SnippetContentHeader>
-                            </View>
-                          </TouchableOpacity>
-                          {errorIsExpanded && (
-                            <ErrorTextContainer>
-                              <ErrorDetailContainer>
-                                <ErrorDetailHeader>
-                                  {t('why')}
-                                </ErrorDetailHeader>
-                                <ErrorDetailText>
-                                  {highlightSearchedText(error.reason)}
-                                </ErrorDetailText>
-                              </ErrorDetailContainer>
-                              <ErrorDetailContainer>
-                                <ErrorDetailHeader>
-                                  {t('tryThisInstead')}:
-                                </ErrorDetailHeader>
-                                <ErrorDetailText>
-                                  {highlightSearchedText(error.suggestion)}
-                                </ErrorDetailText>
-                              </ErrorDetailContainer>
-                              <ErrorDetailContainer style={{ marginBottom: 0 }}>
-                                <ErrorDetailHeader>
-                                  {t('improvedClause')}:
-                                </ErrorDetailHeader>
-                                <ErrorDetailText>
-                                  "{highlightSearchedText(error.improvedClause)}
-                                  "
-                                </ErrorDetailText>
-                              </ErrorDetailContainer>
-                            </ErrorTextContainer>
-                          )}
-                        </ErrorItem>
+                        <SnippetItem
+                          key={error.id}
+                          variant="error"
+                          sentence={sentence}
+                          combinedHighlightedText={combinedHighlightedText}
+                          highlightSearchedText={highlightSearchedText}
+                          error={error}
+                          isExpanded={errorIsExpanded}
+                          onToggle={() => toggleExpandError(error.id)}>
+                          <ErrorTextContainer>
+                            <ErrorDetailContainer>
+                              <ErrorDetailHeader>{t('why')}</ErrorDetailHeader>
+                              <ErrorDetailText>
+                                {highlightSearchedText(error.reason)}
+                              </ErrorDetailText>
+                            </ErrorDetailContainer>
+                            <ErrorDetailContainer>
+                              <ErrorDetailHeader>
+                                {t('tryThisInstead')}:
+                              </ErrorDetailHeader>
+                              <ErrorDetailText>
+                                {highlightSearchedText(error.suggestion)}
+                              </ErrorDetailText>
+                            </ErrorDetailContainer>
+                            <ErrorDetailContainer style={{ marginBottom: 0 }}>
+                              <ErrorDetailHeader>
+                                {t('improvedClause')}:
+                              </ErrorDetailHeader>
+                              <ErrorDetailText>
+                                "{highlightSearchedText(error.improvedClause)}"
+                              </ErrorDetailText>
+                            </ErrorDetailContainer>
+                          </ErrorTextContainer>
+                        </SnippetItem>
                       );
                     })}
                   </ErrorList>
