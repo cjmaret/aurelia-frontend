@@ -31,7 +31,7 @@ export const CardHeader = styled.View`
   border-radius: 8px;
 `;
 
-const ArrowIcon = styled.View``;
+export const ArrowIcon = styled.View``;
 
 export const HeaderArrowIcon = styled(ArrowIcon)`
   display: flex;
@@ -91,27 +91,10 @@ export const SnippetCard = styled.View`
 
 // snippet styles
 
-const SnippetItem = styled.View`
+export const SnippetItem = styled.View`
   border-radius: 5px;
   padding: 7px 10px;
   margin-bottom: 18px;
-`;
-
-export const SnippetContentHeader = styled.View`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 7px;
-`;
-
-export const SnippetContainerLeft = styled.View`
-  flex: 1;
-`;
-
-export const SnippetContainerRight = styled.View`
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 export const SnippetContentHeaderLabelContainer = styled.View`
@@ -159,19 +142,8 @@ export const OriginalValueText = styled(SnippetContentHeaderValueText)`
   margin-bottom: 0;
 `;
 
-export const CorrectedItem = styled(SnippetItem)`
-  background-color: ${({ theme }: { theme: any }) =>
-    theme.colors.snippetBackgroundCorrected};
-`;
-
 export const CorrectedHeaderLabelText = styled(SnippetContentHeaderLabelText)`
   color: ${({ theme }: { theme: any }) => theme.colors.snippetTextCorrected};
-`;
-
-export const CorrectedHeaderValueText = styled(SnippetContentHeaderValueText)`
-  color: ${({ theme }: { theme: any }) => theme.colors.snippetTextCorrected};
-  font-weight: 700;
-  font-size: 16px;
 `;
 
 export const HighlightedCorrectedText = styled.Text`
@@ -186,20 +158,6 @@ export const ErrorList = styled.View``;
 export const ErrorItem = styled(SnippetItem)`
   background-color: ${({ theme }: { theme: any }) =>
     theme.colors.snippetBackgroundError};
-`;
-
-export const ErrorArrowIcon = styled(ArrowIcon)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const ErrorHeaderLabelText = styled(SnippetContentHeaderLabelText)`
-  color: ${({ theme }: { theme: any }) => theme.colors.snippetTextError};
-`;
-
-export const ErrorHeaderValueText = styled(SnippetContentHeaderValueText)`
-  color: ${({ theme }: { theme: any }) => theme.colors.snippetTextError};
 `;
 
 export const BoldText = styled.Text`
@@ -238,10 +196,6 @@ export const ErrorDetailText = styled.Text.attrs({
   word-wrap: break-word;
   overflow-wrap: break-word;
   word-break: break-word;
-`;
-
-export const ErrorWhatsWongText = styled(ErrorDetailText)`
-  max-width: 200px;
 `;
 
 export const ContragulatoryTextContainer = styled.View`

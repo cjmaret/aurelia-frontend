@@ -1,25 +1,13 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { t } from 'i18next';
-import {
-  CorrectedItem,
-  SnippetContentHeader,
-  SnippetContainerLeft,
-  SnippetContentHeaderLabelContainer,
-  IconContainer,
-  CorrectedHeaderLabelText,
-  CorrectedHeaderValueText,
-  SnippetContainerRight,
-  ErrorHeaderLabelText,
-  ErrorHeaderValueText,
-  ErrorItem,
-  ErrorArrowIcon,
-} from '../review-card/styledReviewCard';
+import { CorrectedHeaderLabelText, ErrorItem, IconContainer, SnippetContentHeaderLabelContainer } from '../review-card/styledReviewCard';
 import AudioPlayer from '../audio-player/AudioPlayer';
 import { useTheme } from 'styled-components/native';
 import { SentenceFeedback } from '@/types/types';
 import { TouchableOpacity } from 'react-native';
 import { useAudioPlayerContext } from '@/utils/contexts/AudioPlayerContext';
 import { JSX, ReactNode } from 'react';
+import { CorrectedItem, CorrectedHeaderValueText, ErrorHeaderLabelText, ErrorHeaderValueText, SnippetContentHeader, SnippetContainerLeft, SnippetContainerRight, ErrorArrowIcon } from './styledSnippetItem';
 
 type SnippetItemProps = {
   sentence: SentenceFeedback;
