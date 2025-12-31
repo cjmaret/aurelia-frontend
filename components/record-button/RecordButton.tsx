@@ -7,22 +7,28 @@ import * as Haptics from 'expo-haptics';
 
 export default function RecordButtonComponent({
   isAudioPermissionGranted,
-  showAudioPermissionAlert,
   startRecording,
   stopRecording,
-  isRecordButtonPressed,
-  setIsRecordButtonPressed,
+  resetButtonState,
+  isTapRecording,
+  isTapRecordingRef,
+  isButtonPressed,
+  setIsButtonPressed,
   disabled,
   isVisuallyDisabled,
+  setElapsedTime
 }: {
   isAudioPermissionGranted: boolean;
-  showAudioPermissionAlert: () => void;
-  startRecording: any;
+  startRecording: () => void;
   stopRecording: any;
-  isRecordButtonPressed: boolean;
-  setIsRecordButtonPressed: React.Dispatch<React.SetStateAction<boolean>>;
+  resetButtonState: () => void;
+  isTapRecording: boolean;
+  isTapRecordingRef: React.MutableRefObject<boolean>;
+  isButtonPressed: boolean;
+  setIsButtonPressed: (pressed: boolean) => void;
   disabled: boolean;
   isVisuallyDisabled?: boolean;
+  setElapsedTime: (seconds: number) => void;
 }) {
   const [ripples, setRipples] = useState<
     { id: number; scale: Animated.Value; opacity: Animated.Value }[]
@@ -31,7 +37,7 @@ export default function RecordButtonComponent({
   const theme: any = useTheme();
 
   useEffect(() => {
-    if (isRecordButtonPressed && isAudioPermissionGranted) {
+    if (isTapRecording && isAudioPermissionGranted) {
       // start generating ripples continuously
       rippleInterval.current = setInterval(triggerRipple, 1000);
       triggerRipple();
@@ -46,7 +52,7 @@ export default function RecordButtonComponent({
     return () => {
       if (rippleInterval.current) clearInterval(rippleInterval.current);
     };
-  }, [isRecordButtonPressed]);
+  }, [isTapRecording]);
 
   const triggerRipple = () => {
     const newRipple = {
@@ -76,22 +82,40 @@ export default function RecordButtonComponent({
     });
   };
 
-  const handlePressIn = async () => {
-    if (disabled) return; // prevent interaction if disabled
-    // for immediate style changes
-    setIsRecordButtonPressed(true);
-    for (let i = 0; i < 3; i++) {
+  const playHeavyHaptic = async () => {
+    for (let i = 0; i < 2; i++) {
       await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
-      await new Promise((resolve) => setTimeout(resolve, 80));
+      await new Promise((resolve) => setTimeout(resolve, 100));
     }
-    isAudioPermissionGranted
-      ? startRecording()
-      : showAudioPermissionAlert();
   };
 
-  const handlePressOut = () => {
-    setIsRecordButtonPressed(false);
-    stopRecording();
+  const handlePressIn = async () => {
+    // show visuals if not already recording
+    if (!isTapRecordingRef.current) {
+      playHeavyHaptic();
+      setIsButtonPressed(true);
+      setElapsedTime(0)
+    }
+  };
+
+  const handlePressOut = async () => {
+    if (disabled || !isAudioPermissionGranted) {
+      playHeavyHaptic();
+      setIsButtonPressed(false);
+      return;
+    }
+
+    playHeavyHaptic();
+
+    // if recording, stop, if not recording, start
+    if (isTapRecordingRef.current) {
+      resetButtonState();
+      stopRecording();
+    } else {
+      setIsButtonPressed(true);
+      isTapRecordingRef.current = true;
+      startRecording();
+    }
   };
 
   return (
@@ -114,10 +138,10 @@ export default function RecordButtonComponent({
       <RecordButton
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
-        isRecordButtonPressed={isRecordButtonPressed}
+        isRecordButtonPressed={isButtonPressed}
         isVisuallyDisabled={isVisuallyDisabled}>
         <Ionicons
-          name="mic-outline"
+          name={isTapRecording ? 'stop' : 'mic-outline'}
           size={55}
           color={theme.colors.textPrimary}
         />

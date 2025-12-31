@@ -49,14 +49,15 @@ export default function SpeechRecorder() {
   const [waveformOpacity] = useState(new Animated.Value(0));
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [isRecordButtonPressed, setIsRecordButtonPressed] =
-    useState<boolean>(false);
-  // prevents duplicate calls if user holds record button past allotted time
+  const [isTapRecording, setIsTapRecording] = useState<boolean>(false);
+  const isTapRecordingRef = useRef<boolean>(false);
+  const [isButtonPressed, setIsButtonPressed] = useState<boolean>(false);
+  // prevents duplicate calls when max recording length is reached
   const hasStoppedRef = useRef(false);
-  const MAX_RECORDING_SECONDS = 60;
   // prevents user from spamming record button
   const [canRecord, setCanRecord] = useState(true);
   const canRecordRef = useRef(true);
+  const MAX_RECORDING_SECONDS = 60;
   const RECORD_COOLDOWN_MS = 1000;
 
   useEffect(() => {
@@ -99,8 +100,8 @@ export default function SpeechRecorder() {
   // stop recording if exceeds max length
   useEffect(() => {
     if (isRecording && elapsedTime >= MAX_RECORDING_SECONDS) {
+      resetButtonState();
       stopRecording();
-      setIsRecordButtonPressed(false);
       showToast(
         'info',
         'Recording Stopped',
@@ -109,20 +110,34 @@ export default function SpeechRecorder() {
     }
   }, [elapsedTime, isRecording]);
 
+  function resetButtonState() {
+    setIsTapRecording(false);
+    isTapRecordingRef.current = false;
+    setIsButtonPressed(false);
+  }
+
   async function startRecording() {
     if (isAudioPermissionGranted) {
       try {
-        if (!canRecordRef.current) return; // Use ref for instant check
+        if (!canRecordRef.current) return;
         canRecordRef.current = false;
         setCanRecord(false);
         hasStoppedRef.current = false;
+
+        setIsTapRecording(true);
+        isTapRecordingRef.current = true;
+
         try {
           await audioRecorder.prepareToRecordAsync();
-
           audioRecorder.record();
-          setIsRecording(true);
 
+          setIsRecording(true);
           setElapsedTime(0);
+
+          // re-enable button to allow stopping
+          canRecordRef.current = true;
+          setCanRecord(true);
+
           if (timerRef.current) {
             clearInterval(timerRef.current);
           }
@@ -131,9 +146,17 @@ export default function SpeechRecorder() {
           }, 1000);
         } catch (err) {
           console.error('Failed to start recording', err);
+          canRecordRef.current = true;
+          setCanRecord(true);
+          setIsTapRecording(false);
+          isTapRecordingRef.current = false;
         }
       } catch (error) {
         console.error('Error starting recording:', error);
+        canRecordRef.current = true;
+        setCanRecord(true);
+        setIsTapRecording(false);
+        isTapRecordingRef.current = false;
       }
     } else {
       showAudioPermissionAlert();
@@ -142,10 +165,11 @@ export default function SpeechRecorder() {
 
   async function stopRecording() {
     if (hasStoppedRef.current) return;
-    // prevents race condition from turning off ref
     hasStoppedRef.current = true;
 
     setIsRecording(false);
+    setIsTapRecording(false);
+    isTapRecordingRef.current = false;
 
     if (timerRef.current) {
       clearInterval(timerRef.current);
@@ -271,13 +295,16 @@ export default function SpeechRecorder() {
           </TimerText>
           <RecordButtonComponent
             isAudioPermissionGranted={isAudioPermissionGranted}
-            showAudioPermissionAlert={showAudioPermissionAlert}
             startRecording={startRecording}
             stopRecording={stopRecording}
-            isRecordButtonPressed={isRecordButtonPressed}
-            setIsRecordButtonPressed={setIsRecordButtonPressed}
+            resetButtonState={resetButtonState}
+            isTapRecording={isTapRecording}
+            isTapRecordingRef={isTapRecordingRef}
+            isButtonPressed={isButtonPressed}
+            setIsButtonPressed={setIsButtonPressed}
             disabled={!canRecord || hasReachedAnonLimit}
             isVisuallyDisabled={hasReachedAnonLimit}
+            setElapsedTime={setElapsedTime}
           />
           {hasReachedAnonLimit && (
             <LogInToContinueText>
