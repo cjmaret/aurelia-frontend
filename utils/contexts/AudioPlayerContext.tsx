@@ -1,6 +1,20 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useAudioPlayer as useExpoAudioPlayer, AudioSource, setAudioModeAsync } from 'expo-audio';
-import { getAudioForText, cleanupOldCacheFiles, clearAllCachedAudio } from '@/utils/functions/audioCache';
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from 'react';
+import {
+  useAudioPlayer as useExpoAudioPlayer,
+  AudioSource,
+  setAudioModeAsync,
+} from 'expo-audio';
+import {
+  getAudioForText,
+  cleanupOldCacheFiles,
+  clearAllCachedAudio,
+} from '@/utils/functions/audioCache';
 import { AudioPlayerContextType } from '@/types/types';
 
 const AudioPlayerContext = createContext<AudioPlayerContextType | undefined>(
@@ -21,7 +35,7 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentAudioId, setCurrentAudioId] = useState<string | null>(null);
-  const [playbackRate, setPlaybackRateState] = useState(1.0);
+  const [playbackRate, setPlaybackRateState] = useState(1);
   const player = useExpoAudioPlayer();
 
   useEffect(() => {
@@ -30,9 +44,9 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
       allowsRecording: false,
       shouldPlayInBackground: false,
     }).catch(console.error);
-    
+
     cleanupOldCacheFiles().catch(console.error);
-    
+
     if (__DEV__) {
       // @ts-ignore
       global.clearAudioCache = async () => {
@@ -48,8 +62,10 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const setPlaybackRate = async (rate: number) => {
-    await player.setPlaybackRate(rate);
     setPlaybackRateState(rate);
+    if (isPlaying && player.playing) {
+      await player.setPlaybackRate(rate);
+    }
   };
 
   const playFromText = async (text: string, audioId: string) => {
@@ -103,9 +119,10 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
         hasStartedPlaying = true;
       }
 
-      if (hasStartedPlaying && !player.playing) {
+      if (hasStartedPlaying && !player.playing && !isLoading) {
         setIsPlaying(false);
         setCurrentAudioId(null);
+        clearInterval(checkInterval);
       }
     }, 100);
 

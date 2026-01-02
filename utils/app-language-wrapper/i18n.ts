@@ -33,7 +33,7 @@ const resources = {
       back: 'Back',
       welcomeTitle: 'Welcome to Aurelia!',
       welcomeRecordInstruction:
-        'Press and hold the record button to record speech in your target language',
+        'Tap the record button to record speech in your target language',
       welcomeCorrectionsInstruction:
         'Once you’re done recording, your corrections will appear in the Grammar Review tab',
 
@@ -227,7 +227,7 @@ const resources = {
       back: 'Retour',
       welcomeTitle: 'Bienvenue sur Aurelia !',
       welcomeRecordInstruction:
-        'Appuyez et maintenez le bouton d’enregistrement pour enregistrer votre voix dans votre langue cible',
+        'Appuie sur le bouton d’enregistrement pour enregistrer ta voix dans ta langue cible',
       welcomeCorrectionsInstruction:
         'Une fois l’enregistrement terminé, vos corrections apparaîtront dans l’onglet Révision de Grammaire',
       gotIt: 'Compris',
@@ -438,7 +438,7 @@ const resources = {
       back: 'Atrás',
       welcomeTitle: '¡Bienvenido a Aurelia!',
       welcomeRecordInstruction:
-        'Mantén presionado el botón de grabar para grabar tu voz en tu idioma objetivo',
+        'Toca el botón de grabar para grabar tu voz en tu idioma objetivo',
       welcomeCorrectionsInstruction:
         'Cuando termines de grabar, tus correcciones aparecerán en la pestaña Revisión de Gramática',
       gotIt: 'Entendido',

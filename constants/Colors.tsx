@@ -45,7 +45,8 @@ export const Colors = {
 
     // button colors
     buttonBackgroundPrimary: '#81c6d0',
-    buttonBackgroundSecondary: '#b5b5b5',
+    buttonBackgroundSecondary: '#eeeeee',
+    buttonBackgroundSecondarySelected: '#d1d1d1',
     buttonBackgroundDisabled: '#cccccc',
     buttonTextPrimary: '#ffffff',
     buttonTextSecondary: '#81c6d0',
@@ -106,6 +107,8 @@ export const Colors = {
 
     // card colors
     cardBackground: '#35393f',
+    // TODO: fix
+    cardBackgroundGray: '#2d3136',
     cardTimeText: '#81c6d0',
     cardBorder: '#363b40',
     cardShadowTopGradient: 'rgba(24, 28, 31, 0)',
@@ -116,15 +119,17 @@ export const Colors = {
     modalTextPrimary: '',
 
     // snippet colors
-    snippetBackground: '#23272A',
     snippetTextOriginal: '#d5e0ec',
     snippetTextError: '#fa7474',
+    snippetBackground: '#23272A',
+    snippetBackgroundCorrected: 'rgba(40, 192, 98, 0.144)',
     snippetBackgroundError: 'rgba(155, 27, 27, 0.2)',
     snippetShadow: 'rgb(28, 28, 28)',
 
     // button colors
     buttonBackgroundPrimary: '#2099a6',
-    buttonBackgroundSecondary: '#626262',
+    buttonBackgroundSecondary: '#3e3a3a',
+    buttonBackgroundSecondarySelected: '#4b4b4b',
     buttonBackgroundDisabled: '#949494',
     buttonTextPrimary: '#ffffff',
     buttonTextSecondary: '#81c6d0',

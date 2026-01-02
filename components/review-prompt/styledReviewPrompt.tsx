@@ -75,7 +75,7 @@ export const SecondaryButton = styled.TouchableOpacity`
   margin-right: 10px;
   border-radius: 8px;
   background-color: ${({ theme }: { theme: any }) =>
-    theme.colors.buttonBackgroundSecondary};
+    theme.colors.buttonBackgroundSecondarySelected};
   align-items: center;
 `;
 

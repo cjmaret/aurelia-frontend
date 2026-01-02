@@ -1,13 +1,28 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { t } from 'i18next';
-import { CorrectedHeaderLabelText, ErrorItem, IconContainer, SnippetContentHeaderLabelContainer } from '../review-card/styledReviewCard';
+import {
+  CorrectedHeaderLabelText,
+  ErrorItem,
+  IconContainer,
+  SnippetContentHeaderLabelContainer,
+} from '../review-card/styledReviewCard';
 import AudioPlayer from '../audio-player/AudioPlayer';
 import { useTheme } from 'styled-components/native';
 import { SentenceFeedback } from '@/types/types';
 import { TouchableOpacity } from 'react-native';
 import { useAudioPlayerContext } from '@/utils/contexts/AudioPlayerContext';
 import { JSX, ReactNode } from 'react';
-import { CorrectedItem, CorrectedHeaderValueText, ErrorHeaderLabelText, ErrorHeaderValueText, SnippetContentHeader, SnippetContainerLeft, SnippetContainerRight, ErrorArrowIcon } from './styledSnippetItem';
+import {
+  CorrectedItem,
+  CorrectedHeaderValueText,
+  ErrorHeaderLabelText,
+  ErrorHeaderValueText,
+  SnippetContentHeader,
+  SnippetContainerLeft,
+  SnippetContainerRight,
+  ErrorArrowIcon,
+} from './styledSnippetItem';
+import PlaybackSpeedModal from '../playback-speed-modal/PlaybackSpeedModal';
 
 type SnippetItemProps = {
   sentence: SentenceFeedback;
@@ -30,8 +45,10 @@ type SnippetItemProps = {
 
 export default function SnippetItem(props: SnippetItemProps) {
   const theme: any = useTheme();
-  const { togglePlayPause } = useAudioPlayerContext();
+  const { togglePlayPause, isPlaying, currentAudioId } =
+    useAudioPlayerContext();
   const { sentence, combinedHighlightedText, variant } = props;
+  const isCurrentSnippetPlaying = isPlaying && currentAudioId === sentence.id;
 
   const config = {
     corrected: {
@@ -76,11 +93,7 @@ export default function SnippetItem(props: SnippetItemProps) {
       <SnippetContainerLeft>
         <SnippetContentHeaderLabelContainer>
           <IconContainer>
-            <MaterialCommunityIcons
-              name={icon}
-              size={variant === 'error' ? 24 : 20}
-              color={color}
-            />
+            <MaterialCommunityIcons name={icon} size={20} color={color} />
           </IconContainer>
           <LabelText>{label}:</LabelText>
         </SnippetContentHeaderLabelContainer>
@@ -122,7 +135,12 @@ export default function SnippetItem(props: SnippetItemProps) {
 
   return (
     <TouchableOpacity onPress={handlePress}>
-      <Container>{content}</Container>
+      <Container>
+        {content}
+        {isCurrentSnippetPlaying && (
+          <PlaybackSpeedModal />
+        )}
+      </Container>
     </TouchableOpacity>
   );
 }

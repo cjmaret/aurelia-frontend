@@ -7,6 +7,7 @@ import {
 } from '../review-card/styledReviewCard';
 
 export const SnippetContentHeader = styled.View`
+  position: relative;
   display: flex;
   flex-direction: row;
   width: 100%;

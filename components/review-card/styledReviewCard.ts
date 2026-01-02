@@ -134,7 +134,9 @@ export const OriginalItem = styled(SnippetItem)`
   padding: 0 5px 0 10px;
 `;
 
-export const OriginalLabelText = styled(SnippetContentHeaderLabelText)``;
+export const OriginalLabelText = styled(SnippetContentHeaderLabelText)`
+  color: ${({ theme }: { theme: any }) => theme.colors.snippetTextOriginal};
+`;
 
 export const OriginalValueText = styled(SnippetContentHeaderValueText)`
   color: ${({ theme }: { theme: any }) => theme.colors.snippetTextOriginal};
