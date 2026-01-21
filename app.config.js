@@ -57,6 +57,9 @@ export default {
           backgroundColor: '#9EE3ED',
         },
       ],
+      'expo-font',
+      'expo-secure-store',
+      'expo-web-browser',
     ],
     experiments: {
       typedRoutes: true,
