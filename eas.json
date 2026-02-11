@@ -5,6 +5,9 @@
   },
   "build": {
     "development": {
+      "env": {
+        "EXPO_PUBLIC_ENV": "development"
+      },
       "developmentClient": true,
       "distribution": "internal"
     },
@@ -12,7 +15,10 @@
       "distribution": "internal"
     },
     "production": {
-      "autoIncrement": true
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_ENV": "production"
+      }
     }
   },
   "submit": {

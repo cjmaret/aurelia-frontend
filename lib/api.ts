@@ -2,7 +2,7 @@ import { ApiTypes, ConversationResponseType } from '@/types/types';
 import config from './config';
 import * as SecureStore from 'expo-secure-store';
 import { jwtDecode } from 'jwt-decode';
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy';
 
 class Api {
   private _baseUrl: string | undefined;

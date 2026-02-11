@@ -1,18 +1,24 @@
+const IS_DEV =
+  process.env.EXPO_PUBLIC_ENV === 'development' ||
+  process.env.EXPO_PUBLIC_ENV === 'local';
+
 export default {
   expo: {
-    name: 'Aurelia',
+    name: IS_DEV ? 'Aurelia (Dev)' : 'Aurelia',
     slug: 'aurelia-frontend',
     owner: 'cjmaret',
     version: '1.0.7',
     orientation: 'portrait',
     icon: './assets/images/aurelia-icon.png',
-    scheme: 'com.aureliaai.myapp',
+    scheme: IS_DEV ? 'aureliadev' : 'aurelia',
     platforms: ['ios', 'android'],
     userInterfaceStyle: 'automatic',
     newArchEnabled: true,
     ios: {
       supportsTablet: true,
-      bundleIdentifier: 'com.cjmaret.aureliafrontend',
+      bundleIdentifier: IS_DEV
+        ? 'com.cjmaret.aureliafrontend.dev'
+        : 'com.cjmaret.aureliafrontend',
       buildNumber: '49',
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,
@@ -27,7 +33,9 @@ export default {
         foregroundImage: './assets/images/adaptive-icon.png',
         backgroundColor: '#ffffff',
       },
-      package: 'com.cjmaret.aureliafrontend',
+      package: IS_DEV
+        ? 'com.cjmaret.aureliafrontend.dev'
+        : 'com.cjmaret.aureliafrontend',
       versionCode: 40,
       versionName: '1.0.7',
       permissions: [
