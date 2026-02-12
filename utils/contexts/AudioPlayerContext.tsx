@@ -18,14 +18,14 @@ import {
 import { AudioPlayerContextType } from '@/types/types';
 
 const AudioPlayerContext = createContext<AudioPlayerContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export function useAudioPlayerContext() {
   const context = useContext(AudioPlayerContext);
   if (!context) {
     throw new Error(
-      'useAudioPlayerContext must be used within AudioPlayerProvider'
+      'useAudioPlayerContext must be used within AudioPlayerProvider',
     );
   }
   return context;
@@ -39,12 +39,6 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
   const player = useExpoAudioPlayer();
 
   useEffect(() => {
-    setAudioModeAsync({
-      playsInSilentMode: true,
-      allowsRecording: false,
-      shouldPlayInBackground: false,
-    }).catch(console.error);
-
     cleanupOldCacheFiles().catch(console.error);
 
     if (__DEV__) {
@@ -55,10 +49,6 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
       };
       console.log('🔧 Dev tools: clearAudioCache()');
     }
-
-    return () => {
-      player.remove();
-    };
   }, []);
 
   const setPlaybackRate = async (rate: number) => {
@@ -72,6 +62,12 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true);
       setCurrentAudioId(audioId);
+
+      await setAudioModeAsync({
+        playsInSilentMode: true,
+        allowsRecording: false,
+        shouldPlayInBackground: false,
+      });
 
       const audioFilePath = await getAudioForText(text);
 

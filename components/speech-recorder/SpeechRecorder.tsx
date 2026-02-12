@@ -7,7 +7,7 @@ import {
   requestRecordingPermissionsAsync,
   getRecordingPermissionsAsync,
 } from 'expo-audio';
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy';
 import {
   LogInToContinueText,
   LowerContainer,
@@ -105,7 +105,7 @@ export default function SpeechRecorder() {
       showToast(
         'info',
         'Recording Stopped',
-        `Maximum recording length of ${MAX_RECORDING_SECONDS} seconds reached.`
+        `Maximum recording length of ${MAX_RECORDING_SECONDS} seconds reached.`,
       );
     }
   }, [elapsedTime, isRecording]);
@@ -128,6 +128,12 @@ export default function SpeechRecorder() {
         isTapRecordingRef.current = true;
 
         try {
+          await setAudioModeAsync({
+            playsInSilentMode: true,
+            allowsRecording: true,
+            shouldPlayInBackground: false,
+          });
+
           await audioRecorder.prepareToRecordAsync();
           audioRecorder.record();
 
@@ -203,12 +209,11 @@ export default function SpeechRecorder() {
       showToast(
         'info',
         t('processingRecording'),
-        t('processingRecordingMessage')
+        t('processingRecordingMessage'),
       );
 
-      const response: ConversationResponseType = await api.addConversation(
-        audioUri
-      );
+      const response: ConversationResponseType =
+        await api.addConversation(audioUri);
 
       if (!response.success) {
         showToast('error', 'Error Processing Recording', 'Please try again.');
@@ -222,8 +227,8 @@ export default function SpeechRecorder() {
           const filtered = prevData.filter(
             (c) =>
               !conversationData.some(
-                (cd) => cd.conversationId === c.conversationId
-              )
+                (cd) => cd.conversationId === c.conversationId,
+              ),
           );
           return [...conversationData, ...filtered];
         });
@@ -253,7 +258,7 @@ export default function SpeechRecorder() {
     const seconds = elaspedSeconds % 60;
     return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(
       2,
-      '0'
+      '0',
     )}`;
   }
 
@@ -273,7 +278,7 @@ export default function SpeechRecorder() {
           },
         },
         { text: 'Cancel', style: 'cancel' },
-      ]
+      ],
     );
   };
 
