@@ -7,7 +7,7 @@ import {
   requestRecordingPermissionsAsync,
   getRecordingPermissionsAsync,
 } from 'expo-audio';
-import * as FileSystem from 'expo-file-system/legacy';
+import * as FileSystem from 'expo-file-system';
 import {
   LogInToContinueText,
   LowerContainer,
@@ -185,16 +185,32 @@ export default function SpeechRecorder() {
     await audioRecorder.stop();
     const uri = audioRecorder.uri;
     if (uri) {
-      const info = await FileSystem.getInfoAsync(uri);
-      if (!info.exists || info.size < 1000) {
-        showToast('error', t('errorSendingAudio'), t('noSpeechDetectedError'));
+      try {
+        const file = new FileSystem.File(uri);
+        const exists = file.exists;
+        const size = exists ? file.size : 0;
+
+        if (!exists || size < 1000) {
+          showToast(
+            'error',
+            t('errorSendingAudio'),
+            t('noSpeechDetectedError'),
+          );
+          setTimeout(() => {
+            canRecordRef.current = true;
+            setCanRecord(true);
+          }, RECORD_COOLDOWN_MS);
+          return;
+        }
+        addConversation(uri);
+      } catch (error) {
+        console.error('Error checking file:', error);
         setTimeout(() => {
           canRecordRef.current = true;
           setCanRecord(true);
         }, RECORD_COOLDOWN_MS);
         return;
       }
-      addConversation(uri);
     }
     waveformOpacity.setValue(0);
     setTimeout(() => {
