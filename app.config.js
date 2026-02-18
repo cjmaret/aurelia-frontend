@@ -7,7 +7,7 @@ export default {
     name: IS_DEV ? 'Aurelia (Dev)' : 'Aurelia',
     slug: 'aurelia-frontend',
     owner: 'cjmaret',
-    version: '1.0.7',
+    version: '2.0.0',
     orientation: 'portrait',
     icon: './assets/images/aurelia-icon.png',
     scheme: IS_DEV ? 'aureliadev' : 'aurelia',
@@ -19,7 +19,7 @@ export default {
       bundleIdentifier: IS_DEV
         ? 'com.cjmaret.aureliafrontend.dev'
         : 'com.cjmaret.aureliafrontend',
-      buildNumber: '49',
+      buildNumber: '50',
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,
         NSMicrophoneUsageDescription:
@@ -36,8 +36,8 @@ export default {
       package: IS_DEV
         ? 'com.cjmaret.aureliafrontend.dev'
         : 'com.cjmaret.aureliafrontend',
-      versionCode: 40,
-      versionName: '1.0.7',
+      versionCode: 50,
+      versionName: '2.0.0',
       permissions: [
         'android.permission.INTERNET',
         'android.permission.RECORD_AUDIO',
@@ -82,7 +82,7 @@ export default {
         projectId: 'da01ca79-b1e8-465d-bf37-f21ccb7d8bfb',
       },
     },
-    runtimeVersion: '1.0.7',
+    runtimeVersion: '2.0.0',
     updates: {
       url: 'https://u.expo.dev/da01ca79-b1e8-465d-bf37-f21ccb7d8bfb',
     },
